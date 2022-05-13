@@ -1,0 +1,120 @@
+\newcommand{\ClassPath}{../VIU_TFM_LaTeX_template}
+\documentclass{\ClassPath/viu-tfm-template}
+
+
+\definecolor{maincolor}{HTML}{e65218}
+
+%--------------------------------------------------------------------------
+% Definiciones necesarias Modifica con tus datos
+%--------------------------------------------------------------------------
+\def\nombre{Gómez Olivencia, Rubén}
+\def\dni{78910013-A}
+\def\titulo{Análisis y diseño de la aplicación web \linebreak\linebreak\linebreak para la Asociación Internacional de Chefs}
+\def\titulacion{Máster Universitario en Desarrollo de Aplicaciones y Servicios Web}
+\def\curso{2022-2023}
+
+%Los siguientes son opcionales: si no se ponen, la portada cambia un poco. Ideal para escribir artículos/trabajos cortos
+\def\dirige{}
+\def\convocatoria{}
+\def\asignatura{Ingeniería Software Web}
+
+
+% importar fichero de Bibliografía
+\addbibresource{Actividad_2.bib}
+
+\begin{document}
+    \graphicspath{{../VIU_TFM_LaTeX_template/}}
+
+    \coverpage
+
+    \tableofcontents
+
+\chapter{Introducción}
+En el siguiente documento se va a detallar el proceso que nos ha llevado para la realización de la aplicación web solicitada por la  \textbf{Asociación Internacional de Chefs (AIC)} para la gestión y compartición de recetas culinarias.
+
+A lo largo del documento se diferenciarán distintos apartados en los que se detallarán cuál ha sido la metodología empleada durante todo el proceso, la planificación realizada y cómo se ha hecho la obtención y posterior análisis de requisitos.
+
+Con todo ello, se ha realizado el modelado de datos que es necesario para llevar a cabo la petición del cliente, así como distintos diseños conceptuales que serán explicados en sus respectivos apartados.
+
+Para finalizar se han incluido las conclusiones de todo el proceso llevado a cabo.
+
+
+\chapter{Metodología utilizada}
+Para llevar a cabo la creación de la aplicación web, y todo el proceso subyacente, se ha hecho uso del método “diseño centrado en el usuario” (\textbf{DCU}), y tal como nos dice la definición de \textcite{hassan2004diseno} “se caracteriza por asumir que todo el proceso de diseño y desarrollo del sitio web debe estar conducido por el usuario, sus necesidades, características y objetivos”.
+
+Es por eso, que para llevar a buen puerto el proyecto encargado por la AIC, debemos de comprender las funcionalidades presentadas y sus requerimientos buscando como objetivo final el tener la mejor experiencia de usuario.
+
+\chapter{Planificación}
+
+\chapter{Requisitos del cliente}
+
+En este apartado vamos a detallar cómo se ha realizado toda la toma de requisitos y el análisis para poder realizar una diferenciación de los mismos para su posterior modelado, tanto de datos como de interfaces.
+
+Antes de continuar, cabe recordar qué es un requisito, y tal como nos dice \textcite{Sommerville2005}, es una declaración abstracta de alto nivel de un servicio que debe proporcionar el sistema o una restricción de éste.
+
+Así mismo, y teniendo en cuenta la definición proporcionada por la \textcite{IEEE610} en su estándar 610.12-1990, se define como “una condición o capacidad que debe estar presente en un sistema o componentes de sistema para satisfacer un contrato, estándar, especificación u otro documento formal”.
+
+
+\section{Obtención de los requisitos}
+Para la obtención de los requisitos se realizaron una serie de entrevistas con los responsables de la \textbf{AIC} con el fin de recabar toda la información posible para que de esta manera quedasen claro las funcionalidades y requisitos mínimos que debe tener la aplicación web.
+
+A la reunión acudieron, como ya se ha dicho, los responsables de negocio de la Asociación Internacional de Chefs (\textbf{AIC}) y por otro lado, y en función de analista, Rubén Gómez Olivencia.
+
+
+
+
+\section{Análisis de requisitos}
+
+
+
+\section{transaccionales}
+
+
+\section{Requisitos funcionales}
+
+\begin{enumerate}[label=\alph*)]
+    \item Registrar el usuario a la plataforma de la AIC.
+    \item Autenticar usuario al ingresar a la aplicación de la AIC.
+    \item Cargar la receta, con todos sus aspectos asociados (categoría, lista de
+    ingredientes, procedimiento, dificultad, costo, etc.)
+    \item Buscar recetas en base a distintos aspectos: clase de receta, tipo de ingrediente
+    de base, nivel de dificultad, costo de la receta.
+    \item Visualizar resultados de búsqueda.
+    \item Visualizar la información sobre cada receta.
+    \item Compartir receta en las redes.
+    \item Valorar receta (de 1 a 5 estrellas).
+\end{enumerate}
+
+\section{Requisitos no funcionales}
+
+\subsection{Disponibilidad}
+
+Meter cosas de: varios idiomas,
+
+\subsection{Escalabilidad}
+
+\subsection{Funcionalidad}
+
+\subsection{Usabilidad}
+
+\subsection{Accesibilidad}
+
+\subsection{...}
+
+\section{Especificación}
+
+\chapter{Modelo conceptual}
+
+\chapter{Modelado de datos}
+
+\chapter{Modelado de interfaces}
+
+\chapter{Diseño}
+
+
+\chapter{Conclusiones}
+
+
+\printbibliography[title={Referencias bibliográficas},heading=bibintoc]
+
+\end{document}
