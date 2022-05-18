@@ -1,0 +1,85 @@
+\newcommand{\ClassPath}{../../VIU_TFM_LaTeX_template}
+\documentclass{\ClassPath/viu-tfm-template}
+
+
+\definecolor{maincolor}{HTML}{e65218}
+
+%--------------------------------------------------------------------------
+% Definiciones necesarias Modifica con tus datos
+%--------------------------------------------------------------------------
+\def\nombre{Gómez Olivencia, Rubén}
+\def\dni{78910013-A}
+\def\titulo{Progressive Web Apps}
+\def\titulacion{Máster Universitario en Desarrollo de Aplicaciones y Servicios Web}
+\def\curso{2022-2023}
+
+%Los siguientes son opcionales: si no se ponen, la portada cambia un poco. Ideal para escribir artículos/trabajos cortos
+\def\dirige{}
+\def\convocatoria{}
+\def\asignatura{Ingeniería Software Web}
+
+
+% importar fichero de Bibliografía
+\addbibresource{Actividad_1.bib}
+
+\begin{document}
+    \graphicspath{{../../VIU_TFM_LaTeX_template/}}
+
+    \coverpage
+
+    \tableofcontents
+
+\chapter{Introducción}
+
+El uso de dispositivos móviles en los últimos años ha hecho que el desarrollo para ellos haya crecido de manera acelerada, y por consiguiente, la manera en la que se ha desarrollado para ellos también ha sufrido una evolución.
+
+A día de hoy contamos con la posibilidad de realizar distintos tipos de desarrollo, como son las aplicaciones nativas, las híbridas y las \textbf{\textit{progressive web apps}}.
+
+\chapter{Aplicaciones nativas}
+
+Las aplicaciones nativas se refieren a aplicaciones que son escritas y desarrolladas de manera específica para un sistema operativo móvil concreto \parencite{Jobe_2013}. Desde que el uso de los \textit{smartphones} se popularizó han existido distintos sistemas operativos móviles (BlackBerry, Android, iOS de Apple, Windows Phone, ...).
+
+Tal como nos dicen \textcite{thomas_2020}, el desarrollo nativo de aplicaciones móviles posee ciertas ventajas, como la posibilidad de acceder sin limitaciones a todas las características del dispositivo, pero teniendo en cuenta lo descrito previamente, en el caso de querer realizar una aplicación que abarque el mayor número de dispositivos hace que necesitemos un grupo de desarrollo para cada sistema.
+
+Esto, junto con la imposibilidad de reutilizar código entre distintas plataformas, hace que el desarrollo de aplicaciones nativas sea ineficiente por el tiempo de desarrollo y el coste del mantenimiento, tal como concluyen \textcite{xanthopoulos2013comparative}.
+
+
+\chapter{Aplicaciones Web e híbridas}
+
+En contraposición a las aplicaciones nativas, surgieron las aplicaciones Web y posteriormente las híbridas. Ambas se construyen como si de una aplicación Web se tratara, pero las primeras se visualizan directamente en el navegador y las segundas a través de un navegador incrustado dentro de una aplicación nativa.
+
+El problema principal de este tipo de aplicaciones es que la utilización de componentes no nativos en la interfaz perjudica la experiencia de usuario, y la ejecución se ve ralentizada por la carga asociada al contenedor web \parencite{thomas_2020}.
+
+\chapter{Progressive Web Apps}
+
+Como evolución de las aplicaciones webs surgieron las denominadas como \textit{Progressive Web Apps} (o PWA). \textcite{aguirre2019pwa} nos indican que las PWA emplean un conjunto de tecnologías que permiten a nuestros desarrollos superar algunas de las limitaciones subyacentes al enfoque web móvil, y que además, brindan al usuario la sensación de estar utilizando una aplicación nativa.
+
+A la hora de diferenciar las PWA con las aplicaciones nativas, podemos destacar las siguientes características:
+\vspace{-1.2em}
+\begin{enumerate}
+    \item El enfoque PWA nos permite unificar el desarrollo de aplicaciones, independientemente del tipo de dispositivo (\cite{aguirre2019pwa}).
+    \item Un desarrollo PWA se puede testar antes de realizar la instalación de la aplicación (\cite{webist17}).
+    \item El almacenamiento utilizado en el dispositivo, en el enfoque PWA es mucho menor al de las aplicaciones nativas (\cite{webist17}).
+\end{enumerate}
+\vspace{-1.2em}
+
+\section{Ejemplos}
+
+Como ejemplos de PWA podemos destacar los siguientes:
+\vspace{-1.2em}
+\begin{enumerate}
+    \item \href{https://www.reddit.com/}{https://www.reddit.com} : sitio web y agregador social de noticias con una gran comunidad.
+    \item \href{https://www.twitter.com/}{https://www.twitter.com/} : red social de microblogging en el que los usuarios interactúan entre sí.
+\end{enumerate}
+\vspace{-1.2em}
+
+Ambas pueden ser instaladas tanto en dispositivos móviles a través del navegador, o desde el navegador que utilizamos en nuestro ordenador de sobremesa/portátil. De esta manera, a ojos del usuario final, son aplicaciones independientes que funcionarán con ciertas características que hasta ahora sólo eran del alcance de las nativas (caché de información, geolocalización, notificaciones push, ...).
+
+\chapter{Conclusiones}
+La evolución tecnológica ha hecho que en los últimos años dispongamos de dispositivos móviles que utilizamos en todo momento. Ello también ha traído una evolución en cómo crear aplicaciones para los dispositivos, y buscando la eficiencia en el desarrollo nacieron las \textit{progressive web apps}.
+
+Es por eso, que teniendo en cuenta las ventajas que traen consigo, podemos afirmar que las PWA son el presente y el futuro en el desarrollo web, tanto para dispositivos móviles como para aplicaciones de escritorio.
+
+\printbibliography[title={Referencias bibliográficas},heading=bibintoc]
+
+\end{document}
