@@ -1,0 +1,130 @@
+DEPORTISTA(deportista_id, nombre, apellidos, fecha_nacimiento, genero, usuario, password)
+    PK: {deportista_id}
+    Dominio genero: [masculino, femenino, nd]
+
+
+FEDERACION(federacion_id, nombre, direccion, web)
+    PK:{federacion_id}
+
+
+DEPORTE(deporte_id,nombre, _federacion_id_)
+    PK:{deporte_id}
+    FK: DEPORTE.federacion_id → FEDERACION.federacion_id
+        ¿Acepta nulos?: NO
+        Borrado: PROPAGAR
+        Modificación: PROPAGAR
+
+
+ENTRENAMIENTO(entrenamiento_id, nombre, fecha, duracion, distancia, _deportista_id_, _deporte_id_)
+    PK: {entrenamiento_id}
+    FK: ENTRENAMIENTO.deportista_id → DEPORTISTA.deportista_id
+        ¿Acepta nulos?: NO
+        Borrado: PROPAGAR
+        Modificación: PROPAGAR
+    FK: ENTRENAMIENTO.deporte_id → DEPORTE.deporte_id
+        ¿Acepta nulos?: NO
+        Borrado: RESTRINGIR
+        Modificación: PROPAGAR
+
+
+CAMPEONATO(campeonato_id, nombre, fecha_inicio, fecha_fin, _federacion_id_)
+    PK: {campeonato_id}
+    FK: CAMPEONATO.federacion_id → FEDERACION.federacion_id
+        ¿Acepta nulos?: NO
+        Borrado: PROPAGAR
+        Modificación: PROPAGAR
+
+
+PRUEBA(prueba_id, nombre, distancia, _deporte_id_)
+    PK: {prueba_id}
+    FK: PRUEBA.deporte_id → DEPORTE.deporte_id
+        ¿Acepta nulos?: NO
+        Borrado: RESTRINGIR
+        Modificación: PROPAGAR
+
+LOGRO(logro_id, nombre)
+    PK:{logro_id}
+
+
+RETO(reto_id, nombre, descripcion, fecha_inicio, fecha_fin, distancia, tiempo, _deporte_id_, _logro_id_)
+    PK: {reto_id}
+    FK: RETO.deporte_id → DEPORTE.deporte_id
+        ¿Acepta nulos?: NO
+        Borrado: RESTRINGIR
+        Modificación: PROPAGAR
+    FK: RETO.logro_id → LOGRO.logro_id
+        ¿Acepta nulos?: NO
+        Borrado: RESTRINGIR
+        Modificación: PROPAGAR
+
+
+EVENTO(evento_id, nombre, fecha, distancia, _federacion_id_)
+    PK: {evento_id}
+    FK: EVENTO.federacion_id → FEDERACION.federacion_id
+        ¿Acepta nulos?: NO
+        Borrado: PROPAGAR
+        Modificación: PROPAGAR
+
+
+PRACTICA(_deportista_id_,_deporte_id_, federado, numero_federado)
+    PK: {deportista_id,deporte_id}
+    FK: PRACTICA.deportista_id → DEPORTISTA.deportista_id
+        ¿Acepta nulos?: NO
+        Borrado: PROPAGAR
+        Modificación: PROPAGAR
+    FK: PRACTICA.deporte_id → DEPORTE.deporte_id
+        ¿Acepta nulos?: NO
+        Borrado: RESTRINGIR
+        Modificación: PROPAGAR
+
+
+ASISTE(_deportista_id_,_evento_id_,tiempo_realizado)
+    PK: {deportista_id,evento_id}
+    FK: ASISTE.deportista_id → DEPORTISTA.deportista_id
+        ¿Acepta nulos?: NO
+        Borrado: PROPAGAR
+        Modificación: PROPAGAR
+    FK: ASISTE.evento_id → EVENTO.evento_id
+        ¿Acepta nulos?: NO
+        Borrado: RESTRINGIR
+        Modificación: PROPAGAR
+
+
+COMPITE(_deportista_id,prueba_id,campeonato_id_,tiempo_realizado)
+    PK: {deportista_id,prueba_id,campeonato_id}
+    FK: COMPITE.deportista_id → DEPORTISTA.deportista_id
+        ¿Acepta nulos?: NO
+        Borrado: PROPAGAR
+        Modificación: PROPAGAR
+    FK: COMPITE.prueba_id → PRUEBA.prueba_id
+        ¿Acepta nulos?: NO
+        Borrado: RESTRINGIR
+        Modificación: PROPAGAR
+    FK: COMPITE.campeonato_id → CAMPEONATO.campeonato_id
+        ¿Acepta nulos?: NO
+        Borrado: RESTRINGIR
+        Modificación: PROPAGAR
+
+
+HACE(_deportista_id_,_reto_id_,fecha_unirse,fecha_completado)
+    PK: {deportista_id,reto_id}
+    FK: HACE.deportista_id → DEPORTISTA.deportista_id
+        ¿Acepta nulos?: NO
+        Borrado: PROPAGAR
+        Modificación: PROPAGAR
+    FK: HACE.reto_id → RETO.reto_id
+        ¿Acepta nulos?: NO
+        Borrado: RESTRINGIR
+        Modificación: PROPAGAR
+
+
+OBTIENE(_deportista_id_,_logro_id_,fecha)
+    PK: {deportista_id,logro_id}
+    FK:OBTIENE.deportista_id → DEPORTISTA.deportista_id
+        ¿Acepta nulos?: NO
+        Borrado: PROPAGAR
+        Modificación: PROPAGAR
+    FK:OBTIENE.logro_id → LOGRO.logro_id
+        ¿Acepta nulos?: NO
+        Borrado: RESTRINGIR
+        Modificación: PROPAGAR
