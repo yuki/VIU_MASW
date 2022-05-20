@@ -106,7 +106,7 @@ CREATE TABLE COMPITE(
     deportista_id INTEGER not null REFERENCES deportista(deportista_id) ON DELETE CASCADE ON UPDATE CASCADE,
     prueba_id INTEGER not null REFERENCES prueba(prueba_id) ON DELETE RESTRICT ON UPDATE CASCADE,
     campeonato_id INTEGER not null REFERENCES campeonato(campeonato_id) ON DELETE RESTRICT ON UPDATE CASCADE,
-    tiempo_realizado INTEGER,
+    tiempo_realizado FLOAT,
     PRIMARY KEY (deportista_id,prueba_id,campeonato_id)
 );
 
