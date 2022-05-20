@@ -1,8 +1,6 @@
-
 CREATE DOMAIN genero_deportista as VARCHAR CHECK(
     VALUE IN ('masculino','femenino','nd')
 );
-
 
 
 CREATE TABLE DEPORTISTA(
@@ -23,11 +21,13 @@ CREATE TABLE FEDERACION(
     web VARCHAR(50)
 );
 
+
 CREATE TABLE DEPORTE(
     deporte_id SERIAL not null primary key,
     nombre VARCHAR(50),
     federacion_id INTEGER not null REFERENCES federacion(federacion_id) ON DELETE CASCADE ON UPDATE CASCADE
 );
+
 
 CREATE TABLE ENTRENAMIENTO(
     entrenamiento_id SERIAL not null primary key,
@@ -102,6 +102,7 @@ CREATE TABLE ASISTE(
 );
 
 
+-- para la competición se necesita que el tiempo (en segundos) tenga decimales
 CREATE TABLE COMPITE(
     deportista_id INTEGER not null REFERENCES deportista(deportista_id) ON DELETE CASCADE ON UPDATE CASCADE,
     prueba_id INTEGER not null REFERENCES prueba(prueba_id) ON DELETE RESTRICT ON UPDATE CASCADE,
@@ -126,3 +127,18 @@ CREATE TABLE OBTIENE(
     fecha TIMESTAMPTZ,
     PRIMARY KEY (deportista_id,logro_id)
 );
+
+
+-- Vistas
+CREATE VIEW deportista_logro AS
+  SELECT d.nombre as deportista_nombre, genero, l.nombre as logro_nombre, o.fecha
+    FROM deportista AS d, logro AS l, obtiene AS o
+    WHERE d.deportista_id = o.deportista_id AND o.logro_id = l.logro_id
+;
+
+
+CREATE VIEW marcas_oficiales AS
+  SELECT d.nombre, d.apellidos, c.tiempo_realizado, p.nombre AS prueba, cmp.nombre AS campeonato
+    FROM deportista d, compite c, prueba p, campeonato cmp
+    WHERE d.deportista_id = c.deportista_id AND c.campeonato_id = cmp.campeonato_id AND c.prueba_id = p.prueba_id
+;
