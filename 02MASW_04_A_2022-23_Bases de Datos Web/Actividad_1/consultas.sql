@@ -1,3 +1,4 @@
+-- consultas JOIN
 SELECT d.nombre, l.nombre as logro, o.fecha 
   FROM deportista d 
     LEFT JOIN obtiene o ON d.deportista_id = o.deportista_id 
@@ -14,6 +15,7 @@ SELECT d.nombre, d.apellidos, ca.nombre AS campeonato, p.nombre AS prueba, c.tie
   WHERE tiempo_realizado IS NOT NULL;
 
 
+-- consultas con función de agregación
 SELECT COUNT(*) AS Logros_entregados 
   FROM obtiene;
 
