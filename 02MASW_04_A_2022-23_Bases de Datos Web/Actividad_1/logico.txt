@@ -7,7 +7,7 @@ FEDERACION(federacion_id, nombre, direccion, web)
     PK:{federacion_id}
 
 
-DEPORTE(deporte_id,nombre, _federacion_id_)
+DEPORTE(deporte_id,nombre, federacion_id)
     PK:{deporte_id}
     FK: DEPORTE.federacion_id → FEDERACION.federacion_id
         ¿Acepta nulos?: NO
@@ -15,7 +15,7 @@ DEPORTE(deporte_id,nombre, _federacion_id_)
         Modificación: PROPAGAR
 
 
-ENTRENAMIENTO(entrenamiento_id, nombre, fecha, duracion, distancia, _deportista_id_, _deporte_id_)
+ENTRENAMIENTO(entrenamiento_id, nombre, fecha, duracion, distancia, deportista_id, deporte_id)
     PK: {entrenamiento_id}
     FK: ENTRENAMIENTO.deportista_id → DEPORTISTA.deportista_id
         ¿Acepta nulos?: NO
@@ -27,7 +27,7 @@ ENTRENAMIENTO(entrenamiento_id, nombre, fecha, duracion, distancia, _deportista_
         Modificación: PROPAGAR
 
 
-CAMPEONATO(campeonato_id, nombre, fecha_inicio, fecha_fin, _federacion_id_)
+CAMPEONATO(campeonato_id, nombre, fecha_inicio, fecha_fin, federacion_id)
     PK: {campeonato_id}
     FK: CAMPEONATO.federacion_id → FEDERACION.federacion_id
         ¿Acepta nulos?: NO
@@ -35,7 +35,7 @@ CAMPEONATO(campeonato_id, nombre, fecha_inicio, fecha_fin, _federacion_id_)
         Modificación: PROPAGAR
 
 
-PRUEBA(prueba_id, nombre, distancia, _deporte_id_)
+PRUEBA(prueba_id, nombre, distancia, deporte_id)
     PK: {prueba_id}
     FK: PRUEBA.deporte_id → DEPORTE.deporte_id
         ¿Acepta nulos?: NO
@@ -46,7 +46,7 @@ LOGRO(logro_id, nombre)
     PK:{logro_id}
 
 
-RETO(reto_id, nombre, descripcion, fecha_inicio, fecha_fin, distancia, tiempo, _deporte_id_, _logro_id_)
+RETO(reto_id, nombre, descripcion, fecha_inicio, fecha_fin, distancia, tiempo, deporte_id, logro_id)
     PK: {reto_id}
     FK: RETO.deporte_id → DEPORTE.deporte_id
         ¿Acepta nulos?: NO
@@ -58,7 +58,7 @@ RETO(reto_id, nombre, descripcion, fecha_inicio, fecha_fin, distancia, tiempo, _
         Modificación: PROPAGAR
 
 
-EVENTO(evento_id, nombre, fecha, distancia, _federacion_id_)
+EVENTO(evento_id, nombre, fecha, distancia, federacion_id)
     PK: {evento_id}
     FK: EVENTO.federacion_id → FEDERACION.federacion_id
         ¿Acepta nulos?: NO
@@ -66,7 +66,7 @@ EVENTO(evento_id, nombre, fecha, distancia, _federacion_id_)
         Modificación: PROPAGAR
 
 
-PRACTICA(_deportista_id_,_deporte_id_, federado, numero_federado)
+PRACTICA(deportista_id,deporte_id, federado, numero_federado)
     PK: {deportista_id,deporte_id}
     FK: PRACTICA.deportista_id → DEPORTISTA.deportista_id
         ¿Acepta nulos?: NO
@@ -78,7 +78,7 @@ PRACTICA(_deportista_id_,_deporte_id_, federado, numero_federado)
         Modificación: PROPAGAR
 
 
-ASISTE(_deportista_id_,_evento_id_,tiempo_realizado)
+ASISTE(deportista_id,evento_id,tiempo_realizado)
     PK: {deportista_id,evento_id}
     FK: ASISTE.deportista_id → DEPORTISTA.deportista_id
         ¿Acepta nulos?: NO
@@ -90,7 +90,7 @@ ASISTE(_deportista_id_,_evento_id_,tiempo_realizado)
         Modificación: PROPAGAR
 
 
-COMPITE(_deportista_id,prueba_id,campeonato_id_,tiempo_realizado)
+COMPITE(deportista_id,prueba_id,campeonato_id,tiempo_realizado)
     PK: {deportista_id,prueba_id,campeonato_id}
     FK: COMPITE.deportista_id → DEPORTISTA.deportista_id
         ¿Acepta nulos?: NO
@@ -106,7 +106,7 @@ COMPITE(_deportista_id,prueba_id,campeonato_id_,tiempo_realizado)
         Modificación: PROPAGAR
 
 
-HACE(_deportista_id_,_reto_id_,fecha_unirse,fecha_completado)
+HACE(deportista_id,reto_id,fecha_unirse,fecha_completado)
     PK: {deportista_id,reto_id}
     FK: HACE.deportista_id → DEPORTISTA.deportista_id
         ¿Acepta nulos?: NO
@@ -118,7 +118,7 @@ HACE(_deportista_id_,_reto_id_,fecha_unirse,fecha_completado)
         Modificación: PROPAGAR
 
 
-OBTIENE(_deportista_id_,_logro_id_,fecha)
+OBTIENE(deportista_id,logro_id,fecha)
     PK: {deportista_id,logro_id}
     FK:OBTIENE.deportista_id → DEPORTISTA.deportista_id
         ¿Acepta nulos?: NO
