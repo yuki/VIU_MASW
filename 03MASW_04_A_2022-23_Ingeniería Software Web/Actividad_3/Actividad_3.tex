@@ -1,0 +1,118 @@
+\newcommand{\ClassPath}{../../VIU_TFM_LaTeX_template}
+\documentclass{\ClassPath/viu-tfm-template}
+\usepackage{multicol}
+
+\definecolor{maincolor}{HTML}{e65218}
+
+%--------------------------------------------------------------------------
+% Definiciones necesarias Modifica con tus datos
+%--------------------------------------------------------------------------
+\def\nombre{Gómez Olivencia, Rubén}
+\def\dni{78910013-A}
+\def\titulo{Prototipado y diseño de navegación \linebreak\linebreak\linebreak para la Asociación Internacional de Chefs}
+\def\titulacion{Máster Universitario en Desarrollo de Aplicaciones y Servicios Web}
+\def\curso{2022-2023}
+
+%Los siguientes son opcionales: si no se ponen, la portada cambia un poco. Ideal para escribir artículos/trabajos cortos
+\def\dirige{}
+\def\convocatoria{}
+\def\asignatura{Ingeniería Software Web}
+
+
+% importar fichero de Bibliografía
+%\addbibresource{Actividad_3.bib}
+
+\begin{document}
+    \graphicspath{{../../VIU_TFM_LaTeX_template/}}
+
+    \coverpage
+
+    \tableofcontents
+
+\chapter{Introducción}
+A lo largo de este documento se van a analizar los modelos concretos y las decisiones tomadas para la creación de los prototipos y diseños de navegación para la aplicación web creada para la Asociación Internacional de Chefs \textbf{AIC}.
+
+Este documento es una continuación de un documento previo en el que se explicaba el análisis y diseño de la aplicación, por lo que varias de las decisiones aquí tomadas tienen origen en dicho documento previo.
+
+
+\chapter{Justificación}
+Una vez realizado el análisis de requisitos del cliente, habiendo conocido las funcionalidades mínimas que requiere y habiendo obtenido los requisitos funcionales, transaccionales, de interfaz y no funcionales, es momento de comenzar con el prototipado y el diseño de navegación que tendrá finalmente la aplicación web.
+
+\section{Prototipos}
+Debemos tener claro que un \textbf{prototipo} es una representación (o simulación) del sistema que se ha planificado y que puede contener las siguientes características:
+
+\begin{itemize}
+    \item Interfaz de usuario.
+    \item Funcionalidades de entrada y salida.
+    \item Todos los usuarios deben entender lo que se muestra en el prototipo.
+\end{itemize}
+
+Las ventajas de creación de los prototipos es que al ser un paso previo a la creación de la aplicación, podemos obtener una reacción directa del cliente y sus impresiones, ya que es probable que no entienda las especificaciones de requisitos creadas en el documento anterior. Es decir, la creación de prototipos nos va a dar un \textit{feedback} del cliente de manera rápida y sencilla.
+
+Con los prototipos, no sólo vamos a obtener una respuesta al análisis creado previamente, sino que que durante las pruebas, nos pueden aparecer comportamientos no previstos previamente y por tanto cuestiones a modificar antes de realizar la programación de la aplicación. Este punto \textbf{nos puede ahorrar mucho tiempo y complicaciones que podrían surgir en el futuro}.
+
+Por supuesto hay que entender que existen distintos tipos de creación de prototipos y dependiendo de la cantidad de funcionalidades añadidas al mismo pueden ser más fieles al resultado final. Es por ello que a continuación se especificará el tipo de prototipo creado.
+
+
+\section{Prototipo creado}
+
+A la hora de crear el prototipo para la aplicación de la \textbf{AIC} se ha optado por las siguientes características:
+
+\vspace{-1em}
+\begin{itemize}
+    \item \textbf{Fidelidad alta}: Se ha querido crear un conjunto de pantallas que le van a proporcionar a los responsables de la \textbf{AIC} un modelo dinámico que pueden utilizar para entender cómo va a ser el resultado final.
+
+    De esta manera, podrán dar el visto bueno a distintos apartados (como pueden ser los colores, las fuentes tipográficas utilizadas, la disposición de algunos componentes) antes de comenzar con el apartado de programación.
+
+    \item \textbf{Uso específico}: Se ha optado por la creación de un prototipo operacional que se ha ido refinando en distintas iteraciones a medida que se iban añadiendo funcionalidades requeridas por el cliente. De esta manera, y tal como se ha dicho previamente, se han encontrado comportamientos no previstos que se han mejorado de cara a que durante la etapa de desarrollo no se pierda el tiempo.
+
+    \item \textbf{Detalle y cantidad de funcionalidades}: Teniendo en cuenta el tipo de aplicación que quiere la \textbf{AIC}, ha sido posible generar un prototipo llamado “diagonal”. Esto quiere decir que se han modelado muchas características del sistema y con gran cantidad de detalle. Esto ha sido posible gracias a que \textbf{gran parte de las funcionalidades se han modularizado y estas se han podido reutilizar} a lo largo de distintas pantallas.
+
+    \item \textbf{Ejecutabilidad}: El prototipo creado se puede considerar que es un \textbf{prototipo interactivo} ya que responde a ciertas entradas que realiza el usuario pero bien es cierto que al no disponer de un servicio de \textit{backend}, dichas funcionalidades siempre son las mismas.
+\end{itemize}
+
+Con todo ello, se ha conseguido que los responsables de la \textbf{AIC} hayan dado una retroalimentación, que hasta ahora no había sido posible, que se haya tenido en cuenta esa información para mejorar el propio prototipo y que se tendrá en cuenta durante la etapa de desarrollo de la aplicación.
+
+A modo de resumen, el prototipo creado es un \textbf{prototipo del sistema completo} en el que se pueden visualizar, y con el que se puede interactuar para ver las distintas funcionalidades que tendrá la aplicación final. De nuevo, destacar que al no contar con un sistema de \textit{backend}, el registro de usuarios o de recetas no va a funcionar (no se guardan los datos), pero todo el proceso es igual al que será en el resultado final.
+
+El prototipo se puede visualizar, e interactuar con él, en la siguiente  \href{https://yuki.github.io/VIU_03MASW/preview.html}{dirección web}.
+
+
+\chapter{Modelos concretos}
+
+A continuación se van a detallar los modelos concretos de las distintas funcionalidades que tiene el prototipo creado, y que posteriormente será desarrollado en la aplicación web.
+
+
+
+
+
+
+
+
+\section{Menú principal}
+
+
+
+
+
+
+\chapter{Esquema de organización}
+
+
+
+
+
+\chapter{Mapa de navegación}
+
+
+
+
+
+\chapter{Conclusiones}
+
+
+
+
+%\printbibliography[title={Referencias bibliográficas},heading=bibintoc]
+
+\end{document}
