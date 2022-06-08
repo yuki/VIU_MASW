@@ -92,14 +92,14 @@ A continuación se puede ver la página principal de la web:
 
 Tal como se ha dicho previamente, todo lo aquí expuesto se puede ver e interactuar a través de la siguiente \href{https://yuki.github.io/VIU_03MASW/preview.html}{dirección web}, que a su vez después también se representará a través de los esquemas de organización.
 
-
+\hypertarget{menu_principal}{}
 \section{Menú principal}
 
 La aplicación web cuenta con un menú en la parte superior que es el punto de partida para que el usuario pueda acceder a distintos apartados del portal. A continuación una imagen del menú:
 
 \begin{center}
     \vspace{-10pt}
-    \includegraphics[frame,width=0.9\linewidth]{img/aic/0_menu.png}
+    \includegraphics[frame,width=\linewidth]{img/aic/0_menu.png}
     \vspace{-20pt}
 \end{center}
 
@@ -144,7 +144,7 @@ Teniendo en cuenta el uso de colores, también se identifican que las dos primer
 
 
 \section{Registro de usuario}
-Tal como se ha dicho previamente, y tal como aparecen en los requisitos funcionales del documento anterior, para que un usuario pueda registrar una receta debe estar registrado en el sistema. Para que un usuario se pueda registrar debe hacer click sobre el botón “Registrar” del menú y acto seguido le aparecerá la siguiente pantalla:
+Continuando con lo dicho previamente, y tal como aparecen en los requisitos funcionales del documento anterior, para que un usuario pueda registrar una receta debe estar registrado en el sistema. Para que un usuario se pueda registrar debe hacer click sobre el botón “Registrar” del menú y acto seguido le aparecerá la siguiente pantalla:
 
 \begin{center}
     \vspace{-10pt}
@@ -215,7 +215,7 @@ A la hora de registrar una nueva receta, habrá que añadir distintos apartados 
         \vspace{-20pt}
     \end{center}
 
-Tal como se puede ver, los apartados son:
+Los apartados son:
 
 \begin{itemize}
     \item \textbf{Nombre de la receta}: Un nombre que identifique la receta.
@@ -241,7 +241,7 @@ Al realizar una primera búsqueda el sistema nos permitirá realizar búsquedas 
         \vspace{-20pt}
     \end{center}
 
-Tal como se puede ver, este recuadro que aparecerá una vez realizadas la búsqueda, nos permitirá realizar búsquedas avanzadas pudiendo seleccionar los siguientes criterios marcando o desmarcando a gusto del usuario:
+Como se aprecia en la imagen, este recuadro aparecerá una vez realizada la búsqueda, nos permitirá realizar búsquedas avanzadas pudiendo seleccionar los siguientes criterios marcando o desmarcando a gusto del usuario:
 
 \begin{itemize}
     \item \textbf{Clasifición}: Tipo de receta que nos interesa buscar.
@@ -254,18 +254,18 @@ Tal como se puede ver, este recuadro que aparecerá una vez realizadas la búsqu
 
 \section{Resultado de búsqueda de recetas}
 
-Tras realizar la búsqueda, tal como se ha explicado en el paso anterior, obtendremos un resultado de búsqueda en el que aparecerán las recetas que coincidan con el término buscado.
+Tras realizar la búsqueda obtendremos un resultado de búsqueda en el que aparecerán las recetas que coincidan con el término buscado.
 
 Cada receta que aparecerá en el listado tiene la siguiente forma:
 
 
 \begin{center}
     \vspace{-10pt}
-    \includegraphics[frame,width=0.8\linewidth]{img/aic/receta.png}
+    \includegraphics[frame,width=0.9\linewidth]{img/aic/receta.png}
     \vspace{-20pt}
 \end{center}
 
-Tal como se puede ver, para cada uno de los resultados obtendremos los siguientes datos:
+Para cada uno de los resultados obtendremos los siguientes datos:
 
 \begin{itemize}
     \item Nombre de la receta.
@@ -324,7 +324,7 @@ Y para finalizar, tal como se puede ver, aparece un apartado con los registros m
 
 \section{Compartir receta en redes sociales}
 
-Tal como se ha visto en el apartado anterior, junto con la información de la receta aparecen los iconos de varias redes sociales:
+Junto con la información de la receta aparecen los iconos de varias redes sociales:
 
 \begin{center}
     \vspace{-10pt}
@@ -443,7 +443,7 @@ De esta manera acceder al ingrediente buscado es más sencillo y más rápido pa
     \vspace{-20pt}
 \end{center}
 
-Tal como se puede ver, para cualquier ingrediente, aparecerá información acerca del mismo junto con una imagen significativa de una receta. En la parte inferior de la página aparece un enlace con “\textbf{{\color{maincolor}Buscar recetas con...}}” que llevará al usuario a la página de búsqueda de recetas pero con el ingrediente ya seleccionado y mostrando sólo las recetas que al menos contengan dicho ingrediente.
+Viendo la imagen se puede observar, para cualquier ingrediente, aparecerá información acerca del mismo junto con una imagen significativa de una receta. En la parte inferior de la página aparece un enlace con “\textbf{{\color{maincolor}Buscar recetas con...}}” que llevará al usuario a la página de búsqueda de recetas pero con el ingrediente ya seleccionado y mostrando sólo las recetas que al menos contengan dicho ingrediente.
 
 Por último, cabe destacar que en la parte superior de la página aparecerá el “camino recorrido por el usuario” para que en todo momento sepa dónde se encuentra, y que cambiará dependiendo del ingrediente en el que se encuentre.
 
@@ -464,14 +464,54 @@ Al igual que sucede con los ingredientes, se ha añadido un índice para que la 
 
 
 \chapter{Mapa de navegación}
+A la hora de navegar por la aplicación web de la \textbf{AIC} es importante que el usuario conozca en todo momento dónde se encuentra y cómo va a poder llegar a otros apartados a través de los enlaces.
+
+Ya se ha comentado previamente que en todas las páginas se puede ver el “camino recorrido por el usuario” que tiene la siguiente forma:
+
+\begin{center}
+    \vspace{-10pt}
+    \textbf{{\color{maincolor}Alimentación sana > \space Ingredientes} >\space Aves}
+    \vspace{-15pt}
+\end{center}
+
+Gracias a esto, el usuario podrá distinguir en qué sección, apartado o sub-apartado se encuentra y volver, de manera sencilla, sobre sus pasos.
+
+En lo que se refiere al mapa de navegación completo, a continuación se detalla un esquema de todas las navegaciones que el usuario puede realizar en toda la aplicación web:
+
+\begin{center}
+    \vspace{-10pt}
+    \includegraphics[width=0.9\linewidth]{img/mapa de navegacion.png}
+    \vspace{-20pt}
+\end{center}
+
+El \hyperlink{menu_principal}{menú principal} es el origen desde el que se puede acceder a todas las secciones principales de la aplicación.
+
+Como se puede ver, existe la posibilidad de navegar entre distintas secciones, como a continuación se va a detallar.
 
 
 
+\section{Navegación en alimentación sana}
+
+Desde la \textbf{AIC} se ha pedido la inclusión de información acerca de la alimentación sana, y ha sido, por tanto, necesario añadir navegación entre las secciones de la alimentación sana y con otras.
+
+A continuación se puede ver el mapa de navegación que se ha realizado entre las subsecciones de alimentación sana que existe entre sí y con la información de los distintos ingredientes.
+
+\begin{center}
+    \vspace{-10pt}
+    \includegraphics[width=0.5\linewidth]{img/mapa de navegacion2.png}
+    \vspace{-20pt}
+\end{center}
+
+Observando la dirección de las flechas, se puede observar que la navegación es bidireccional en todo momento en las secciones de alimentación sana. De esta manera se pretende que el usuario tenga facilidad de buscar la información y volver a su punto de partida si así lo decide.
 
 
 \chapter{Conclusiones}
 
+Con todo lo dicho en este documento, se ha abordado la creación de un sistema a modo de prototipo general para la aplicación de la \textbf{AIC} buscando una alta fidelidad y que el detalle y las funcionalidades mostradas sea lo más parecido a la realidad. De esta manera, el cliente podrá saber cómo será el resultado final antes de realizar la programación.
 
+También se ha puesto especial interés en el apartado de alimentación sana, ya que es una nueva funcionalidad y característica que es de gran interés para la \textbf{AIC} y quiere que los usuarios hagan uso de ella.
+
+Con todo ello, el siguiente paso que queda es convertir el prototipo que podemos ver en la siguiente \href{https://yuki.github.io/VIU_03MASW/preview.html}{dirección web} y convertirlo en la aplicación web final para el cliente.
 
 
 %\printbibliography[title={Referencias bibliográficas},heading=bibintoc]
