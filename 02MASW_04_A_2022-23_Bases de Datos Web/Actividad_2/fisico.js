@@ -1,2 +1,2 @@
-use actividad2
+use salidas_grupales
 db.createCollection("restaurantes")
