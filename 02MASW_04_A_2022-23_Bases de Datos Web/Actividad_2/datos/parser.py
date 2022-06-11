@@ -49,16 +49,18 @@ with open('restaurantes.json', 'r', encoding='utf8') as fichero:
             if len(linea['michelinStar']) > 0:
                 x = int(linea['michelinStar'])
             o.update({"michelinStar":x})
+        lat = 0
         if 'latwgs84' in linea:
-            x = ""
             if len(linea['latwgs84']) > 0:
-                x = float(linea['latwgs84'])
-            o.update({"latwgs84":x})
+                lat = float(linea['latwgs84'])
+        long = 0
         if 'lonwgs84' in linea:
-            x = ""
             if len(linea['lonwgs84']) > 0:
-                x = float(linea['lonwgs84'])
-            o.update({"lonwgs84":x})
+                long = float(linea['lonwgs84'])
+        if lat != 0 or long !=0:
+            coord = json.loads('{}')
+            coord.update({"location":{"type":"Point","coordinates": [long,lat]}})
+            o.update(coord)
         out.append(o)
 out_file = open("parseado.json","w")
 json.dump(out,out_file,ensure_ascii = False)
