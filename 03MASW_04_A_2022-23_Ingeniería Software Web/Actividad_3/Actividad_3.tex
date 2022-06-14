@@ -2,7 +2,7 @@
 \documentclass{\ClassPath/viu-tfm-template}
 \usepackage{multicol}
 
-\definecolor{maincolor}{HTML}{e65218}
+\definecolor{maincolor}{HTML}{f25416}
 
 %--------------------------------------------------------------------------
 % Definiciones necesarias Modifica con tus datos
@@ -30,7 +30,7 @@
     \tableofcontents
 
 \chapter{Introducción}
-A lo largo de este documento se van a analizar los modelos concretos y las decisiones tomadas para la creación de los prototipos y diseños de navegación para la aplicación web creada para la Asociación Internacional de Chefs \textbf{AIC}.
+A lo largo de este documento se va a analizar cómo crear  los modelos concretos y cuáles han sido las decisiones tomadas para la creación de los prototipos y diseños de navegación para la aplicación web creada para la Asociación Internacional de Chefs \textbf{AIC}.
 
 Este documento es una continuación de un documento previo en el que se explicaba el análisis y diseño de la aplicación, por lo que varias de las decisiones aquí tomadas tienen origen en dicho documento previo.
 
@@ -41,6 +41,7 @@ Una vez realizado el análisis de requisitos del cliente, habiendo conocido las 
 \section{Prototipos}
 Debemos tener claro que un \textbf{prototipo} es una representación (o simulación) del sistema que se ha planificado y que puede contener las siguientes características:
 
+\vspace{-1em}
 \begin{itemize}
     \item Interfaz de usuario.
     \item Funcionalidades de entrada y salida.
@@ -68,12 +69,12 @@ A la hora de crear el prototipo para la aplicación de la \textbf{AIC} se ha opt
 
     \item \textbf{Detalle y cantidad de funcionalidades}: Teniendo en cuenta el tipo de aplicación que quiere la \textbf{AIC}, ha sido posible generar un prototipo llamado “diagonal”. Esto quiere decir que se han modelado muchas características del sistema y con gran cantidad de detalle. Esto ha sido posible gracias a que \textbf{gran parte de las funcionalidades se han modularizado y estas se han podido reutilizar} a lo largo de distintas pantallas.
 
-    \item \textbf{Ejecutabilidad}: El prototipo creado se puede considerar que es un \textbf{prototipo interactivo} ya que responde a ciertas entradas que realiza el usuario pero bien es cierto que al no disponer de un servicio de \textit{backend}, dichas funcionalidades siempre son las mismas.
+    \item \textbf{Ejecutabilidad}: El prototipo creado se puede considerar que es un \textbf{prototipo interactivo} ya que responde a ciertas entradas que realiza el usuario. Bien es cierto que al no disponer de un servicio de \textit{backend}, algunas de estas respuestas siempre son las mismas (son estáticas).
 \end{itemize}
 
-Con todo ello, se ha conseguido que los responsables de la \textbf{AIC} hayan dado una retroalimentación, que hasta ahora no había sido posible, que se haya tenido en cuenta esa información para mejorar el propio prototipo y que se tendrá en cuenta durante la etapa de desarrollo de la aplicación.
+Con todo ello, se ha conseguido que los responsables de la \textbf{AIC} hayan dado una retroalimentación que hasta ahora no había sido posible, que se haya tenido en cuenta esa información para mejorar el propio prototipo y que se tendrá en cuenta durante la etapa de desarrollo de la aplicación.
 
-A modo de resumen, el prototipo creado es un \textbf{prototipo del sistema completo} en el que se pueden visualizar, y con el que se puede interactuar para ver las distintas funcionalidades que tendrá la aplicación final. De nuevo, destacar que al no contar con un sistema de \textit{backend}, el registro de usuarios o de recetas no va a funcionar (no se guardan los datos), pero todo el proceso es igual al que será en el resultado final.
+A modo de resumen, el prototipo creado es un \textbf{prototipo del sistema completo} en el que se pueden visualizar, y con el que se puede interactuar para ver las distintas funcionalidades que tendrá la aplicación final. De nuevo destacar que al no contar con un sistema de \textit{backend}, el registro de usuarios o de recetas no va a funcionar (no se guardan los datos), pero todo el proceso es igual al que se verá en el resultado final.
 
 El prototipo se puede visualizar, e interactuar con él, en la siguiente  \href{https://yuki.github.io/VIU_03MASW/preview.html}{dirección web}.
 
@@ -82,7 +83,7 @@ El prototipo se puede visualizar, e interactuar con él, en la siguiente  \href{
 
 A continuación se van a detallar los modelos concretos de las distintas funcionalidades que tiene el prototipo creado, y que posteriormente será desarrollado en la aplicación web.
 
-A continuación se puede ver la página principal de la web:
+En la siguiente imagen se puede ver la página principal de la aplicación:
 
 \begin{center}
     \vspace{-10pt}
@@ -95,7 +96,7 @@ Tal como se ha dicho previamente, todo lo aquí expuesto se puede ver e interact
 \hypertarget{menu_principal}{}
 \section{Menú principal}
 
-La aplicación web cuenta con un menú en la parte superior que es el punto de partida para que el usuario pueda acceder a distintos apartados del portal. A continuación una imagen del menú:
+La aplicación web cuenta con un menú en la parte superior que es el punto de partida para que el usuario pueda acceder a distintos apartados de la aplicación. A continuación una imagen del menú:
 
 \begin{center}
     \vspace{-10pt}
@@ -103,12 +104,12 @@ La aplicación web cuenta con un menú en la parte superior que es el punto de p
     \vspace{-20pt}
 \end{center}
 
-Como se puede ver, se pueden diferenciar distintas “columnas” que son secciones a los que el usuario puede acceder haciendo uso del ratón. A continuación se detallan cada uno de ellos:
+Como se puede ver, se pueden diferenciar distintas “columnas” que son secciones a las que el usuario puede acceder haciendo uso del ratón. A continuación se detallan cada una de ellas:
 
 \vspace{-1em}
 \begin{itemize}
     \item \textbf{Logotipo de AIC}: Para que se reconozca la web en la que nos encontramos, se ha añadido el logo de la \textbf{AIC}. Al hacer click sobre él se irá a la web principal de la aplicación web.
-    \item \textbf{Recetas}: Es el reclamo principal del portal, la sección de recetas. Al hacer click sobre este apartado iremos a las “recetas destacadas” que pueden ser las últimas introducidas o un aleatorio de las mismas.
+    \item \textbf{Recetas}: Es el reclamo principal del portal: la sección de recetas. Al hacer click sobre este apartado iremos a las “recetas destacadas”, que pueden ser las últimas introducidas o un aleatorio de las mismas.
 
     \item \textbf{Platos}: Es un menú desplegable con las categorías de los distintos tipos de platos que existen diferenciados en la aplicación. Al hacer click se despliega el menú en el que se podrá elegir la categoría que interese al usuario. Al elegir uno, se irá a un listado de recetas de dicha categoría.
 
@@ -116,11 +117,11 @@ Como se puede ver, se pueden diferenciar distintas “columnas” que son seccio
 
     \item \textbf{Alimentación sana}: Es un menú en el que se puede seleccionar la nueva información que la \textbf{AIC} ha querido incorporar en la aplicación acerca de la alimentación sana.
 
-    \item \textbf{Caja de búsqueda}: Es un cajón de búsqueda en el que el usuario podrá introducir nombre de recetas, ingredientes, tipos de platos o palabra que puede contener una receta. Al introducir las palabras y darle a “intro” se irá a la web de resultados.
+    \item \textbf{Caja de búsqueda}: Es un cajón de búsqueda en el que el usuario podrá introducir nombre de recetas, ingredientes, tipos de platos o palabra que puede contener una receta. Al introducir las palabras y darle a la tecla “intro” se irá a la web de resultados.
 
     \item \textbf{Selección de idioma}: Mediante el uso del icono de una bandera, se puede modificar el idioma en el que se encuentra el portal web.
 
-    \item \textbf{Botón de “\textit{login}”}: Para realizar la autenticación del usuario y contraseña que tenga el usuario.
+    \item \textbf{Botón de “\textit{login}”}: Para realizar la autenticación de un usuario ya registrado con su usuario y contraseña.
 
     \item \textbf{Botón de “registrar”}: Para aquellos usuarios que quieran introducir recetas nuevas, deben registrarse previamente a través de este botón.
     \vspace{-1em}
@@ -136,7 +137,7 @@ Debajo del menú, y con intención de que el usuario sepa en todo momento dónde
 
 \begin{center}
     \vspace{-10pt}
-    \textbf{\color{maincolor}Alimentación sana > \space Ingredientes \color{black} >\space Carnes}
+    \textbf{\color{maincolor}Alimentación sana > \space Ingredientes \color{black} >\space Frutos secos}
     \vspace{-15pt}
 \end{center}
 
@@ -156,7 +157,7 @@ Al llegar a esta pantalla, se deberán rellenar los datos y pulsar el botón par
 
 
 \section{Autenticación de usuario}
-Una vez el usuario ya esté registrado, si no aparece como “logueado”, el usuario deberá darle al botón de “Log in” del menú para poder autenticarse en la aplicación. Al dar a dicho botón le aparecerá la siguiente pantalla:
+Una vez el usuario ya esté registrado. Si no aparece como “logueado”, el usuario deberá darle al botón de “Log in” del menú para poder autenticarse en la aplicación. Al dar a dicho botón le aparecerá la siguiente pantalla:
 
 \begin{center}
     \vspace{-10pt}
@@ -200,7 +201,7 @@ Todas estas opciones, como ya se ha dicho, sólo aparecen cuando el usuario est�
 
 Cuando un usuario quiere registrar una nueva receta, primero debe estar autenticado como hemos visto en el punto anterior. Al hacer click sobre “{\color{maincolor}Nueva Receta}” aparecerá una nueva página donde se podrá registrar una nueva receta.
 
-A la hora de registrar una nueva receta, habrá que añadir distintos apartados tal como aparecen en las imágenes siguientes:
+A la hora de registrar una nueva receta, habrá que rellenar distintos apartados tal como aparecen en las imágenes siguientes:
 
 
     \begin{center}
@@ -217,11 +218,12 @@ A la hora de registrar una nueva receta, habrá que añadir distintos apartados 
 
 Los apartados son:
 
+\vspace{-1em}
 \begin{itemize}
     \item \textbf{Nombre de la receta}: Un nombre que identifique la receta.
     \item \textbf{Ingredientes}: Es un menú desplegable junto con un icono de “+” que permitirá añadir tantos ingredientes como tenga la receta.
     \item \textbf{Categoría}: Es un menú desplegable para elegir una única categoría del plato de los requisitos indicados en el documento anterior.
-    \item \textbf{Dificultad}: Para indicar la dificultad se ha optado por el uso de iconos con forma de tenedor y cuchillo, que marca de 1 a 5 la dificultad.
+    \item \textbf{Dificultad}: Para indicar la dificultad se ha optado por el uso de iconos con forma de tenedor y cuchillo, sobre los que habrá que hacer click. Indica de 1 a 5 la dificultad (de menor a mayor dificultad).
     \item \textbf{Coste}: Similar al caso anterior, pero con el símbolo de dolar para indicar el coste.
     \item \textbf{Elaboración}: Campo de texto donde el usuario podrá explicar cómo se realiza la receta.
     \item \textbf{Añadir multimedia}: Para poder añadir imágenes o vídeos de  la elaboración de la receta, se ha añadido dicha opción junto con el icono “+” para poder añadir varios ficheros.
@@ -241,7 +243,7 @@ Al realizar una primera búsqueda el sistema nos permitirá realizar búsquedas 
         \vspace{-20pt}
     \end{center}
 
-Como se aprecia en la imagen, este recuadro aparecerá una vez realizada la búsqueda, nos permitirá realizar búsquedas avanzadas pudiendo seleccionar los siguientes criterios marcando o desmarcando a gusto del usuario:
+Como se aprecia en la imagen, este recuadro que aparecerá una vez realizada la búsqueda, nos permitirá realizar búsquedas avanzadas pudiendo seleccionar los siguientes criterios marcando o desmarcando a gusto del usuario:
 
 \begin{itemize}
     \item \textbf{Clasifición}: Tipo de receta que nos interesa buscar.
@@ -254,7 +256,7 @@ Como se aprecia en la imagen, este recuadro aparecerá una vez realizada la bús
 
 \section{Resultado de búsqueda de recetas}
 
-Tras realizar la búsqueda obtendremos un resultado de búsqueda en el que aparecerán las recetas que coincidan con el término buscado.
+Tras realizar cualquier tipo de búsqueda obtendremos un resultado en el que aparecerán las recetas que coincidan con el término buscado, o por los términos avanzados del paso anterior.
 
 Cada receta que aparecerá en el listado tiene la siguiente forma:
 
@@ -290,7 +292,7 @@ Haciendo uso de este sistema de paginación, podremos ir a los siguientes result
 
 \section{Visualizar la información de la receta}
 
-Al  hacer click sobre el título de cualquiera de las recetas que aparecen en los resultados de búsqueda iremos a la información completa de la receta. A la hora de visualizar la receta la página resultante se puede dividir en distintas secciones.
+Al  hacer click sobre el título de cualquiera de las recetas que aparecen en los resultados de búsqueda iremos a la información completa de la receta. A la hora de visualizar la receta, la página resultante se puede dividir en distintas secciones.
 
 La primera parte consta del nombre de la receta, junto con la dificultad, el coste, la valoración y los iconos para poder compartir la receta que será explicado posteriormente.
 
@@ -332,7 +334,7 @@ Junto con la información de la receta aparecen los iconos de varias redes socia
     \vspace{-20pt}
 \end{center}
 
-Al hacer click sobre ellas se permitirá la compartición de la receta a través de las distintas redes sociales:
+Al hacer click sobre cualquiera de estos iconos, se permitirá la compartición de la receta a través de las distintas redes sociales:
 
 \begin{itemize}
     \item Facebook
@@ -341,7 +343,7 @@ Al hacer click sobre ellas se permitirá la compartición de la receta a través
     \item E-mail
 \end{itemize}
 
-Al hacer click en los iconos, nos aparecerá una pequeña ventana “\textit{pop-up}” para indicar a quién queremos compartir la receta:
+Al hacer click en los iconos, nos aparecerá una pequeña ventana “\textit{pop-up}” para indicar con quién queremos compartir la receta:
 
 \begin{center}
     \vspace{-10pt}
@@ -361,7 +363,7 @@ En la visualización de la receta, entre el título y la foto principal, aparece
     \vspace{-20pt}
 \end{center}
 
-Este es el sistema utilizado para poder visualizar cuál es la valoración que los usuarios han otorgado a la receta, y el símbolo “+” servirá a los usuarios para valorar la receta. Al hacer click sobre el símbolo se abrirá un \textit{pop-up} en el que podremos valorar la receta que estamos visualizando actualmente.
+Este es el sistema utilizado para poder visualizar cuál es la valoración que los usuarios han otorgado a la receta. El símbolo “+” servirá a los usuarios para valorar la receta. Al hacer click sobre el símbolo se abrirá un \textit{pop-up} en el que podremos valorar la receta que estamos visualizando actualmente.
 
 \begin{center}
     \vspace{-10pt}
@@ -376,7 +378,7 @@ De esta manera se podrá seleccionar el número de estrellas que el usuario quie
 
 La nueva funcionalidad requerida por la \textbf{AIC} es el incorporar contenidos sobre alimentación sana a la aplicación web. Como se ha visto previamente, se ha decidido añadir la categoría “\textbf{Alimentación Sana}” al menú principal que encabeza la página web en todo momento.
 
-Esta categoría es un desplegable que cuenta con tres opciones en las que se ha subdividido la información a modo de subcategorías:
+Esta categoría es un desplegable que cuenta con tres apartados en las que se ha subdividido la información a modo de subcategorías:
 
 \begin{center}
     \vspace{-10pt}
@@ -389,20 +391,20 @@ Cada una de estas opciones llevará al usuario a su página correspondiente que 
 
 
 \section{Introducción a la alimentación sana}
-La finalidad de esta sección es la de dar información sobre la alimentación al usuario. Esta información ha sido tratada para que se use con un formato coloquial pero que no por ello carezca de información científica y nutricional que sea útil para el usuario.
+La finalidad de esta sección es la de dar información sobre la alimentación al usuario. Esta información ha sido tratada para que se use con un formato coloquial, pero que no por ello carezca de información científica y nutricional que será útil para el usuario.
 
 Para no sólo dar información escrita, se ha hecho uso de la “\textbf{pirámide nutricional} en formato de imagen que permitirá al usuario hacer click en las distintas categorías que la forman para que pueda recibir más información de primera mano sobre la categoría seleccionada.
 
-En la siguiente imagen se pueden ver las distintas secciones en las que se ha separado la pirámide y donde se puede hacer click.
+En la siguiente imagen se pueden ver las distintas secciones en las que se ha separado la pirámide y dónde se puede hacer click.
 \begin{center}
     \vspace{-10pt}
     \includegraphics[width=0.6\linewidth]{img/aic/alimentacion_sana_piramide_click.png}
     \vspace{-20pt}
 \end{center}
 
-Tal como se puede apreciar, en la imagen existen distintas zonas en las que se puede hacer click, coincidiendo con los tipos de alimentos y la información, en formato coloquial, que es útil al usuario sobre el número de raciones diarias que debe de tomar.
+Tal como se puede apreciar en la imagen, existen distintas zonas en las que se puede hacer click, coincidiendo con los tipos de alimentos y la información, en formato coloquial, que es útil al usuario sobre el número de raciones diarias que debe de tomar.
 
-Al hacer click sobre cualquiera de estas secciones le aparecerá un \textit{pop up} con la información requerida y que aparece sobre la propia pirámide.
+Al hacer click sobre cualquiera de estas secciones le aparecerá un \textit{pop up} con más información, que aparece sobre la propia pirámide, y que podrá ampliar yendo al glosario.
 
 \begin{center}
     \vspace{-10pt}
@@ -412,7 +414,7 @@ Al hacer click sobre cualquiera de estas secciones le aparecerá un \textit{pop 
 
 En este caso, la información trata sobre las carnes rojas, pero aparecerá la información requerida de la sección seleccionada.
 
-Debajo de la pirámide se ha decidido añadir una tabla de manera en la que la información está catalogada de manera más ordenada y dividida entre los distintos tipos de personas (bebe/infantil, joven/adolescente, adulto).
+Debajo de la pirámide se ha decidido añadir una tabla de manera en la que la información esté catalogada de manera más ordenada y dividida entre los distintos tipos de personas: bebe/infantil, joven/adolescente y adulto.
 
 \begin{center}
     \vspace{-10pt}
@@ -443,7 +445,7 @@ De esta manera acceder al ingrediente buscado es más sencillo y más rápido pa
     \vspace{-20pt}
 \end{center}
 
-Viendo la imagen se puede observar, para cualquier ingrediente, aparecerá información acerca del mismo junto con una imagen significativa de una receta. En la parte inferior de la página aparece un enlace con “\textbf{{\color{maincolor}Buscar recetas con...}}” que llevará al usuario a la página de búsqueda de recetas pero con el ingrediente ya seleccionado y mostrando sólo las recetas que al menos contengan dicho ingrediente.
+Viendo la imagen se puede observar, que para cualquier ingrediente, aparecerá información acerca del mismo junto con una imagen significativa de una receta. En la parte inferior de la página aparece un enlace con “\textbf{{\color{maincolor}Buscar recetas con...}}” que llevará al usuario a la página de búsqueda de recetas pero con el ingrediente ya seleccionado y mostrando sólo las recetas que al menos contengan dicho ingrediente.
 
 Por último, cabe destacar que en la parte superior de la página aparecerá el “camino recorrido por el usuario” para que en todo momento sepa dónde se encuentra, y que cambiará dependiendo del ingrediente en el que se encuentre.
 
@@ -453,7 +455,7 @@ Por último, cabe destacar que en la parte superior de la página aparecerá el 
     \vspace{-15pt}
 \end{center}
 
-Con todas estas opciones de categorización, junto con el camino del usuario, se trata de hacer que la navegación del usuario sea más sencilla en todo momento.
+Con todas estas opciones de categorización, junto con el camino del usuario, se trata de hacer que el tipo de navegación sea lo más sencillo en todo momento para el usuario.
 
 
 \section{Glosario}
@@ -466,17 +468,9 @@ Al igual que sucede con los ingredientes, se ha añadido un índice para que la 
 \chapter{Mapa de navegación}
 A la hora de navegar por la aplicación web de la \textbf{AIC} es importante que el usuario conozca en todo momento dónde se encuentra y cómo va a poder llegar a otros apartados a través de los enlaces.
 
-Ya se ha comentado previamente que en todas las páginas se puede ver el “camino recorrido por el usuario” que tiene la siguiente forma:
+Ya se ha comentado previamente que en todas las páginas se puede ver el “\textbf{camino recorrido por el usuario}”. Gracias a esto, el usuario podrá distinguir en qué sección, apartado o sub-apartado se encuentra y volver, de manera sencilla, sobre sus pasos.
 
-\begin{center}
-    \vspace{-10pt}
-    \textbf{{\color{maincolor}Alimentación sana > \space Ingredientes} >\space Aves}
-    \vspace{-15pt}
-\end{center}
-
-Gracias a esto, el usuario podrá distinguir en qué sección, apartado o sub-apartado se encuentra y volver, de manera sencilla, sobre sus pasos.
-
-En lo que se refiere al mapa de navegación completo, a continuación se detalla un esquema de todas las navegaciones que el usuario puede realizar en toda la aplicación web:
+A continuación se detalla un esquema de todas las navegaciones que el usuario puede realizar en toda la aplicación web:
 
 \begin{center}
     \vspace{-10pt}
@@ -492,7 +486,7 @@ Como se puede ver, existe la posibilidad de navegar entre distintas secciones, c
 
 \section{Navegación en alimentación sana}
 
-Desde la \textbf{AIC} se ha pedido la inclusión de información acerca de la alimentación sana, y ha sido, por tanto, necesario añadir navegación entre las secciones de la alimentación sana y con otras.
+Desde la \textbf{AIC} se ha pedido la inclusión de información acerca de la alimentación sana, y ha sido, por tanto, necesario añadir navegación entre las propias secciones de la alimentación sana, así como con otras.
 
 A continuación se puede ver el mapa de navegación que se ha realizado entre las subsecciones de alimentación sana que existe entre sí y con la información de los distintos ingredientes.
 
@@ -504,10 +498,12 @@ A continuación se puede ver el mapa de navegación que se ha realizado entre la
 
 Observando la dirección de las flechas, se puede observar que la navegación es bidireccional en todo momento en las secciones de alimentación sana. De esta manera se pretende que el usuario tenga facilidad de buscar la información y volver a su punto de partida si así lo decide.
 
+Recordar, tal como aparecería en el mapa de navegación completo, que a la información de alimentación sana también se puede llegar desde la información de la receta.
+
 
 \chapter{Conclusiones}
 
-Con todo lo dicho en este documento, se ha abordado la creación de un sistema a modo de prototipo general para la aplicación de la \textbf{AIC} buscando una alta fidelidad y que el detalle y las funcionalidades mostradas sea lo más parecido a la realidad. De esta manera, el cliente podrá saber cómo será el resultado final antes de realizar la programación.
+Con todo lo dicho en este documento, se ha abordado la creación de un sistema a modo de prototipo general para la aplicación de la \textbf{AIC} buscando una alta fidelidad, y que el detalle y las funcionalidades mostradas sea lo más parecido a la realidad final de la aplicación. De esta manera, el cliente podrá saber cómo será el resultado final antes de realizar la programación.
 
 También se ha puesto especial interés en el apartado de alimentación sana, ya que es una nueva funcionalidad y característica que es de gran interés para la \textbf{AIC} y quiere que los usuarios hagan uso de ella.
 
