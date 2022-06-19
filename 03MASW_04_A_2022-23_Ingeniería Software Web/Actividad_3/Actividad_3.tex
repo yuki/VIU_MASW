@@ -30,7 +30,7 @@
     \tableofcontents
 
 \chapter{Introducción}
-A lo largo de este documento se va a analizar cómo crear  los modelos concretos y cuáles han sido las decisiones tomadas para la creación de los prototipos y diseños de navegación para la aplicación web creada para la Asociación Internacional de Chefs \textbf{AIC}.
+A lo largo de este documento se va a analizar cómo se han creado los modelos concretos y cuáles han sido las decisiones tomadas para la creación de los prototipos y diseños de navegación de la aplicación web para la Asociación Internacional de Chefs \textbf{AIC}.
 
 Este documento es una continuación de un documento previo en el que se explicaba el análisis y diseño de la aplicación, por lo que varias de las decisiones aquí tomadas tienen origen en dicho documento previo.
 
@@ -48,11 +48,11 @@ Debemos tener claro que un \textbf{prototipo} es una representación (o simulaci
     \item Todos los usuarios deben entender lo que se muestra en el prototipo.
 \end{itemize}
 
-Las ventajas de creación de los prototipos es que al ser un paso previo a la creación de la aplicación, podemos obtener una reacción directa del cliente y sus impresiones, ya que es probable que no entienda las especificaciones de requisitos creadas en el documento anterior. Es decir, la creación de prototipos nos va a dar un \textit{feedback} del cliente de manera rápida y sencilla.
+Las ventajas de los prototipos es que al ser un paso previo a la creación de la aplicación, podemos obtener una reacción directa del cliente y sus impresiones. Esto es importante ya que es probable que no entienda las especificaciones de requisitos creadas en el documento anterior. Es decir, la creación de prototipos nos va a dar un \textit{feedback} del cliente de manera rápida y sencilla.
 
-Con los prototipos, no sólo vamos a obtener una respuesta al análisis creado previamente, sino que que durante las pruebas, nos pueden aparecer comportamientos no previstos previamente y por tanto cuestiones a modificar antes de realizar la programación de la aplicación. Este punto \textbf{nos puede ahorrar mucho tiempo y complicaciones que podrían surgir en el futuro}.
+Con los prototipos, no sólo vamos a obtener una respuesta al análisis creado previamente, sino que durante las pruebas, nos pueden aparecer comportamientos no previstos previamente y por tanto cuestiones a modificar antes de realizar la programación de la aplicación. Este punto \textbf{nos puede ahorrar mucho tiempo y complicaciones que podrían surgir en el futuro}.
 
-Por supuesto hay que entender que existen distintos tipos de creación de prototipos y dependiendo de la cantidad de funcionalidades añadidas al mismo pueden ser más fieles al resultado final. Es por ello que a continuación se especificará el tipo de prototipo creado.
+Por supuesto hay que entender que existen distintos tipos de creación de prototipos, y dependiendo de la cantidad de funcionalidades añadidas al mismo pueden ser más fieles al resultado final. Es por ello que a continuación se especificará el tipo de prototipo creado.
 
 
 \section{Prototipo creado}
@@ -74,20 +74,18 @@ A la hora de crear el prototipo para la aplicación de la \textbf{AIC} se ha opt
 
 Con todo ello, se ha conseguido que los responsables de la \textbf{AIC} hayan dado una retroalimentación que hasta ahora no había sido posible, que se haya tenido en cuenta esa información para mejorar el propio prototipo y que se tendrá en cuenta durante la etapa de desarrollo de la aplicación.
 
-A modo de resumen, el prototipo creado es un \textbf{prototipo del sistema completo} en el que se pueden visualizar, y con el que se puede interactuar para ver las distintas funcionalidades que tendrá la aplicación final. De nuevo destacar que al no contar con un sistema de \textit{backend}, el registro de usuarios o de recetas no va a funcionar (no se guardan los datos), pero todo el proceso es igual al que se verá en el resultado final.
+A modo de resumen, el prototipo creado es un \textbf{prototipo del sistema completo} con el que se puede interactuar y con el que podemos ver las distintas funcionalidades que tendrá la aplicación final. De nuevo destacar que al no contar con un sistema de \textit{backend}, el registro de usuarios o de recetas es una simulación (no se guardan los datos), pero todo el proceso es igual al que se verá en el resultado final.
 
-El prototipo se puede visualizar, e interactuar con él, en la siguiente  \href{https://yuki.github.io/VIU_03MASW/preview.html}{dirección web}.
+El prototipo se puede visualizar, e interactuar con él, en la siguiente  \href{https://yuki.github.io/VIU_03MASW/preview.html}{dirección web}. También se han ido guardado las distintas versiones en un repositorio \href{https://github.com/yuki/VIU_03MASW}{GIT}.
 
 
 \chapter{Modelos concretos}
 
-A continuación se van a detallar los modelos concretos de las distintas funcionalidades que tiene el prototipo creado, y que posteriormente será desarrollado en la aplicación web.
-
-En la siguiente imagen se puede ver la página principal de la aplicación:
+A continuación se van a detallar los modelos concretos de las distintas funcionalidades que tiene el prototipo creado. En la siguiente imagen se puede ver la página principal de la aplicación:
 
 \begin{center}
-    \vspace{-10pt}
-    \includegraphics[frame,width=0.7\linewidth]{img/aic/0_general.png}
+    \vspace{-0.5em}
+    \includegraphics[frame,width=0.87\linewidth]{img/aic/0_general.png}
     \vspace{-20pt}
 \end{center}
 
@@ -104,12 +102,13 @@ La aplicación web cuenta con un menú en la parte superior que es el punto de p
     \vspace{-20pt}
 \end{center}
 
-Como se puede ver, se pueden diferenciar distintas “columnas” que son secciones a las que el usuario puede acceder haciendo uso del ratón. A continuación se detallan cada una de ellas:
+En ella se pueden diferenciar distintas secciones a las que el usuario puede acceder haciendo uso del ratón. A continuación se detallan cada una de ellas:
 
 \vspace{-1em}
 \begin{itemize}
     \item \textbf{Logotipo de AIC}: Para que se reconozca la web en la que nos encontramos, se ha añadido el logo de la \textbf{AIC}. Al hacer click sobre él se irá a la web principal de la aplicación web.
-    \item \textbf{Recetas}: Es el reclamo principal del portal: la sección de recetas. Al hacer click sobre este apartado iremos a las “recetas destacadas”, que pueden ser las últimas introducidas o un aleatorio de las mismas.
+
+    \item \textbf{Recetas}: Es el reclamo principal del portal: la sección de recetas. Al hacer click sobre este apartado iremos a las “recetas destacadas”, que serán elegidas por la AIC para que varíen en el tiempo.
 
     \item \textbf{Platos}: Es un menú desplegable con las categorías de los distintos tipos de platos que existen diferenciados en la aplicación. Al hacer click se despliega el menú en el que se podrá elegir la categoría que interese al usuario. Al elegir uno, se irá a un listado de recetas de dicha categoría.
 
@@ -121,7 +120,7 @@ Como se puede ver, se pueden diferenciar distintas “columnas” que son seccio
 
     \item \textbf{Selección de idioma}: Mediante el uso del icono de una bandera, se puede modificar el idioma en el que se encuentra el portal web.
 
-    \item \textbf{Botón de “\textit{login}”}: Para realizar la autenticación de un usuario ya registrado con su usuario y contraseña.
+    \item \textbf{Botón de “\textit{login}”}: Para realizar la autenticación de un usuario ya registrado con su e-mail y contraseña.
 
     \item \textbf{Botón de “registrar”}: Para aquellos usuarios que quieran introducir recetas nuevas, deben registrarse previamente a través de este botón.
     \vspace{-1em}
@@ -145,7 +144,9 @@ Teniendo en cuenta el uso de colores, también se identifican que las dos primer
 
 
 \section{Registro de usuario}
-Continuando con lo dicho previamente, y tal como aparecen en los requisitos funcionales del documento anterior, para que un usuario pueda registrar una receta debe estar registrado en el sistema. Para que un usuario se pueda registrar debe hacer click sobre el botón “Registrar” del menú y acto seguido le aparecerá la siguiente pantalla:
+Continuando con lo dicho previamente, y tal como aparecen en los requisitos funcionales del documento anterior, para que un usuario pueda registrar una receta debe estar registrado en el sistema.
+
+Para realizar el registro debe hacer click sobre el botón “Registrar” del menú y acto seguido le aparecerá la siguiente pantalla:
 
 \begin{center}
     \vspace{-10pt}
@@ -153,11 +154,11 @@ Continuando con lo dicho previamente, y tal como aparecen en los requisitos func
     \vspace{-20pt}
 \end{center}
 
-Al llegar a esta pantalla, se deberán rellenar los datos y pulsar el botón para que posteriormente el usuario esté registrado en la aplicación y a partir de ahí se puedan registrar recetas.
+Al llegar a esta pantalla, se deberán rellenar los datos y pulsar el botón para que posteriormente el usuario quede registrado en la aplicación. A partir de ese momento, el usuario podrá registrar recetas.
 
 
 \section{Autenticación de usuario}
-Una vez el usuario ya esté registrado. Si no aparece como “logueado”, el usuario deberá darle al botón de “Log in” del menú para poder autenticarse en la aplicación. Al dar a dicho botón le aparecerá la siguiente pantalla:
+Una vez el usuario ya esté registrado. Si no aparece como “logueado”, el usuario deberá darle al botón de “\textit{Log in}” del menú para poder autenticarse en la aplicación. Al dar a dicho botón le aparecerá la siguiente pantalla:
 
 \begin{center}
     \vspace{-10pt}
@@ -167,7 +168,7 @@ Una vez el usuario ya esté registrado. Si no aparece como “logueado”, el us
 
 El usuario deberá introducir el \textit{e-mail} con el que se registró y la contraseña utilizada.
 
-Cuando un usuario se ha autenticado, el menú principal de la aplicación cambia, desapareciendo los botones de autenticación y registro para que en su lugar aparezca lo siguiente:
+Cuando un usuario se ha autenticado, el menú principal de la aplicación cambia, desapareciendo los botones de autenticación y registro, para que en su lugar aparezca lo siguiente:
 
 
 \begin{center}
@@ -176,7 +177,7 @@ Cuando un usuario se ha autenticado, el menú principal de la aplicación cambia
     \vspace{-20pt}
 \end{center}
 
-En este caso lo que aparece es el nombre del usuario, que a su vez es un desplegable, y un enlace para registrar nuevas recetas. El menú del usuario cuenta con:
+En la nueva sección aparece el nombre del usuario, que a su vez es un desplegable, y un enlace para registrar nuevas recetas. El menú del usuario cuenta con:
 
 
 \begin{multicols}{2}
@@ -201,7 +202,7 @@ Todas estas opciones, como ya se ha dicho, sólo aparecen cuando el usuario est�
 
 Cuando un usuario quiere registrar una nueva receta, primero debe estar autenticado como hemos visto en el punto anterior. Al hacer click sobre “{\color{maincolor}Nueva Receta}” aparecerá una nueva página donde se podrá registrar una nueva receta.
 
-A la hora de registrar una nueva receta, habrá que rellenar distintos apartados tal como aparecen en las imágenes siguientes:
+A la hora de registrar una nueva receta, habrá que rellenar distintos apartados tal como aparece a continuación:
 
 
     \begin{center}
@@ -294,7 +295,7 @@ Haciendo uso de este sistema de paginación, podremos ir a los siguientes result
 
 \section{Visualizar la información de la receta}
 
-Al  hacer click sobre el título de cualquiera de las recetas que aparecen en los resultados de búsqueda iremos a la \textbf{información completa} de la receta. A la hora de visualizar la receta, la página resultante se puede dividir en distintas secciones.
+Al  hacer click sobre el título de cualquiera de las recetas que aparecen en los resultados de búsqueda iremos a la \textbf{información completa} de la receta. A la hora de visualizar la receta, la página resultante se divide en distintas secciones.
 
 La primera parte consta del nombre de la receta, junto con la dificultad, el coste, la valoración y los iconos para poder compartir la receta que será explicado posteriormente.
 
@@ -319,8 +320,8 @@ Tras esto, aparece el apartado de cómo se prepara la receta. Estos pasos son lo
 
 \begin{center}
     \vspace{-10pt}
-    \includegraphics[width=0.7\linewidth]{img/aic/receta_3.png}
-    \includegraphics[width=0.7\linewidth]{img/aic/receta_4.png}
+    \includegraphics[width=0.75\linewidth]{img/aic/receta_3.png}
+    \includegraphics[width=0.75\linewidth]{img/aic/receta_4.png}
     \vspace{-20pt}
 \end{center}
 
@@ -345,12 +346,13 @@ Al hacer click sobre cualquiera de estos iconos, se permitirá la compartición 
     \item Twitter
     \item E-mail
 \end{itemize}
+\vspace{-1em}
 
 Al hacer click en los iconos, nos aparecerá una pequeña ventana “\textit{pop-up}” para indicar con quién queremos compartir la receta:
 
 \begin{center}
     \vspace{-10pt}
-    \includegraphics[width=0.4\linewidth]{img/aic/compartir_2.png}
+    \includegraphics[width=0.5\linewidth]{img/aic/compartir_2.png}
     \vspace{-20pt}
 \end{center}
 
@@ -362,7 +364,7 @@ En la visualización de la receta, entre el título y la foto principal, aparece
 
 \begin{center}
     \vspace{-10pt}
-    \includegraphics[width=0.4\linewidth]{img/aic/valorar.png}
+    \includegraphics[width=0.5\linewidth]{img/aic/valorar.png}
     \vspace{-20pt}
 \end{center}
 
@@ -370,7 +372,7 @@ Este es el sistema utilizado para poder visualizar cuál es la valoración que l
 
 \begin{center}
     \vspace{-10pt}
-    \includegraphics[width=0.4\linewidth]{img/aic/valorar_2.png}
+    \includegraphics[width=0.5\linewidth]{img/aic/valorar_2.png}
     \vspace{-10pt}
 \end{center}
 
@@ -448,7 +450,9 @@ De esta manera acceder al ingrediente buscado es más sencillo y más rápido pa
     \vspace{-20pt}
 \end{center}
 
-Viendo la imagen se puede observar, que para cualquier ingrediente, aparecerá información acerca del mismo junto con una imagen significativa de una receta. En la parte inferior de la página aparece un enlace con “\textbf{{\color{maincolor}Buscar recetas con...}}” que llevará al usuario a la página de búsqueda de recetas pero con el ingrediente ya seleccionado y mostrando sólo las recetas que al menos contengan dicho ingrediente.
+Viendo la imagen se puede observar que para cualquier ingrediente aparecerá información acerca del mismo junto con una imagen significativa de una receta.
+
+En la parte inferior de la página aparece un enlace “\textbf{{\color{maincolor}Buscar recetas con...}}” que llevará al usuario a la página de búsqueda de recetas pero con el ingrediente ya seleccionado y mostrando sólo las recetas que al menos contengan dicho ingrediente.
 
 Por último, cabe destacar que en la parte superior de la página aparecerá el “camino recorrido por el usuario” para que en todo momento sepa dónde se encuentra, y que cambiará dependiendo del ingrediente en el que se encuentre.
 
@@ -458,7 +462,7 @@ Por último, cabe destacar que en la parte superior de la página aparecerá el 
     \vspace{-15pt}
 \end{center}
 
-Con todas estas opciones de categorización, junto con el camino del usuario, se trata de hacer que el tipo de navegación sea lo más sencillo en todo momento para el usuario.
+Con todas estas opciones de categorización, junto con el “camino del usuario”, \textbf{se busca que el tipo de navegación sea lo más sencillo en todo momento para el usuario}.
 
 
 \section{Glosario}
@@ -489,7 +493,7 @@ Como se puede ver, existe la posibilidad de navegar entre distintas secciones, c
 
 \section{Navegación en alimentación sana}
 
-Desde la \textbf{AIC} se ha pedido la inclusión de información acerca de la alimentación sana, y ha sido, por tanto, necesario añadir navegación entre las propias secciones de la alimentación sana, así como con otras.
+Desde la \textbf{AIC} se ha pedido la inclusión de información acerca de la alimentación sana, y ha sido, por tanto, necesario añadir navegación entre las propias secciones de la alimentación sana, así como con otras de las secciones de la aplicación.
 
 A continuación se puede ver el mapa de navegación que se ha realizado entre las subsecciones de alimentación sana que existe entre sí y con la información de los distintos ingredientes.
 
@@ -506,7 +510,7 @@ Recordar, tal como aparecería en el mapa de navegación completo, que a la info
 
 \chapter{Conclusiones}
 
-Con todo lo dicho en este documento, se ha abordado la creación de un sistema prototipo general para la aplicación de la \textbf{AIC} buscando que sea de \textbf{alta fidelidad}, y que el detalle y las funcionalidades mostradas \textbf{sea lo más parecido a la realidad final de la aplicació}n. De esta manera, el cliente podrá saber cómo será el resultado del proyecto antes de realizar la programación.
+Con todo lo dicho en este documento, se ha abordado la creación de un sistema de prototipado general para la aplicación de la \textbf{AIC} buscando que sea de \textbf{alta fidelidad}, y que el detalle y las funcionalidades mostradas \textbf{sea lo más parecido a la realidad final de la aplicació}n. De esta manera, el cliente podrá saber cómo será el resultado del proyecto antes de realizar la programación.
 
 También se ha puesto especial interés en el apartado de alimentación sana, ya que es una nueva funcionalidad y característica que es de gran interés para la \textbf{AIC} y quiere que los usuarios hagan uso de ella.
 
