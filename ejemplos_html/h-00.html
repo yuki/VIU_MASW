@@ -1,0 +1,64 @@
+
+
+<!DOCTYPE asignaturas [
+   <!ELEMENT asignaturas (asignatura)* >
+   <!ELEMENT asignatura ( titulo, profesores, fecha ) >
+   <!ELEMENT titulo (#PCDATA )>
+   <!ELEMENT profesores ( profesor )>
+   <!ELEMENT profesor (nombre, apellido+) >
+   <!ELEMENT nombre (#PCDATA) >
+   <!ELEMENT apellido (#PCDATA) >
+   <!ELEMENT fecha (fecha_inicio, fecha_fin) >
+   <!ELEMENT fecha_inicio (#PCDATA) >
+   <!ELEMENT fecha_fin (#PCDATA) >
+   <!ATTLIST asignatura materia (tecnologías web, dispositivos móviles y computación en la nube | 
+           fundamentos web | gestión de proyectos web | trabajo fin de máster) "castellano">
+]>
+
+<asignaturas>
+	<asignatura materia="tecnologías web, dispositivos móviles y computación en la nube">
+		<titulo>Desarrollo de aplicaciones web I: lado del servidor (back-end)</titulo>
+		<profesores>
+			<profesor>
+				<nombre>Rubén</nombre>
+				<apellido>Martínez</apellido>
+				<apellido>Albiñana</apellido>
+			</profesor>
+		</profesores>
+		<fecha>
+			<fecha_inicio>10-06-2022</fecha_inicio>
+			<fecha_fin>20-07-2022</fin>
+		</fecha>
+	</asignatura>
+
+	<asignatura materia="tecnologías web, dispositivos móviles y computación en la nube">
+		<titulo>Desarrollo de aplicaciones web II: lado del cliente (front-end) y multimedia </titulo>
+		<profesores>
+			<profesor>
+				<nombre>Ismael</nombre>
+				<apellido>de Fez</apellido>
+				<apellido>Lava</apellido>
+			</profesor>
+		</profesores>
+		<fecha>
+			<fecha_inicio>09-06-2022</fecha_inicio>
+			<fecha_fin>21-07-2022</fecha_fin>
+		</fecha>
+	</asignatura>
+</asignaturas>
+
+
+<h1>Ejemplo</h1>
+
+
+<img src="imagen.jpg" alt="imagen"/>
+
+<input disabled>
+
+<img src="logo_viu.jpg" alt="Logo VIU"/>
+
+<hr style="border:2px;">
+
+	Esta es la <a href="http://www.universidadviu.com/">página web de la VIU</a>
+
+<!-- Esto es un comentario -->
