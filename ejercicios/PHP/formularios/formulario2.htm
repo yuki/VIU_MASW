@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+	</head>
+	<body>
+		<form name="f_prof" id="f_prof" action="formulario2.php" method="post">
+			Introduzca nombre:
+			<input type="text" name="name" id="name"/>
+			<br>
+			¿Tienes hijos?
+			<input type="checkbox" name="children" id="children"/>
+			<br>
+			Rango de edad
+			<br>
+			de 0 a 10 años <input name="years" type="radio" value="1"/>
+			<br>
+			de 10 a 20 años <input name="years" type="radio" value="2"/>
+			<br>
+			más de 20 años <input name="years" type="radio" value="3"/>
+			<br>
+			<input type="hidden" name="hiddenElement" id="hiddenElement" value="Esto no se muestra" />
+			<input type="submit" value="ENVIAR" name="sendBtn" id="sendBtn"/>
+		</form>
+	</body>
+</html>
+
