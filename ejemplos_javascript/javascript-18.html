@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="es-ES">
+   <head>
+       <title>DOM</title>
+       <meta charset="utf-8">
+       <style>
+          .azul { color: blue; }
+          .verde { color: green; }
+          .negrita { font-weight: bold; }
+       </style>    
+   </head>
+   <body>
+       <p id="p1" lang="lat" >Lorem ipsum dolor sit amet, consectetur 
+       adipisicing elit. <span id="resaltado">Ut enim ad 
+       minim veniam</span>, quis nostrud exercitation.
+       </p>
+
+       <p class="clase1">Lorem ipsum dolor sit amet, consectetur 
+       et dolore magna aliqua.
+       </p>
+
+       <p class="clase1">Excepteur sint occaecat cupidatat non
+       proident, <span><b>Lorem ipsum</b></span> dolor sit amet.
+       </p>
+
+       <script>
+            var x = document.getElementById("p1");
+            x.innerHTML = "Hola, <span class='clase_z'>¿qué tal?</span>";
+            document.querySelector("p.clase1").innerHTML = "Hello, <span>world</span>";
+            var pp = document.querySelectorAll("p.clase1");
+            for (i=0; i<pp.length; i++) {
+              pp[i].lang="es-ES"; // Solo algunas propiedades
+              pp[i].style.color="blue"; // Color
+              pp[i].innerHTML += "<b> C.Q.D.</b>"; // Se añade al final
+            }
+            pp[0].style.removeProperty("color");
+       </script>
+   </body>
+</html> 
+
+
+

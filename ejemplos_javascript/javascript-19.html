@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="es-ES">
+   <head>
+       <title>DOM</title>
+       <meta charset="utf-8">
+       <style>
+          .azul { color: blue; }
+          .verde { color: green; }
+          .negrita { font-weight: bold; }
+       </style>    
+   </head>
+   <body>
+       <p id="p1" lang="lat" >Lorem ipsum dolor sit amet, consectetur 
+       adipisicing elit. <span id="resaltado">Ut enim ad 
+       minim veniam</span>, quis nostrud exercitation.
+       </p>
+
+       <p class="clase1">Lorem ipsum dolor sit amet, consectetur 
+       et dolore magna aliqua.
+       </p>
+
+       <p class="clase1">Excepteur sint occaecat cupidatat non
+       proident, <span><b>Lorem ipsum</b></span> dolor sit amet.
+       </p>
+
+       <script>
+         var spResaltado = document.getElementById("resaltado");
+         spResaltado.id = "pepe";
+
+         var spResaltado = document.getElementById("pepe");
+         console.log(spResaltado);
+
+         spResaltado.className="azul";
+         spResaltado.classList.add("negrita");
+         spResaltado.classList.remove("azul");
+         spResaltado.classList.toggle("negrita");
+         spResaltado.classList.toggle("negrita");
+       </script>
+   </body>
+</html> 
+
+
+

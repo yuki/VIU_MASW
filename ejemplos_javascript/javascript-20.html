@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="es-ES">
+   <head>
+       <title>DOM</title>
+       <meta charset="utf-8">
+   </head>
+   <body>
+      <!-- Esto es un comentario "-->
+      <p id="p1" lang="lat" >Párrafo 1: Lorem ipsum dolor sit amet, adipisicing 
+         elit. <span id="resaltado">Ut enim ad minim </span>, quis nostrud.</p>
+      <div id="d1"></div>
+      <div id="d2">
+          <p id="p2" class="clase1">Párrafo 2: Lorem ipsum dolor sit amet, 
+            consectetur et dolore magna aliqua.</p>
+          <p id="p3" class="clase1">Párrafo 3: Excepteur sint occaecat cupidatat 
+            non proident, <span><b>Lorem ipsum</b></span> dolor sit amet.</p>
+          <p id="p4" class="clase1">Párrafo 4: Sed ut perspiciatis unde omnis iste 
+            natus error sit voluptatem accusantium doloremque laudantium.</p>
+          <p id="p5" class="clase1">Párrafo 5: Totam rem aperiam, eaque ipsa quae 
+            ab illo inventore veritatis et quasi vitae dicta sunt explicabo.</p>
+      </div>
+
+      <script>
+         var d1 = document.getElementById("d1");
+         var manzana = document.createElement("img");
+         manzana.setAttribute("src", "manzana.png");
+         manzana.style.width="50px";
+         d1.appendChild(manzana);
+
+         var p = document.createElement("p");
+         var t = document.createTextNode("Hola, ¿qué tal?");
+         p.appendChild(t);
+         var d2 = document.getElementById("d2");
+         var p3 = document.getElementById("p3");
+         d2.insertBefore(p, p3);
+
+         var b = document.createElement("button");
+         b.innerHTML="Botón 4";
+         var p4 = document.getElementById("p4");
+         d2.replaceChild(b, p4);
+         p4.onclick="saludar(Pepe)"
+
+         var p5 = document.getElementById("p5");
+         d2.removeChild(p5);
+      </script>
+   </body>
+</html> 
+

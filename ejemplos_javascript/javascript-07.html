@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Ejemplo de comparaciones</title>
+		<meta charset="utf-8">
+	</head>
+	<body>
+		<script>
+			var valor1=5;
+			var valor2="5";
+			document.writeln("var valor1=5;<br>var valor2='5';<br><br>");
+			document.writeln("valor1==valor2: " + (valor1==valor2));
+			document.writeln("<br>");
+			document.writeln("valor1===valor2: " + (valor1===valor2));
+			document.writeln("<br><br>");
+			var obj1 = {valor:'5'};
+			var obj2 = obj1;
+			var obj3 = {valor:'5'};
+			var obj4 = {valor:5}
+			document.writeln("var obj1 = {valor:'5'};<br>var obj2=obj1;" + 
+				"<br>var obj3 = {valor: '5' };<br><br>" );
+			document.writeln("obj1==obj2:" + (obj1==obj2) + "<br>");
+			document.writeln("obj1===obj2: " + (obj1===obj2) + "<br><br>");
+			document.writeln("obj1==obj3: " + (obj1==obj3) + "<br>");
+			document.writeln("obj1===obj3: " + (obj1===obj3) + "<br><br>");
+			document.writeln("obj2==obj3: " + (obj2==obj3) + "<br>");
+			document.writeln("obj2===obj3: " + (obj2===obj3) + "<br><br>");
+			document.writeln("obj1.valor==obj2.valor: " + (obj1.valor==obj2.valor) + "<br>");
+			document.writeln("obj1.valor===obj2.valor: " + (obj1.valor===obj2.valor) + "<br><br>");
+			document.writeln("obj1.valor==obj3.valor: " + (obj1.valor==obj3.valor) + "<br>");
+			document.writeln("obj1.valor===obj3.valor: " + (obj1.valor===obj3.valor) + "<br><br>");
+			document.writeln("obj1.valor==obj4.valor: " + (obj1.valor==obj4.valor) + "<br>");
+			document.writeln("obj1.valor===obj4.valor: " + (obj1.valor===obj4.valor) + "<br><br>");
+		</script>
+	</body>
+</html>
+
+
