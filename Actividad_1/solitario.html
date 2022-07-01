@@ -9,7 +9,8 @@
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
         <!--/*** !!!!!!!!!!!!!!!!!!! CODIGO !!!!!!!!!!!!!!!!!!!! **/
 		Invocar a los ficheros de estilos y al JavaScript donde proceda
-        -->     
+        -->
+		<link rel="stylesheet" href="./css/solitario.css">
 	</head>
 
     <body>
@@ -19,7 +20,7 @@
 			<!--/*** !!!!!!!!!!!!!!!!!!! CODIGO !!!!!!!!!!!!!!!!!!!! **/
 			Rellenar h1 e insertar el logo donde proceda
         	-->
-			<h1 id="titulo"></h1>
+			<h1 id="titulo">Juego del solitario <img id="logo" src="./imagenes/logoVIU.png"></h1>
 			
 			<!-- Siguiente línea donde se indicará el tiempo transcurrido y la cantidad
 				de movimientos que se han hecho hasta el momento. Estos números se 
@@ -48,5 +49,6 @@
 			<!-- Botón de reset que reinicia todo: partida, contadores de tiempo, de movimientos, ... -->
 			<button id="reset" class="btn btn-danger">Reiniciar</button>
 		</div> <!-- class="central" -->
+		<script src="./js/solitario.js"></script>
     </body>
 </html>

@@ -27,13 +27,14 @@ let mazo_receptor3 = [];
 let mazo_receptor4 = [];
 
 // Contadores de cartas
-let cont_inicial     = document.getElementById("cont_inicial");
-let cont_sobrantes   = document.getElementById("cont_sobrantes");
-let cont_receptor1   = document.getElementById("cont_receptor1");
-let cont_receptor2   = document.getElementById("cont_receptor2");
-let cont_receptor3   = document.getElementById("cont_receptor3");
-let cont_receptor4   = document.getElementById("cont_receptor4");
-let cont_movimientos = document.getElementById("cont_movimientos");
+// FIXED: Los nombres de las variables no eran correctos
+let cont_inicial     = document.getElementById("contador_inicial");
+let cont_sobrantes   = document.getElementById("contador_sobrantes");
+let cont_receptor1   = document.getElementById("contador_receptor1");
+let cont_receptor2   = document.getElementById("contador_receptor2");
+let cont_receptor3   = document.getElementById("contador_receptor3");
+let cont_receptor4   = document.getElementById("contador_receptor4");
+let cont_movimientos = document.getElementById("contador_movimientos");
 
 // Tiempo
 let cont_tiempo  = document.getElementById("cont_tiempo"); // span cuenta tiempo
@@ -60,7 +61,15 @@ function comenzar_juego() {
 	*/
 
 	/*** !!!!!!!!!!!!!!!!!!! CODIGO !!!!!!!!!!!!!!!!!!!! **/	
-    
+    for (let i = 0; i < numeros.length; i++) {
+		for (let j = 0; j < palos.length; j++) {
+			var img_elemento = document.createElement("img");
+			img_elemento.src = "./imagenes/baraja/" + numeros[i] + "-" + palos[j] + '.png';
+			img_elemento.className = "carta";
+			mazo_inicial.push(img_elemento);
+		}
+	}
+
 	
 	// Barajar
 	barajar(mazo_inicial);
@@ -69,6 +78,8 @@ function comenzar_juego() {
 	cargar_tapete_inicial(mazo_inicial);
 
 	// Puesta a cero de contadores de mazos
+	// FIXED: faltaba poner el contador del tapete inicial
+	set_contador(cont_inicial, mazo_inicial.length)
 	set_contador(cont_sobrantes, 0);
 	set_contador(cont_receptor1, 0);
 	set_contador(cont_receptor2, 0);
@@ -77,7 +88,7 @@ function comenzar_juego() {
 	set_contador(cont_movimientos, 0);
 	
 	// Arrancar el conteo de tiempo
-	arrancar_tiempo();
+	// arrancar_tiempo();
 
 } // comenzar_juego
 
@@ -133,7 +144,31 @@ function arrancar_tiempo(){
 	dentro de la rutina, esto aparecerá reflejado fuera de la misma.
 */
 function barajar(mazo) {
-	/*** !!!!!!!!!!!!!!!!!!! CODIGO !!!!!!!!!!!!!!!!!!!! **/	
+	/*** !!!!!!!!!!!!!!!!!!! CODIGO !!!!!!!!!!!!!!!!!!!! **/
+	/* Este algoritmo lo que hace es coger una carta aleatoria del mazo y lo pone en 
+	   un nuevo mazo aleatorio. Luego le asigno al mazo pasado como parámetro el mazo
+	   ya barajado. La alternativa sería intercambiar posiciones, pero es la primera
+	   manera que se me ha ocurrido y prefiero dejarlo así.
+	*/
+	var mazo_bajarado = [];
+	var barajando = true;
+	while (barajando) {
+		num_cartas = mazo.length;
+		//Math.random devuelve un número entre 0 y 1, así que lo multiplicamos con el número de cartas.
+		aleatorio = Math.floor(Math.random()*num_cartas);
+		if (num_cartas != 0){
+			// si quedan cartas, cogemos la de la posición aleatoria
+			mazo_bajarado.push(mazo[aleatorio]);
+			mazo.splice(aleatorio,1);
+		} else {
+			// hemos terminado y no quedan cartas en el mazo original
+			barajando = false;
+		}
+	}
+	// TODO: comprobar cómo clonarlo mejor
+	for (i = 0; i<mazo_bajarado.length; i++){
+		mazo.push(mazo_bajarado[i]);
+	}
 } // barajar
 
 
@@ -147,6 +182,9 @@ function barajar(mazo) {
 */
 function cargar_tapete_inicial(mazo) {
 	/*** !!!!!!!!!!!!!!!!!!! CODIGO !!!!!!!!!!!!!!!!!!!! **/	
+	for (var i=0; i<mazo_inicial.length; i++){
+		tapete_inicial.appendChild(mazo_inicial[i]);
+	}
 } // cargar_tapete_inicial
 
 
@@ -163,6 +201,8 @@ function inc_contador(contador){
 */
 function dec_contador(contador){
 	/*** !!!!!!!!!!!!!!!!!!! CODIGO !!!!!!!!!!!!!!!!!!!! ***/	
+	// TODO: Comprobar que está bien
+	contador.innerHTML = +contador.innerHTML - 1;
 } // dec_contador
 
 /**
@@ -171,4 +211,6 @@ function dec_contador(contador){
 */
 function set_contador(contador, valor) {
 	/*** !!!!!!!!!!!!!!!!!!! CODIGO !!!!!!!!!!!!!!!!!!!! **/
+	// TODO: Comprobar que está bien
+	contador.innerHTML = valor;
 } // set_contador
