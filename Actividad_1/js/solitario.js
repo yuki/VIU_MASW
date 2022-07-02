@@ -24,7 +24,7 @@ for (cont = 0; cont<tapetes.length; cont++) {
 	tapetes[cont].ondragenter = function(e) { e.preventDefault(); };
 	tapetes[cont].ondragover = function(e) { e.preventDefault(); };
 	tapetes[cont].ondragleave = function(e) { e.preventDefault(); };
-	tapetes[cont].ondrop = soltar;
+	tapetes[cont].ondrop = soltar_carta;
 }
 
 // Mazos
@@ -71,19 +71,26 @@ function comenzar_juego() {
 	*/
 
 	/*** !!!!!!!!!!!!!!!!!!! CODIGO !!!!!!!!!!!!!!!!!!!! **/
-	// TODO: hay que reiniciar los mazos por si se da dos veces al botón reiniciar.
+	// nos aseguramos que los mazos están vacíos
+	mazo_inicial = [];
+	mazo_sobrantes = [];
+	mazo_receptor1 = [];
+	mazo_receptor2 = [];
+	mazo_receptor3 = [];
+	mazo_receptor4 = [];
 
 	// rellenamos el mazo
     for (let i = 0; i < numeros.length; i++) {
 		for (let j = 0; j < palos.length; j++) {
 			var img_carta = document.createElement("img");
 			img_carta.src = "./imagenes/baraja/" + numeros[i] + "-" + palos[j] + '.png';
+			img_carta.setAttribute("id",numeros[i]+"-"+palos[j]);
 			img_carta.setAttribute("data-palo",palos[j]);
 			img_carta.setAttribute("data-numero",numeros[i]);
 			img_carta.className = "carta";
 			// evitamos que todas las cartas se puedan arrastrar, porque se podrían hacer trampas
 			img_carta.draggable = false;
-			img_carta.ondragstart=al_mover;
+			img_carta.ondragstart=al_mover_carta;
 			img_carta.ondrag = function(e){};
 			img_carta.ondragend = function(){};
 			mazo_inicial.push(img_carta);
@@ -203,12 +210,11 @@ function barajar(mazo) {
 function cargar_tapete_inicial(mazo) {
 	/*** !!!!!!!!!!!!!!!!!!! CODIGO !!!!!!!!!!!!!!!!!!!! **/	
 	for (var i=0; i<mazo_inicial.length; i++){
-		/* TODO: Intentar hacer esto sólo en CSS? Se puede?
-		   Mi idea inicial era hacer la escalera de cartas directamente en CSS (mezclando propiedades de hermanos)
-		   pero no lo he conseguido. 
+		/* Mi idea inicial era hacer la escalera de cartas directamente en CSS (mezclando propiedades
+		   de hermanos de CSS, y demás) pero no lo he conseguido.
 		*/
-		mazo_inicial[i].style.top = i*5 + "px";
-		mazo_inicial[i].style.left = i*5 + "px";
+		mazo_inicial[i].style.top = i*paso + "px";
+		mazo_inicial[i].style.left = i*paso + "px";
 		if (i == mazo_inicial.length-1) {
 			// a la última carta le damos la opción de ser arrastrada.
 			mazo_inicial[i].draggable = true;
@@ -250,13 +256,42 @@ function set_contador(contador, valor) {
 /**
  * Función que se ejecuta al mover las cartas
  */
-function al_mover(e) {
+function al_mover_carta(e) {
 	console.log(e) //TODO: quitar
 	e.dataTransfer.setData( "text/plain/numero", e.target.dataset["numero"] );
 	e.dataTransfer.setData( "text/plain/palo", e.target.dataset["palo"] );
 	e.dataTransfer.setData( "text/plain/id", e.target.id );
 }
 
-function soltar(e) {
-	console.log(e);
+function soltar_carta(e) {
+	e.preventDefault();
+	var numero = e.dataTransfer.getData("text/plain/numero");
+	var palo = e.dataTransfer.getData("text/plain/palo");
+	var tapete_destinto = e.target.id;
+	if (tapete_destinto == "sobrantes") {
+		// cogemos la carta del mazo_inicial y hacemos cosas con ella
+		carta = mazo_inicial.pop();
+		// Con esto, el vértice superior izquierdo de la carta queda en el centro del tapete
+		carta.style.top = "50%";
+		carta.style.left = "50%";
+		// Con la siguiente traslación, se centra definitivamente en el tapete: se desplaza,
+		// a la izquierda y hacia arriba (valores negativos) el 50 % de las dimensiones de
+		// la carta.
+		carta.style.transform="translate(-50%, -50%)";
+
+		//añadimos la carta al tapete de sobrantes y se mueve
+		mazo_sobrantes.push(carta);
+		tapete_sobrantes.appendChild(carta);
+
+		// cambiamos contadores
+		dec_contador(cont_inicial);
+		inc_contador(cont_sobrantes);
+		inc_contador(cont_movimientos);
+
+		// la que ahora es la última carta del tapete inicial se tiene que poder mover
+		if (mazo_inicial.length > 0) {
+			mazo_inicial[mazo_inicial.length-1].draggable = true;
+		}
+	}
+	console.log(e.target.id);
 }

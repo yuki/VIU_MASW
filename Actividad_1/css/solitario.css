@@ -7,7 +7,7 @@
 **/
 /* imagen del logo */
 img#logo {
-	height: 80px;
+	height: 50px;
 }
 
 /* botón de reset */
@@ -35,9 +35,10 @@ img.carta {
 
 
 /* Centrado del título y color */
+/* Fixed: el color oficial de la VIU parece que ha cambiado*/
 h1#titulo {
 	text-align: center;
-	color: #E65014;
+	color: #F25416;
 }
 
 /* Centrado de los marcadores de tiempo y movimientos */
