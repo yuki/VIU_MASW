@@ -11,6 +11,10 @@
 		Invocar a los ficheros de estilos y al JavaScript donde proceda
         -->
 		<link rel="stylesheet" href="./css/solitario.css">
+		<!-- El javascript se debería poner al final porque llama a partes no inicializadas.
+			 Pero también se puede poner aquí si añadimos "defer" para que se ejecute al final de parsear el HTML.
+		-->
+		<script defer src="./js/solitario.js"></script>
 	</head>
 
     <body>
@@ -49,6 +53,6 @@
 			<!-- Botón de reset que reinicia todo: partida, contadores de tiempo, de movimientos, ... -->
 			<button id="reset" class="btn btn-danger">Reiniciar</button>
 		</div> <!-- class="central" -->
-		<script src="./js/solitario.js"></script>
+		
     </body>
 </html>

@@ -5,14 +5,23 @@
 /* /*** !!!!!!!!!!!!!!!!!!! CODIGO !!!!!!!!!!!!!!!!!!!! 
 	Completar los estilos que faltan y modificar al gusto del alumno
 **/
+/* imagen del logo */
 img#logo {
 	height: 80px;
 }
 
+/* botón de reset */
+#reset {
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+/* cartas */
 img.carta {
 	width: 40px;
 	float: left;
-	position: relative;
+	position: absolute;
 }
 
 /* Todos los contadores estarán ubicados en la parte inferior 

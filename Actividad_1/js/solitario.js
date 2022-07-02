@@ -18,6 +18,15 @@ let tapete_receptor2 = document.getElementById("receptor2");
 let tapete_receptor3 = document.getElementById("receptor3");
 let tapete_receptor4 = document.getElementById("receptor4");
 
+// hacemos que los tapetes permitan recibir objetos
+let tapetes = [tapete_sobrantes,tapete_receptor1,tapete_receptor2,tapete_receptor3,tapete_receptor4];
+for (cont = 0; cont<tapetes.length; cont++) {
+	tapetes[cont].ondragenter = function(e) { e.preventDefault(); };
+	tapetes[cont].ondragover = function(e) { e.preventDefault(); };
+	tapetes[cont].ondragleave = function(e) { e.preventDefault(); };
+	tapetes[cont].ondrop = soltar;
+}
+
 // Mazos
 let mazo_inicial   = [];
 let mazo_sobrantes = [];
@@ -27,7 +36,7 @@ let mazo_receptor3 = [];
 let mazo_receptor4 = [];
 
 // Contadores de cartas
-// FIXED: Los nombres de las variables no eran correctos
+// FIXED: Los nombres de las id de los elementos no eran correctos
 let cont_inicial     = document.getElementById("contador_inicial");
 let cont_sobrantes   = document.getElementById("contador_sobrantes");
 let cont_receptor1   = document.getElementById("contador_receptor1");
@@ -37,7 +46,8 @@ let cont_receptor4   = document.getElementById("contador_receptor4");
 let cont_movimientos = document.getElementById("contador_movimientos");
 
 // Tiempo
-let cont_tiempo  = document.getElementById("cont_tiempo"); // span cuenta tiempo
+// FIXED: el ID es contador_tiempo en lugar de cont_tiempo
+let cont_tiempo  = document.getElementById("contador_tiempo"); // span cuenta tiempo
 let segundos 	 = 0;    // cuenta de segundos
 let temporizador = null; // manejador del temporizador
 
@@ -60,13 +70,23 @@ function comenzar_juego() {
 	el elemento img, inclúyase como elemento del array mazo_inicial. 
 	*/
 
-	/*** !!!!!!!!!!!!!!!!!!! CODIGO !!!!!!!!!!!!!!!!!!!! **/	
+	/*** !!!!!!!!!!!!!!!!!!! CODIGO !!!!!!!!!!!!!!!!!!!! **/
+	// TODO: hay que reiniciar los mazos por si se da dos veces al botón reiniciar.
+
+	// rellenamos el mazo
     for (let i = 0; i < numeros.length; i++) {
 		for (let j = 0; j < palos.length; j++) {
-			var img_elemento = document.createElement("img");
-			img_elemento.src = "./imagenes/baraja/" + numeros[i] + "-" + palos[j] + '.png';
-			img_elemento.className = "carta";
-			mazo_inicial.push(img_elemento);
+			var img_carta = document.createElement("img");
+			img_carta.src = "./imagenes/baraja/" + numeros[i] + "-" + palos[j] + '.png';
+			img_carta.setAttribute("data-palo",palos[j]);
+			img_carta.setAttribute("data-numero",numeros[i]);
+			img_carta.className = "carta";
+			// evitamos que todas las cartas se puedan arrastrar, porque se podrían hacer trampas
+			img_carta.draggable = false;
+			img_carta.ondragstart=al_mover;
+			img_carta.ondrag = function(e){};
+			img_carta.ondragend = function(){};
+			mazo_inicial.push(img_carta);
 		}
 	}
 
@@ -88,7 +108,7 @@ function comenzar_juego() {
 	set_contador(cont_movimientos, 0);
 	
 	// Arrancar el conteo de tiempo
-	// arrancar_tiempo();
+	arrancar_tiempo();
 
 } // comenzar_juego
 
@@ -183,6 +203,16 @@ function barajar(mazo) {
 function cargar_tapete_inicial(mazo) {
 	/*** !!!!!!!!!!!!!!!!!!! CODIGO !!!!!!!!!!!!!!!!!!!! **/	
 	for (var i=0; i<mazo_inicial.length; i++){
+		/* TODO: Intentar hacer esto sólo en CSS? Se puede?
+		   Mi idea inicial era hacer la escalera de cartas directamente en CSS (mezclando propiedades de hermanos)
+		   pero no lo he conseguido. 
+		*/
+		mazo_inicial[i].style.top = i*5 + "px";
+		mazo_inicial[i].style.left = i*5 + "px";
+		if (i == mazo_inicial.length-1) {
+			// a la última carta le damos la opción de ser arrastrada.
+			mazo_inicial[i].draggable = true;
+		}
 		tapete_inicial.appendChild(mazo_inicial[i]);
 	}
 } // cargar_tapete_inicial
@@ -214,3 +244,19 @@ function set_contador(contador, valor) {
 	// TODO: Comprobar que está bien
 	contador.innerHTML = valor;
 } // set_contador
+
+/*** Código propio **/
+
+/**
+ * Función que se ejecuta al mover las cartas
+ */
+function al_mover(e) {
+	console.log(e) //TODO: quitar
+	e.dataTransfer.setData( "text/plain/numero", e.target.dataset["numero"] );
+	e.dataTransfer.setData( "text/plain/palo", e.target.dataset["palo"] );
+	e.dataTransfer.setData( "text/plain/id", e.target.id );
+}
+
+function soltar(e) {
+	console.log(e);
+}
