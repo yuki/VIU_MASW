@@ -31,6 +31,12 @@ img.carta {
 	position: absolute;
 	bottom: 0px;
 	right: 3px;
+	color: white;
+}
+/* el contador inicial es especial por tener el border-radius más pronunciado */
+#contador_inicial {
+	bottom: 10px;
+	right: 15px;
 }
 
 
@@ -49,7 +55,14 @@ h2#marcadores{
 /* Mesa que contiene a los tapetes centrados */
 div#mesa{
 	text-align: center;
-	margin:20px;
+	background-color: #F25416;
+	border-radius: 50px;
+	/* border: 50px solid black;
+	border-image-source: url("../imagenes/pildora_blanca.svg");
+	border-image-slice: 40%;
+	border-image-repeat: round; */
+	margin: 50px 200px;
+	padding: 50px;
 }
 
 /* Todos los tapetes con position relative para que
@@ -59,13 +72,18 @@ div.tapete{
 	display: inline-block;
 	position: relative;
 	margin: 10px;
+	background: url("../imagenes/sello-viu.svg") center no-repeat;
+	border-radius: 10px;
+	border: 2px solid;
 }
 
 /* Dimensiones y color de fondo para el tapete inicial */
 div.tapete#inicial{
 	width: 340px;
 	height: 340px;			
-	background-color: lightgrey;
+	/* background-color: lightgrey; */
+	border-radius: 30px;
+	border-color: lightgrey;
 }
 
 /* Dimensiones para todos los tapetes salvo el inicial */
@@ -76,10 +94,13 @@ div.tapete:not(#inicial){
 
 /* Color de fondo para el tapete de las cartas sobrantes */
 div.tapete#sobrantes{
-	background-color: lightblue;
+	/* background-color: lightblue; */
+	border-color: lightblue;
 }
 
 /* Color de fondo de los tapetes receptores */
 div.tapete.receptor{
-	background-color: lightgreen;
+	/* background-color: lightgreen; */
+	border-color: lightgreen;
+	
 }

@@ -1,11 +1,12 @@
 /***** INICIO DECLARACIÓN DE VARIABLES GLOBALES *****/
 
 // Array de palos
-let palos = ["viu", "cua", "hex", "cir"];
+//let palos = ["viu", "cua", "hex", "cir"];
+let palos = ["viu", "cua"];
 // Array de número de cartas
 //let numeros = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
 // En las pruebas iniciales solo se trabajará con cuatro cartas por palo:
-let numeros = [9, 10, 11, 12];
+let numeros = [11, 12];
 
 // paso (top y left) en pixeles de una carta a la siguiente en un mazo
 let paso = 5;
@@ -79,6 +80,18 @@ function comenzar_juego() {
 	mazo_receptor3 = [];
 	mazo_receptor4 = [];
 
+	// limpiamos tapete inicial
+	while (tapete_inicial.getElementsByTagName('img').length>0) {
+		tapete_inicial.getElementsByTagName('img')[0].remove()
+	}
+	// limpiamos el resto de tapetes
+	for (i = 0; i<tapetes.length; i++) {
+		// borramos todos los hijos que sean imágenes
+		while (tapetes[i].getElementsByTagName('img').length>0) {
+			tapetes[i].getElementsByTagName('img')[0].remove()
+		}
+	}
+
 	// rellenamos el mazo
     for (let i = 0; i < numeros.length; i++) {
 		for (let j = 0; j < palos.length; j++) {
@@ -87,9 +100,8 @@ function comenzar_juego() {
 			img_carta.setAttribute("id",numeros[i]+"-"+palos[j]);
 			img_carta.setAttribute("data-palo",palos[j]);
 			img_carta.setAttribute("data-numero",numeros[i]);
+			img_carta.setAttribute("data-mazo","inicial");
 			img_carta.className = "carta";
-			// evitamos que todas las cartas se puedan arrastrar, porque se podrían hacer trampas
-			img_carta.draggable = false;
 			img_carta.ondragstart=al_mover_carta;
 			img_carta.ondrag = function(e){};
 			img_carta.ondragend = function(){};
@@ -209,17 +221,21 @@ function barajar(mazo) {
 */
 function cargar_tapete_inicial(mazo) {
 	/*** !!!!!!!!!!!!!!!!!!! CODIGO !!!!!!!!!!!!!!!!!!!! **/	
-	for (var i=0; i<mazo_inicial.length; i++){
+	for (var i=0; i<mazo.length; i++){
 		/* Mi idea inicial era hacer la escalera de cartas directamente en CSS (mezclando propiedades
 		   de hermanos de CSS, y demás) pero no lo he conseguido.
+		   Limpiamos el estilo por si las cartas vienen del tapete sobrante.
+		   HACK: La suma de 15 es por redondear el tapete, para que quede dentro de él.
 		*/
-		mazo_inicial[i].style.top = i*paso + "px";
-		mazo_inicial[i].style.left = i*paso + "px";
-		if (i == mazo_inicial.length-1) {
+		mazo[i].style = "";
+		mazo[i].style.top = (i*paso+15) + "px";
+		mazo[i].style.left = (i*paso+15) + "px";
+		mazo[i].draggable = false;
+		if (i == mazo.length-1) {
 			// a la última carta le damos la opción de ser arrastrada.
-			mazo_inicial[i].draggable = true;
+			mazo[i].draggable = true;
 		}
-		tapete_inicial.appendChild(mazo_inicial[i]);
+		tapete_inicial.appendChild(mazo[i]);
 	}
 } // cargar_tapete_inicial
 
@@ -257,41 +273,121 @@ function set_contador(contador, valor) {
  * Función que se ejecuta al mover las cartas
  */
 function al_mover_carta(e) {
-	console.log(e) //TODO: quitar
 	e.dataTransfer.setData( "text/plain/numero", e.target.dataset["numero"] );
 	e.dataTransfer.setData( "text/plain/palo", e.target.dataset["palo"] );
+	e.dataTransfer.setData( "text/plain/mazo", e.target.dataset["mazo"] );
 	e.dataTransfer.setData( "text/plain/id", e.target.id );
 }
 
 function soltar_carta(e) {
 	e.preventDefault();
+	// recogemos los valores de la carta y del mazo del que viene.
 	var numero = e.dataTransfer.getData("text/plain/numero");
 	var palo = e.dataTransfer.getData("text/plain/palo");
+	var mazo = e.dataTransfer.getData("text/plain/mazo");
 	var tapete_destinto = e.target.id;
-	if (tapete_destinto == "sobrantes") {
-		// cogemos la carta del mazo_inicial y hacemos cosas con ella
-		carta = mazo_inicial.pop();
-		// Con esto, el vértice superior izquierdo de la carta queda en el centro del tapete
-		carta.style.top = "50%";
-		carta.style.left = "50%";
-		// Con la siguiente traslación, se centra definitivamente en el tapete: se desplaza,
-		// a la izquierda y hacia arriba (valores negativos) el 50 % de las dimensiones de
-		// la carta.
-		carta.style.transform="translate(-50%, -50%)";
-
-		//añadimos la carta al tapete de sobrantes y se mueve
-		mazo_sobrantes.push(carta);
-		tapete_sobrantes.appendChild(carta);
-
-		// cambiamos contadores
-		dec_contador(cont_inicial);
-		inc_contador(cont_sobrantes);
-		inc_contador(cont_movimientos);
-
-		// la que ahora es la última carta del tapete inicial se tiene que poder mover
-		if (mazo_inicial.length > 0) {
-			mazo_inicial[mazo_inicial.length-1].draggable = true;
+	console.log(tapete_destinto);
+	// tenemos en cuenta el mazo, para evitar hacks de coger cartas de otros mazos
+	if (tapete_destinto == "sobrantes" && mazo == "inicial") {
+		mazo_inicial[mazo_inicial.length-1].setAttribute("data-mazo","sobrantes");
+		mover_carta(mazo_inicial,mazo_sobrantes,tapete_sobrantes,cont_inicial,cont_sobrantes);
+	} else {
+		var mazo_receptor;
+		var tapete_receptor;
+		var cont_receptor;
+		var mazo_origen;
+		var cont_origen;
+		if (mazo == "inicial") {
+			mazo_origen = mazo_inicial;
+			cont_origen = cont_inicial;
+		} else {
+			mazo_origen = mazo_sobrantes;
+			cont_origen = cont_sobrantes;
+		}
+		switch(tapete_destinto) {
+			case ("receptor1"):
+				mazo_receptor = mazo_receptor1;
+				tapete_receptor = tapete_receptor1;
+				cont_receptor = cont_receptor1;
+				break;
+			case ("receptor2"):
+				mazo_receptor = mazo_receptor2;
+				tapete_receptor = tapete_receptor2;
+				cont_receptor = cont_receptor2;
+				break;
+			case ("receptor3"):
+				mazo_receptor = mazo_receptor3;
+				tapete_receptor = tapete_receptor3;
+				cont_receptor = cont_receptor3;
+				break;
+			case ("receptor4"):
+				mazo_receptor = mazo_receptor4;
+				tapete_receptor = tapete_receptor4;
+				cont_receptor = cont_receptor4;
+				break;
+		}
+		
+		// TODO: MIRAR ESTA CARTA!
+		carta = mazo_origen[mazo_origen.length-1];
+		if (mazo_receptor.length == 0 && numero == 12){
+			mover_carta(mazo_origen,mazo_receptor,tapete_receptor,cont_origen,cont_receptor);
+		}
+		if (mazo_receptor.length != 0) {
+			carta_mazo_num = mazo_receptor[mazo_receptor.length-1].getAttribute("data-numero");
+			if (carta_mazo_num-1 == numero) {
+				// aceptamos la carta por número, pero por palo?
+				console.log("aceptamos por numero")
+				carta_mazo_palo = mazo_receptor[mazo_receptor.length-1].getAttribute("data-palo");
+				console.log(palo +" -- " + carta_mazo_palo)
+				if ((palo == "viu" || palo == "cua") && (carta_mazo_palo == "hex" || carta_mazo_palo == "cir") ) {
+					// aceptamos la carta por palo, pero por número? 
+					mover_carta(mazo_origen,mazo_receptor,tapete_receptor,cont_origen,cont_receptor);
+				} else if ((palo == "hex" || palo == "cir") && (carta_mazo_palo == "viu" || carta_mazo_palo == "cua")) {
+					mover_carta(mazo_origen,mazo_receptor,tapete_receptor,cont_origen,cont_receptor);
+				}
+			}
 		}
 	}
-	console.log(e.target.id);
+	// si mazo_inicial es 0, cogemos las cartas del tapete de sobrantes.
+	if (mazo_inicial.length == 0) {
+		// limpiamos el tapete de sobrantes
+		while (tapete_sobrantes.getElementsByTagName('img').length>0) {
+			tapete_sobrantes.getElementsByTagName('img')[0].remove()
+		}
+		// pasamos el mazo sobrantes a inicial, barajamos y colocamos.
+		mazo_inicial = mazo_sobrantes;
+		mazo_sobrantes = [];
+		set_contador(cont_sobrantes,0);
+		barajar(mazo_inicial);
+		cargar_tapete_inicial(mazo_inicial);
+		set_contador(cont_inicial,mazo_inicial.length);
+	}
+}
+
+function mover_carta(mazo_origen, mazo_destino, tapete_destino, contador_origen, contador_destino) {
+	// cogemos la carta del mazo_origen y hacemos cosas con ella
+	carta = mazo_origen.pop();
+	// Con esto, el vértice superior izquierdo de la carta queda en el centro del tapete
+	carta.style.top = "50%";
+	carta.style.left = "50%";
+	// Con la siguiente traslación, se centra definitivamente en el tapete: se desplaza,
+	// a la izquierda y hacia arriba (valores negativos) el 50 % de las dimensiones de la carta.
+	carta.style.transform="translate(-50%, -50%)";
+
+	//añadimos la carta al tapete destino y se mueve
+	mazo_destino.push(carta);
+	tapete_destino.appendChild(carta);
+
+	// cambiamos contadores
+	dec_contador(contador_origen);
+	inc_contador(contador_destino);
+	inc_contador(cont_movimientos);
+
+	// la que ahora es la última carta del mazo_origen se tiene que poder mover
+	if (mazo_origen.length > 0) {
+		mazo_origen[mazo_origen.length-1].draggable = true;
+	}
+	
+	// las cartas en los mazos receptores ya no se pueden mover
+	// TODO: hay que hacer esto
 }
