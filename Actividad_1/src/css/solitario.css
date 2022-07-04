@@ -5,6 +5,12 @@
 /* /*** !!!!!!!!!!!!!!!!!!! CODIGO !!!!!!!!!!!!!!!!!!!! 
 	Completar los estilos que faltan y modificar al gusto del alumno
 **/
+/* Variable global de color */
+:root {
+	--corporativo: #F25416;
+  }
+
+
 /* imagen del logo */
 img#logo {
 	height: 50px;
@@ -44,7 +50,7 @@ img.carta {
 /* Fixed: el color oficial de la VIU parece que ha cambiado*/
 h1#titulo {
 	text-align: center;
-	color: #F25416;
+	color: var(--corporativo);
 }
 
 /* Centrado de los marcadores de tiempo y movimientos */
@@ -55,12 +61,12 @@ h2#marcadores{
 /* Mesa que contiene a los tapetes centrados */
 div#mesa{
 	text-align: center;
-	background-color: #F25416;
+	background-color: var(--corporativo);
 	border-radius: 50px;
-	/* border: 50px solid black;
+	/* intento de borde, se puede mejorar */
+	border: 50px solid white;
 	border-image-source: url("../imagenes/pildora_blanca.svg");
-	border-image-slice: 40%;
-	border-image-repeat: round; */
+	border-image-slice: 100%;
 	margin: 50px 200px;
 	padding: 50px;
 }
@@ -102,5 +108,4 @@ div.tapete#sobrantes{
 div.tapete.receptor{
 	/* background-color: lightgreen; */
 	border-color: lightgreen;
-	
 }

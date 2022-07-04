@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   width="48"
+   height="48"
+   style=""
+   version="1.1"
+   id="svg11"
+   sodipodi:docname="pildora_blanca.svg"
+   inkscape:version="1.1.2 (0a00cf5339, 2022-02-04)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <defs
+     id="defs15" />
+  <sodipodi:namedview
+     id="namedview13"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     showgrid="false"
+     inkscape:zoom="14.979167"
+     inkscape:cx="35.616133"
+     inkscape:cy="26.536856"
+     inkscape:window-width="2560"
+     inkscape:window-height="1363"
+     inkscape:window-x="2560"
+     inkscape:window-y="0"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg11" />
+  <rect
+     id="backgroundrect"
+     class=""
+     width="100%"
+     height="100%"
+     fill="none"
+     x="1.0853417"
+     y="0" />
+  <g
+     class="currentLayer"
+     style="fill:#ffffff"
+     id="g9-1-9"
+     transform="matrix(0.35279472,0,0,0.35279472,15.533033,15.532997)">
+    <title
+       id="title3-0-3">Layer 1</title>
+    <g
+       id="g7-8-3"
+       style="fill:#ffffff">
+      <path
+         d="m 41.888,6.012 c -7.7218,-7.765 -20.241,-7.765 -27.964,0 l -7.8126,7.8566 c -7.7218,7.765 -7.7218,20.354 0,28.119 7.7218,7.765 20.242,7.765 27.964,0 L 41.888,34.131 c 7.7218,-7.765 7.7218,-20.354 0,-28.119"
+         fill="#fff"
+         id="path5-5-8"
+         style="fill:#ffffff" />
+    </g>
+  </g>
+</svg>
