@@ -10,41 +10,45 @@ let numeros = [9, 10, 11, 12];
 // paso (top y left) en pixeles de una carta a la siguiente en un mazo
 let paso = 5;
 
-// Tapetes				
-let tapete_inicial   = document.getElementById("inicial");
-let tapete_sobrantes = document.getElementById("sobrantes");
-let tapete_receptor1 = document.getElementById("receptor1");
-let tapete_receptor2 = document.getElementById("receptor2");
-let tapete_receptor3 = document.getElementById("receptor3");
-let tapete_receptor4 = document.getElementById("receptor4");
+// Tapetes
+let tapetes = [
+	document.getElementById("inicial"),
+	document.getElementById("receptor1"),
+	document.getElementById("receptor2"),
+	document.getElementById("receptor3"),
+	document.getElementById("receptor4"),
+	document.getElementById("sobrantes")
+]
 
 // hacemos que los tapetes permitan recibir objetos (menos el tapete_inicial)
-let tapetes = [tapete_sobrantes,tapete_receptor1,tapete_receptor2,tapete_receptor3,tapete_receptor4];
-for (cont = 0; cont<tapetes.length; cont++) {
-	tapetes[cont].ondragenter = function(e) { e.preventDefault(); };
-	tapetes[cont].ondragover = function(e) { e.preventDefault(); };
-	tapetes[cont].ondragleave = function(e) { e.preventDefault(); };
-	tapetes[cont].ondrop = soltar_carta;
+for (i = 1; i<tapetes.length; i++) {
+	tapetes[i].ondragenter = function(e) { e.preventDefault(); };
+	tapetes[i].ondragover = function(e) { e.preventDefault(); };
+	tapetes[i].ondragleave = function(e) { e.preventDefault(); };
+	tapetes[i].ondrop = soltar_carta;
 }
 
 // Mazos
-let mazo_inicial   = [];
-let mazo_sobrantes = [];
-let mazo_receptor1 = [];
-let mazo_receptor2 = [];
-let mazo_receptor3 = [];
-let mazo_receptor4 = [];
+let mazos = [
+	[], // inicial
+	[], // receptor1
+	[], // receptor2
+	[], // receptor3
+	[], // receptor4
+	[], // sobrantes
+]
 
 // Contadores de cartas
-// FIXED: Los nombres de las id de los elementos no eran correctos
-let cont_inicial     = document.getElementById("contador_inicial");
-let cont_sobrantes   = document.getElementById("contador_sobrantes");
-let cont_receptor1   = document.getElementById("contador_receptor1");
-let cont_receptor2   = document.getElementById("contador_receptor2");
-let cont_receptor3   = document.getElementById("contador_receptor3");
-let cont_receptor4   = document.getElementById("contador_receptor4");
-let cont_movimientos = document.getElementById("contador_movimientos");
+let contadores = [
+	document.getElementById("contador_inicial"),
+	document.getElementById("contador_receptor1"),
+	document.getElementById("contador_receptor2"),
+	document.getElementById("contador_receptor3"),
+	document.getElementById("contador_receptor4"),
+	document.getElementById("contador_sobrantes")
+]
 
+let cont_movimientos = document.getElementById("contador_movimientos");
 // Tiempo
 // FIXED: el ID es contador_tiempo en lugar de cont_tiempo
 let cont_tiempo  = document.getElementById("contador_tiempo"); // span cuenta tiempo
@@ -64,58 +68,47 @@ document.getElementById("reset").onclick = comenzar_juego;
 function comenzar_juego() {
 	/*** !!!!!!!!!!!!!!!!!!! CODIGO !!!!!!!!!!!!!!!!!!!! **/
 	// nos aseguramos que los mazos están vacíos
-	mazo_inicial = [];
-	mazo_sobrantes = [];
-	mazo_receptor1 = [];
-	mazo_receptor2 = [];
-	mazo_receptor3 = [];
-	mazo_receptor4 = [];
+	for (i=0;i<mazos.length;i++) {
+		mazos[i] = [];
+	}
 
-	// limpiamos de imágenes/cartas el tapete inicial, para asegurar
-	limpiar_tapete(tapete_inicial);
-	// limpiamos el resto de tapetes, para asegurar
+	// limpiamos de imágenes/cartas los tapetes para asegurar
 	for (i = 0; i<tapetes.length; i++) {
 		limpiar_tapete(tapetes[i]);
 	}
 
-	/* Crear baraja, es decir crear el mazo_inicial. Este será un array cuyos
-	elementos serán elementos HTML <img>, siendo cada uno de ellos una carta.
-	Sugerencia: en dos bucles for, bárranse los "palos" y los "numeros", formando
-	oportunamente el nombre del fichero png que contiene a la carta (recuérdese poner
-	el path correcto en la URL asociada al atributo src de <img>). Una vez creado
-	el elemento img, inclúyase como elemento del array mazo_inicial.
-	*/
-	// rellenamos el mazo
+	// rellenamos el mazo inicial
     for (let i = 0; i < numeros.length; i++) {
 		for (let j = 0; j < palos.length; j++) {
+			// creamos un objeto imagen y le asignamos atributos y clases
 			var img_carta = document.createElement("img");
 			img_carta.src = "./imagenes/baraja/" + numeros[i] + "-" + palos[j] + '.png';
 			img_carta.setAttribute("id",numeros[i]+"-"+palos[j]);
 			img_carta.setAttribute("data-palo",palos[j]);
 			img_carta.setAttribute("data-numero",numeros[i]);
 			img_carta.className = "carta";
+			// permitimos que se puedan mover
 			img_carta.ondragstart=al_mover_carta;
 			img_carta.ondrag = function(e){};
 			img_carta.ondragend = function(){};
-			mazo_inicial.push(img_carta);
+			// metemos el objeto en el mazo inicial
+			mazos[0].push(img_carta);
 		}
 	}
 
 	
 	// Barajar
-	barajar(mazo_inicial);
+	barajar(mazos[0]);
 
 	// Dejar mazo_inicial en tapete inicial
-	cargar_tapete_inicial(mazo_inicial);
+	cargar_tapete_inicial(mazos[0]);
 
+	// El contador inicial es igual al número de cartas del mazo inicial
+	set_contador(contadores[0], mazos[0].length)
 	// Puesta a cero de contadores de mazos
-	// FIXED: faltaba poner el contador del tapete inicial
-	set_contador(cont_inicial, mazo_inicial.length)
-	set_contador(cont_sobrantes, 0);
-	set_contador(cont_receptor1, 0);
-	set_contador(cont_receptor2, 0);
-	set_contador(cont_receptor3, 0);
-	set_contador(cont_receptor4, 0);
+	for (i=1;i<contadores.length;i++) {
+		set_contador(contadores[i], 0);
+	}
 	set_contador(cont_movimientos, 0);
 	
 	// Arrancar el conteo de tiempo
@@ -147,6 +140,7 @@ function comenzar_juego() {
 	el resultado de la llamada a setInterval en alguna variable para llamar oportunamente
 	a clearInterval en su caso.   
 */
+// convierte los segundos en el formato arriba expuesto
 function devuelve_tiempo() {
 	let seg = Math.trunc( segundos % 60 );
 	let min = Math.trunc( (segundos % 3600) / 60 );
@@ -157,7 +151,7 @@ function devuelve_tiempo() {
 	return tiempo;
 }
 
-// he movido cómo obtener el tiempo a una función para aprovecharlo luego
+// arranca el timer
 function arrancar_tiempo(){
 	/*** !!!!!!!!!!!!!!!!!!! CODIGO !!!!!!!!!!!!!!!!!!!! **/
 	if (temporizador) clearInterval(temporizador);
@@ -229,7 +223,7 @@ function cargar_tapete_inicial(mazo) {
 			// a la última carta le damos la opción de ser arrastrada.
 			mazo[i].draggable = true;
 		}
-		tapete_inicial.appendChild(mazo[i]);
+		tapetes[0].appendChild(mazo[i]);
 	}
 } // cargar_tapete_inicial
 
@@ -285,54 +279,54 @@ function soltar_carta(e) {
 	}
 
 	// tenemos en cuenta el mazo, para evitar hacks de coger cartas de otros mazos cambiando al atributo draggable
+	// si el mazo es el inicial y el destino es sobrantes, no hay nada que pensar
 	if (tapete_destinto == "sobrantes" && mazo == "inicial") {
-		mazo_inicial[mazo_inicial.length-1].setAttribute("data-mazo","sobrantes");
-		mover_carta(mazo_inicial,mazo_sobrantes,tapete_sobrantes,cont_inicial,cont_sobrantes);
+		mazos[0][mazos[0].length-1].setAttribute("data-mazo","sobrantes");
+		mover_carta(mazos[0],mazos[5],tapetes[5],contadores[0],contadores[5]);
 	} else {
-		// variables que van a depender de lo que se haga
+		// si entramos aquí es porque va a un montón y tenemos que tener en cuenta las siguientes variables:
+		var mazo_origen;
 		var mazo_receptor;
 		var tapete_receptor;
-		var cont_receptor;
-		var mazo_origen;
 		var cont_origen;
-		// el mazo origen es el inicial o el sobrantes?
+		var cont_receptor;
+
+		// sólo se permite coger cartas del mazo origen o del sobrantes
 		if (mazo == "inicial") {
-			mazo_origen = mazo_inicial;
-			cont_origen = cont_inicial;
+			mazo_origen = mazos[0];
+			cont_origen = contadores[0];
 		} else {
-			mazo_origen = mazo_sobrantes;
-			cont_origen = cont_sobrantes;
+			// entonces el origen es el sobrantes
+			mazo_origen = mazos[5];
+			cont_origen = contadores[5];
 		}
 		// si el tapete es uno de los receptores, hay que saber cuál es
+		var cual = 0;
 		switch(tapete_destinto) {
 			case ("receptor1"):
-				mazo_receptor = mazo_receptor1;
-				tapete_receptor = tapete_receptor1;
-				cont_receptor = cont_receptor1;
+				cual = 1;
 				break;
 			case ("receptor2"):
-				mazo_receptor = mazo_receptor2;
-				tapete_receptor = tapete_receptor2;
-				cont_receptor = cont_receptor2;
+				cual = 2;
 				break;
 			case ("receptor3"):
-				mazo_receptor = mazo_receptor3;
-				tapete_receptor = tapete_receptor3;
-				cont_receptor = cont_receptor3;
+				cual = 3;
 				break;
 			case ("receptor4"):
-				mazo_receptor = mazo_receptor4;
-				tapete_receptor = tapete_receptor4;
-				cont_receptor = cont_receptor4;
+				cual = 4;
 				break;
 		}
-		
+		mazo_receptor = mazos[cual];
+		tapete_receptor = tapetes[cual];
+		cont_receptor = contadores[cual];
+
 		// cogemos la carta del mazo origen para ver qué hacer con ella
 		carta = mazo_origen[mazo_origen.length-1];
 
 		if (mazo_receptor.length == 0 && numero == 12){
 			// es una carta con número 12 y va a ser la primera carta del tapete
 			carta.draggable = false;
+			// movemos la carta de un mazo a otro
 			mover_carta(mazo_origen,mazo_receptor,tapete_receptor,cont_origen,cont_receptor);
 		} else if (mazo_receptor.length != 0) {
 			// no es la primera carta del tapete. Tenemos que ver el número de la carta que ya está en ese tapete.
@@ -352,32 +346,29 @@ function soltar_carta(e) {
 		}
 	}
 
-	// ¿Tiene que terminar el juego?
-	if (mazo_inicial.length == 0 && mazo_sobrantes.length == 0) {
+	// ¿Tiene que terminar el juego? (mazo inicial y sobrantes vacíos)
+	if (mazos[0].length == 0 && mazos[5].length == 0) {
 		clearInterval(temporizador);
-		var seguimos = confirm("JUEGO TERMINADO. Has hecho "+ cont_movimientos.innerHTML + " movimientos en "+ devuelve_tiempo() + " ¿Quieres seguir jugando?");
-		if (seguimos) {
-			comenzar_juego();
-		}
+		efecto_final();
 		return; //para salir de la función
 	}
 
 	// Si no termina, si el mazo inicial es 0, cogemos las cartas del tapete de sobrantes.
-	if (mazo_inicial.length == 0) {
+	if (mazos[0].length == 0) {
 		// limpiamos el tapete de sobrantes
-		limpiar_tapete(tapete_sobrantes);
+		limpiar_tapete(tapetes[5]);
 
 		// pasamos el mazo sobrantes a inicial, barajamos y colocamos.
-		mazo_inicial = mazo_sobrantes;
-		mazo_sobrantes = [];
-		set_contador(cont_sobrantes,0);
-		barajar(mazo_inicial);
-		cargar_tapete_inicial(mazo_inicial);
-		set_contador(cont_inicial,mazo_inicial.length);
+		mazos[0] = mazos[5];
+		mazos[5] = [];
+		set_contador(contadores[5],0);
+		barajar(mazos[0]);
+		cargar_tapete_inicial(mazos[0]);
+		set_contador(contadores[0],mazos[0].length);
 	}
 }
 
-// función que mueve la carta de un mazo a otro y a un tapete destino. Y cambiamos contadores
+// función que mueve la carta de un mazo a otro y a un tapete destino. Y cambiamos contadores.
 function mover_carta(mazo_origen, mazo_destino, tapete_destino, contador_origen, contador_destino) {
 	// cogemos la carta del mazo_origen
 	carta = mazo_origen.pop();
@@ -407,5 +398,35 @@ function mover_carta(mazo_origen, mazo_destino, tapete_destino, contador_origen,
 function limpiar_tapete(tapete) {
 	while (tapete.getElementsByTagName('img').length>0) {
 		tapete.getElementsByTagName('img')[0].remove();
+	}
+}
+
+// función para hacer un efecto sobre las cartas de los tapetes al terminar el juego.
+// se podría mejorar, pero queda decente
+async function efecto_final() {
+	// solo nos interesan los 4 tapetes donde están las cartas al finalizar el juego (posiciones 1 a 4)
+	for (i=1;i<5;i++) {
+		for (j = 0; j<tapetes[i].getElementsByTagName('img').length; j++) {
+			carta = tapetes[i].getElementsByTagName('img')[j];
+			carta.style = "";
+			if (i == 1 || i == 4) {
+				// los dos mazos de los extremos
+				carta.style.bottom = 50+(j*paso) + "%";
+			} else {
+				carta.style.bottom = 50+(j*paso+j*6) + "%";
+			}
+
+			if (i == 1 || i == 2) {
+				carta.style.right = 50+(j*paso+j*j) + "%";
+			} else {
+				carta.style.left = 50+(j*paso+j*j) + "%";
+			}
+			await new Promise(resolve => setTimeout(resolve, 100));
+		}
+	}
+
+	var seguimos = confirm("JUEGO TERMINADO. Has hecho "+ cont_movimientos.innerHTML + " movimientos en "+ devuelve_tiempo() + " ¿Quieres seguir jugando?");
+	if (seguimos) {
+		comenzar_juego();
 	}
 }
