@@ -3,9 +3,9 @@
 // Array de palos
 let palos = ["viu", "cua", "hex", "cir"];
 // Array de número de cartas
-//let numeros = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
+let numeros = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
 // En las pruebas iniciales solo se trabajará con cuatro cartas por palo:
-let numeros = [9, 10, 11, 12];
+// let numeros = [9, 10, 11, 12];
 
 // paso (top y left) en pixeles de una carta a la siguiente en un mazo
 let paso = 5;
@@ -349,8 +349,14 @@ function soltar_carta(e) {
 	// ¿Tiene que terminar el juego? (mazo inicial y sobrantes vacíos)
 	if (mazos[0].length == 0 && mazos[5].length == 0) {
 		clearInterval(temporizador);
-		efecto_final();
-		return; //para salir de la función
+		efecto_final().then(function() {
+			// esperamos a que termine el efecto y luego sacamos el aviso
+			var seguimos = confirm("JUEGO TERMINADO. Has hecho "+ cont_movimientos.innerHTML + " movimientos en "+ devuelve_tiempo() + " ¿Quieres seguir jugando?");
+			if (seguimos) {
+				comenzar_juego();
+			}
+			return;
+		});
 	}
 
 	// Si no termina, si el mazo inicial es 0, cogemos las cartas del tapete de sobrantes.
@@ -402,7 +408,7 @@ function limpiar_tapete(tapete) {
 }
 
 // función para hacer un efecto sobre las cartas de los tapetes al terminar el juego.
-// se podría mejorar, pero queda decente
+// se podría mejorar, pero queda decente para estar hecho a mano.
 async function efecto_final() {
 	// solo nos interesan los 4 tapetes donde están las cartas al finalizar el juego (posiciones 1 a 4)
 	for (i=1;i<5;i++) {
@@ -413,6 +419,7 @@ async function efecto_final() {
 				// los dos mazos de los extremos
 				carta.style.bottom = 50+(j*paso) + "%";
 			} else {
+				// los centrales tienen una curva distinta
 				carta.style.bottom = 50+(j*paso+j*6) + "%";
 			}
 
@@ -424,9 +431,5 @@ async function efecto_final() {
 			await new Promise(resolve => setTimeout(resolve, 100));
 		}
 	}
-
-	var seguimos = confirm("JUEGO TERMINADO. Has hecho "+ cont_movimientos.innerHTML + " movimientos en "+ devuelve_tiempo() + " ¿Quieres seguir jugando?");
-	if (seguimos) {
-		comenzar_juego();
-	}
+	return new Promise(resolve => setTimeout(resolve, 100));
 }
