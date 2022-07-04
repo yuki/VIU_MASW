@@ -71,16 +71,11 @@ function comenzar_juego() {
 	mazo_receptor3 = [];
 	mazo_receptor4 = [];
 
-	// limpiamos tapete inicial, para asegurar
-	while (tapete_inicial.getElementsByTagName('img').length>0) {
-		tapete_inicial.getElementsByTagName('img')[0].remove()
-	}
+	// limpiamos de imágenes/cartas el tapete inicial, para asegurar
+	limpiar_tapete(tapete_inicial);
 	// limpiamos el resto de tapetes, para asegurar
 	for (i = 0; i<tapetes.length; i++) {
-		// borramos todos los hijos que sean imágenes
-		while (tapetes[i].getElementsByTagName('img').length>0) {
-			tapetes[i].getElementsByTagName('img')[0].remove()
-		}
+		limpiar_tapete(tapetes[i]);
 	}
 
 	/* Crear baraja, es decir crear el mazo_inicial. Este será un array cuyos
@@ -224,11 +219,7 @@ function barajar(mazo) {
 function cargar_tapete_inicial(mazo) {
 	/*** !!!!!!!!!!!!!!!!!!! CODIGO !!!!!!!!!!!!!!!!!!!! **/	
 	for (var i=0; i<mazo.length; i++){
-		/* Mi idea inicial era hacer la escalera de cartas directamente en CSS (mezclando propiedades
-		   de hermanos de CSS, y demás) pero no lo he conseguido.
-		   Limpiamos el estilo por si las cartas vienen del tapete sobrante.
-		   HACK: La suma de 15 es por redondear el tapete, para que quede dentro de él.
-		*/
+		// La suma de 15 es por redondear el tapete, para que quede dentro de él.
 		mazo[i].setAttribute("data-mazo","inicial");
 		mazo[i].style = "";
 		mazo[i].style.top = (i*paso+15) + "px";
@@ -287,17 +278,24 @@ function soltar_carta(e) {
 	var palo = e.dataTransfer.getData("text/plain/palo");
 	var mazo = e.dataTransfer.getData("text/plain/mazo");
 	var tapete_destinto = e.target.id;
-	console.log(tapete_destinto);
-	// tenemos en cuenta el mazo, para evitar hacks de coger cartas de otros mazos
+
+	if (e.target.className == "carta") {
+		// por si hemos movido una carta sobre otra, necesitamos saber en qué tapete está para permitir mover la carta encima
+		tapete_destinto = e.path[1].id;
+	}
+
+	// tenemos en cuenta el mazo, para evitar hacks de coger cartas de otros mazos cambiando al atributo draggable
 	if (tapete_destinto == "sobrantes" && mazo == "inicial") {
 		mazo_inicial[mazo_inicial.length-1].setAttribute("data-mazo","sobrantes");
 		mover_carta(mazo_inicial,mazo_sobrantes,tapete_sobrantes,cont_inicial,cont_sobrantes);
 	} else {
+		// variables que van a depender de lo que se haga
 		var mazo_receptor;
 		var tapete_receptor;
 		var cont_receptor;
 		var mazo_origen;
 		var cont_origen;
+		// el mazo origen es el inicial o el sobrantes?
 		if (mazo == "inicial") {
 			mazo_origen = mazo_inicial;
 			cont_origen = cont_inicial;
@@ -305,6 +303,7 @@ function soltar_carta(e) {
 			mazo_origen = mazo_sobrantes;
 			cont_origen = cont_sobrantes;
 		}
+		// si el tapete es uno de los receptores, hay que saber cuál es
 		switch(tapete_destinto) {
 			case ("receptor1"):
 				mazo_receptor = mazo_receptor1;
@@ -328,12 +327,15 @@ function soltar_carta(e) {
 				break;
 		}
 		
+		// cogemos la carta del mazo origen para ver qué hacer con ella
 		carta = mazo_origen[mazo_origen.length-1];
+
 		if (mazo_receptor.length == 0 && numero == 12){
-			// la primera carta del tapete receptor es 12
+			// es una carta con número 12 y va a ser la primera carta del tapete
 			carta.draggable = false;
 			mover_carta(mazo_origen,mazo_receptor,tapete_receptor,cont_origen,cont_receptor);
 		} else if (mazo_receptor.length != 0) {
+			// no es la primera carta del tapete. Tenemos que ver el número de la carta que ya está en ese tapete.
 			carta_mazo_num = mazo_receptor[mazo_receptor.length-1].getAttribute("data-numero");
 			if (carta_mazo_num-1 == numero) {
 				// aceptamos la carta por número, pero por palo?
@@ -357,15 +359,14 @@ function soltar_carta(e) {
 		if (seguimos) {
 			comenzar_juego();
 		}
-		exit;
+		return; //para salir de la función
 	}
 
 	// Si no termina, si el mazo inicial es 0, cogemos las cartas del tapete de sobrantes.
 	if (mazo_inicial.length == 0) {
 		// limpiamos el tapete de sobrantes
-		while (tapete_sobrantes.getElementsByTagName('img').length>0) {
-			tapete_sobrantes.getElementsByTagName('img')[0].remove()
-		}
+		limpiar_tapete(tapete_sobrantes);
+
 		// pasamos el mazo sobrantes a inicial, barajamos y colocamos.
 		mazo_inicial = mazo_sobrantes;
 		mazo_sobrantes = [];
@@ -376,6 +377,7 @@ function soltar_carta(e) {
 	}
 }
 
+// función que mueve la carta de un mazo a otro y a un tapete destino. Y cambiamos contadores
 function mover_carta(mazo_origen, mazo_destino, tapete_destino, contador_origen, contador_destino) {
 	// cogemos la carta del mazo_origen
 	carta = mazo_origen.pop();
@@ -398,5 +400,12 @@ function mover_carta(mazo_origen, mazo_destino, tapete_destino, contador_origen,
 	// la que ahora es la última carta del mazo_origen se tiene que poder mover
 	if (mazo_origen.length > 0) {
 		mazo_origen[mazo_origen.length-1].draggable = true;
+	}
+}
+
+// función para limpiar el tapete de cartas
+function limpiar_tapete(tapete) {
+	while (tapete.getElementsByTagName('img').length>0) {
+		tapete.getElementsByTagName('img')[0].remove();
 	}
 }
