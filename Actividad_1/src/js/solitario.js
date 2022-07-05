@@ -274,7 +274,7 @@ function al_mover_carta(e) {
 	e.dataTransfer.setData( "text/plain/numero", e.target.dataset["numero"] );
 	e.dataTransfer.setData( "text/plain/palo", e.target.dataset["palo"] );
 	e.dataTransfer.setData( "text/plain/mazo", e.target.dataset["mazo"] );
-	e.dataTransfer.setData("text/plain/color", e.target.dataset["color"] );
+	e.dataTransfer.setData( "text/plain/color", e.target.dataset["color"] );
 	e.dataTransfer.setData( "text/plain/id", e.target.id );
 }
 
@@ -359,7 +359,7 @@ function soltar_carta(e) {
 		clearInterval(temporizador);
 		efecto_final().then(function() {
 			// esperamos a que termine el efecto y luego sacamos el aviso
-			var seguimos = confirm("JUEGO TERMINADO. Has hecho "+ cont_movimientos.innerHTML + " movimientos en "+ devuelve_tiempo() + " ¿Quieres seguir jugando?");
+			var seguimos = confirm("JUEGO TERMINADO. Has hecho "+ cont_movimientos.innerHTML + " movimientos en "+ devuelve_tiempo() + " ¿Quieres volver a jugar?");
 			if (seguimos) {
 				comenzar_juego();
 			}

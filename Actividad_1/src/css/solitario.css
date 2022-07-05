@@ -8,7 +8,7 @@
 /* Variable global de color */
 :root {
 	--corporativo: #F25416;
-  }
+}
 
 
 /* imagen del logo */
@@ -54,8 +54,10 @@ h1#titulo {
 }
 
 /* Centrado de los marcadores de tiempo y movimientos */
+/* FIXED: Ahora se hace con el sistema Grid de Bootstrap */
 h2#marcadores{ 
-	text-align: center; 
+	padding-top:80px;
+	/* text-align: center;  */
 }
 
 /* Mesa que contiene a los tapetes centrados */
@@ -63,11 +65,12 @@ div#mesa{
 	text-align: center;
 	background-color: var(--corporativo);
 	border-radius: 50px;
-	/* intento de borde, se puede mejorar */
+	/* el borde se puede mejorar */
 	border: 50px solid white;
 	border-image-source: url("../imagenes/pildora_blanca.svg");
 	border-image-slice: 100%;
-	margin: 50px;
+	margin-top: 30px;
+	margin-bottom: 50px;
 }
 
 /* Todos los tapetes con position relative para que

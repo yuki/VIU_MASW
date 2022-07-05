@@ -20,27 +20,27 @@
     <body>
 		<div class="container">
 			<!-- Título principal -->
+			<div class="row">
+				<!--/*** !!!!!!!!!!!!!!!!!!! CODIGO !!!!!!!!!!!!!!!!!!!! **/
+				Rellenar h1 e insertar el logo donde proceda
+				-->
+				<h1 id="titulo" class="col-md-12">Juego del solitario <img id="logo" src="./imagenes/logoVIU.png"></h1>
 
-			<!--/*** !!!!!!!!!!!!!!!!!!! CODIGO !!!!!!!!!!!!!!!!!!!! **/
-			Rellenar h1 e insertar el logo donde proceda
-        	-->
-			<h1 id="titulo">Juego del solitario <img id="logo" src="./imagenes/logoVIU.png"></h1>
-			
-			<!-- Siguiente línea donde se indicará el tiempo transcurrido y la cantidad
-				de movimientos que se han hecho hasta el momento. Estos números se 
-				indicarán en los span internos -->
-			<h2 id="marcadores">
-				<span>Tiempo: <span id="contador_tiempo"></span></span>
-				<span style="display:inline-block; width:200px"></span>
-				<span>Movimientos: <span id="contador_movimientos" class=""></span></span>
-			</h2>
-
+				<!-- Siguiente línea donde se indicará el tiempo transcurrido y la cantidad
+					de movimientos que se han hecho hasta el momento. Estos números se
+					indicarán en los span internos -->
+				<h2 id="marcadores" class="col-md-offset-3">
+					<span class="col-md-5">Tiempo: <span id="contador_tiempo"></span></span>
+					<!-- <span style="display:inline-block; width:200px"></span> -->
+					<span class="col-md-4">Movimientos: <span id="contador_movimientos" class=""></span></span>
+				</h2>
+			</div>
 			<!-- La "mesa" contendrá los 6 tapetes. En la parte superior dos de ellos 
 				y en la parte inferior los cuatro restantes. Los contadores de los
 				mazos de cartas de cada tapete están indicados oportunamente dentro
 				de elementos span -->
-			<div class="">
-				<div id="mesa", class="">
+			<div class="row">
+				<div id="mesa", class="col-md-offset-2 col-md-8">
 					<div class="tapetes_superiores">
 						<div id="inicial" class="tapete"><span id="contador_inicial" class="contador"></span></div><!--
 						--><div id="sobrantes" class="tapete"><span id="contador_sobrantes" class="contador"></span></div>
