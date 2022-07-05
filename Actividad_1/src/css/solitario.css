@@ -67,8 +67,7 @@ div#mesa{
 	border: 50px solid white;
 	border-image-source: url("../imagenes/pildora_blanca.svg");
 	border-image-slice: 100%;
-	margin: 50px 200px;
-	padding: 50px;
+	margin: 50px;
 }
 
 /* Todos los tapetes con position relative para que
