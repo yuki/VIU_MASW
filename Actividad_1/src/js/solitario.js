@@ -86,6 +86,12 @@ function comenzar_juego() {
 			img_carta.setAttribute("id",numeros[i]+"-"+palos[j]);
 			img_carta.setAttribute("data-palo",palos[j]);
 			img_carta.setAttribute("data-numero",numeros[i]);
+			// para simplificar luego qué carta puede ir encima de otra
+			if (palos[j] == "viu" || palos[j] == "cua") {
+				img_carta.setAttribute("data-color","naranja");
+			} else {
+				img_carta.setAttribute("data-color","gris");
+			}
 			img_carta.className = "carta";
 			// permitimos que se puedan mover
 			img_carta.ondragstart=al_mover_carta;
@@ -262,6 +268,7 @@ function al_mover_carta(e) {
 	e.dataTransfer.setData( "text/plain/numero", e.target.dataset["numero"] );
 	e.dataTransfer.setData( "text/plain/palo", e.target.dataset["palo"] );
 	e.dataTransfer.setData( "text/plain/mazo", e.target.dataset["mazo"] );
+	e.dataTransfer.setData("text/plain/color", e.target.dataset["color"] );
 	e.dataTransfer.setData( "text/plain/id", e.target.id );
 }
 
@@ -271,6 +278,7 @@ function soltar_carta(e) {
 	var numero = e.dataTransfer.getData("text/plain/numero");
 	var palo = e.dataTransfer.getData("text/plain/palo");
 	var mazo = e.dataTransfer.getData("text/plain/mazo");
+	var color = e.dataTransfer.getData("text/plain/color");
 	var tapete_destinto = e.target.id;
 
 	if (e.target.className == "carta") {
@@ -329,19 +337,13 @@ function soltar_carta(e) {
 			// movemos la carta de un mazo a otro
 			mover_carta(mazo_origen,mazo_receptor,tapete_receptor,cont_origen,cont_receptor);
 		} else if (mazo_receptor.length != 0) {
-			// no es la primera carta del tapete. Tenemos que ver el número de la carta que ya está en ese tapete.
+			// no es la primera carta del tapete. Tenemos que ver el número de la carta que ya está en ese tapete y su color.
 			carta_mazo_num = mazo_receptor[mazo_receptor.length-1].getAttribute("data-numero");
-			if (carta_mazo_num-1 == numero) {
-				// aceptamos la carta por número, pero por palo?
-				carta_mazo_palo = mazo_receptor[mazo_receptor.length-1].getAttribute("data-palo");
-				// este "if-else-if" se podría poner en un único IF muy largo, pero así creo que queda más sencillo de leer.
-				if ((palo == "viu" || palo == "cua") && (carta_mazo_palo == "hex" || carta_mazo_palo == "cir") ) {
-					carta.draggable = false;
-					mover_carta(mazo_origen,mazo_receptor,tapete_receptor,cont_origen,cont_receptor);
-				} else if ((palo == "hex" || palo == "cir") && (carta_mazo_palo == "viu" || carta_mazo_palo == "cua")) {
-					carta.draggable = false;
-					mover_carta(mazo_origen,mazo_receptor,tapete_receptor,cont_origen,cont_receptor);
-				}
+			carta_mazo_col = mazo_receptor[mazo_receptor.length-1].getAttribute("data-color");
+			if (carta_mazo_num-1 == numero && carta_mazo_col != color ) {
+				// aceptamos la carta porque el número es uno menos que la que ya está y es de distinto color/palo
+				carta.draggable = false;
+				mover_carta(mazo_origen,mazo_receptor,tapete_receptor,cont_origen,cont_receptor);
 			}
 		}
 	}
