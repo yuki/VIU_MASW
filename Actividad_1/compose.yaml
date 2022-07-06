@@ -1,0 +1,29 @@
+services:
+  php:
+    image: docker.io/webdevops/php-nginx-dev:8.1
+    ports:
+      - '80:80'
+    volumes:
+      - './src:/app'
+    depends_on:
+      - mysql
+  mysql:
+    image: mysql:8.0.28
+    environment:
+      # ALLOW_EMPTY_PASSWORD is recommended only for development.
+      - MYSQL_ROOT_PASSWORD=pass1234
+      - ALLOW_EMPTY_PASSWORD=yes
+      - MYSQL_USER=actividad1
+      - MYSQL_PASSWORD=4ct1v1d4d1
+      - MYSQL_DATABASE=actividad1
+    ports:
+      - '3306:3306'
+  phpmyadmin:
+    image: phpmyadmin
+    ports:
+      - 3307:80
+    environment:
+      - PMA_ARBITRARY=1
+      - PMA_HOST=mysql
+    depends_on:
+      - mysql
