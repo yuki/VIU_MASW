@@ -1,6 +1,6 @@
 CREATE TABLE platform (
     id INTEGER NOT NULL PRIMARY KEY AUTO_INCREMENT,
-    name VARCHAR(50)
+    name VARCHAR(50) UNIQUE
 );
 
 CREATE TABLE language (

@@ -3,18 +3,22 @@
 /* ***********************************************************
  * 
  * Fichero de configuración con distintas opciones necesarias.
+ * ===========================================================
+ * 
+ * Generamos un array con distintas configuraciones para 
+ * facilitar luego el uso de las variables.
  * 
  * ***********************************************************
  */
 
 // Nombre de la aplicación
-$app_name = "YukiDB";
+$conf["app_name"] = "YukiDB";
 
 // Configuraciones de bases de datos
-$db_host = "mysql8";     // IP del servidor
-$db_name = "actividad1"; // Nombre de la base de datos
-$db_user = "actividad1"; // Nombre del usuario para la conexión
-$db_pass = "4ct1v1d4d1"; // Password del usuario
+$conf["db_host"] = "mysql"; // IP/hostname del servidor
+$conf["db_name"] = "actividad1"; // Nombre de la base de datos
+$conf["db_user"] = "actividad1"; // Nombre del usuario para la conexión
+$conf["db_pass"] = "4ct1v1d4d1"; // Password del usuario
 
 
 ?>

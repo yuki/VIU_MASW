@@ -1,19 +1,16 @@
 <?php
 
-require_once("../config.php");
+require_once(__DIR__."/../config.php");
 
 
 function connectDB() {
-    $host = global $db_host;
-    $user = global $db_user;
-    $pass = global$db_password;
-    $db   =  global $db_name;
+    global $conf;
 
     $mysqli = @new mysqli(
-        $host,
-        $user,
-        $pass,
-        $db
+        $conf["db_host"],
+        $conf["db_user"],
+        $conf["db_pass"],
+        $conf["db_name"]
     );
 
     if ($mysqli->connect_error) {
@@ -21,6 +18,17 @@ function connectDB() {
     }
 
     return $mysqli;
+}
+
+/*
+ * Para no tener que estar instanciando la conexión en todos lados
+ * me creo una función que recibe la query y devuelve el resultado.
+*/
+function execQuery($query){
+    $mysqli = connectDB();
+    $data = $mysqli->query(query: $query);
+    $mysqli->close();
+    return $data;
 }
 
 ?>

@@ -1,9 +1,9 @@
 <?php
-include_once("views/template/html_0init.php");
-include_once("views/template/nav.php");
+include_once("views/template/html_head.php");
 
-  echo "II";
+// TODO: Poner algo decente en la portada
+  echo "HAY QUE MODIFICAR LA PORTADA!";
 
 
-include_once("views/template/html_end.php");
+include_once("views/template/html_tail.php");
 ?>
