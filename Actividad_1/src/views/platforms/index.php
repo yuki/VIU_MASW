@@ -1,5 +1,6 @@
 <?php
 include_once("../template/html_head.php");
+include_once("../template/delete_modal.php");
 require_once(__DIR__."/../../controllers/PlatformController.php");
 ?>
 
@@ -23,7 +24,7 @@ require_once(__DIR__."/../../controllers/PlatformController.php");
             <td><?php echo $platform->getName() ?></td>
             <td>
                 <a class="btn btn-outline-warning btn-sm" href="edit.php?id=<?php echo $platform->getId() ?>" role="button">Editar</a>
-                <a class="btn btn-outline-danger btn-sm" href="#" role="button">Borrar</a>
+                <a class="btn btn-outline-danger btn-sm" onclick="getPlatformShows(<?php echo $platform->getId() ?>)" role="button">Borrar</a>
             </td>
           </tr>
       <?php

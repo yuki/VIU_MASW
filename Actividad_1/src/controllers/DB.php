@@ -1,4 +1,14 @@
 <?php
+/* ***********************************************************
+ * 
+ * Fichero para la conexión a MySQL
+ * ===========================================================
+ * 
+ * Así nos ahorramos tener que hacer las conexiones en otros 
+ * sitios. Todo centralizado.
+ * 
+ * ***********************************************************
+ */
 
 require_once(__DIR__."/../config.php");
 

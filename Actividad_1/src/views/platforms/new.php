@@ -1,6 +1,7 @@
 <?php
 include_once("../template/html_head.php");
 require_once(__DIR__."/../../controllers/PlatformController.php");
+require_once(__DIR__."/../../controllers/helpers.php");
 ?>
 
 <h1>Crear plataforma</h1>
@@ -15,27 +16,14 @@ require_once(__DIR__."/../../controllers/PlatformController.php");
 
       if ($platformCreated) {
         // plataforma creada
-        ?>
-          <div class="alert alert-success" role="alert">
-            La plataforma se ha creado. <a href="index.php" class="alert-link">Vete al listado de plataformas</a>.
-          </div>
-        <?php
+        echo getAlert("plataforma","crear","success","index.php");
       } else {
         // ha habido error al crear la plataforma
-        ?>
-          <div class="alert alert-danger" role="alert">
-            ¡Ha habido un error al crear la plataforma! <br> 
-            <strong>¿Quizá la plataforma ya existe?</strong>
-          </div>
-        <?php
+        echo getAlert("plataforma","error","danger","");
       }
     } else {
       // No se ha introducido nombre de plataforma
-      ?>
-        <div class="alert alert-danger" role="alert">
-          ¡Debes introducir el nombre de la plataforma!
-        </div>
-      <?php
+      echo getAlert("plataforma","falta","danger","");
     }
   }
 ?>
