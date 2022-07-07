@@ -1,7 +1,7 @@
 <?php
 include_once("../template/html_head.php");
 include_once("../template/delete_modal.php");
-require_once(__DIR__."/../../controllers/PlatformController.php");
+require_once("../../controllers/PlatformController.php");
 ?>
 
 <h1>Plataformas</h1>
