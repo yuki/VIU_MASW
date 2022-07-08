@@ -11,14 +11,14 @@ CREATE TABLE languages (
 
 CREATE TABLE tvshows (
     id INTEGER NOT NULL PRIMARY KEY AUTO_INCREMENT,
-    title VARCHAR(50),
+    name VARCHAR(50),
     url varchar(100),
     platform_id INTEGER NOT NULL REFERENCES platform(id)
 );
 
 CREATE TABLE episodes (
     id INTEGER NOT NULL PRIMARY KEY AUTO_INCREMENT,
-    title VARCHAR(50),
+    name VARCHAR(50),
     released DATE,
     tvshow_id INTEGER NOT NULL REFERENCES tvshow(id)
 );

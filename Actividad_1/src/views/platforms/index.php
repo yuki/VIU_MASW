@@ -20,8 +20,7 @@ require_once("../../controllers/PlatformController.php");
         foreach ($platformList as $platform){
       ?>
           <tr>
-            <td><?php //echo $platform->getId() ?></td>
-            <td><?php echo $platform->getName() ?></td>
+            <td><a href="/views/platforms/show.php?id=<?php echo $platform->getId(); ?>"><?php echo $platform->getName(); ?></a></td>
             <td>
                 <a class="btn btn-outline-warning btn-sm" href="edit.php?id=<?php echo $platform->getId() ?>" role="button">Editar</a>
                 <a class="btn btn-outline-danger btn-sm" onclick="getPlatformShows(<?php echo $platform->getId() ?>)" role="button">Borrar</a>

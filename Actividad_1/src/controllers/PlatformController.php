@@ -2,8 +2,9 @@
 
 require_once(__DIR__."/DB.php");
 require_once(__DIR__."/../models/Platform.php");
+require_once(__DIR__."/../models/TVShow.php");
 
-
+// comprobamos que el nombre de la plataforma existe
 function checkPlatformName($name) {
     // TODO: Esto quedaría mejor intentando hacer el insert, MySQL falla y recogiendo la
     // excepción. Lo dejo para más adelante.
@@ -24,17 +25,14 @@ function createPlatform($name) {
     return $platformCreated;
 }
 
-// Devolvemos el nombre de la plataforma por su ID
+// Devolvemos la plataforma por su ID
 function getPlatform($id) {
     $data = execQuery("SELECT * FROM platforms WHERE id = $id")->fetch_array();
-    $platform = new Platform($data["id"],$data["name"]);
-
-    return $platform;
-}
-
-// Devuelve las series que tiene la plataforma
-function getPlatformShows($id) {
-    return execQuery("SELECT * FROM tvshows WHERE platform_id = $id")->num_rows;
+    if ($data != NULL) {
+        $platform = new Platform($data["id"],$data["name"]);
+        return $platform;
+    }
+    return NULL;
 }
 
 // editamos el nombre de la plataforma
@@ -74,6 +72,20 @@ function listPlatforms() {
 
 function deletePlatform($id) {
     return execQuery("DELETE FROM platforms WHERE id = $id");
+}
+
+// Devuelve las series que tiene la plataforma
+function getPlatformShows($id) {
+    $tvshows=[];
+    // $platform = getPlatform($id);
+
+    $list = execQuery("SELECT * FROM tvshows WHERE platform_id = $id");
+
+    foreach ($list as $item) {
+        array_push($tvshows,new TVShow($item["id"],$item["name"],$item["platform_id"],$item["url"]));
+    }
+
+    return $tvshows;
 }
 
 ?>
