@@ -2,6 +2,7 @@
 include_once("../template/html_head.php");
 include_once("../template/delete_modal.php");
 require_once("../../controllers/TVShowController.php");
+require_once("../../controllers/PlatformController.php");
 ?>
 
 <h1>Series</h1>
@@ -13,7 +14,13 @@ require_once("../../controllers/TVShowController.php");
   if (count($tvshowList) > 0){
       include_once("_list.php");
   } else {
-      echo "<p>No hay series. Crea una a través del botón.</p>";
+      $platformList = listPlatforms();
+      if (count($platformList) > 0){
+        echo "<p>No hay series. Crea una a través del botón.</p>";
+      } else {
+        echo "<p>No hay Plataformas. Vete y crea una en <a href='/views/platforms/'>este enlace</a>.</p>";
+      }
+      
   }
   
   include_once("../template/html_tail.php");

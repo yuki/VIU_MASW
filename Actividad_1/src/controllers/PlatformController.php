@@ -60,7 +60,7 @@ function editPlatform($id, $name) {
 
 // Devuelve un array de todas las plataformas
 function listPlatforms() {
-    $platformList = execQuery("SELECT * FROM platforms");
+    $platformList = execQuery("SELECT * FROM platforms ORDER BY name ASC");
 
     $platforms = [];
     foreach($platformList as $item){
@@ -70,6 +70,7 @@ function listPlatforms() {
     return $platforms;
 }
 
+// Borra la plataforma
 function deletePlatform($id) {
     return execQuery("DELETE FROM platforms WHERE id = $id");
 }

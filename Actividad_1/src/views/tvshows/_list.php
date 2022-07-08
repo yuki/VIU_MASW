@@ -13,7 +13,7 @@
               //si hay URL de IMDB
               if ($tvshow->getUrl()) {
                 ?>
-                <td><a href="<?php echo $tvshow->getUrl() ?>">IMDB</a></td>
+                <td><a target="_blank" href="<?php echo $tvshow->getUrl() ?>">IMDB</a></td>
                 <?php
               } else {
                 ?>
@@ -23,8 +23,14 @@
             ?>
             
             <td>
-                <a class="btn btn-outline-warning btn-sm" href="edit.php?id=<?php echo $tvshow->getId() ?>" role="button">Editar</a>
-                <a class="btn btn-outline-danger btn-sm" onclick="getTVShowEpisodes(<?php echo $tvshow->getId() ?>)" role="button">Borrar</a>
+                <a class="btn btn-outline-warning btn-sm" href="/views/tvshows/edit.php?id=<?php echo $tvshow->getId() ?>" role="button">Editar</a>
+                <a class="btn btn-outline-danger btn-sm" 
+                  onclick="getDependencies(<?php echo $tvshow->getId() ?> ,
+                                          'tvshows',
+                                          'serie',
+                                          'capítulos'
+                                          )" 
+                  role="button">Borrar</a>
             </td>
           </tr>
       <?php

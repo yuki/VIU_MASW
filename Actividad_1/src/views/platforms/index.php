@@ -23,7 +23,13 @@ require_once("../../controllers/PlatformController.php");
             <td><a href="/views/platforms/show.php?id=<?php echo $platform->getId(); ?>"><?php echo $platform->getName(); ?></a></td>
             <td>
                 <a class="btn btn-outline-warning btn-sm" href="edit.php?id=<?php echo $platform->getId() ?>" role="button">Editar</a>
-                <a class="btn btn-outline-danger btn-sm" onclick="getPlatformShows(<?php echo $platform->getId() ?>)" role="button">Borrar</a>
+                <a class="btn btn-outline-danger btn-sm" 
+                  onclick="getDependencies(<?php echo $platform->getId() ?>,
+                                          'platforms',
+                                          'plataforma',
+                                          'series'
+                                          )" 
+                  role="button">Borrar</a>
             </td>
           </tr>
       <?php
