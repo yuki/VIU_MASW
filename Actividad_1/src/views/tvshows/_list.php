@@ -7,7 +7,7 @@
         foreach ($tvshowList as $tvshow){
       ?>
           <tr>
-            <td><?php echo $tvshow->getName() ?></td>
+            <td><a href="/views/tvshows/show.php?id=<?php echo $tvshow->getId() ?>"><?php echo $tvshow->getName() ?></a></td>
             <td><a href="/views/platforms/show.php?id=<?php echo $tvshow->getPlatform()->getId(); ?>"><?php echo $tvshow->getPlatform()->getName(); ?></a></td>
             <?php 
               //si hay URL de IMDB
@@ -23,6 +23,7 @@
             ?>
             
             <td>
+                <a class="btn btn-outline-success btn-sm" href="/views/episodes/new.php?tvshow_id=<?php echo $tvshow->getId() ?>" role="button">Crear Episodio</a>
                 <a class="btn btn-outline-warning btn-sm" href="/views/tvshows/edit.php?id=<?php echo $tvshow->getId() ?>" role="button">Editar</a>
                 <a class="btn btn-outline-danger btn-sm" 
                   onclick="getDependencies(<?php echo $tvshow->getId() ?> ,

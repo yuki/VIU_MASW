@@ -7,6 +7,7 @@
     <label for="url" class="form-label">URL de IMDB</label>
     <input type="text" class="form-control" id="url" name="url" value="<?php if (isset($tvshow)) {echo $tvshow->getUrl();} ?>"/>
   </div>
+  
   <div class="mb-3">
     <label for="platform_id" class="form-label">Elige Plataforma donde se encuentra</label>
     <select class="form-select" aria-label="default-select" id="platform_id" name="platform_id" required>
@@ -21,7 +22,12 @@
                 if ($tvshow->getPlatform()->getId() == $platform->getId()){
                   echo "selected";
                 }
-              } 
+              }
+              if (isset($_GET["platform_id"])){
+                if ($platform->getId() == $_GET["platform_id"]){
+                  echo "selected";
+                }
+              }
             ?>
           >
             <?php echo $platform->getName();?>

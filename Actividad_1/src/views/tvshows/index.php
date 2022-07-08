@@ -18,7 +18,7 @@ require_once("../../controllers/PlatformController.php");
       if (count($platformList) > 0){
         echo "<p>No hay series. Crea una a través del botón.</p>";
       } else {
-        echo "<p>No hay Plataformas. Vete y crea una en <a href='/views/platforms/'>este enlace</a>.</p>";
+        echo "<p>No hay Plataformas. Vete y crea una en <a href='/views/platforms/new.php'>este enlace</a>.</p>";
       }
       
   }

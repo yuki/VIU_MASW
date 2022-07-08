@@ -35,6 +35,9 @@ global $conf;
             <a class="nav-link" href="/views/tvshows/">Series</a>
           </li>
           <li class="nav-item">
+            <a class="nav-link" href="/views/episodes/">Episodios</a>
+          </li>
+          <li class="nav-item">
             <a class="nav-link" href="/views/persons/">Staff</a>
           </li>
           <li class="nav-item">

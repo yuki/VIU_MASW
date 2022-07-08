@@ -1,18 +1,20 @@
 <?php
-// si no hay ID volvemos a la portada
-if (!isset($_GET["id"])) {
-    header('Location: /');
-    exit();
-}
-
 include_once("../template/html_head.php");
 include_once("../template/delete_modal.php");
 require_once("../../controllers/PlatformController.php");
 
-$platform = getPlatform($_GET["id"]);
+// si no hay ID ponemos error
+if (!isset($_GET["id"])) {
+    echo "<h1>Esta plataforma no existe</h1>";
+    echo "<p>Vete al listado de plataformas <a href='/views/platforms'>aquí</a></p>";
+    die;
+}
 
+$platform = getPlatform($_GET["id"]);
+// si no existe la plataforma ponemos error
 if (!$platform) {
     echo "<h1>Esta plataforma no existe</h1>";
+    echo "<p>Vete al listado de plataformas <a href='/views/platforms'>aquí</a></p>";
     die;
 }
 

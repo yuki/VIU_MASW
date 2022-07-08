@@ -41,6 +41,11 @@ function getAlert($name, $action, $alertType, $link) {
     return $message;
 }
 
-
+// cambiamos el formato de la fecha a dd/mm/yyyy
+function changeDateFormat($old_date) {
+    // devolvemos la fecha en formato dd/mm/yyyy
+    $date = date_create($old_date);
+    return date_format($date, 'm/d/Y');
+}
 
 ?>

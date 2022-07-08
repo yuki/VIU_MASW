@@ -2,8 +2,10 @@
 
 require_once(__DIR__."/DB.php");
 require_once(__DIR__."/../models/TVShow.php");
+require_once(__DIR__."/../models/Episode.php");
 
 
+// Devuelve la serie
 function getTVShow($id) {
     $data = execQuery("SELECT * FROM tvshows WHERE id = $id")->fetch_array();
     if ($data != NULL) {
@@ -14,7 +16,7 @@ function getTVShow($id) {
 }
 
 
-// Devuelve un array de todas las plataformas
+// Devuelve un array de todas las series
 function listTVShows() {
     $tvshowList = execQuery("SELECT * FROM tvshows ORDER BY name ASC");
 
@@ -26,15 +28,17 @@ function listTVShows() {
     return $tvshows;
 }
 
+// comprobamos que no exista otro show igual
 function checkTVShowName($name) {
     // TODO: Esto quedaría mejor intentando hacer el insert, MySQL falla y recogiendo la
     // excepción. Lo dejo para más adelante.
     return execQuery("SELECT * FROM tvshows WHERE lower(name) = '".strtolower($name)."'");
 }
 
+// Creamos la serie
 function createTVShow($name,$url,$platform_id) {
-
     $tvshowCreated = false;
+
     //comprobamos que la plataforma existe
     $platformExists = getPlatform($platform_id);
     $tvshowExists = checkTVShowName($name);
@@ -48,6 +52,7 @@ function createTVShow($name,$url,$platform_id) {
     return $tvshowCreated;
 }
 
+// Editamos la serie
 function editTVShow($id,$name,$url,$platform_id) {
     $tvshowUpdated = false;
 
@@ -84,9 +89,9 @@ function getTVShowEpisodes($id) {
 
     $list = execQuery("SELECT * FROM episodes WHERE tvshow_id = $id");
 
-    // foreach ($list as $item) {
-    //     array_push($episodes,new TVShow($item["id"],$item["name"],$item["platform_id"],$item["url"]));
-    // }
+    foreach ($list as $item) {
+        array_push($episodes,new Episode($item["id"],$item["name"],$item["tvshow_id"],$item["released"]));
+    }
 
     return $episodes;
 }
