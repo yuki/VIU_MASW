@@ -1,0 +1,42 @@
+<table class="table mt-5">
+    <tbody>
+      <thead>
+        <tr><th>Nombre y apellidos</th><th>Fecha de nacimiento</th><th>Nacionalidad</th><th>URL en IMDB</th><th>Acciones</th></tr>
+      </thead>
+      <?php
+        foreach ($celebritiesList as $celebrity){
+      ?>
+          <tr>
+            <td><a href="/views/celebrities/show.php?id=<?php echo $celebrity->getId() ?>"><?php echo $celebrity->getName() .' '. $celebrity->getSurname() ?></a></td>
+            <td><?php echo $celebrity->getBorn(); ?></td>
+            <td><?php echo $celebrity->getNation(); ?></td>
+            <?php 
+              //si hay URL de IMDB
+              if ($celebrity->getUrl()) {
+                ?>
+                <td><a target="_blank" href="<?php echo $celebrity->getUrl() ?>">IMDB</a></td>
+                <?php
+              } else {
+                ?>
+                <td></td>
+                <?php
+              }
+            ?>
+            <td>
+                <a class="btn btn-outline-success btn-sm" href="/views/celebrities/new.php?tvshow_id=<?php echo $celebrity->getId() ?>" role="button">Añadir a Episodio</a>
+                <a class="btn btn-outline-warning btn-sm" href="/views/celebrities/edit.php?id=<?php echo $celebrity->getId() ?>" role="button">Editar</a>
+                <a class="btn btn-outline-danger btn-sm" 
+                  onclick="getDependencies(<?php echo $celebrity->getId() ?> ,
+                                          'celebrity',
+                                          '',
+                                          ''
+                                          )" 
+                  role="button">Borrar</a>
+            </td>
+          </tr>
+      <?php
+        }
+      ?>
+      
+    </tbody>
+</table>

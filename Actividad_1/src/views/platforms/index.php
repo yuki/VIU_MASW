@@ -13,15 +13,15 @@ require_once("../../controllers/PlatformController.php");
   if (count($platformList) > 0){
   ?>
 
-
-  <table class="table mt-5">
+  <div class="col-md-5">
+  <table class="table mt-5 ">
     <tbody>
       <?php
         foreach ($platformList as $platform){
       ?>
           <tr>
             <td><a href="/views/platforms/show.php?id=<?php echo $platform->getId(); ?>"><?php echo $platform->getName(); ?></a></td>
-            <td>
+            <td class="">
                 <a class="btn btn-outline-success btn-sm" href="/views/tvshows/new.php?platform_id=<?php echo $platform->getId() ?>" role="button">Crear Serie</a>
                 <a class="btn btn-outline-warning btn-sm" href="edit.php?id=<?php echo $platform->getId() ?>" role="button">Editar</a>
                 <a class="btn btn-outline-danger btn-sm" 
@@ -39,6 +39,7 @@ require_once("../../controllers/PlatformController.php");
       
     </tbody>
   </table>
+  </div>
 
 
   <?php

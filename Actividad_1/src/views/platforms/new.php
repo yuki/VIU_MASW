@@ -4,7 +4,7 @@ require_once("../../controllers/PlatformController.php");
 require_once("../../controllers/helpers.php");
 ?>
 
-<h1>Crear plataforma</h1>
+<h1>Añadir plataforma</h1>
 
 <?php
   /*

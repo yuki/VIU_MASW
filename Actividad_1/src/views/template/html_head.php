@@ -38,7 +38,7 @@ global $conf;
             <a class="nav-link" href="/views/episodes/">Episodios</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="/views/persons/">Staff</a>
+            <a class="nav-link" href="/views/celebrities/">Celebrities</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="/views/languages/">Idiomas</a>
@@ -50,5 +50,5 @@ global $conf;
   </nav>
 
   <main class="container mt-5">
-    <div class="offset-md-3 col-md-6">
+    <div class="offset-md-3">
      

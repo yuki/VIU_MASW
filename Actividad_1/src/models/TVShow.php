@@ -32,15 +32,30 @@ class TVShow {
         return $this->name;
     }
 
+    public function setName($name)
+    {
+        $this->name = $name;
+    }
+
 
     public function getUrl()
     {
         return $this->url;
     }
 
+    public function setUrl($url)
+    {
+        $this->url = $url;
+    }
+
     public function getPlatform()
     {
         return $this->platform;
+    }
+
+    public function setPlatform($platform_id)
+    {
+        $this->platform = $platform_id;
     }
 }
 ?>

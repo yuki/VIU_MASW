@@ -35,20 +35,21 @@ CREATE TABLE episodes_languages (
     PRIMARY KEY (episode_id,language_id,type)
 );
 
-CREATE TABLE persons (
+CREATE TABLE celebrities (
     id INTEGER NOT NULL PRIMARY KEY AUTO_INCREMENT,
     name VARCHAR(50),
     surname VARCHAR(50),
     born DATE,
-    nation VARCHAR(50)
+    nation VARCHAR(50),
+    url VARCHAR(100)
 );
 
 
-CREATE TABLE episodes_persons(
+CREATE TABLE episodes_celebrities(
     episode_id INTEGER NOT NULL, 
     FOREIGN KEY (episode_id) REFERENCES episodes(id) ON DELETE CASCADE,
-    person_id  INTEGER NOT NULL,
-    FOREIGN KEY (person_id) REFERENCES persons(id) ON DELETE CASCADE,
+    celebrity_id  INTEGER NOT NULL,
+    FOREIGN KEY (celebrity_id) REFERENCES celebrities(id) ON DELETE CASCADE,
     perform_as ENUM('director','actor'),
-    PRIMARY KEY (episode_id,person_id,perform_as)
+    PRIMARY KEY (episode_id,celebrity_id,perform_as)
 );

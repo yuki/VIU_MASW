@@ -5,7 +5,7 @@ require_once("../../controllers/PlatformController.php");
 require_once("../../controllers/helpers.php");
 ?>
 
-<h1>Crear serie</h1>
+<h1>Añadir serie</h1>
 
 <?php
   /*

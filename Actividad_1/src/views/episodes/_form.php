@@ -1,4 +1,4 @@
-<form class="mt-2" name="create_platform" action="" method="POST">
+<form class="mt-2 col-md-5" name="create_platform" action="" method="POST">
   <div class="mb-3">
     <label for="name" class="form-label">Nombre</label>
     <input type="text" class="form-control" id="name" name="name" required value="<?php if (isset($episode)) {echo $episode->getName();} ?>"/>

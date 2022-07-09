@@ -33,6 +33,13 @@ class Episode {
         return $this->name;
     }
 
+    public function setName($name)
+    {
+        $this->name = $name;
+
+        return $this;
+    }
+
     // fecha en castellano
     public function getReleased()
     {   
@@ -41,6 +48,13 @@ class Episode {
         }
         // estará nulo
         return $this->released;
+    }
+
+    public function setReleased($released)
+    {
+        $this->released = $released;
+
+        return $this;
     }
 
     // fecha de la base de datos sin modificar    
@@ -52,6 +66,13 @@ class Episode {
     public function getTVShow()
     {
         return $this->tvshow;
+    }
+
+    public function setTvshow($tvshow)
+    {
+        $this->tvshow = $tvshow;
+
+        return $this;
     }
 }
 ?>

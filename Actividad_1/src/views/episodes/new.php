@@ -5,7 +5,7 @@ require_once("../../controllers/EpisodeController.php");
 require_once("../../controllers/helpers.php");
 ?>
 
-<h1>Crear episodio</h1>
+<h1>Añadir episodio</h1>
 
 <?php
   /*
