@@ -15,8 +15,8 @@
                 <a class="btn btn-outline-danger btn-sm" 
                   onclick="getDependencies(<?php echo $episode->getId() ?> ,
                                           'episodes',
-                                          'capítulos',
-                                          'capítulos'
+                                          '',
+                                          ''
                                           )" 
                   role="button">Borrar</a>
             </td>

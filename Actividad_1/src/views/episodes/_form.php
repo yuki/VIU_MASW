@@ -5,7 +5,13 @@
   </div>
   <div class="mb-3">
     <label for="date">Fecha de emisión</label>
-    <input type="date" id="date" name="released">
+    <input class="form-control" type="date" id="date" name="released"
+      <?php
+        if (isset($episode)) {
+          echo 'value="'.$episode->getDate().'"';
+        }
+      ?>
+    >
   </div>
   
   <div class="mb-3">

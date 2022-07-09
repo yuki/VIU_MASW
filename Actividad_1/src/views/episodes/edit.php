@@ -15,18 +15,18 @@ require_once("../../controllers/helpers.php");
   if (isset($_POST["Button"])) {
     if (strlen($_POST["name"])>0 && $_POST["tvshow_id"]>0) {
       // tiene que haber nombre de serie y haber elegido plataforma.
-      $tvshowCreated = editTVShow($_POST["id"],$_POST["name"],$_POST["url"],$_POST["platform_id"]);
+      $episodeUpdated = editEpisode($_POST["id"],$_POST["name"],$_POST["released"],$_POST["tvshow_id"]);
 
-    //   if ($tvshowCreated) {
-    //     // serie creada
-    //     echo getAlert("serie","editar","success","index.php");
-    //   } else {
-    //     // ha habido error al editar la serie
-    //     echo getAlert("serie","editar","danger","index.php");
-      // }
+      if ($episodeUpdated) {
+        // episodio actualizado
+        echo getAlert("episodio","editar","success","index.php");
+      } else {
+        // ha habido error
+        echo getAlert("episodio","editar","danger","index.php");
+      }
     } else {
-      // No se ha introducido nombre de serie o 
-      echo getAlert("serie","falta","danger","index.php");
+      // No se ha introducido nombre de episodio 
+      echo getAlert("episodio","falta","danger","index.php");
     }
   } else {
     $tvshowList = listTVShows();

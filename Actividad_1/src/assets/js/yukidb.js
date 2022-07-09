@@ -13,18 +13,16 @@ function getDependencies(id,path,origin,dependencies) {
     })
     .then((response) => response.text())
     .then(response => {
+        if (path != "episodes") {
+            //actualizamos el modal
+            document.getElementById('mensaje').innerHTML="La "+origin+" tiene "+response+" "+dependencies+". Se borrará todo el contenido";
+        }
+        
         // sacamos el modal para confirmar el borrado
-        document.getElementById('mensaje').innerHTML="La "+origin+" tiene "+response+" "+dependencies+". Se borrará todo el contenido";
         delete_modal = new bootstrap.Modal(document.getElementById('deleteModal'));
         delete_modal.show();
-        switch(path) {
-            case "platforms":
-                document.getElementById('borrar').onclick = function() {deleteOrigin(id,path)};
-                break;
-            case "tvshows":
-                document.getElementById('borrar').onclick = function() {deleteOrigin(id,path)};
-                break;
-        }
+        
+        document.getElementById('borrar').onclick = function() {deleteOrigin(id,path)};
     })
     .catch(error => function(){
         alert("Error al borrar" + error);

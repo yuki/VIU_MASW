@@ -33,13 +33,19 @@ class Episode {
         return $this->name;
     }
 
-
+    // fecha en castellano
     public function getReleased()
     {   
         if ($this->released) {
            return changeDateFormat($this->released);
         }
         // estará nulo
+        return $this->released;
+    }
+
+    // fecha de la base de datos sin modificar    
+    public function getDate()
+    {   
         return $this->released;
     }
 

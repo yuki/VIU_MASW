@@ -29,7 +29,7 @@
                   onclick="getDependencies(<?php echo $tvshow->getId() ?> ,
                                           'tvshows',
                                           'serie',
-                                          'capítulos'
+                                          'episodios'
                                           )" 
                   role="button">Borrar</a>
             </td>
