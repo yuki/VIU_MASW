@@ -67,7 +67,7 @@ function editEpisode($id,$name,$released,$tvshow_id) {
     if (strlen($released) != 0) {
         $query .= ", released = '$released'";
     }
-    $query .= "WHERE id = $id";
+    $query .= " WHERE id = $id";
 
     // comprobamos si el nuevo nombre es el mismo que antes, y de la misma serie. 
     // si lo es, no comprobamos si ya existe.

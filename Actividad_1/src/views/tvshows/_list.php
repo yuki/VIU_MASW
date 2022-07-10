@@ -1,14 +1,32 @@
 <table class="table mt-5">
     <tbody>
       <thead>
-        <tr><th>Nombre</th><th>Plataforma</th><th>enlace IMDB</th><th>Acciones</th></tr>
+        <tr>
+          <th>Nombre</th>
+            <?php
+              if (strpos($_SERVER["DOCUMENT_URI"],"tvshows") == true){
+                ?>
+                  <th>Plataforma</th>
+                <?php
+              }
+            ?>
+          <th>enlace IMDB</th>
+          <th>Acciones</th>
+        </tr>
       </thead>
       <?php
         foreach ($tvshowList as $tvshow){
       ?>
           <tr>
             <td><a href="/views/tvshows/show.php?id=<?php echo $tvshow->getId() ?>"><?php echo $tvshow->getName() ?></a></td>
-            <td><a href="/views/platforms/show.php?id=<?php echo $tvshow->getPlatform()->getId(); ?>"><?php echo $tvshow->getPlatform()->getName(); ?></a></td>
+
+            <?php
+              if (strpos($_SERVER["DOCUMENT_URI"],"tvshows") == true){
+                ?>
+                <td><a href="/views/platforms/show.php?id=<?php echo $tvshow->getPlatform()->getId(); ?>"><?php echo $tvshow->getPlatform()->getName(); ?></a></td>
+                <?php
+              }
+            ?>
             <?php 
               //si hay URL de IMDB
               if ($tvshow->getUrl()) {

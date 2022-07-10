@@ -6,7 +6,7 @@ require_once("../../controllers/CelebrityController.php");
 
 <h1>Celebrities</h1>
 
-<a class="btn btn-outline-primary" href="new.php" role="button">Nuevo Celebrity</a>
+<a class="btn btn-outline-primary" href="new.php" role="button">Nueva Celebrity</a>
 
 <?php
   $celebritiesList = listCelebrities();

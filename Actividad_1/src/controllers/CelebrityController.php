@@ -2,6 +2,7 @@
 
 require_once(__DIR__."/DB.php");
 require_once(__DIR__."/../models/Celebrity.php");
+require_once(__DIR__."/../controllers/EpisodeController.php");
 
 
 // devuelve un celebrity
@@ -101,11 +102,38 @@ function getFilmography($id) {
     $list = execQuery("SELECT * FROM episodes_celebrities WHERE celebrity_id = $id");
 
     foreach ($list as $item) {
-        array_push($tvshows,[$item["perform_as"],$item["episode_id"]]);
+        array_push($tvshows,[getEpisode($item["episode_id"]),$item["perform_as"]]);
     }
 
     return $tvshows;
 }
 
+
+// añadimos filmografía a celebrity
+function addFilmography($id,$funcion,$episode_id) {
+    $celebrity = getCelebrity($id);
+    if ($celebrity) {
+        $episode = getEpisode($episode_id);
+        if ($episode) {
+            return execQuery("INSERT INTO episodes_celebrities(celebrity_id,episode_id,perform_as) VALUES ($id,$episode_id,'$funcion')");
+        }
+    }
+    return NULL;
+}
+
+// borramos la filmografía al celebrity
+function deleteFilmography($id,$funcion,$episode_id) {
+    $celebrity = getCelebrity($id);
+    if ($celebrity) {
+        $episode = getEpisode($episode_id);
+        if ($episode) {
+            return execQuery("DELETE FROM episodes_celebrities WHERE 
+                                celebrity_id = $id AND 
+                                episode_id = $episode_id AND 
+                                perform_as = '$funcion'");
+        }
+    }
+    return NULL;
+}
 
 ?>

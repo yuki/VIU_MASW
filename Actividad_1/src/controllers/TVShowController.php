@@ -99,4 +99,18 @@ function getTVShowEpisodes($id) {
     return $episodes;
 }
 
+// devolvemos todas las series y sus capítulos con el id del capítulo para la parte de añadir filmografía
+function getAllTVShowsComplete() {
+    $episodes=[];
+
+    $list = execQuery("SELECT CONCAT(tvshows.name, ' - ' , episodes.name) AS name, episodes.id 
+                FROM tvshows, episodes WHERE tvshows.id = episodes.tvshow_id ORDER BY name");
+
+    foreach ($list as $item) {
+        array_push($episodes,[$item["id"],$item["name"]]);
+    }
+
+    return $episodes;
+}
+
 ?>

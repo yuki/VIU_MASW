@@ -52,3 +52,43 @@ function deleteOrigin(id,path){
         alert("Error al borrar" + error);
     });
 }
+
+// abrimos el modal para añadir filmografía
+function FilmographyModal() {
+    filmography_modal = new bootstrap.Modal(document.getElementById('FilmographyModal'));
+    filmography_modal.show();
+}
+
+//preguntamos si queremos borrar la filmografía de un celebrity
+function confirmDeleteFilmography(celebrity_id, episode_id, funcion){
+    // sacamos el modal para confirmar el borrado
+    delete_modal = new bootstrap.Modal(document.getElementById('deleteModal'));
+    delete_modal.show();
+    
+    document.getElementById('borrar').onclick = function() {deleteFilmography(celebrity_id, episode_id, funcion)};
+}
+
+// borramos parte de la filmografía de una celebrity
+function deleteFilmography(celebrity_id, episode_id, funcion){
+    var url = window.location.origin + "/views/celebrities/deleteFilmography.php";
+
+    reqData = 'id='+  celebrity_id + '&episode_id=' + episode_id+ '&funcion=' +funcion;
+    fetch(`${url}`,{
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
+          },
+
+        body: reqData
+    })
+    .then((response) => response.text())
+    .then(response => {
+        if (response) {
+            // al borrar redirigimos al listado
+            window.location="/views/celebrities/show.php?id="+celebrity_id;
+        }
+    })
+    .catch(error => function(){
+        alert("Error al borrar" + error);
+    });
+}

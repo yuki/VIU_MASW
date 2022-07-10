@@ -36,9 +36,15 @@ function connectDB() {
 */
 function execQuery($query){
     $mysqli = connectDB();
-    $data = $mysqli->query(query: $query);
-    $mysqli->close();
-    return $data;
+    try {
+        $data = $mysqli->query(query: $query);
+        $mysqli->close();
+        return $data;
+    } catch (\Throwable $th) {
+        //throw $th;
+        return NULL;
+    }
+    
 }
 
 ?>

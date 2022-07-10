@@ -31,7 +31,7 @@ function getAlert($name, $action, $alertType, $link) {
             }
             break;
         case 'falta':
-            $message .= 'Falta información en el formulario';
+            $message .= 'Falta información en el formulario, u opciones no elegidas';
             break;
     }
     if ($link){
@@ -47,5 +47,15 @@ function changeDateFormat($old_date) {
     $date = date_create($old_date);
     return date_format($date, 'd/m/Y');
 }
+
+// devuelve las posibles acciones de una celebrity
+// TODO: ampliar a más funciones, pero hay que tocar el enum de MySQL
+function getFunciones() {
+    return ["director","actor"];
+}
+
+
+// TODO: hacer función que compruebe que el ID es integer y si no de error
+// ideal para poner en todas las funciones antes de buscar por ID.
 
 ?>
