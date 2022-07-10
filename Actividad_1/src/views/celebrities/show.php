@@ -41,7 +41,7 @@ echo "<h1>".$celebrity->getName() ." ". $celebrity->getSurname()."</h1>";
 $allEpisodes = getAllTVShowsComplete();
 $funciones = getFunciones();
 
-include_once("../template/episods_celebrities_modal.php");
+include_once("../template/episodes_celebrities_modal.php");
 
 ?>
 <a class="btn btn-outline-primary" role="button" 

@@ -65,11 +65,20 @@ function confirmDeleteFilmography(celebrity_id, episode_id, funcion){
     delete_modal = new bootstrap.Modal(document.getElementById('deleteModal'));
     delete_modal.show();
     
-    document.getElementById('borrar').onclick = function() {deleteFilmography(celebrity_id, episode_id, funcion)};
+    document.getElementById('borrar').onclick = function() {deleteFilmography(celebrity_id, episode_id, funcion,'celebrities')};
+}
+
+//preguntamos si queremos borrar parte del casting de un episodio
+function confirmDeleteCasting(episode_id, celebrity_id, funcion){
+    // sacamos el modal para confirmar el borrado
+    delete_modal = new bootstrap.Modal(document.getElementById('deleteModal'));
+    delete_modal.show();
+    
+    document.getElementById('borrar').onclick = function() {deleteFilmography(celebrity_id, episode_id, funcion,'episodes')};
 }
 
 // borramos parte de la filmografía de una celebrity
-function deleteFilmography(celebrity_id, episode_id, funcion){
+function deleteFilmography(celebrity_id, episode_id, funcion,origin){
     var url = window.location.origin + "/views/celebrities/deleteFilmography.php";
 
     reqData = 'id='+  celebrity_id + '&episode_id=' + episode_id+ '&funcion=' +funcion;
@@ -85,7 +94,13 @@ function deleteFilmography(celebrity_id, episode_id, funcion){
     .then(response => {
         if (response) {
             // al borrar redirigimos al listado
-            window.location="/views/celebrities/show.php?id="+celebrity_id;
+            if (origin == 'celebrities') {
+                window.location="/views/"+origin+"/show.php?id="+celebrity_id;
+            } else {
+                window.location="/views/"+origin+"/show.php?id="+episode_id;
+            }
+                
+
         }
     })
     .catch(error => function(){

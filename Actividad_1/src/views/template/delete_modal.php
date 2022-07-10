@@ -8,7 +8,7 @@
       </div>
       <div class="modal-body">
         <div class="alert alert-danger" role="alert">
-          ¡Está a punto de hacer una acción que no se puede rehacer!
+          ¡Está a punto de hacer una acción que no se puede deshacer!
         </div>
         <div id="mensaje"></div>
       </div>

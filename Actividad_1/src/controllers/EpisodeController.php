@@ -2,10 +2,16 @@
 
 require_once(__DIR__."/DB.php");
 require_once(__DIR__."/../models/Episode.php");
+require_once(__DIR__."/../controllers/CelebrityController.php");
 
 
 // devuelve el episodio
 function getEpisode($id) {
+    if (!intval($id)){
+        return NULL;
+    }
+    $id = intval($id);
+
     $data = execQuery("SELECT * FROM episodes WHERE id = $id")->fetch_array();
     if ($data != NULL) {
         $episode = new Episode($data["id"],$data["name"],$data["tvshow_id"],$data["released"]);
@@ -59,6 +65,11 @@ function createEpisode($name,$released,$tvshow_id) {
 
 // Editamos el episodio
 function editEpisode($id,$name,$released,$tvshow_id) {
+    if (!intval($id)){
+        return NULL;
+    }
+    $id = intval($id);
+
     $episodeUpdated = false;
 
     //generamos query de actualización
@@ -95,7 +106,30 @@ function editEpisode($id,$name,$released,$tvshow_id) {
 
 // Borra el episodio
 function deleteEpisode($id) {
+    if (!intval($id)){
+        return NULL;
+    }
+    $id = intval($id);
+
     return execQuery("DELETE FROM episodes WHERE id = $id");
+}
+
+// Devuelve el casting de celebrities que participa en el capítulo
+function getEpisodeCasting($id) {
+    if (!intval($id)){
+        return NULL;
+    }
+    $id = intval($id);
+    
+    $celebrities=[];
+
+    $list = execQuery("SELECT * FROM episodes_celebrities WHERE episode_id = $id");
+
+    foreach ($list as $item) {
+        array_push($celebrities,[getCelebrity($item["celebrity_id"]),$item["perform_as"]]);
+    }
+
+    return $celebrities;
 }
 
 ?>

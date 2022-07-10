@@ -75,11 +75,11 @@ function editCelebrity($id, $name,$surname,$born,$nation,$url) {
     } else {
         $query .= "'$born'";
     }
-    $query .= ",nation = '$nation', url = '$url' WHERE id = $id";
+    $query .= ",nation = '$nation', url = '$url' WHERE id = ".intval($id);
 
     $existe = checkCelebrityExists($name,$surname);
     // si existe, pero es el mismo id, e puede actulizar (por si se cambia fecha de nacimiento o así)
-    if ($existe->fetch_array()["id"] == $id) {
+    if ($existe->fetch_array()["id"] == intval($id)) {
         if (execQuery($query)){
             $celebrityUpdated = true;
         }
