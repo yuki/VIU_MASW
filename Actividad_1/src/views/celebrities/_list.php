@@ -27,9 +27,9 @@
                 <a class="btn btn-outline-warning btn-sm" href="/views/celebrities/edit.php?id=<?php echo $celebrity->getId() ?>" role="button">Editar</a>
                 <a class="btn btn-outline-danger btn-sm" 
                   onclick="getDependencies(<?php echo $celebrity->getId() ?> ,
+                                          'celebrities',
                                           'celebrity',
-                                          '',
-                                          ''
+                                          'apariciones'
                                           )" 
                   role="button">Borrar</a>
             </td>

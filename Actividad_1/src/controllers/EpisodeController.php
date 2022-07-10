@@ -61,16 +61,18 @@ function createEpisode($name,$released,$tvshow_id) {
 function editEpisode($id,$name,$released,$tvshow_id) {
     $episodeUpdated = false;
 
+    //generamos query de actualización
+    $query = "UPDATE episodes SET name = '$name', tvshow_id = $tvshow_id";
+    // por si  no se ha metido fecha.
+    if (strlen($released) != 0) {
+        $query .= ", released = '$released'";
+    }
+    $query .= "WHERE id = $id";
+
     // comprobamos si el nuevo nombre es el mismo que antes, y de la misma serie. 
     // si lo es, no comprobamos si ya existe.
     $old = getEpisode($id);
     if ($old->getName() == $name && $old->getTVShow()->getId() == $tvshow_id) {
-        $query = "UPDATE episodes SET name = '$name', tvshow_id = $tvshow_id";
-        // por si  no se ha metido fecha.
-        if (strlen($released) != 0) {
-            $query .= ", released = '$released'";
-        }
-        $query .= "WHERE id = $id";
         if (execQuery($query)){
             $episodeUpdated = true;
         }
@@ -83,12 +85,6 @@ function editEpisode($id,$name,$released,$tvshow_id) {
     // comprobamos que no existe otro capítulo para la serie que se llame igual
     // y que no sea el mismo ID, y que la serie exista para evitar hacks
     if (!$episodeExists->num_rows && $tvshowExists){
-        $query = "UPDATE episodes SET name = '$name', tvshow_id = $tvshow_id";
-        // por si  no se ha metido fecha.
-        if (strlen($released) != 0) {
-            $query .= ", released = '$released'";
-        }
-        $query .= "WHERE id = $id";
         if (execQuery($query)){
             $episodeUpdated = true;
         }

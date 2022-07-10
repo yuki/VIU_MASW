@@ -56,10 +56,13 @@ function createTVShow($name,$url,$platform_id) {
 function editTVShow($id,$name,$url,$platform_id) {
     $tvshowUpdated = false;
 
+    // generamos query:
+    $query = "UPDATE tvshows SET name = '$name', url = '$url', platform_id = '$platform_id' WHERE id = $id";
+
     // comprobamos si el nuevo nombre es el mismo que antes, y si lo es, no comprobamos si ya existe.
     $old_name = getTVShow($id)->getName();
     if ($old_name == $name) {
-        if (execQuery("UPDATE tvshows SET name = '$name', url = '$url', platform_id = '$platform_id' WHERE id = $id")) {
+        if (execQuery($query)) {
             $tvshowUpdated = true;
         }
         return $tvshowUpdated;
@@ -69,7 +72,7 @@ function editTVShow($id,$name,$url,$platform_id) {
     $tvshowExists = checkTVShowName($name);
     if (!$tvshowExists->num_rows && $platformExists){
         
-        if (execQuery("UPDATE tvshows SET name = '$name', url = '$url', platform_id = '$platform_id' WHERE id = $id")) {
+        if (execQuery($query)) {
             $tvshowUpdated = true;
         }
     }
