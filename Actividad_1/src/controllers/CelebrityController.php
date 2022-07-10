@@ -7,6 +7,10 @@ require_once(__DIR__."/../controllers/EpisodeController.php");
 
 // devuelve un celebrity
 function getCelebrity($id) {
+    if (!intval($id)){
+         return NULL;
+    }
+    $id = intval($id);
     $data = execQuery("SELECT * FROM celebrities WHERE id = $id")->fetch_array();
     if ($data != NULL) {
         $celebrity = new Celebrity($data["id"],$data["name"],$data["surname"],$data["born"],$data["nation"],$data["url"]);
@@ -57,6 +61,10 @@ function createCelebrity($name,$surname,$born,$nation,$url) {
 
 // Editamos la celebrity
 function editCelebrity($id, $name,$surname,$born,$nation,$url) {
+    if (!intval($id)){
+        return NULL;
+    }
+    $id = intval($id);
     $celebrityUpdated = false;
 
     //generamos query de update
@@ -90,6 +98,10 @@ function editCelebrity($id, $name,$surname,$born,$nation,$url) {
 
 // Borra la celebrity
 function deleteCelebrity($id) {
+    if (!intval($id)){
+        return NULL;
+    }
+    $id = intval($id);
     return execQuery("DELETE FROM celebrities WHERE id = $id");
 }
 
@@ -97,6 +109,10 @@ function deleteCelebrity($id) {
 
 // Devuelve la filmografía/apariciones de una celebrity
 function getFilmography($id) {
+    if (!intval($id)){
+        return NULL;
+    }
+    $id = intval($id);
     $tvshows=[];
 
     $list = execQuery("SELECT * FROM episodes_celebrities WHERE celebrity_id = $id");
@@ -111,6 +127,10 @@ function getFilmography($id) {
 
 // añadimos filmografía a celebrity
 function addFilmography($id,$funcion,$episode_id) {
+    if (!intval($id)){
+        return NULL;
+    }
+    $id = intval($id);
     $celebrity = getCelebrity($id);
     if ($celebrity) {
         $episode = getEpisode($episode_id);
@@ -123,6 +143,10 @@ function addFilmography($id,$funcion,$episode_id) {
 
 // borramos la filmografía al celebrity
 function deleteFilmography($id,$funcion,$episode_id) {
+    if (!intval($id)){
+        return NULL;
+    }
+    $id = intval($id);
     $celebrity = getCelebrity($id);
     if ($celebrity) {
         $episode = getEpisode($episode_id);

@@ -7,6 +7,11 @@ require_once(__DIR__."/../models/Episode.php");
 
 // Devuelve la serie
 function getTVShow($id) {
+    if (!intval($id)){
+        return NULL;
+    }
+    $id = intval($id);
+    
     $data = execQuery("SELECT * FROM tvshows WHERE id = $id")->fetch_array();
     if ($data != NULL) {
         $platform = new TVShow($data["id"],$data["name"],$data["platform_id"],$data["url"]);
@@ -54,6 +59,11 @@ function createTVShow($name,$url,$platform_id) {
 
 // Editamos la serie
 function editTVShow($id,$name,$url,$platform_id) {
+    if (!intval($id)){
+        return NULL;
+    }
+    $id = intval($id);
+
     $tvshowUpdated = false;
 
     // generamos query:
@@ -82,12 +92,22 @@ function editTVShow($id,$name,$url,$platform_id) {
 
 // Borra la serie
 function deleteTVShow($id) {
+    if (!intval($id)){
+        return NULL;
+    }
+    $id = intval($id);
+
     return execQuery("DELETE FROM tvshows WHERE id = $id");
 }
 
 
 // Devuelve los capítulos que tiene una serie
 function getTVShowEpisodes($id) {
+    if (!intval($id)){
+        return NULL;
+    }
+    $id = intval($id);
+
     $episodes=[];
 
     $list = execQuery("SELECT * FROM episodes WHERE tvshow_id = $id");

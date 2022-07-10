@@ -6,18 +6,14 @@ require_once("../../controllers/TVShowController.php");
 $error = false;
 // si no hay ID ponemos error
 if (!isset($_GET["id"])) {
-    $error = true;
+    echo getAlert("serie","mostrar","danger","index.php");
+    die;
 }
 
 $tvshow = getTVShow($_GET["id"]);
 // por si el id es malo
 if (!$tvshow) {
-    $error = true;
-}
-
-if ($error){
-    echo "<h1>Esta serie no existe</h1>";
-    echo "<p>Vete al listado de series <a href='/views/tvshows'>aquí</a></p>";
+    echo getAlert("serie","mostrar","danger","index.php");
     die;
 }
 

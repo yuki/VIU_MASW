@@ -27,6 +27,10 @@ function createPlatform($name) {
 
 // Devolvemos la plataforma por su ID
 function getPlatform($id) {
+    if (!intval($id)){
+        return NULL;
+    }
+    $id = intval($id);
     $data = execQuery("SELECT * FROM platforms WHERE id = $id")->fetch_array();
     if ($data != NULL) {
         $platform = new Platform($data["id"],$data["name"]);
@@ -37,6 +41,11 @@ function getPlatform($id) {
 
 // editamos el nombre de la plataforma
 function editPlatform($id, $name) {
+    if (!intval($id)){
+        return NULL;
+    }
+    $id = intval($id);
+
     $platformUpdated = false;
     // TODO: se podría mejorar esto. Se podría hacer a nivel de frontend con un input hidden,
     // pero aquí también hay que comprobarlo.
@@ -77,6 +86,11 @@ function deletePlatform($id) {
 
 // Devuelve las series que tiene la plataforma
 function getPlatformShows($id) {
+    if (!intval($id)){
+        return NULL;
+    }
+    $id = intval($id);
+    
     $tvshows=[];
     // $platform = getPlatform($id);
 

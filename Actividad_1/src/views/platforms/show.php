@@ -2,22 +2,19 @@
 include_once("../template/html_head.php");
 include_once("../template/delete_modal.php");
 require_once("../../controllers/PlatformController.php");
+require_once("../../controllers/helpers.php");
 
 $error = false;
 // si no hay ID ponemos error
 if (!isset($_GET["id"])) {
-    $error= true;
+    echo getAlert("plataforma","mostrar","danger","index.php");
+    die;
 }
 
 $platform = getPlatform($_GET["id"]);
 // si no existe la plataforma ponemos error
 if (!$platform) {
-    $error= true;
-}
-
-if ($error){
-    echo "<h1>Esta plataforma no existe</h1>";
-    echo "<p>Vete al listado de plataformas <a href='/views/platforms'>aquí</a></p>";
+    echo getAlert("plataforma","mostrar","danger","index.php");
     die;
 }
 

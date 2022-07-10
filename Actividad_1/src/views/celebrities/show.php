@@ -21,26 +21,20 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["funcion_id"]) && isset
 }
 
 
-
-
-
 $error = false;
 // si no hay ID ponemos error
 if (!isset($_GET["id"])) {
-    $error = true;
-    
+    echo getAlert("celebrity","mostrar","danger","index.php");
+    die;
 }
 
 $celebrity = getCelebrity($_GET["id"]);
 // si no existe la plataforma ponemos error
 if (!$celebrity) {
-    $error = true;
-}
-if ($error){
-    echo "<h1>Esta celebrity no existe</h1>";
-    echo "<p>Vete al listado de celebrities <a href='/views/celebrities'>aquí</a></p>";
+    echo getAlert("celebrity","mostrar","danger","index.php");
     die;
 }
+
 
 echo "<h1>".$celebrity->getName() ." ". $celebrity->getSurname()."</h1>";
 // cogemos todas las series con sus capítulos

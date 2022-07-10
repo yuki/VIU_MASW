@@ -6,20 +6,18 @@ require_once("../../controllers/EpisodeController.php");
 $error = false;
 // si no hay ID ponemos error
 if (!isset($_GET["id"])) {
-    $error = true;
-    
+    echo getAlert("episodio","mostrar","danger","index.php");
+    die;
 }
 
 $episode = getEpisode($_GET["id"]);
-// si no existe la plataforma ponemos error
+// si no existe el episodio ponemos error
 if (!$episode) {
-    $error = true;
-}
-if ($error){
-    echo "<h1>Esta celebrity no existe</h1>";
-    echo "<p>Vete al listado de celebrities <a href='/views/celebrities'>aquí</a></p>";
+    echo getAlert("episodio","mostrar","danger","index.php");
     die;
 }
+
+
 // TODO:continuar con el show
 echo "TODO: hay que terminar esto";
 

@@ -33,6 +33,10 @@ function getAlert($name, $action, $alertType, $link) {
         case 'falta':
             $message .= 'Falta información en el formulario, u opciones no elegidas';
             break;
+        case 'mostrar':
+            $message .= '¡Ha habido un error al '.$action.' la '.$name.'!<br>';
+            $message .= 'Quizá falta el parámetro o el episodio no existe';
+            break;
     }
     if ($link){
         $message .= '<br><br><a href="'.$link.'" class="alert-link">Vete al listado de '.$name.'s.</a>';
@@ -40,6 +44,10 @@ function getAlert($name, $action, $alertType, $link) {
     $message .= '</div>';
     return $message;
 }
+
+
+
+
 
 // cambiamos el formato de la fecha a dd/mm/yyyy
 function changeDateFormat($old_date) {
