@@ -13,7 +13,7 @@ require_once("../../controllers/LanguageController.php");
   if (count($languages) > 0){
       include_once("_list.php");
   } else {
-    echo "<p>No hay idiomas. Vete y crea una en <a href='/views/languages/new.php'>este enlace</a>.</p>";
+    echo "<p class='mt-3'>No hay idiomas. Vete y crea una en <a href='/views/languages/new.php'>este enlace</a>.</p>";
   }
   
   include_once("../template/html_tail.php");

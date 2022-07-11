@@ -10,7 +10,7 @@ require_once(__DIR__."/../../controllers/helpers.php");
   $platform = getPlatform($_GET["id"]);
 
   /*
-  * Parte POST, para comprobar si se crea la plataforma
+  * Parte POST, para comprobar si se edita la plataforma
   */
   if (isset($_POST["Button"])) {
     if (strlen($_POST["name"])>0 && strlen($_POST["id"])>0) {

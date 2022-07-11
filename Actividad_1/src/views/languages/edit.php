@@ -9,7 +9,7 @@ require_once("../../controllers/helpers.php");
 <?php
     $language = getLanguage($_GET["id"]);
   /*
-  * Parte POST, para comprobar si se crea el  idioma
+  * Parte POST, para comprobar si se edita el  idioma
   */
   if (isset($_POST["Button"])) {
     if (strlen($_POST["name"])>0 && $_POST["id"]>0 && strlen($_POST["rfc_code"])>0) {

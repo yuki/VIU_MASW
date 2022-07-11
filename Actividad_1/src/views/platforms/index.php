@@ -44,7 +44,7 @@ require_once("../../controllers/PlatformController.php");
 
   <?php
   } else {
-    echo "<p>No hay plataformas. Crea una a través del botón.</p>";
+    echo "<p class='mt-3'>No hay plataformas. Crea una a través del botón.</p>";
   }
   
   include_once("../template/html_tail.php");

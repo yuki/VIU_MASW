@@ -14,11 +14,11 @@ require_once("../../controllers/EpisodeController.php");
   if (count($episodeList) > 0){
       include_once("_list.php");
   } else {
-      $tvshowList = listPlatforms();
+      $tvshowList = listTVShows();
       if (count($tvshowList) > 0){
-        echo "<p>No hay capítulos. Crea uno a través del botón.</p>";
+        echo "<p class='mt-3'>No hay episodios. Crea uno a través del botón.</p>";
       } else {
-        echo "<p>No hay Series. Vete y crea una en <a href='/views/tvshows/'>este enlace</a>.</p>";
+        echo "<p  class='mt-3'>No hay Series. Vete y crea una en <a href='/views/tvshows/'>este enlace</a>.</p>";
       }
       
   }

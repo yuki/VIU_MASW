@@ -5,10 +5,13 @@ require_once("../../controllers/CelebrityController.php");
 require_once("../../controllers/TVShowController.php");
 require_once("../../controllers/helpers.php");
 
-
-if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["funcion_id"]) && isset($_POST["episode_id"]) && isset($_POST["celebrity_id"]) ) {
-    if ($_POST["funcion_id"]>0 && $_POST["episode_id"]>0 ) {
-        $added = addFilmography($_POST["celebrity_id"],$_POST["funcion_id"],$_POST["episode_id"]);
+/*
+* Recibimos el POST y añadimos
+*/ 
+if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["funcion"]) && isset($_POST["episode_id"]) && isset($_POST["celebrity_id"])) {
+    if ($_POST["funcion"]>0 && $_POST["episode_id"]>0 ) {
+        
+        $added = addFilmography($_POST["celebrity_id"],$_POST["funcion"],$_POST["episode_id"]);
         if ($added) {
             echo getAlert("filmography","añadir","success","");
         } else {
@@ -20,7 +23,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["funcion_id"]) && isset
     
 }
 
-
+/*
+* GET
+*/ 
 $error = false;
 // si no hay ID ponemos error
 if (!isset($_GET["id"])) {
@@ -54,7 +59,7 @@ $celebrityFilmography = getFilmography($_GET["id"]);
 if ($celebrityFilmography) {
     include_once("_episodes_celebrities.php");
 } else {
-    echo '<p class="mt-5">Esta celebrity no tiene filmografía todavía.';
+    echo '<p class="mt-3">Esta celebrity no tiene filmografía todavía.';
 }
 
 include_once("../template/html_tail.php");

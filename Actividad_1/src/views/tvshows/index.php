@@ -16,9 +16,9 @@ require_once("../../controllers/PlatformController.php");
   } else {
       $platformList = listPlatforms();
       if (count($platformList) > 0){
-        echo "<p>No hay series. Crea una a través del botón.</p>";
+        echo "<p class='mt-3'>No hay series. Crea una a través del botón.</p>";
       } else {
-        echo "<p>No hay Plataformas. Vete y crea una en <a href='/views/platforms/new.php'>este enlace</a>.</p>";
+        echo "<p class='mt-3'>No hay Plataformas. Vete y crea una en <a href='/views/platforms/new.php'>este enlace</a>.</p>";
       }
       
   }

@@ -4,7 +4,9 @@ require_once("../../controllers/EpisodeController.php");
 require_once("../../controllers/LanguageController.php");
 require_once("../../controllers/CelebrityController.php");
 
-
+/*
+* Parte POST, para añadir celebrities o idiomas al episodio
+*/
 if ($_SERVER["REQUEST_METHOD"] == "POST" ) {
     // Añadimos idioma al episodio?
     if (isset($_POST["addLanguage"])){
@@ -35,6 +37,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" ) {
     }
 }
 
+
+/*
+* Parte GET
+*/
 
 // si no hay ID ponemos error
 if (!isset($_GET["id"])) {

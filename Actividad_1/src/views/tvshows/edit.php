@@ -10,7 +10,7 @@ require_once("../../controllers/helpers.php");
 <?php
     $tvshow = getTVShow($_GET["id"]);
   /*
-  * Parte POST, para comprobar si se crea la serie
+  * Parte POST, para comprobar si se edita la serie
   */
   if (isset($_POST["Button"])) {
     if (strlen($_POST["name"])>0 && $_POST["platform_id"]>0) {

@@ -13,7 +13,7 @@ require_once("../../controllers/CelebrityController.php");
   if (count($celebritiesList) > 0){
       include_once("_list.php");
   } else {
-        echo "<p>No hay celebrities. Crea una a través del botón.</p>";      
+        echo "<p class='mt-3'>No hay celebrities. Crea una a través del botón.</p>";      
   }
   
   include_once("../template/html_tail.php");

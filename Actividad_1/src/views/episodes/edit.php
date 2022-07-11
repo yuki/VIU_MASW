@@ -10,7 +10,7 @@ require_once("../../controllers/helpers.php");
 <?php
     $episode = getEpisode($_GET["id"]);
   /*
-  * Parte POST, para comprobar si se crea la serie
+  * Parte POST, para comprobar si se edita el episodio
   */
   if (isset($_POST["Button"])) {
     if (strlen($_POST["name"])>0 && $_POST["tvshow_id"]>0) {

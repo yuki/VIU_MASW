@@ -9,7 +9,7 @@ require_once("../../controllers/helpers.php");
 
 <?php
   /*
-  * Parte POST, para comprobar si se crea el capítulo
+  * Parte POST, para comprobar si se crea el episodio
   */
   if (isset($_POST["Button"])) {
     
