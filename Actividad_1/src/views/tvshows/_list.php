@@ -19,7 +19,7 @@
         foreach ($tvshowList as $tvshow){
       ?>
           <tr>
-            <td>
+            <td class="text-center">
                 <?php
                     $imageExists = getImagePath($tvshow->getId(),"tvshow");
                     if ($imageExists[0]){

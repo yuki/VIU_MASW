@@ -1,6 +1,7 @@
 <?php
 
 require_once(__DIR__."/DB.php");
+require_once(__DIR__."/helpers.php");
 require_once(__DIR__."/../models/Celebrity.php");
 require_once(__DIR__."/../controllers/EpisodeController.php");
 
@@ -38,7 +39,7 @@ function checkCelebrityExists($name,$surname){
 }
 
 // Creamos la celebrity
-function createCelebrity($name,$surname,$born,$nation,$url) {
+function createCelebrity($name,$surname,$born,$nation,$url,$file) {
     $celebrityCreated = false;
     $existe = checkCelebrityExists($name,$surname);
     // comprobamos que no existe una plataforma con el mismo nombre
@@ -53,6 +54,11 @@ function createCelebrity($name,$surname,$born,$nation,$url) {
         $query .= ",'$nation','$url')";
         if (execQuery($query)){
             $celebrityCreated = true;
+            // guardamos la imagen
+            if (isset($file)){
+                $celebrityExists = checkCelebrityExists($name,$surname);
+                saveImage($file,$celebrityExists->fetch_array()["id"],"celebrity");
+            }
         }
     }
 
@@ -60,7 +66,7 @@ function createCelebrity($name,$surname,$born,$nation,$url) {
 }
 
 // Editamos la celebrity
-function editCelebrity($id, $name,$surname,$born,$nation,$url) {
+function editCelebrity($id, $name,$surname,$born,$nation,$url,$file) {
     if (!intval($id)){
         return NULL;
     }
@@ -82,6 +88,10 @@ function editCelebrity($id, $name,$surname,$born,$nation,$url) {
     if ($existe->fetch_array()["id"] == intval($id)) {
         if (execQuery($query)){
             $celebrityUpdated = true;
+            // guardamos la imagen
+            if (isset($file)){
+                saveImage($file,$id,"celebrity");
+            }
         }
         return $celebrityUpdated;
     }
@@ -90,6 +100,10 @@ function editCelebrity($id, $name,$surname,$born,$nation,$url) {
         
         if (execQuery($query)){
             $celebrityUpdated = true;
+            // guardamos la imagen
+            if (isset($file)){
+                saveImage($file,$id,"celebrity");
+            }
         }
     }
 

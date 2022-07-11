@@ -1,12 +1,26 @@
-<table class="table mt-5">
+<table class="table mt-5 align-middle">
     <tbody>
       <thead>
-        <tr><th>Nombre y apellidos</th><th>Fecha de nacimiento</th><th>Nacionalidad</th><th>URL en IMDB</th><th>Acciones</th></tr>
+        <tr>
+          <th></th>
+          <th>Nombre y apellidos</th>
+          <th>Fecha de nacimiento</th>
+          <th>Nacionalidad</th>
+          <th>URL en IMDB</th>
+          <th>Acciones</th></tr>
       </thead>
       <?php
         foreach ($celebritiesList as $celebrity){
       ?>
           <tr>
+            <td class="text-center">
+                <?php
+                    $imageExists = getImagePath($celebrity->getId(),"celebrity");
+                    if ($imageExists[0]){
+                      echo "<img class='imagen' src='".$imageExists[1]."'>";
+                    }
+                ?>
+            </td>
             <td><a href="/views/celebrities/show.php?id=<?php echo $celebrity->getId() ?>"><?php echo $celebrity->getName() .' '. $celebrity->getSurname() ?></a></td>
             <td><?php echo $celebrity->getBorn(); ?></td>
             <td><?php echo $celebrity->getNation(); ?></td>

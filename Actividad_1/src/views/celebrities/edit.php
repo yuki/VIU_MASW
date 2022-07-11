@@ -14,7 +14,7 @@ require_once("../../controllers/helpers.php");
   */
   if (isset($_POST["Button"])) {
     if (strlen($_POST["name"])>0 && strlen($_POST["surname"])>0 && strlen($_POST["id"])>0) {
-      $celebrityEdited = editCelebrity($_POST["id"],$_POST["name"],$_POST["surname"],$_POST["born"],$_POST["nation"],$_POST["url"]);
+      $celebrityEdited = editCelebrity($_POST["id"],$_POST["name"],$_POST["surname"],$_POST["born"],$_POST["nation"],$_POST["url"],$_FILES);
 
       if ($celebrityEdited) {
         $celebrity->setName($_POST["name"]);

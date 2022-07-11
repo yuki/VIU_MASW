@@ -1,4 +1,4 @@
-<form class="mt-2 col-md-5" name="create_celebrity" action="" method="POST">
+<form class="mt-2 col-md-5" name="create_celebrity" action="" method="POST" enctype="multipart/form-data">
   <div class="mb-3">
     <label for="name" class="form-label">Nombre</label>
     <input type="text" class="form-control" id="name" name="name" required value="<?php if (isset($celebrity)) {echo $celebrity->getName();} ?>"/>
@@ -25,6 +25,10 @@
   <div class="mb-3">
     <label for="url" class="form-label">URL en IMDB</label>
     <input type="text" class="form-control" id="url" name="url"  value="<?php if (isset($celebrity)) {echo $celebrity->getUrl();} ?>"/>
+  </div>
+  <div class="mb-3">
+    <label for="file" class="form-label">Elige imagen</label>
+    <input type="file" class="form-control" name="file" id="file">
   </div>
   
   <div class="mb-3">
