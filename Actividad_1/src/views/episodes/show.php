@@ -19,13 +19,15 @@ if (!$episode) {
 
 
 echo "<h1>".$episode->getName()."</h1>";
-
-$celebrityFilmography = getEpisodeCasting($episode->getId());
-
-echo "<h3 class='mt-5'>Casting del episodio</h3>";
 echo "<p class=''><a href='/views/tvshows/show.php?id=".$episode->getTVShow()->getId()."'>".$episode->getTVShow()->getName().
         "</a> se emite en <a href='/views/platforms/show.php?id=".$episode->getTVShow()->getPlatform()->getId()."'>"
         .$episode->getTVShow()->getPlatform()->getName()."</a></p>";
+
+// cogemos el casting del episodio.
+$celebrityFilmography = getEpisodeCasting($episode->getId());
+
+echo "<h3 class='mt-5'>Casting del episodio</h3>";
+
 if ($celebrityFilmography) {
     include_once("../celebrities/_episodes_celebrities.php");
 } else {

@@ -47,10 +47,5 @@ require_once("../../controllers/PlatformController.php");
     echo "<p>No hay plataformas. Crea una a través del botón.</p>";
   }
   
-
-?>
-
-
-<?php
-include_once("../template/html_tail.php");
+  include_once("../template/html_tail.php");
 ?>

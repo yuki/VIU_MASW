@@ -35,9 +35,3 @@ require_once("../../controllers/helpers.php");
 
 include_once("../template/html_tail.php");
 ?>
-
-<?php
-include_once("../template/html_head.php");
-require_once(__DIR__."/../../controllers/TVShowController.php");
-require_once(__DIR__."/../../controllers/helpers.php");
-?>

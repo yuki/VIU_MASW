@@ -18,7 +18,7 @@ require_once("../../controllers/EpisodeController.php");
       if (count($tvshowList) > 0){
         echo "<p>No hay capítulos. Crea uno a través del botón.</p>";
       } else {
-        echo "<p>No hay Series. Vete y crea una en <a href='/views/tvshows/new.php'>este enlace</a>.</p>";
+        echo "<p>No hay Series. Vete y crea una en <a href='/views/tvshows/'>este enlace</a>.</p>";
       }
       
   }

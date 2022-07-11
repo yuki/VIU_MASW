@@ -6,7 +6,7 @@ CREATE TABLE platforms (
 CREATE TABLE languages (
     id INTEGER NOT NULL PRIMARY KEY AUTO_INCREMENT,
     name VARCHAR (50),
-    iso_code VARCHAR(2)
+    rfc_code VARCHAR(8)
 );
 
 CREATE TABLE tvshows (

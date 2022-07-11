@@ -13,7 +13,7 @@ function getDependencies(id,path,origin,dependencies) {
     })
     .then((response) => response.text())
     .then(response => {
-        if (path != "episodes") {
+        if (path == "platforms" || path == 'tvshows') {
             //actualizamos el modal
             document.getElementById('mensaje').innerHTML="La "+origin+" tiene "+response+" "+dependencies+". Se borrará todo el contenido";
         }
