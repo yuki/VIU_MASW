@@ -14,7 +14,7 @@ require_once("../../controllers/helpers.php");
   if (isset($_POST["Button"])) {
     if (strlen($_POST["name"])>0 && $_POST["platform_id"]>0) {
       // tiene que haber nombre de serie y haber elegido plataforma.
-      $tvshowCreated = createTVShow($_POST["name"],$_POST["url"],$_POST["platform_id"]);
+      $tvshowCreated = createTVShow($_POST["name"],$_POST["url"],$_POST["platform_id"],$_FILES);
 
       if ($tvshowCreated) {
         // plataforma creada

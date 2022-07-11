@@ -13,6 +13,8 @@ global $conf;
     <!-- Bootstrap CSS -->
     <link href="/assets/css/bootstrap.min.css" rel="stylesheet">
 
+    <!-- estilos propios -->
+    <link href="/assets/css/yukidb.css" rel="stylesheet">
     <!-- funciones propias javascripts -->
     <script src="/assets/js/yukidb.js"></script>
 

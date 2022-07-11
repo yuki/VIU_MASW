@@ -1,7 +1,8 @@
-<table class="table mt-5">
+<table class="table mt-5 align-middle">
     <tbody>
       <thead>
         <tr>
+          <th></th>
           <th>Nombre</th>
             <?php
               if (strpos($_SERVER["DOCUMENT_URI"],"tvshows") == true){
@@ -18,6 +19,14 @@
         foreach ($tvshowList as $tvshow){
       ?>
           <tr>
+            <td>
+                <?php
+                    $imageExists = getImagePath($tvshow->getId(),"tvshow");
+                    if ($imageExists[0]){
+                      echo "<img class='imagen' src='".$imageExists[1]."'>";
+                    }
+                ?>
+            </td>
             <td><a href="/views/tvshows/show.php?id=<?php echo $tvshow->getId() ?>"><?php echo $tvshow->getName() ?></a></td>
 
             <?php

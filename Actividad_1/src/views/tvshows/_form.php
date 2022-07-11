@@ -1,4 +1,4 @@
-<form class="mt-2 col-md-5" name="create_tvshow" action="" method="POST">
+<form class="mt-2 col-md-5" name="create_tvshow" action="" method="POST" enctype="multipart/form-data">
   <div class="mb-3">
     <label for="name" class="form-label">Nombre</label>
     <input type="text" class="form-control" id="name" name="name" required value="<?php if (isset($tvshow)) {echo $tvshow->getName();} ?>"/>
@@ -36,6 +36,10 @@
         }
       ?>
     </select>
+  </div>
+  <div class="mb-3">
+    <label for="file" class="form-label">Elige imagen</label>
+    <input type="file" class="form-control" name="file" id="file">
   </div>
   <div class="mb-3">
     <?php

@@ -1,4 +1,6 @@
 <?php
+require_once(__DIR__."/../config.php");
+
 /* ***********************************************************
  * 
  * Funciones que se pueden usar desde distintos sitios
@@ -48,8 +50,26 @@ function getAlert($name, $action, $alertType, $link) {
     return $message;
 }
 
+// guardamos la imagen para una serie/episodio/celebrity
+function saveImage($file,$id,$what){
+    if ($file["file"]["type"] == "image/jpeg" || $file["file"]["type"] == "image/jpg") {
+        global $conf;
+        // me aseguro que el directorio existe
+        if ( !is_dir( $conf["absolute_image_path"] ) ) {
+            mkdir( $conf["absolute_image_path"] );       
+        }
+        $target_file = $conf["absolute_image_path"] . $what ."_".$id.".jpg";
+        move_uploaded_file($_FILES["file"]["tmp_name"], $target_file);
+    }
+}
 
-
+// devuelve una ruta y si existe la imagen
+function getImagePath($id,$what){
+    global $conf;
+    $absolute_target_file = $conf["absolute_image_path"] . $what ."_".$id.".jpg";
+    $target_file = $conf["relative_image_path"] . $what ."_".$id.".jpg";
+    return [file_exists($absolute_target_file),$target_file];
+}
 
 
 // cambiamos el formato de la fecha a dd/mm/yyyy

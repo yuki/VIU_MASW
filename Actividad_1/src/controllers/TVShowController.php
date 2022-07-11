@@ -1,6 +1,7 @@
 <?php
 
 require_once(__DIR__."/DB.php");
+require_once(__DIR__."/helpers.php");
 require_once(__DIR__."/../models/TVShow.php");
 require_once(__DIR__."/../models/Episode.php");
 
@@ -41,7 +42,7 @@ function checkTVShowName($name) {
 }
 
 // Creamos la serie
-function createTVShow($name,$url,$platform_id) {
+function createTVShow($name,$url,$platform_id,$file) {
     $tvshowCreated = false;
 
     //comprobamos que la plataforma existe
@@ -51,6 +52,11 @@ function createTVShow($name,$url,$platform_id) {
     if (!$tvshowExists->num_rows && $platformExists){
         if (execQuery("INSERT INTO tvshows(name,url,platform_id) VALUES ('$name','$url',$platform_id)")){
             $tvshowCreated = true;
+            // guardamos la imagen
+            if (isset($file)){
+                $tvshowExists = checkTVShowName($name);
+                saveImage($file,$tvshowExists->fetch_array()["id"],"tvshow");
+            }
         }
     }
 
@@ -58,7 +64,7 @@ function createTVShow($name,$url,$platform_id) {
 }
 
 // Editamos la serie
-function editTVShow($id,$name,$url,$platform_id) {
+function editTVShow($id,$name,$url,$platform_id,$file) {
     if (!intval($id)){
         return NULL;
     }
@@ -74,6 +80,10 @@ function editTVShow($id,$name,$url,$platform_id) {
     if ($old_name == $name) {
         if (execQuery($query)) {
             $tvshowUpdated = true;
+            // guardamos la imagen
+            if (isset($file)){
+                saveImage($file,$id,"tvshow");
+            }
         }
         return $tvshowUpdated;
     }
@@ -84,6 +94,10 @@ function editTVShow($id,$name,$url,$platform_id) {
         
         if (execQuery($query)) {
             $tvshowUpdated = true;
+            // guardamos la imagen
+            if (isset($file)){
+                saveImage($file,$id,"tvshow");
+            }
         }
     }
 
