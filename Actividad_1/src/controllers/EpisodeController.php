@@ -2,6 +2,7 @@
 
 require_once(__DIR__."/DB.php");
 require_once(__DIR__."/../models/Episode.php");
+require_once(__DIR__."/../models/Language.php");
 require_once(__DIR__."/../controllers/CelebrityController.php");
 
 
@@ -130,6 +131,53 @@ function getEpisodeCasting($id) {
     }
 
     return $celebrities;
+}
+
+// Devuelve los idiomas que tiene un episodio
+function getEpisodeLanguages($id) {
+    if (!intval($id)){
+        return NULL;
+    }
+    $id = intval($id);
+    
+    $languages=[];
+
+    $list = execQuery("SELECT * FROM episodes_languages WHERE episode_id = $id");
+    foreach ($list as $item) {
+        array_push($languages,[getLanguage($item["language_id"]),$item["type"]]);
+    }
+
+    return $languages;
+}
+
+// añadimos idioma al episodio
+function addEpisodeLanguage($episode_id,$language_id,$type){
+    $added = false;
+
+    if (!intval($episode_id)){
+        return NULL;
+    }
+    $episode_id = intval($episode_id);
+
+    if (!intval($language_id)){
+        return NULL;
+    }
+    $language_id = intval($language_id);
+
+    $episode = getEpisode($episode_id);
+    $language = getLanguage($language_id);
+
+    if ($episode && $language) {
+        if (execQuery("INSERT INTO episodes_languages(episode_id,language_id,type) VALUES ($episode_id,$language_id,'$type')")){
+            $added = true;
+        }
+    }
+    return $added;
+}
+
+// borramos el idioma al episodio
+function deleteEpisodeLanguage($episode_id,$language_id,$type){
+    return execQuery("DELETE FROM episodes_languages WHERE episode_id = $episode_id AND language_id = $language_id AND type = '$type'");
 }
 
 ?>

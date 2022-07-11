@@ -35,7 +35,6 @@ function listLanguages() {
 
 // comprobamos que el nombre del idioma y su código existe
 function checkLanguageName($name,$rfc_code) {
-    var_dump("SELECT * FROM languages WHERE lower(name) = '".strtolower($name)."' AND lower(rfc_code) = '".strtolower($rfc_code)."'");
     return execQuery("SELECT * FROM languages WHERE lower(name) = '".strtolower($name)."' AND lower(rfc_code) = '".strtolower($rfc_code)."'");
 }
 

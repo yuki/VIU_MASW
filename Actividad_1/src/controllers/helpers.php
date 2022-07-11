@@ -16,9 +16,12 @@ function getAlert($name, $action, $alertType, $link) {
     $message = '<div class="alert alert-'.$alertType.'" role="alert">';
     switch ($action) {
         case 'crear':
+        case 'añadir':
         case 'editar':
             if ($action == 'crear') {
                 $verbo = "creado";
+            } elseif ($action == 'añadir') {
+                $verbo = "añadido";
             } else {
                 $verbo = "editado";
             }
@@ -60,6 +63,11 @@ function changeDateFormat($old_date) {
 // TODO: ampliar a más funciones, pero hay que tocar el enum de MySQL
 function getFunciones() {
     return ["director","actor"];
+}
+
+// devuelve los posibles tipos de idiomas para un episodio
+function getLanguageTypes() {
+    return ["audio","subtitle"];
 }
 
 

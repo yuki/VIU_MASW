@@ -12,10 +12,10 @@ require_once("../../controllers/helpers.php");
   */
   if (isset($_POST["Button"])) {
     // TODO: modificar
-    if (strlen($_POST["name"])>0 && $_POST["id"]>0 && strlen($_POST["rfc_code"])>0) {
+    if (strlen($_POST["name"])>0 && strlen($_POST["rfc_code"])>0) {
       // tiene que haber nombre del idioma y código rfc_code.
       $languageCreated = createLanguage($_POST["name"],$_POST["rfc_code"]);
-      var_dump($languageCreated);
+
       if ($languageCreated) {
         // idioma creado
         echo getAlert("idioma","crear","success","index.php");

@@ -107,3 +107,46 @@ function deleteFilmography(celebrity_id, episode_id, funcion,origin){
         alert("Error al borrar" + error);
     });
 }
+
+
+// abrimos el modal para añadir idiomas
+function languageModal() {
+    language_modal = new bootstrap.Modal(document.getElementById('LanguageModal'));
+    language_modal.show();
+}
+
+
+//preguntamos si queremos borrar idiomas de un episodio
+function confirmDeleteLanguageEpisode(episode_id, language_id, funcion){
+    // sacamos el modal para confirmar el borrado
+    delete_modal = new bootstrap.Modal(document.getElementById('deleteModal'));
+    delete_modal.show();
+    
+    document.getElementById('borrar').onclick = function() {deleteEpisodeLanguage(episode_id,language_id,funcion)};
+}
+
+
+function deleteEpisodeLanguage(episode_id,language_id,type){
+    var url = window.location.origin + "/views/episodes/deleteEpisodeLanguage.php";
+
+    reqData = 'episode_id='+  episode_id + '&language_id=' + language_id+ '&type=' +type;
+    fetch(`${url}`,{
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
+          },
+
+        body: reqData
+    })
+    .then((response) => response.text())
+    .then(response => {
+        if (response) {
+            // al borrar redirigimos al listado
+            window.location="/views/episodes/show.php?id="+episode_id;
+        }
+    })
+    .catch(error => function(){
+        alert("Error al borrar" + error);
+    });
+
+}

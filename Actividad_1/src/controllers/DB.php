@@ -40,11 +40,10 @@ function execQuery($query){
         $data = $mysqli->query(query: $query);
         $mysqli->close();
         return $data;
-    } catch (\Throwable $th) {
+    } catch (Throwable $th) {
         //throw $th;
         return NULL;
     }
-    
 }
 
 ?>

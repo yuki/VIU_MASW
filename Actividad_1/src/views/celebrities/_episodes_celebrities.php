@@ -30,6 +30,7 @@
             <td>
               <?php
                 if (strpos($_SERVER["DOCUMENT_URI"],"celebrities") != true){
+                  // para borrar celebrities de un episodio estando en un celebrity
                   ?>
                     <a class="btn btn-outline-danger btn-sm" 
                       onclick="confirmDeleteCasting(<?php echo $episode->getId() ?> ,
@@ -39,6 +40,7 @@
                       role="button">Borrar</a>
                   <?php 
                 } else {
+                  // para borrar celebrities de un episodio estando en un episodio
                   ?>
                     <a class="btn btn-outline-danger btn-sm" 
                       onclick="confirmDeleteFilmography(<?php echo $celebrity->getId() ?> ,
