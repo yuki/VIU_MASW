@@ -26,8 +26,8 @@
             </div>
 
             <div class="mb-3">
-              <label for="funcion" class="form-label">Tipo</label>
-              <select class="form-select" aria-label="default-select" id="funcion_id" name="funcion" required>
+              <label for="type_id" class="form-label">Tipo</label>
+              <select class="form-select" aria-label="default-select" id="type_id" name="type" required>
                 <option value=0>Tipo</option>
                 <?php
                   foreach ($tipos as $tipo) {

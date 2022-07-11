@@ -10,9 +10,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["funcion_id"]) && isset
     if ($_POST["funcion_id"]>0 && $_POST["episode_id"]>0 ) {
         $added = addFilmography($_POST["celebrity_id"],$_POST["funcion_id"],$_POST["episode_id"]);
         if ($added) {
-            echo getAlert("filmography","crear","success","");
+            echo getAlert("filmography","añadir","success","");
         } else {
-            echo getAlert("filmography","crear","danger","");
+            echo getAlert("filmography","añadir","danger","");
         }
     } else {
        echo getAlert("filmography","falta","danger","");

@@ -1,4 +1,4 @@
-<table class="table mt-5">
+<table class="table mt-3">
     <tbody>
       <thead>
         <tr>
