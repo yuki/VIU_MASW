@@ -4,6 +4,7 @@ include_once("../template/delete_modal.php");
 require_once("../../controllers/TVShowController.php");
 require_once("../../controllers/PlatformController.php");
 ?>
+<div class="col-md-7">
 
 <h1>Series</h1>
 
@@ -25,3 +26,4 @@ require_once("../../controllers/PlatformController.php");
   
   include_once("../template/html_tail.php");
 ?>
+</div>

@@ -1,9 +1,9 @@
+</div>
 <table class="table mt-5 align-middle">
     <tbody>
       <thead>
         <tr>
-          <th></th>
-          <th>Nombre</th>
+          <th class="text-center">Nombre</th>
             <?php
               if (strpos($_SERVER["DOCUMENT_URI"],"tvshows") == true){
                 ?>
@@ -11,6 +11,7 @@
                 <?php
               }
             ?>
+          <th>Sinopsis</th>
           <th>enlace IMDB</th>
           <th>Acciones</th>
         </tr>
@@ -20,14 +21,15 @@
       ?>
           <tr>
             <td class="text-center">
+              <a href="/views/tvshows/show.php?id=<?php echo $tvshow->getId() ?>">
                 <?php
                     $imageExists = getImagePath($tvshow->getId(),"tvshow");
                     if ($imageExists[0]){
                       echo "<img class='imagen' src='".$imageExists[1]."'>";
                     }
                 ?>
+                <?php echo $tvshow->getName() ?></a>
             </td>
-            <td><a href="/views/tvshows/show.php?id=<?php echo $tvshow->getId() ?>"><?php echo $tvshow->getName() ?></a></td>
 
             <?php
               if (strpos($_SERVER["DOCUMENT_URI"],"tvshows") == true){
@@ -36,6 +38,7 @@
                 <?php
               }
             ?>
+            <td class="col-md-4"><?php echo $tvshow->getSinopsis() ?></td>
             <?php 
               //si hay URL de IMDB
               if ($tvshow->getUrl()) {

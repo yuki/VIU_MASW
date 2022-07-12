@@ -1,4 +1,4 @@
-<form class="mt-2 col-md-5" name="create_tvshow" action="" method="POST" enctype="multipart/form-data">
+<form class="mt-2 offset-md-2 name="create_tvshow" action="" method="POST" enctype="multipart/form-data">
   <div class="mb-3">
     <label for="name" class="form-label">Nombre</label>
     <input type="text" class="form-control" id="name" name="name" required value="<?php if (isset($tvshow)) {echo $tvshow->getName();} ?>"/>
@@ -38,6 +38,10 @@
     </select>
   </div>
   <div class="mb-3">
+    <label for="sinopsis" class="form-label">Sinopsis</label>
+    <textarea type="textarea" class="form-control" name="sinopsis" id="file" rows="3"><?php if (isset($tvshow)) {echo $tvshow->getSinopsis();} ?></textarea>
+  </div>
+  <div class="mb-3">
     <label for="file" class="form-label">Elige imagen</label>
     <input type="file" class="form-control" name="file" id="file">
   </div>
@@ -51,6 +55,5 @@
         }
     ?>
   </div>
-  <input type="hidden" class="form-control" id="iction" name="action" value="<?php echo $button_name; ?>" />
-  <button type="submit" class="btn btn-primary" name="Button"><?php echo $button_name ?></button>
+  <button type="submit" class="btn btn-primary" name="<?php echo $button_name ?>"><?php echo $button_name ?></button>
 </form>

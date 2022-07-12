@@ -1,4 +1,4 @@
-<table class="table mt-5 ">
+<table class="table mt-5 offset-md-2">
     <tbody>
         <thead>
             <tr>
@@ -13,7 +13,7 @@
             <tr>
                 <td><?php echo $language->getName(); ?></td>
                 <td><?php echo $language->getRFCCode(); ?></td>
-                <td class="">
+                <td>
                     <a class="btn btn-outline-warning btn-sm" href="edit.php?id=<?php echo $language->getId() ?>" role="button">Editar</a>
                     <a class="btn btn-outline-danger btn-sm" 
                     onclick="getDependencies(<?php echo $language->getId() ?>,

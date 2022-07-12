@@ -4,6 +4,7 @@ include_once("../template/delete_modal.php");
 require_once("../../controllers/CelebrityController.php");
 ?>
 
+<div class="col-md-7">
 <h1>Celebrities</h1>
 
 <a class="btn btn-outline-primary" href="new.php" role="button">Nueva Celebrity</a>
@@ -18,3 +19,4 @@ require_once("../../controllers/CelebrityController.php");
   
   include_once("../template/html_tail.php");
 ?>
+</div>

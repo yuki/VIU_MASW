@@ -39,28 +39,48 @@ if (!$celebrity) {
     echo getAlert("celebrity","mostrar","danger","index.php");
     die;
 }
-
-
-echo "<h1>".$celebrity->getName() ." ". $celebrity->getSurname()."</h1>";
-// cogemos todas las series con sus capítulos
-$allEpisodes = getAllTVShowsComplete();
-$funciones = getFunciones();
-
-include_once("../template/episodes_celebrities_modal.php");
-
 ?>
-<a class="btn btn-outline-primary" role="button" 
-    onclick="FilmographyModal()">Añadir filmografía</a>
+
+<div class="container">
+  <div class="row">
+    <div class="offset-md-1 col-auto">
+        <?php
+
+        $celebrityImage=getImagePath($celebrity->getId(),"celebrity");
+
+        if ($celebrityImage[0]){
+            echo "<img class='imagen_grande' src='$celebrityImage[1]'>";
+        }
+        ?>
+    </div>
+    <div class='col'>
+        <h1><?php echo $celebrity->getName() ." ". $celebrity->getSurname() ?></h1>
+
+        <?php
+        // cogemos todas las series con sus capítulos
+        $allEpisodes = getAllTVShowsComplete();
+        $funciones = getFunciones();
+
+
+
+        ?>
+        <a class="btn btn-outline-primary mt-3" role="button" 
+            onclick="FilmographyModal()">Añadir filmografía</a>
+
+        <?php
+
+        $celebrityFilmography = getFilmography($_GET["id"]);
+
+        if ($celebrityFilmography) {
+            include_once("_episodes_celebrities.php");
+        } else {
+            echo '<p class="mt-3">Esta celebrity no tiene filmografía todavía.';
+        }
+
+        include_once("../template/html_tail.php");
+        ?>
+celebrityImage
 
 <?php
-
-$celebrityFilmography = getFilmography($_GET["id"]);
-
-if ($celebrityFilmography) {
-    include_once("_episodes_celebrities.php");
-} else {
-    echo '<p class="mt-3">Esta celebrity no tiene filmografía todavía.';
-}
-
-include_once("../template/html_tail.php");
+include_once("../template/episodes_celebrities_modal.php");
 ?>

@@ -6,6 +6,47 @@ require_once(__DIR__."/../models/TVShow.php");
 require_once(__DIR__."/../models/Episode.php");
 
 
+// comprueba el parámetro POST para ver si se puede crear o editar la plataforma
+function checkTVShowPost($post,$file) {
+
+    if ( (isset($post["Crear"]) && isset($post["name"]) && $post["platform_id"]) && 
+            (((strlen($post["name"])>0 && strlen($post["name"])<50) && $post["platform_id"]>0)) && strlen($post["sinopsis"])<512 )
+    {
+        // vamos a crear y el parámetro "name" existe y el platform_id
+        $tvshowCreated = createTVShow($post["name"],$post["sinopsis"],$post["url"],$post["platform_id"]);
+
+        if ($tvshowCreated) {
+            // plataforma creada y guardamos la imagen
+            if (isset($file)){
+                $tvshowExists = checkTVShowName($post["name"]);
+                saveImage($file,$tvshowExists->fetch_array()["id"],"tvshow");
+            }
+            return getAlert("la serie","crear","success","index.php");
+        } else {
+            // ha habido error al crear la serie
+            return getAlert("la serie","crear","danger","index.php");
+        }
+    } else if ((isset($post["Editar"]) && isset($post["name"]) && isset($post["id"]) && isset($post["platform_id"])) && 
+                (((strlen($post["name"])>0 && strlen($post["name"])<50) && $post["platform_id"]>0)) && strlen($post["sinopsis"])<512)
+    {
+        // tiene que haber nombre de serie y haber elegido plataforma.
+        $tvshowCreated = editTVShow($_POST["id"],$_POST["name"],$_POST["sinopsis"],$_POST["url"],$_POST["platform_id"]);
+        if ($tvshowCreated) {
+             // plataforma creada y guardamos la imagen
+             if (isset($file)){
+                $tvshowExists = checkTVShowName($post["name"]);
+                saveImage($file,$tvshowExists->fetch_array()["id"],"tvshow");
+            }
+            // serie creada
+            return getAlert("la serie","editar","success","index.php");
+        } else {
+            // ha habido error al editar la serie
+            return getAlert("la serie","editar","danger","index.php");
+        }
+    }
+    return getAlert("la serie","falta","danger","index.php");
+}
+
 // Devuelve la serie
 function getTVShow($id) {
     if (!intval($id)){
@@ -15,7 +56,7 @@ function getTVShow($id) {
     
     $data = execQuery("SELECT * FROM tvshows WHERE id = $id")->fetch_array();
     if ($data != NULL) {
-        $platform = new TVShow($data["id"],$data["name"],$data["platform_id"],$data["url"]);
+        $platform = new TVShow($data["id"],$data["name"],$data["sinopsis"],$data["platform_id"],$data["url"]);
         return $platform;
     }
     return NULL;
@@ -28,7 +69,7 @@ function listTVShows() {
 
     $tvshows = [];
     foreach($tvshowList as $item){
-        array_push($tvshows,new TVShow($item['id'],$item['name'],$item['platform_id'],$item['url']));
+        array_push($tvshows,new TVShow($item['id'],$item['name'],$item["sinopsis"],$item['platform_id'],$item['url']));
     }
     
     return $tvshows;
@@ -42,7 +83,7 @@ function checkTVShowName($name) {
 }
 
 // Creamos la serie
-function createTVShow($name,$url,$platform_id,$file) {
+function createTVShow($name,$sinopsis,$url,$platform_id) {
     $tvshowCreated = false;
 
     //comprobamos que la plataforma existe
@@ -50,13 +91,8 @@ function createTVShow($name,$url,$platform_id,$file) {
     $tvshowExists = checkTVShowName($name);
     // comprobamos que no existe una serie con el mismo nombre
     if (!$tvshowExists->num_rows && $platformExists){
-        if (execQuery("INSERT INTO tvshows(name,url,platform_id) VALUES ('$name','$url',$platform_id)")){
+        if (execQuery("INSERT INTO tvshows(name,sinopsis,url,platform_id) VALUES ('$name','$sinopsis','$url',$platform_id)")){
             $tvshowCreated = true;
-            // guardamos la imagen
-            if (isset($file)){
-                $tvshowExists = checkTVShowName($name);
-                saveImage($file,$tvshowExists->fetch_array()["id"],"tvshow");
-            }
         }
     }
 
@@ -64,7 +100,7 @@ function createTVShow($name,$url,$platform_id,$file) {
 }
 
 // Editamos la serie
-function editTVShow($id,$name,$url,$platform_id,$file) {
+function editTVShow($id,$name,$sinopsis,$url,$platform_id) {
     if (!intval($id)){
         return NULL;
     }
@@ -73,17 +109,13 @@ function editTVShow($id,$name,$url,$platform_id,$file) {
     $tvshowUpdated = false;
 
     // generamos query:
-    $query = "UPDATE tvshows SET name = '$name', url = '$url', platform_id = '$platform_id' WHERE id = $id";
+    $query = "UPDATE tvshows SET name = '$name', sinopsis='$sinopsis', url = '$url', platform_id = '$platform_id' WHERE id = $id";
 
     // comprobamos si el nuevo nombre es el mismo que antes, y si lo es, no comprobamos si ya existe.
     $old_name = getTVShow($id)->getName();
     if ($old_name == $name) {
         if (execQuery($query)) {
             $tvshowUpdated = true;
-            // guardamos la imagen
-            if (isset($file)){
-                saveImage($file,$id,"tvshow");
-            }
         }
         return $tvshowUpdated;
     }
@@ -94,10 +126,6 @@ function editTVShow($id,$name,$url,$platform_id,$file) {
         
         if (execQuery($query)) {
             $tvshowUpdated = true;
-            // guardamos la imagen
-            if (isset($file)){
-                saveImage($file,$id,"tvshow");
-            }
         }
     }
 
@@ -110,7 +138,7 @@ function deleteTVShow($id) {
         return NULL;
     }
     $id = intval($id);
-
+    deleteImage($id,"tvshow");
     return execQuery("DELETE FROM tvshows WHERE id = $id");
 }
 

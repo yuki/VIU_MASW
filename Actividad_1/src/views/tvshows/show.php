@@ -16,15 +16,33 @@ if (!$tvshow) {
     echo getAlert("serie","mostrar","danger","index.php");
     die;
 }
-
-echo "<h1>Episodios de ".$tvshow->getName()."</h1>";
-
-$episodeList = getTVShowEpisodes($tvshow->getId());
-
-if ($episodeList) {
-    include_once("../episodes/_list.php");
-} else {
-    echo '<p>Esta serie no tiene capítulos. <a href="/views/episodes/new.php?tvshow_id='.$tvshow->getId().'">Vete y crea uno.</a></p>';
-}
-include_once("../template/html_tail.php");
 ?>
+
+<div class="container">
+  <div class="row">
+    <div class="offset-md-1 col-auto">
+        <?php
+
+        $tvshowImage=getImagePath($tvshow->getId(),"tvshow");
+
+        if ($tvshowImage[0]){
+            echo "<img class='imagen_grande' src='$tvshowImage[1]'>";
+        }
+        ?>
+    </div>
+    <div class='col'>
+        <?php
+        echo "<h1>Episodios de ".$tvshow->getName()."</h1>";
+
+        $episodeList = getTVShowEpisodes($tvshow->getId());
+
+        if ($episodeList) {
+            include_once("../episodes/_list.php");
+        } else {
+            echo '<p>Esta serie no tiene capítulos. <a href="/views/episodes/new.php?tvshow_id='.$tvshow->getId().'">Vete y crea uno.</a></p>';
+        }
+        include_once("../template/html_tail.php");
+        ?>
+    </div>
+  </div>
+</div>

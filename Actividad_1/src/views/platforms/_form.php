@@ -1,4 +1,4 @@
-<form class="mt-2 col-md-5" name="create_platform" action="" method="POST" enctype="multipart/form-data">
+<form class="mt-2 offset-md-2" name="create_platform" action="" method="POST" enctype="multipart/form-data">
   <div class="mb-3">
     <label for="name" class="form-label">Nombre</label>
     <input type="text" class="form-control" id="name" name="name" required value="<?php if (isset($platform)) {echo $platform->getName();} ?>"/>

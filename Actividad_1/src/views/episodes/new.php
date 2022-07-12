@@ -4,7 +4,7 @@ require_once("../../controllers/TVShowController.php");
 require_once("../../controllers/EpisodeController.php");
 require_once("../../controllers/helpers.php");
 ?>
-
+<div class="col-md-7">
 <h1>Añadir episodio</h1>
 
 <?php
@@ -35,3 +35,4 @@ require_once("../../controllers/helpers.php");
 
 include_once("../template/html_tail.php");
 ?>
+</div>

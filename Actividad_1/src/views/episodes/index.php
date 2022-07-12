@@ -4,7 +4,7 @@ include_once("../template/delete_modal.php");
 require_once("../../controllers/TVShowController.php");
 require_once("../../controllers/EpisodeController.php");
 ?>
-
+<div class="col-md-7">
 <h1>Episodios</h1>
 
 <a class="btn btn-outline-primary" href="new.php" role="button">Nuevo Episodio</a>
@@ -25,3 +25,4 @@ require_once("../../controllers/EpisodeController.php");
   
   include_once("../template/html_tail.php");
 ?>
+</div>

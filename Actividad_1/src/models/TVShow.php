@@ -10,12 +10,14 @@ require_once(__DIR__."/../controllers/PlatformController.php");
 class TVShow {
     private $id;
     private $name;
+    private $sinopsis;
     private $url;
     private Platform $platform;
 
-    public function __construct($id, $name,$platform_id,$url="",) {
+    public function __construct($id, $name, $sinopsis, $platform_id, $url="") {
         $this->id = $id;
         $this->name = $name;
+        $this->sinopsis  = $sinopsis;
         $this->url  = $url;
         $this->platform = getPlatform($platform_id);
     }
@@ -37,6 +39,17 @@ class TVShow {
         $this->name = $name;
     }
 
+    public function getSinopsis()
+    {
+        return $this->sinopsis;
+    }
+
+    public function setSinopsis($sinopsis)
+    {
+        $this->sinopsis = $sinopsis;
+
+        return $this;
+    }
 
     public function getUrl()
     {
@@ -57,5 +70,7 @@ class TVShow {
     {
         $this->platform = $platform_id;
     }
+
+
 }
 ?>

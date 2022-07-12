@@ -4,6 +4,38 @@ require_once(__DIR__."/DB.php");
 require_once(__DIR__."/../models/Language.php");
 
 
+// comprueba el parámetro POST para ver si se puede crear o editar el idioma
+function checkLanguagePost($post,$file) {
+
+    if ( (isset($post["Crear"]) && isset($post["name"])) && 
+            (((strlen($post["name"])>0 && strlen($post["name"])<50) && strlen($post["rfc_code"])<8)) )
+    {
+        // tiene que haber nombre del idioma y código rfc_code.
+        $languageCreated = createLanguage($_POST["name"],$_POST["rfc_code"]);
+
+        if ($languageCreated) {
+            // idioma creado
+            return getAlert("el idioma","crear","success","index.php");
+        } else {
+            // ha habido error al crear el idioma
+            return getAlert("el idioma","crear","danger","index.php");
+        }
+    } else if ((isset($post["Editar"]) && isset($post["name"]) && isset($post["id"])) && 
+                (((strlen($post["name"])>0 && strlen($post["name"])<50) && $post["id"]>0)) && strlen($post["rfc_code"])<8)
+    {
+        $episodeUpdated = editLanguage($_POST["id"],$_POST["name"],$_POST["rfc_code"]);
+
+        if ($episodeUpdated) {
+            // idioma actualizado
+            return getAlert("el idioma","editar","success","index.php");
+        } else {
+            // ha habido error
+            return getAlert("el idioma","editar","danger","index.php");
+        }
+    }
+    return getAlert("el idioma","falta","danger","index.php");
+}
+
 // Devuelve la serie
 function getLanguage($id) {
     if (!intval($id)){

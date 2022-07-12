@@ -29,17 +29,17 @@ function getAlert($name, $action, $alertType, $link) {
             }
 
             if ($alertType == "success") {
-                $message .= 'La '.$name.' se ha '.$verbo;
+                $message .= $name.' se ha '.$verbo;
             } else {
-                $message .= '¡Ha habido un error al '.$action.' la '.$name.'!<br>';
-                $message .= '<strong>¿Quizá la '.$name.' ya existe?</strong>';
+                $message .= '¡Ha habido un error al '.$action.' '.$name.'!<br>';
+                $message .= '<strong>¿Quizá '.$name.' ya existe?</strong>';
             }
             break;
         case 'falta':
-            $message .= 'Falta información en el formulario, u opciones no elegidas';
+            $message .= 'Los datos introducidos en el formulario son incorrectos (por falta o exceso).';
             break;
         case 'mostrar':
-            $message .= '¡Ha habido un error al '.$action.' la '.$name.'!<br>';
+            $message .= '¡Ha habido un error al '.$action.' '.$name.'!<br>';
             $message .= 'Quizá falta el parámetro o el episodio no existe';
             break;
     }

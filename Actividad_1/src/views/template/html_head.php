@@ -52,5 +52,5 @@ global $conf;
   </nav>
 
   <main class="container mt-5">
-    <div class="offset-md-3">
+    <div class="row justify-content-md-center">
      

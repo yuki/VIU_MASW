@@ -5,6 +5,49 @@ require_once(__DIR__."/helpers.php");
 require_once(__DIR__."/../models/Celebrity.php");
 require_once(__DIR__."/../controllers/EpisodeController.php");
 
+// comprueba el parámetro POST para ver si se puede crear o editar la celebrity
+function checkCelebrityPost($post,$file) {
+
+    if ( (isset($post["Crear"]) && isset($post["name"]) && isset($post["surname"])) && 
+            (((strlen($post["name"])>0 && strlen($post["name"])<50) && (strlen($post["surname"])>0 && strlen($post["surname"])<50))) && 
+            strlen($post["nation"])<50 && strlen($post["url"])<100)
+    {
+        $celebrityCreated = createCelebrity($_POST["name"],$_POST["surname"],$_POST["born"],$_POST["nation"],$_POST["url"]);
+
+        if ($celebrityCreated) {
+            // guardamos la imagen
+            if (isset($file)){
+                $celebrityExists = checkCelebrityExists($post["name"],$post["surname"]);
+                saveImage($file,$celebrityExists->fetch_array()["id"],"celebrity");
+            }
+            // plataforma creada
+            return getAlert("celebrity","crear","success","index.php");
+        } else {
+            // ha habido error al crear la celebrity
+            return getAlert("celebrity","crear","danger","index.php");
+        }
+    } else if ((isset($post["Editar"]) && isset($post["name"]) && isset($post["id"])) && 
+                (((strlen($post["name"])>0 && strlen($post["name"])<50) && (strlen($post["surname"])>0 && strlen($post["surname"])<50))) && 
+                strlen($post["nation"])<50 && strlen($post["url"])<100)
+    {
+        $celebrityEdited = editCelebrity($_POST["id"],$_POST["name"],$_POST["surname"],$_POST["born"],$_POST["nation"],$_POST["url"]);
+
+        if ($celebrityEdited) {
+            // guardamos la imagen
+            if (isset($file)){
+                $celebrityExists = checkCelebrityExists($post["name"],$post["surname"]);
+                saveImage($file,$celebrityExists->fetch_array()["id"],"celebrity");
+            }
+            // plataforma editada
+            return getAlert("la celebrity","editar","success","index.php");
+        } else {
+            // ha habido error al crear la plataforma
+            return getAlert("la celebrity","editar","danger","index.php");
+        }
+    }
+    return getAlert("la celebrity","falta","danger","index.php");
+}
+
 
 // devuelve un celebrity
 function getCelebrity($id) {
@@ -39,7 +82,7 @@ function checkCelebrityExists($name,$surname){
 }
 
 // Creamos la celebrity
-function createCelebrity($name,$surname,$born,$nation,$url,$file) {
+function createCelebrity($name,$surname,$born,$nation,$url) {
     $celebrityCreated = false;
     $existe = checkCelebrityExists($name,$surname);
     // comprobamos que no existe una plataforma con el mismo nombre
@@ -54,11 +97,6 @@ function createCelebrity($name,$surname,$born,$nation,$url,$file) {
         $query .= ",'$nation','$url')";
         if (execQuery($query)){
             $celebrityCreated = true;
-            // guardamos la imagen
-            if (isset($file)){
-                $celebrityExists = checkCelebrityExists($name,$surname);
-                saveImage($file,$celebrityExists->fetch_array()["id"],"celebrity");
-            }
         }
     }
 
@@ -66,7 +104,7 @@ function createCelebrity($name,$surname,$born,$nation,$url,$file) {
 }
 
 // Editamos la celebrity
-function editCelebrity($id, $name,$surname,$born,$nation,$url,$file) {
+function editCelebrity($id, $name,$surname,$born,$nation,$url) {
     if (!intval($id)){
         return NULL;
     }
@@ -85,13 +123,9 @@ function editCelebrity($id, $name,$surname,$born,$nation,$url,$file) {
 
     $existe = checkCelebrityExists($name,$surname);
     // si existe, pero es el mismo id, e puede actulizar (por si se cambia fecha de nacimiento o así)
-    if ($existe->fetch_array()["id"] == intval($id)) {
+    if ($existe->num_rows && $existe->fetch_array()["id"] == intval($id)) {
         if (execQuery($query)){
             $celebrityUpdated = true;
-            // guardamos la imagen
-            if (isset($file)){
-                saveImage($file,$id,"celebrity");
-            }
         }
         return $celebrityUpdated;
     }
@@ -116,6 +150,7 @@ function deleteCelebrity($id) {
         return NULL;
     }
     $id = intval($id);
+    deleteImage($id,"celebrity");
     return execQuery("DELETE FROM celebrities WHERE id = $id");
 }
 

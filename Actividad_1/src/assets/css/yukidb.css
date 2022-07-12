@@ -1,4 +1,11 @@
 img.imagen{
     max-width: 150px;
     max-height: 150px;
+    margin-right: 20px;
+}
+
+img.imagen_grande{
+    max-width: 300px;
+    max-height: 350px;
+    margin-right: 20px;
 }

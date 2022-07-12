@@ -4,9 +4,11 @@ include_once("../template/delete_modal.php");
 require_once("../../controllers/PlatformController.php");
 ?>
 
+<div class="col-md-7">
 <h1>Plataformas</h1>
 
 <a class="btn btn-outline-primary" href="new.php" role="button">Nueva Plataforma</a>
+</div>
 
 <?php
   $platformList = listPlatforms();

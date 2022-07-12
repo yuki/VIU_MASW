@@ -4,6 +4,7 @@ require_once("../../controllers/PlatformController.php");
 require_once("../../controllers/helpers.php");
 ?>
 
+<div class="col-md-7">
 <h1>Añadir plataforma</h1>
 
 <?php
@@ -16,3 +17,5 @@ require_once("../../controllers/helpers.php");
 
 include_once("../template/html_tail.php");
 ?>
+
+</div>
