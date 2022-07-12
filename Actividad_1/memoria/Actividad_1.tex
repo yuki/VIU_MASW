@@ -263,7 +263,7 @@ A continuación se detallan cuáles son los pasos que se realizan en esta funcio
 \end{enumerate}
 \vspace{-0.5em}
 
-\begin{mycode}{Controlamos si la carta se puede soltar}{javascript}{{\footnotesize }}
+\begin{mycode}{Controlamos si la carta se puede soltar (parte de función \textbf{soltar\_carta})}{javascript}{{\footnotesize }}
 if (mazo_receptor.length == 0 && numero == 12){
   // es una carta con número 12 y va a ser la primera carta del tapete
   carta.draggable = false;
@@ -294,7 +294,7 @@ if (mazo_receptor.length == 0 && numero == 12){
 Hay que recordar que cuando se mueve la última carta del tapete inicial (ya sea sobre uno de los tapetes receptores o el de sobrantes) se cogerán todas las cartas del tapete sobrantes, se barajarán de nuevo y se colocarán en el tapete inicial para continuar la partida.
 
 Para limpiar el tapete correspondiente, lo que se ha realizado es la eliminación de los nodos hijos que son “img”, y para ello se ha creado una función:
-\begin{mycode}{Controlamos si la carta se puede soltar}{javascript}{}
+\begin{mycode}{Función que limpia un tapete de imágenes}{javascript}{}
 // función para limpiar un tapete de cartas
 function limpiar_tapete(tapete) {
     while (tapete.getElementsByTagName('img').length>0) {
