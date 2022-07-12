@@ -26,7 +26,6 @@ function connectDB() {
     if ($mysqli->connect_error) {
         die("Error: ".$mysqli->connect_error);
     }
-
     return $mysqli;
 }
 
@@ -35,13 +34,31 @@ function connectDB() {
  * me creo una función que recibe la query y devuelve el resultado.
 */
 function execQuery($query){
-    $mysqli = connectDB();
+
+    try {
+        $mysqli = connectDB();
+    } catch (\Throwable $th) {
+        //lanzamos error si entramos aquí
+        die("
+            <h1>Error fatal al conectar a la base de datos</h1>
+            <div>Comprueba el fichero <strong>config.php</strong> y confirma que los datos son correctos.</div><br><br><br>
+            <div>".$th."</div>
+        ");
+    }
+    
+    
     try {
         $data = $mysqli->query(query: $query);
         $mysqli->close();
         return $data;
-    } catch (Throwable $th) {
-        //throw $th;
+    } catch (\Throwable $th) {
+        //lanzamos error si entramos aquí
+        die("
+            <h1>Error fatal con la base de datos</h1>
+            <div>Existe algún problema con la <strong>base de datos</strong> al realizar una sentencia.</div>
+            <div>Hable con el administrador del servidor para que pueda comprobar qué es.</div><br><br><br>
+            <div>".$th."</div>
+        ");
         return NULL;
     }
 }

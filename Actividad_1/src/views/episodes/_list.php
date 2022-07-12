@@ -22,7 +22,7 @@
         foreach ($episodeList as $episode){
       ?>
           <tr>
-            <td class="text-center">
+            <td>
                 <a href="/views/episodes/show.php?id=<?php echo $episode->getId() ?>">
                     <?php
                         $imageExists = getImagePath($episode->getId(),"episode");
@@ -36,13 +36,23 @@
             <?php
               if (strpos($_SERVER["DOCUMENT_URI"],"episodes") == true){
                 ?>
-                  <td><a href="/views/tvshows/show.php?id=<?php echo $episode->getTVShow()->getId(); ?>"><?php echo $episode->getTVShow()->getName(); ?></a></td>
+                  <td><a href="/views/tvshows/show.php?id=<?php echo $episode->getTVShow()->getId(); ?>">
+                        <?php
+                              $imageExists = getImagePath($episode->getTVShow()->getId(),"tvshow");
+                              if ($imageExists[0]){
+                                echo "<img class='imagen_mini' src='".$imageExists[1]."' alt='".$episode->getTVShow()->getName()."'>";
+                              } else {
+                                $episode->getTVShow()->getName(); 
+                              }
+                        ?>
+                      </a>
+                  </td>
                 <?php
               }
             ?>
             <td><?php echo $episode->getSeason() ?></td>
             <td><?php echo $episode->getEpisode() ?></td>
-            <td><?php echo $episode->getSinopsis() ?></td>
+            <td class="col-md-2"><?php echo $episode->getSinopsis() ?></td>
             <td><?php echo $episode->getReleased() ?></td>
             <td>
                 <a class="btn btn-outline-warning btn-sm" href="/views/episodes/edit.php?id=<?php echo $episode->getId() ?>" role="button">Editar</a>

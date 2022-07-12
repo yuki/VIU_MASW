@@ -1,6 +1,7 @@
 <?php
 include_once("../template/html_head.php");
 include_once("../template/delete_modal.php");
+require_once("../../controllers/helpers.php");
 require_once("../../controllers/TVShowController.php");
 
 $error = false;
@@ -38,17 +39,38 @@ if (!$tvshow) {
 
     
         <?php
-        echo $tvshow->getSinopsis();
+            echo "<p class='sinopsis'>".$tvshow->getSinopsis()."</p>";
 
-        $episodeList = getTVShowEpisodes($tvshow->getId());
+        
+        ?>
 
-        if ($episodeList) {
-            include_once("../episodes/_list.php");
-        } else {
-            echo '<p>Esta serie no tiene capítulos. <a href="/views/episodes/new.php?tvshow_id='.$tvshow->getId().'">Vete y crea uno.</a></p>';
-        }
-        include_once("../template/html_tail.php");
+        <?php
+            $celebrities = getTVShowCasting($tvshow->getId());
+            if ($celebrities) {
+            ?>
+                <h3 class="mt-5">Casting</h3>
+                <p>Algunos actores que aparecen en esta serie:</p>
+            <?php
+                foreach ($celebrities as $celebrity) {
+                    $celebrityImage=getImagePath($celebrity->getId(),"celebrity");
+                    if ($celebrityImage[0]){
+                        echo "<a href='/views/celebrities/show.php?id=".$celebrity->getId()."'><img class='casting_mini' src='$celebrityImage[1]'></a>";
+                    }
+                }
+            }
+        ?>
+
+        <h3 class="mt-5">Episodios</h3>
+        <?php
+            $episodeList = getTVShowEpisodes($tvshow->getId());
+            if ($episodeList) {
+                include_once("../episodes/_list.php");
+            } else {
+                echo '<p>Esta serie no tiene episodios. <a href="/views/episodes/new.php?tvshow_id='.$tvshow->getId().'">Vete y crea uno.</a></p>';
+            }
         ?>
     </div>
   </div>
 </div>
+
+<?php include_once("../template/html_tail.php"); ?>

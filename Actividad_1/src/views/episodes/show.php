@@ -82,7 +82,9 @@ if (!$episode) {
         </p>
 
         <?php
-        echo $episode->getSinopsis();
+        echo "<p class='sinopsis'>".$episode->getSinopsis()."</p>";
+        echo "<p class='emitido'>Emitido el ". $episode->getReleased()."</p>";
+
         // cogemos el casting del episodio.
         $celebrityFilmography = getEpisodeCasting($episode->getId());
 

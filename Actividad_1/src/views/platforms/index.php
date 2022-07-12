@@ -8,21 +8,20 @@ require_once("../../controllers/PlatformController.php");
 <h1>Plataformas</h1>
 
 <a class="btn btn-outline-primary" href="new.php" role="button">Nueva Plataforma</a>
-</div>
 
 <?php
   $platformList = listPlatforms();
   if (count($platformList) > 0){
   ?>
 
-  <div class="col-md-7">
+  
   <table class="table mt-5 align-middle">
     <tbody>
       <?php
         foreach ($platformList as $platform){
       ?>
         <tr>
-            <td class="text-center">
+            <td>
               <a href="/views/platforms/show.php?id=<?php echo $platform->getId(); ?>">
                 <?php
                     $imageExists = getImagePath($platform->getId(),"platform");
@@ -50,13 +49,14 @@ require_once("../../controllers/PlatformController.php");
       
     </tbody>
   </table>
-  </div>
+
 
 
   <?php
-  } else {
-    echo "<p class='mt-3'>No hay plataformas. Crea una a través del botón.</p>";
-  }
-  
-  include_once("../template/html_tail.php");
-?>
+    } else {
+      echo "<p class='mt-3'>No hay plataformas. Crea una a través del botón.</p>";
+    }
+    
+    include_once("../template/html_tail.php");
+  ?>
+</div>

@@ -3,7 +3,6 @@
     <tbody>
       <thead>
         <tr>
-          <th class="text-center">Nombre</th>
             <?php
               if (strpos($_SERVER["DOCUMENT_URI"],"tvshows") == true){
                 ?>
@@ -11,6 +10,7 @@
                 <?php
               }
             ?>
+          <th class="text-center">Nombre</th>
           <th>Sinopsis</th>
           <th>enlace IMDB</th>
           <th>Acciones</th>
@@ -20,7 +20,24 @@
         foreach ($tvshowList as $tvshow){
       ?>
           <tr>
-            <td class="text-center">
+          <?php
+              if (strpos($_SERVER["DOCUMENT_URI"],"tvshows") == true){
+                ?>
+                <td><a href="/views/platforms/show.php?id=<?php echo $tvshow->getPlatform()->getId(); ?>">
+                        <?php
+                          $imageExists = getImagePath($tvshow->getPlatform()->getId(),"platform");
+                          if ($imageExists[0]){
+                            echo "<img class='platform_mini' src='".$imageExists[1]."' alt='".$tvshow->getPlatform()->getName()."'>";
+                          } else {
+                            $tvshow->getPlatform()->getName(); 
+                          }
+                        ?>
+                    </a>
+                </td>
+                <?php
+              }
+            ?>
+            <td>
               <a href="/views/tvshows/show.php?id=<?php echo $tvshow->getId() ?>">
                 <?php
                     $imageExists = getImagePath($tvshow->getId(),"tvshow");
@@ -30,15 +47,7 @@
                 ?>
                 <?php echo $tvshow->getName() ?></a>
             </td>
-
-            <?php
-              if (strpos($_SERVER["DOCUMENT_URI"],"tvshows") == true){
-                ?>
-                <td><a href="/views/platforms/show.php?id=<?php echo $tvshow->getPlatform()->getId(); ?>"><?php echo $tvshow->getPlatform()->getName(); ?></a></td>
-                <?php
-              }
-            ?>
-            <td class="col-md-4"><?php echo $tvshow->getSinopsis() ?></td>
+            <td class="col-md-2"><?php echo $tvshow->getSinopsis() ?></td>
             <?php 
               //si hay URL de IMDB
               if ($tvshow->getUrl()) {

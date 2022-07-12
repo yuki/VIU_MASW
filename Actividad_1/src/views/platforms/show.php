@@ -17,15 +17,32 @@ if (!$platform) {
     echo getAlert("plataforma","mostrar","danger","index.php");
     die;
 }
-
-echo "<h1>Series de ".$platform->getName()."</h1>";
-
-$tvshowList = getPlatformShows($platform->getId());
-
-if ($tvshowList) {
-    include_once("../tvshows/_list.php");
-} else {
-    echo '<p>Esta plataforma no tiene series. <a href="/views/tvshows/">Vete y crea una.</a></p>';
-}
-include_once("../template/html_tail.php");
 ?>
+<div class="container">
+  <div class="row">
+    <div class="offset-md-1 col-md-3">
+        <?php
+
+        $tvshowImage=getImagePath($platform->getId(),"platform");
+
+        if ($tvshowImage[0]){
+            echo "<img class='imagen_grande' src='$tvshowImage[1]'>";
+        }
+        ?>
+    </div>
+    <div class='col'>
+        <h1>Series de "<?php echo $platform->getName()?>"</h1>
+        <?php 
+        $tvshowList = getPlatformShows($platform->getId());
+
+        if ($tvshowList) {
+            include_once("../tvshows/_list.php");
+        } else {
+            echo '<p>Esta plataforma no tiene series. <a href="/views/tvshows/new.php?platform_id='.$platform->getId().'">Vete y crea una.</a></p>';
+        }
+        include_once("../template/html_tail.php");
+        ?>
+
+    </div>
+  </div>
+</div>

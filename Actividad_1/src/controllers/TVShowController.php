@@ -4,6 +4,7 @@ require_once(__DIR__."/DB.php");
 require_once(__DIR__."/helpers.php");
 require_once(__DIR__."/../models/TVShow.php");
 require_once(__DIR__."/../models/Episode.php");
+require_once(__DIR__."/CelebrityController.php");
 
 
 // comprueba el parámetro POST para ver si se puede crear o editar la plataforma
@@ -173,5 +174,27 @@ function getAllTVShowsComplete() {
 
     return $episodes;
 }
+
+
+function getTVShowCasting($id) {
+    if (!intval($id)){
+        return NULL;
+    }
+    $id = intval($id);
+    
+    $celebrities=[];
+
+    $list = execQuery("SELECT DISTINCT(celebrity_id) 
+                        FROM episodes_celebrities 
+                        WHERE episode_id IN (SELECT id FROM episodes WHERE tvshow_id = $id)
+                        LIMIT 5");
+
+    foreach ($list as $item) {
+        array_push($celebrities,getCelebrity($item["celebrity_id"]));
+    }
+
+    return $celebrities;
+}
+
 
 ?>

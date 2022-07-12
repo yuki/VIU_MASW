@@ -33,6 +33,10 @@ function checkEpisodePost($post,$file) {
         $episodeUpdated = editEpisode($post["id"],$post["name"],$post["season"],$post["episode"],$post["sinopsis"],$post["released"],$post["tvshow_id"]);
 
         if ($episodeUpdated) {
+            if (isset($file)){
+                $episodeExists = checkEpisodeName($post["name"],$post["tvshow_id"]);
+                saveImage($file,$episodeExists->fetch_array()["id"],"episode");
+            }
             // episodio actualizado
             return getAlert("el episodio","editar","success","index.php");
         } else {
@@ -61,7 +65,11 @@ function getEpisode($id) {
 
 // Devuelve un array de todos los episodios
 function listEpisodes() {
-    $episodeList = execQuery("SELECT * FROM episodes ORDER BY name ASC");
+    $episodeList = execQuery("SELECT e.id AS id, e.name AS name, e.season AS season, e.episode AS episode, 
+                                    e.sinopsis AS sinopsis, e.released AS released, e.tvshow_id AS tvshow_id 
+                                FROM episodes AS e, tvshows as t 
+                                WHERE e.tvshow_id = t.id
+                                ORDER BY t.name ASC, e.season ASC, e.episode ASC");
 
     $episodes = [];
     foreach($episodeList as $item){

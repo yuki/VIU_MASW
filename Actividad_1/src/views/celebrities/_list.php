@@ -13,7 +13,7 @@
         foreach ($celebritiesList as $celebrity){
       ?>
           <tr>
-            <td class="text-center">
+            <td>
               <a href="/views/celebrities/show.php?id=<?php echo $celebrity->getId() ?>">
                 <?php
                     $imageExists = getImagePath($celebrity->getId(),"celebrity");
