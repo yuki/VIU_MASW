@@ -3,6 +3,46 @@
 require_once(__DIR__."/DB.php");
 require_once(__DIR__."/../models/Platform.php");
 require_once(__DIR__."/../models/TVShow.php");
+require_once(__DIR__."/helpers.php");
+
+// comprueba el parámetro POST para ver si se puede crear o editar la plataforma
+function checkPlatformPost($post,$file) {
+    if ((isset($post["Crear"]) && isset($post["name"])) && strlen($post["name"])>0){
+        // vamos a crear y el parámetro "name" es correcto
+        $platformCreated = createPlatform($post["name"]);
+
+        if ($platformCreated) {
+            // plataforma creada y guardamos la imagen
+            if (isset($file)){
+
+                $platformExists = checkPlatformName($post["name"]);
+                saveImage($file,$platformExists->fetch_array()["id"],"platform");
+            }
+            return getAlert("plataforma","crear","success","index.php");
+        } else {
+            // ha habido error al crear la plataforma
+            return getAlert("plataforma","crear","danger","index.php");
+        }
+    } else if ((isset($post["Editar"]) && isset($post["name"]) && isset($post["id"])) && (strlen($post["name"])>0 && strlen($post["id"])>0)) {
+        // vamos a editar y los parámetros "name"  e "id" son correctos
+        $platformEdited = editPlatform($post["id"],$post["name"]);
+    
+        if ($platformEdited) {
+            // plataforma editada
+            // plataforma creada y guardamos la imagen
+            if (isset($file)){
+                $platformExists = checkPlatformName($post["name"]);
+                saveImage($file,$platformExists->fetch_array()["id"],"platform");
+            }
+            return getAlert("plataforma","editar","success","index.php");
+        } else {
+            // ha habido error al crear la plataforma
+            return getAlert("plataforma","editar","danger","index.php");
+        }
+    }
+    return getAlert("plataforma","falta","danger","index.php");
+
+}
 
 // comprobamos que el nombre de la plataforma existe
 function checkPlatformName($name) {
@@ -81,6 +121,7 @@ function listPlatforms() {
 
 // Borra la plataforma
 function deletePlatform($id) {
+    deleteImage($id,"platform");
     return execQuery("DELETE FROM platforms WHERE id = $id");
 }
 

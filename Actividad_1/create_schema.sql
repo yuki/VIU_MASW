@@ -13,6 +13,7 @@ CREATE TABLE tvshows (
     id INTEGER NOT NULL PRIMARY KEY AUTO_INCREMENT,
     name VARCHAR(50),
     url varchar(100),
+    sinopsis varchar(512),
     platform_id INTEGER NOT NULL,
     FOREIGN KEY (platform_id) REFERENCES platforms(id) ON DELETE CASCADE
 );
@@ -20,6 +21,9 @@ CREATE TABLE tvshows (
 CREATE TABLE episodes (
     id INTEGER NOT NULL PRIMARY KEY AUTO_INCREMENT,
     name VARCHAR(50),
+    season integer,
+    episode integer,
+    sinopsis varchar(512),
     released DATE,
     tvshow_id INTEGER NOT NULL,
     FOREIGN KEY (tvshow_id) REFERENCES tvshows(id) ON DELETE CASCADE

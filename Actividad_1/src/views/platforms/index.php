@@ -13,14 +13,23 @@ require_once("../../controllers/PlatformController.php");
   if (count($platformList) > 0){
   ?>
 
-  <div class="col-md-5">
-  <table class="table mt-5 ">
+  <div class="col-md-7">
+  <table class="table mt-5 align-middle">
     <tbody>
       <?php
         foreach ($platformList as $platform){
       ?>
-          <tr>
-            <td><a href="/views/platforms/show.php?id=<?php echo $platform->getId(); ?>"><?php echo $platform->getName(); ?></a></td>
+        <tr>
+            <td class="text-center">
+              <a href="/views/platforms/show.php?id=<?php echo $platform->getId(); ?>">
+                <?php
+                    $imageExists = getImagePath($platform->getId(),"platform");
+                    if ($imageExists[0]){
+                      echo "<img class='imagen' src='".$imageExists[1]."'>";
+                    }
+                ?>
+              <?php echo $platform->getName(); ?></a>
+            </td>
             <td class="">
                 <a class="btn btn-outline-success btn-sm" href="/views/tvshows/new.php?platform_id=<?php echo $platform->getId() ?>" role="button">Crear Serie</a>
                 <a class="btn btn-outline-warning btn-sm" href="edit.php?id=<?php echo $platform->getId() ?>" role="button">Editar</a>
@@ -32,7 +41,7 @@ require_once("../../controllers/PlatformController.php");
                                           )" 
                   role="button">Borrar</a>
             </td>
-          </tr>
+        </tr>
       <?php
         }
       ?>

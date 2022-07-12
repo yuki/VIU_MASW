@@ -9,25 +9,9 @@ require_once(__DIR__."/../../controllers/helpers.php");
 <?php
   $platform = getPlatform($_GET["id"]);
 
-  /*
-  * Parte POST, para comprobar si se edita la plataforma
-  */
-  if (isset($_POST["Button"])) {
-    if (strlen($_POST["name"])>0 && strlen($_POST["id"])>0) {
-      $platformEdited = editPlatform($_POST["id"],$_POST["name"]);
-
-      if ($platformEdited) {
-        $platform->setName($_POST["name"]);
-        // plataforma editada
-        echo getAlert("plataforma","editar","success","index.php");
-      } else {
-        // ha habido error al crear la plataforma
-        echo getAlert("plataforma","editar","danger","index.php");
-      }
-    } else {
-      // No se ha introducido nombre de plataforma
-      echo getAlert("plataforma","falta","danger","index.php");
-    }
+  // si es petición POST llamamos a función para ver si se edita la plataforma
+  if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    echo checkPlatformPost($_POST,$_FILES);
   } else {
     include("_form.php");
   }

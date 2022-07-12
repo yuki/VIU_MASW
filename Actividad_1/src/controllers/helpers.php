@@ -50,9 +50,9 @@ function getAlert($name, $action, $alertType, $link) {
     return $message;
 }
 
-// guardamos la imagen para una serie/episodio/celebrity
+// guardamos la imagen para una plataforma/serie/episodio/celebrity
 function saveImage($file,$id,$what){
-    if ($file["file"]["type"] == "image/jpeg" || $file["file"]["type"] == "image/jpg") {
+    if ($file["file"]["type"] == "image/jpeg" || $file["file"]["type"] == "image/jpg" || $file["file"]["type"] == "image/png") {
         global $conf;
         // me aseguro que el directorio existe
         if ( !is_dir( $conf["absolute_image_path"] ) ) {
@@ -61,6 +61,13 @@ function saveImage($file,$id,$what){
         $target_file = $conf["absolute_image_path"] . $what ."_".$id.".jpg";
         move_uploaded_file($_FILES["file"]["tmp_name"], $target_file);
     }
+}
+
+// borramos la imagen de una plataforma/serie/episodio/celebrity
+function deleteImage($id,$what){
+    global $conf;
+    $target_file = $conf["absolute_image_path"] . $what ."_".$id.".jpg";
+    unlink($target_file);
 }
 
 // devuelve una ruta y si existe la imagen
