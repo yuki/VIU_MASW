@@ -33,7 +33,7 @@
 
 A lo largo de este documento se van a explicar las decisiones tomadas, tanto en el ámbito de programación como de diseño, durante el desarrollo de un juego basado en el popular juego de cartas “el solitario”.
 
-Para la realización de este juego se ha hecho uso del lenguaje de marcado de hipertexto \textbf{HTML}, junto con el sistema de hojas de estilo en casacada \textbf{CSS} y el lenguaje de programación \textbf{Javascript}.
+Para la realización de este juego se ha hecho uso del lenguaje de marcado de hipertexto \textbf{HTML}, junto con el sistema de hojas de estilo en cascada \textbf{CSS} y el lenguaje de programación \textbf{Javascript}.
 
 
 \chapter{Arquitectura cliente-servidor}
@@ -57,27 +57,27 @@ A la hora de interactuar, un usuario hará uso del cliente (navegador web), con 
 Tal como se puede ver en la imagen, los pasos que se realizan son:
 
 \begin{enumerate}
-    \item \textbf{Usuario interactúa con navegador web}. Tal como hemos dicho, un navegador web es el cliente de nuestra arquitectura, que es utilizado por el usuario. Cuando un usuario accede a una web, hace click en un enlace o realiza una búsqueda,  está comenzando el proceso del siguiente paso.
+    \item \textbf{Usuario interactúa con navegador web}. Tal como hemos dicho, un navegador web es el cliente de nuestra arquitectura, que es utilizado por el usuario. Cuando un usuario accede a una web, hace clic en un enlace o realiza una búsqueda,  está comenzando el proceso del siguiente paso.
 
     \item \textbf{Realizar petición}. El navegador detecta lo que el usuario quiere realizar, y en ese momento lanza una petición (o varias) pidiendo al servidor web lo solicitado (una nueva web, una búsqueda, ...).
 
     \item \textbf{Devolver respuesta}: El servidor web recibe la petición, la procesa, y devuelve el resultado al cliente (navegador web) que mostrará por pantalla.
 \end{enumerate}
 
-\section{Backend vs. Frontend}
+\section{Back-end vs. Front-end}
 En la arquitectura mostrada previamente, a la hora de diseñar el software, entran en juego también dos partes, que se encargarán por separado de procesar la entrada y realizar una salida:
 
 \begin{itemize}
-    \item El \textbf{Back end} es el software que se ejecuta en la parte de \textbf{servidor}, que recibe las peticiones del cliente, las procesa (gestión de autenticación, acceder a base de datos, realizar cálculos, obtener información...) y que posteriormente el servidor devolverá.
+    \item El \textbf{\textit{back-end}} es el software que se ejecuta en la parte de \textbf{servidor}, que recibe las peticiones del cliente, las procesa (gestión de autenticación, acceder a base de datos, realizar cálculos, obtener información...) y que posteriormente el servidor devolverá.
 
-    En este apartado de \textbf{backend} se hace uso de lenguajes de programación como \href{https://www.php.net/}{PHP} o \href{https://www.java.com/es/}{Java}, frameworks como \href{https://rubyonrails.org/}{Ruby on Rails}... , por poner sólo unos pocos.
+    En este apartado de \textbf{\textit{back-end}} se hace uso de lenguajes de programación como \href{https://www.php.net/}{PHP} o \href{https://www.java.com/es/}{Java}, frameworks como \href{https://rubyonrails.org/}{Ruby on Rails}... , por poner sólo unos ejemplos.
 
-    \item El \textbf{Front end} es la parte que se ejecuta en la parte \textbf{cliente} (navegador web) de la arquitectura anterior. Mostrará la información atendiendo al diseño recibido, teniendo en cuenta la información HTML y las hojas de estilos CSS.
+    \item El \textbf{\textit{front-end}} es la parte que se ejecuta en la parte \textbf{cliente} (navegador web) de la arquitectura anterior. Mostrará la información atendiendo al diseño recibido, teniendo en cuenta la información HTML y las hojas de estilos CSS.
 
     También existe la posibilidad de ejecutar código que alterará, o que nos permitirá interactuar con la web. Este código está escrito en lenguaje \textbf{javascript} y que se ejecuta enteramente en el lado cliente (navegador web).
 \end{itemize}
 
-El juego realizado, que se va a detallar a continuación, ha sido realizado para que pueda ser ejecutado enteramente en la parte \textbf{frontend}. Esto hace que no sea necesario un servidor con el que interactuar, y por tanto sólo el navegador web ejecutará todas las funciones necesarias para poder jugar.
+El juego realizado, que se va a detallar a continuación, ha sido realizado para que pueda ser ejecutado enteramente en la parte \textbf{\textit{frontend}}. Esto hace que no sea necesario un servidor con el que interactuar, y por tanto sólo el navegador web ejecutará todas las funciones necesarias para poder jugar.
 
 
 \chapter{Normas del juego}
@@ -109,7 +109,7 @@ Las reglas del juego son las siguientes:
 \end{itemize}
 \vspace{-1em}
 
-La mesa de juego tiene la siguiente forma, donde se pueden ver los distintos tapetes, en la fila superior el inicial (más grande) y el sobrantes, y abajo los cuatro de recepción:
+La mesa de juego tiene la siguiente forma, donde se pueden ver los distintos tapetes: en la fila superior el inicial (más grande) y el de cartas sobrantes y abajo los cuatro de recepción:
 \begin{center}
     \includegraphics[width=0.7\linewidth]{img/mesa.png}
 \end{center}
@@ -121,7 +121,7 @@ Teniendo en cuenta las reglas previas, se ha tenido que realizar el desarrollo s
 
 A la hora de realizar el desarrollo existen distintos aspectos y etapas que tiene el juego. A continuación se exponen y serán detallados más adelante:
 
-\begin{itemize}
+\begin{enumerate}
     \item Variables globales
     \item Comienzo del juego
     \begin{itemize}
@@ -130,7 +130,7 @@ A la hora de realizar el desarrollo existen distintos aspectos y etapas que tien
     \end{itemize}
     \item Mover carta entre tapetes
     \item Fin del juego
-\end{itemize}
+\end{enumerate}
 \vspace{-1em}
 
 
@@ -141,7 +141,7 @@ Sin entrar en las variables de los palos y los números, existen tres variables 
 
 \vspace{-1em}
 \begin{itemize}
-    \item \textbf{Tapetes}: Los tapetes existentes en el juego, que son los objetos DOM del HTML.
+    \item \textbf{Tapetes}: Los tapetes existentes en el juego, que son objetos DOM del HTML.
 
 \begin{mycode}{Variable para los tapetes, con el DOM correspondiente}{javascript}{}
 // Tapetes
@@ -186,7 +186,7 @@ Cada una de estas tres variables son un array de seis posiciones, siguiendo el o
 \section{Comienzo del juego}
 Tal como se ha podido ver previamente, el comienzo del juego se ha diferenciado en dos apartados, que se realizan de manera consecutiva.
 
-Para que comience el juego, primero debemos hacer click sobre el botón situado en la parte inferior con el aspecto:
+Para que comience el juego, primero debemos hacer clic sobre el botón situado en la parte inferior con el aspecto:
 
 \vspace{-1.6em}
 \begin{center}
@@ -206,7 +206,7 @@ Este apartado es el principal del juego, ya que se encarga de crear el mazo inic
 
 Para ello se recorren los palos y las cartas y se añaden al array de mazos (posición “0”, para el mazo inicial). Se crean objetos imágenes, indicando cuál es el origen de la imagen a utilizar, indicamos que los objetos se pueden mover (“\textit{draggable}”) y añadimos ciertos atributos que después necesitaremos para aceptar o denegar el movimiento entre tapetes.
 
-Este mazo inicial se baraja en la función \textbf{barajar}, que recibe el mazo como parámetro, que también se utilizará al pasar las cartas del tapete sobrantes al inicial.
+Este mazo inicial se baraja en la función \textbf{barajar}, que recibe el mazo como parámetro. Esta función también se utilizará al pasar las cartas del tapete sobrantes al inicial.
 
 Y por último, se colocan las cartas sobre el tapete inicial a través de la función \textbf{cargar\_tapete\_inicial} haciendo un efecto en cascada diagonal.
 
@@ -214,7 +214,7 @@ Y por último, se colocan las cartas sobre el tapete inicial a través de la fun
 \subsection{Control del tiempo y contadores}
 Este apartado no es estrictamente necesario para el juego, pero da valor a la hora de que sea más ameno si queremos tratar de batir nuestro propio récord, ya sea de tardar menos o realizar el menor número de movimientos posibles.
 
-El juego cuenta con un control de tiempo, que es un \textit{interval} que se llama cada segundo, realizando un incremento de tiempo para posteriormente ser visualizado en el formato “HH:MM:SS” (donde “HH” son horas, “MM” minutos y “SS” segundos).
+El juego cuenta con un control de tiempo, que es un \textit{\textbf{interval}} que se llama cada segundo, realizando un incremento de tiempo para posteriormente ser visualizado en el formato “HH:MM:SS” (donde “HH” son horas, “MM” minutos y “SS” segundos).
 
 Existe un contador para cada tapete, situado en su esquina inferior derecha, para que el usuario sepa cuántas cartas tiene el mazo que está sobre él.
 
@@ -228,7 +228,7 @@ Tanto el tiempo como el contador de movimientos se puede ver en la parte superio
 \end{center}
 \vspace{-1em}
 
-Tras esto, el botón que daba comienzo al juego se ha cambiado de color y ahora pone “Reiniciar”, lo que reiniciará el juego, limpiando tapetes, contadores, volviendo a barajar y situando las cartas de nuevo en el tapete inicial.
+Tras iniciar el juego, el botón que daba comienzo al juego se cambia de color y pondrá “Reiniciar”, lo que reiniciará el juego, limpiando tapetes, contadores, volviendo a barajar y situando las cartas de nuevo en el tapete inicial.
 
 \vspace{-1.6em}
 \begin{center}
@@ -279,7 +279,7 @@ if (mazo_receptor.length == 0 && numero == 12){
     // y es de distinto color/palo
     carta.draggable = false;
     mover_carta(mazo_origen,mazo_receptor,tapete_receptor,cont_origen,cont_receptor);
-    }
+  }
 }
 \end{mycode}
 
@@ -293,9 +293,9 @@ if (mazo_receptor.length == 0 && numero == 12){
 
 Hay que recordar que cuando se mueve la última carta del tapete inicial (ya sea sobre uno de los tapetes receptores o el de sobrantes) se cogerán todas las cartas del tapete sobrantes, se barajarán de nuevo y se colocarán en el tapete inicial para continuar la partida.
 
-Para limpiar el tapete correspondiente, lo que tenemos que hacer es eliminar los nodos hijos que son “img”, y para ello se ha creado una función:
+Para limpiar el tapete correspondiente, lo que se ha realizado es la eliminación de los nodos hijos que son “img”, y para ello se ha creado una función:
 \begin{mycode}{Controlamos si la carta se puede soltar}{javascript}{}
-// función para limpiar el tapete de cartas
+// función para limpiar un tapete de cartas
 function limpiar_tapete(tapete) {
     while (tapete.getElementsByTagName('img').length>0) {
         tapete.getElementsByTagName('img')[0].remove();
@@ -308,9 +308,9 @@ function limpiar_tapete(tapete) {
 \subsection{Fin del juego}
 La comprobación de ver si el juego ha finalizado se realiza cada vez que se mueve una carta de manera correcta.
 
-Esta comprobación es sencilla, y lo que hace es comprobar que el contador del tapete inicial y el de sobrantes es igual a cero. En este caso el juego se da por terminado.
+Esta comprobación es sencilla, y lo que hace es comprobar que el número de cartas de los mazos inicial y sobrantes es igual a cero. En este caso el juego se da por terminado.
 
-A la hora de finalizar el juego se para el contador, las cartas realizarán un efecto que se desplazan por la mesa de juego, para poder ver todas ellas:
+A la hora de finalizar el juego se para el contador y las cartas realizarán un efecto de desplazamiento por la mesa de juego, terminando como la imagen siguiente:
 
 \vspace{-1em}
 \begin{center}
@@ -318,7 +318,7 @@ A la hora de finalizar el juego se para el contador, las cartas realizarán un e
 \end{center}
 \vspace{-1em}
 
-Y nos saldrá un aviso con el número de movimientos realizados, junto con tiempo empleado y preguntando al usuario si quiere volver a jugar:
+Después saldrá un aviso con el número de movimientos realizados, junto con tiempo empleado y preguntando al usuario si quiere volver a jugar:
 
 \vspace{-1em}
 \begin{center}
@@ -329,7 +329,7 @@ Y nos saldrá un aviso con el número de movimientos realizados, junto con tiemp
 En caso de aceptar el aviso, el juego se reiniciará. En caso de cancelar, podremos ver cómo ha quedado el tapete, el tiempo y el número de movimientos. En todo caso, podremos volver a reiniciar el juego con el botón de “Reiniciar”.
 
 \chapter{Aspecto visual}
-Para mejorar el aspecto visual del juego, se han realizado unas pequeñas modificaciones en la plantilla propuesta para el juego:
+Para mejorar el aspecto visual del juego, se han realizado unas pequeñas modificaciones a la plantilla propuesta para el juego:
 
 \vspace{-1em}
 \begin{itemize}
@@ -362,30 +362,30 @@ Para mejorar el aspecto visual del juego, se han realizado unas pequeñas modifi
 
 Como todo proyecto de programación, durante el desarrollo nos podemos encontrar con ciertas dificultades que deben ser subsanadas para llegar a cumplir los requisitos planteados al comienzo del proyecto.
 
-En este caso, la lógica del juego hace que sea un desarrollo sencillo, en el que no hay que tener demasiadas cosas en cuenta, por lo que la lógica del juego es sencilla.
+En este caso, la lógica del juego hace que sea un desarrollo sencillo, en el que no ha habido que tener demasiadas cosas en cuenta, por lo que la lógica del juego ha resultado una tarea sencilla.
 
 Ahora bien, eso no quita que haya habido dificultades al realizar el proyecto, ya que se han usado ciertos aspectos nunca vistos previamente por el programador, que son:
 
 \begin{itemize}
-    \item \textbf{API drag and drop}: Aunque la mecánica de la API de HTML5 es sencilla, se ha tenido que profundizar en cómo funcionan las distintos funciones que se pueden utilizar en la API. Con ello, también se ha investigado la información que se puede enviar a través de los eventos generados en cada una de esas funciones.
+    \item \textbf{API drag and drop}: Aunque la mecánica de la API de HTML5 es sencilla, se ha tenido que profundizar en cómo funcionan las distintos funciones que se pueden utilizar con la API. Con ello, también se ha investigado la información que se puede enviar a través de los eventos generados en cada una de esas funciones.
 
     Las funciones de la API utilizadas han sido “\textbf{ondragstart}”, al comenzar el movimiento de la carta, y “\textbf{ondrop}”, para cuando se suelta sobre un tapete. Otras de las funciones existentes en la API (“onstart”, “ondragend”, “ondragleave”) no han sido necesarias, pero se han inicializado para que no hagan nada.
 
-    \item \textbf{Colocación de las cartas}: Debido a la flexibilidad de CSS, y la colocación de imágenes teniendo en cuenta su posición relativa respecto al contenedor, ha sido necesario entender cómo funciona los estilos “float”, “position”, sobre todo para el efecto final.
+    \item \textbf{Colocación de las cartas}: Debido a la flexibilidad de CSS, y la colocación de imágenes teniendo en cuenta su posición relativa respecto al contenedor, ha sido necesario entender cómo funciona los estilos “float” y “position”, sobre todo para el efecto final.
 
     \item \textbf{Intervalos}: Aunque ya habían sido utilizados por parte del programador, debido a que no los utiliza de manera habitual, ha sido interesante recordar su funcionalidad.
 
-    \item \textbf{Promesas}: Igual que el caso anterior, aunque se conocía el uso de “\textit{Promise}” para realizar \textbf{programación asíncrona}, se ha hecho uso de ellas para el efecto final de movimiento de las cartas. De esta manera se realiza una pequeña pausa al mover cada una de las cartas, y hay que esperar para que salga el aviso de finalización del juego.
+    \item \textbf{Promesas}: Igual que el caso anterior, aunque se conocía el uso de “\textit{\textbf{Promise}}” para realizar \textbf{programación asíncrona}, se ha hecho uso de ellas para el efecto final de movimiento de las cartas. De esta manera se realiza una pequeña pausa al mover cada una de las cartas, y hay que esperar para que salga el aviso de finalización del juego.
 \end{itemize}
 
 
 \chapter{Conclusiones}
 
-A la hora de afrontar un proyecto, aunque el algoritmo generado sea sencillo, no quita que exista un proceso de aprendizaje a la hora de utilizar ciertas herramientas no conocidas.
+A la hora de afrontar un proyecto, aunque el algoritmo generado pueda ser sencillo, no quita que exista un proceso de aprendizaje a la hora de utilizar ciertas herramientas no conocidas.
 
 Este ha sido el caso durante la programación en \textbf{Javascript} y el uso de ciertas funcionalidades de \textbf{HTML5} y \textbf{CSS} versión 3 no conocidas hasta ahora.
 
-Esto nos va a permitir que las aplicaciones generadas para el lado del cliente (conocido como programación \textbf{frontend}) tengan más funcionalidades y de esta manera podamos realizar aplicaciones más complejas.
+Este desarrollo nos va a permitir que las aplicaciones generadas a partir de ahora para el lado del cliente (conocido como programación \textbf{\textit{frontend}}) tengan más funcionalidades, y de esta manera podamos realizar aplicaciones más complejas.
 
 
 %\printbibliography[title={Referencias bibliográficas},heading=bibintoc]

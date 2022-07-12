@@ -189,14 +189,13 @@ function barajar(mazo) {
 	/*** !!!!!!!!!!!!!!!!!!! CODIGO !!!!!!!!!!!!!!!!!!!! **/
 	/* Este algoritmo lo que hace es coger una carta aleatoria del mazo y lo pone en
 	   un nuevo mazo aleatorio. Luego le asigno al mazo pasado como parámetro el mazo
-	   ya barajado. La alternativa sería intercambiar posiciones, pero es la primera
-	   manera que se me ha ocurrido y prefiero dejarlo así.
+	   ya barajado.
 	*/
 	var mazo_bajarado = [];
 	var barajando = true;
 	while (barajando) {
 		num_cartas = mazo.length;
-		//Math.random devuelve un número entre 0 y 1, así que lo multiplicamos con el número de cartas.
+		//Math.random devuelve un número entre 0 y 1, así que lo multiplicamos por el número de cartas.
 		aleatorio = Math.floor(Math.random()*num_cartas);
 		if (num_cartas != 0){
 			// si quedan cartas, cogemos la de la posición aleatoria
@@ -216,10 +215,9 @@ function barajar(mazo) {
 
 
 /**
- 	En el elemento HTML que representa el tapete inicial (variable tapete_inicial)
-	se deben añadir como hijos todos los elementos <img> del array mazo.
-	Antes de añadirlos, se deberían fijar propiedades como la anchura, la posición,
-	coordenadas top y left, algun atributo de tipo data-...
+ 	En el elemento HTML que representa el tapete inicial  se deben añadir como hijos todos los
+	elementos <img> del array mazo. Antes de añadirlos, se deberían fijar propiedades como la
+	anchura, la posición, 	coordenadas top y left, algun atributo de tipo data-...
 	Al final se debe ajustar el contador de cartas a la cantidad oportuna
 */
 function cargar_tapete_inicial(mazo) {
@@ -278,6 +276,9 @@ function al_mover_carta(e) {
 	e.dataTransfer.setData( "text/plain/id", e.target.id );
 }
 
+/**
+ * Función que se ejecuta al soltar una carta sobre un tapete
+ */
 function soltar_carta(e) {
 	e.preventDefault();
 	// recogemos los valores de la carta y del mazo del que viene.
@@ -293,12 +294,12 @@ function soltar_carta(e) {
 	}
 
 	// tenemos en cuenta el mazo, para evitar hacks de coger cartas de otros mazos cambiando al atributo draggable
-	// si el mazo es el inicial y el destino es sobrantes, no hay nada que pensar
+	// si el mazo es el inicial y el destino es sobrantes, se mueve la carta directamente.
 	if (tapete_destinto == "sobrantes" && mazo == "inicial") {
 		mazos[0][mazos[0].length-1].setAttribute("data-mazo","sobrantes");
 		mover_carta(mazos[0],mazos[5],tapetes[5],contadores[0],contadores[5]);
 	} else {
-		// si entramos aquí es porque va a un montón y tenemos que tener en cuenta las siguientes variables:
+		// si entramos aquí es porque va a un tapete y tenemos que tener en cuenta las siguientes variables:
 		var mazo_origen;
 		var mazo_receptor;
 		var tapete_receptor;
@@ -339,7 +340,7 @@ function soltar_carta(e) {
 
 		if (mazo_receptor.length == 0 && numero == 12){
 			// es una carta con número 12 y va a ser la primera carta del tapete
-			carta.draggable = false;
+			carta.draggable = false; // ya no se podrá mover
 			// movemos la carta de un mazo a otro
 			mover_carta(mazo_origen,mazo_receptor,tapete_receptor,cont_origen,cont_receptor);
 		} else if (mazo_receptor.length != 0) {
@@ -348,7 +349,7 @@ function soltar_carta(e) {
 			carta_mazo_col = mazo_receptor[mazo_receptor.length-1].getAttribute("data-color");
 			if (carta_mazo_num-1 == numero && carta_mazo_col != color ) {
 				// aceptamos la carta porque el número es uno menos que la que ya está y es de distinto color/palo
-				carta.draggable = false;
+				carta.draggable = false; // ya no se podrá mover
 				mover_carta(mazo_origen,mazo_receptor,tapete_receptor,cont_origen,cont_receptor);
 			}
 		}
