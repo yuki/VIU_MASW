@@ -20,7 +20,7 @@ if (!$tvshow) {
 
 <div class="container">
   <div class="row">
-    <div class="offset-md-1 col-auto">
+    <div class="offset-md-1 col-md-3">
         <?php
 
         $tvshowImage=getImagePath($tvshow->getId(),"tvshow");
@@ -31,8 +31,14 @@ if (!$tvshow) {
         ?>
     </div>
     <div class='col'>
+        
+        <h1>Episodios de '<?php echo $tvshow->getName() ?>'
+            <a class="btn btn-outline-warning btn-sm" href="/views/tvshows/edit.php?id=<?php echo $tvshow->getId() ?>" role="button">Editar</a>
+        </h1>
+
+    
         <?php
-        echo "<h1>Episodios de ".$tvshow->getName()."</h1>";
+        echo $tvshow->getSinopsis();
 
         $episodeList = getTVShowEpisodes($tvshow->getId());
 

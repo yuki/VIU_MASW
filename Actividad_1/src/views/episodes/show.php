@@ -54,53 +54,73 @@ if (!$episode) {
     echo getAlert("episodio","mostrar","danger","index.php");
     die;
 }
-
-
-echo "<h1>".$episode->getName()."</h1>";
-echo "<p class=''><a href='/views/tvshows/show.php?id=".$episode->getTVShow()->getId()."'>".$episode->getTVShow()->getName().
-        "</a> se emite en <a href='/views/platforms/show.php?id=".$episode->getTVShow()->getPlatform()->getId()."'>"
-        .$episode->getTVShow()->getPlatform()->getName()."</a></p>";
-
-// cogemos el casting del episodio.
-$celebrityFilmography = getEpisodeCasting($episode->getId());
-
-
-
-/*
-* Casting del capítulo
-*/
-echo "<h4 class='mt-5'>Casting del episodio</h4>";
-$listCelebrities = listCelebrities();
-$funciones = getFunciones();
-
-if ($listCelebrities) {
-    echo "<a class='btn btn-outline-primary' role='button' onclick='FilmographyModal()'>Añadir casting</a>";
-    if ($celebrityFilmography) {
-        include_once("../celebrities/_episodes_celebrities.php");
-    } else {
-        echo '<p>Este episodio no tiene casting asociado.</p>';
-    }
-} else {
-    echo '<p>No hay celebrities para añadir. <a href="/views/celebrities">Vete y crea una.</a></p>';
-}
-
-
-/*
-* Idiomas del capítulo
-*/
-echo "<h4 class='mt-5'>Idiomas del episodio</h4>";
-
-$episodeLanguages = getEpisodeLanguages($episode->getId());
-
-$languages = listLanguages();
-$tipos = getLanguageTypes();
-if ($episodeLanguages) {
-    include_once("_list_languages.php");
-} else {
-    echo '<p class="mt-3">Este episodio no tiene idiomas asociados. </p>';
-}
-
 ?>
+
+
+<div class="container">
+  <div class="row">
+    <div class="offset-md-1 col-md-3">
+        <?php
+
+        $episodeImage=getImagePath($episode->getId(),"episode");
+
+        if ($episodeImage[0]){
+            echo "<img class='imagen_grande' src='$episodeImage[1]'>";
+        }
+        ?>
+    </div>
+    <div class='col'>
+        <h1>'<?php echo $episode->getName() ?>'
+            <a class="btn btn-outline-warning btn-sm" href="/views/episodes/edit.php?id=<?php echo $episode->getId() ?>" role="button">Editar</a>
+        </h1>
+        
+        <p class=''><a href='/views/tvshows/show.php?id=<?php echo $episode->getTVShow()->getId()?>'>
+                    <?php echo $episode->getTVShow()->getName()?></a> 
+                    se emite en <a href='/views/platforms/show.php?id=<?php echo $episode->getTVShow()->getPlatform()->getId()?>'>
+                    <?php echo $episode->getTVShow()->getPlatform()->getName()?>
+                    </a>
+        </p>
+
+        <?php
+        echo $episode->getSinopsis();
+        // cogemos el casting del episodio.
+        $celebrityFilmography = getEpisodeCasting($episode->getId());
+
+        /*
+        * Casting del capítulo
+        */
+        echo "<h4 class='mt-5'>Casting del episodio</h4>";
+        $listCelebrities = listCelebrities();
+        $funciones = getFunciones();
+
+        if ($listCelebrities) {
+            echo "<a class='btn btn-outline-primary' role='button' onclick='FilmographyModal()'>Añadir casting</a>";
+            if ($celebrityFilmography) {
+                include_once("../celebrities/_episodes_celebrities.php");
+            } else {
+                echo '<p>Este episodio no tiene casting asociado.</p>';
+            }
+        } else {
+            echo '<p>No hay celebrities para añadir. <a href="/views/celebrities">Vete y crea una.</a></p>';
+        }
+
+
+        /*
+        * Idiomas del capítulo
+        */
+        echo "<h4 class='mt-5'>Idiomas del episodio</h4>";
+
+        $episodeLanguages = getEpisodeLanguages($episode->getId());
+
+        $languages = listLanguages();
+        $tipos = getLanguageTypes();
+        if ($episodeLanguages) {
+            include_once("_list_languages.php");
+        } else {
+            echo '<p class="mt-3">Este episodio no tiene idiomas asociados. </p>';
+        }
+
+        ?>
 <a class="btn btn-outline-primary" role="button" onclick="languageModal()">Añadir Idiomas</a>
 
 <?php

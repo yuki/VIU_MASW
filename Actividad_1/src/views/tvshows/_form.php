@@ -3,6 +3,7 @@
     <label for="name" class="form-label">Nombre</label>
     <input type="text" class="form-control" id="name" name="name" required value="<?php if (isset($tvshow)) {echo $tvshow->getName();} ?>"/>
   </div>
+
   <div class="mb-3">
     <label for="url" class="form-label">URL de IMDB</label>
     <input type="text" class="form-control" id="url" name="url" value="<?php if (isset($tvshow)) {echo $tvshow->getUrl();} ?>"/>
@@ -41,10 +42,12 @@
     <label for="sinopsis" class="form-label">Sinopsis</label>
     <textarea type="textarea" class="form-control" name="sinopsis" id="file" rows="3"><?php if (isset($tvshow)) {echo $tvshow->getSinopsis();} ?></textarea>
   </div>
+
   <div class="mb-3">
     <label for="file" class="form-label">Elige imagen</label>
     <input type="file" class="form-control" name="file" id="file">
   </div>
+
   <div class="mb-3">
     <?php
         if (isset($tvshow)) {

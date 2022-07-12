@@ -5,24 +5,24 @@ require_once("../../controllers/TVShowController.php");
 require_once("../../controllers/EpisodeController.php");
 ?>
 <div class="col-md-7">
-<h1>Episodios</h1>
+    <h1>Episodios</h1>
 
-<a class="btn btn-outline-primary" href="new.php" role="button">Nuevo Episodio</a>
+    <a class="btn btn-outline-primary" href="new.php" role="button">Nuevo Episodio</a>
 
-<?php
-  $episodeList = listEpisodes();
-  if (count($episodeList) > 0){
-      include_once("_list.php");
-  } else {
-      $tvshowList = listTVShows();
-      if (count($tvshowList) > 0){
-        echo "<p class='mt-3'>No hay episodios. Crea uno a través del botón.</p>";
+    <?php
+      $episodeList = listEpisodes();
+      if (count($episodeList) > 0){
+          include_once("_list.php");
       } else {
-        echo "<p  class='mt-3'>No hay Series. Vete y crea una en <a href='/views/tvshows/'>este enlace</a>.</p>";
+          $tvshowList = listTVShows();
+          if (count($tvshowList) > 0){
+            echo "<p class='mt-3'>No hay episodios. Crea uno a través del botón.</p>";
+          } else {
+            echo "<p  class='mt-3'>No hay Series. Vete y crea una en <a href='/views/tvshows/'>este enlace</a>.</p>";
+          }
+          
       }
       
-  }
-  
-  include_once("../template/html_tail.php");
-?>
+      include_once("../template/html_tail.php");
+    ?>
 </div>

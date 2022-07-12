@@ -5,34 +5,19 @@ require_once("../../controllers/EpisodeController.php");
 require_once("../../controllers/helpers.php");
 ?>
 <div class="col-md-7">
-<h1>Añadir episodio</h1>
+    <h1>Añadir episodio</h1>
 
-<?php
-  /*
-  * Parte POST, para comprobar si se crea el episodio
-  */
-  if (isset($_POST["Button"])) {
-    
-    if (strlen($_POST["name"])>0 && $_POST["tvshow_id"]>0) {
-      // tiene que haber nombre del capítulo y haber elegido la serie.
-      $episodeCreated = createEpisode($_POST["name"],$_POST["released"],$_POST["tvshow_id"]);
-
-      if ($episodeCreated) {
-        // capítulo creado
-        echo getAlert("capítulo","crear","success","index.php");
+    <?php
+      /*
+      * Parte POST, para comprobar si se crea el episodio
+      */
+      if ($_SERVER["REQUEST_METHOD"] == "POST") {
+        echo checkEpisodePost($_POST,$_FILES);
       } else {
-        // ha habido error al crear el capítulo
-        echo getAlert("capítulo","crear","danger","index.php");
+        $tvshowList = listTVShows();
+        include("_form.php");
       }
-    } else {
-      // No se ha introducido nombre de capítulo
-      echo getAlert("capítulo","falta","danger","index.php");
-    }
-  } else {
-    $tvshowList = listTVShows();
-    include("_form.php");
-  }
 
-include_once("../template/html_tail.php");
-?>
+    include_once("../template/html_tail.php");
+    ?>
 </div>

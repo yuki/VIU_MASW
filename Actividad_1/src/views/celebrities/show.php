@@ -43,7 +43,7 @@ if (!$celebrity) {
 
 <div class="container">
   <div class="row">
-    <div class="offset-md-1 col-auto">
+    <div class="offset-md-1 col-md-3">
         <?php
 
         $celebrityImage=getImagePath($celebrity->getId(),"celebrity");
@@ -79,7 +79,6 @@ if (!$celebrity) {
 
         include_once("../template/html_tail.php");
         ?>
-celebrityImage
 
 <?php
 include_once("../template/episodes_celebrities_modal.php");

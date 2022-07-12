@@ -1,8 +1,24 @@
-<form class="mt-2 col-md-5 offset-md-2" name="create_episode" action="" method="POST">
+<form class="mt-2 col-md-5 offset-md-2" name="create_episode" action="" method="POST" enctype="multipart/form-data">
   <div class="mb-3">
     <label for="name" class="form-label">Nombre</label>
     <input type="text" class="form-control" id="name" name="name" required value="<?php if (isset($episode)) {echo $episode->getName();} ?>"/>
   </div>
+
+  <div class="mb-3">
+    <label for="season" class="form-label">Temporada</label>
+    <input type="number" class="form-control" id="season" name="season"  value="<?php if (isset($episode)) {echo $episode->getSeason();} ?>"/>
+  </div>
+
+  <div class="mb-3">
+    <label for="episode" class="form-label">Episodio</label>
+    <input type="number" class="form-control" id="episode" name="episode"  value="<?php if (isset($episode)) {echo $episode->getEpisode();} ?>"/>
+  </div>
+
+  <div class="mb-3">
+    <label for="sinopsis" class="form-label">Sinopsis</label>
+    <textarea type="textarea" class="form-control" name="sinopsis" id="file" rows="3"><?php if (isset($episode)) {echo $episode->getSinopsis();} ?></textarea>
+  </div>
+
   <div class="mb-3">
     <label for="date">Fecha de emisión</label>
     <input class="form-control" type="date" id="date" name="released"
@@ -53,6 +69,11 @@
         }
     ?>
   </div>
-  <input type="hidden" class="form-control" id="iction" name="action" value="<?php echo $button_name; ?>" />
-  <button type="submit" class="btn btn-primary" name="Button"><?php echo $button_name ?></button>
+
+  <div class="mb-3">
+    <label for="file" class="form-label">Elige imagen</label>
+    <input type="file" class="form-control" name="file" id="file">
+  </div>
+
+  <button type="submit" class="btn btn-primary" name="<?php echo $button_name ?>"><?php echo $button_name ?></button>
 </form>

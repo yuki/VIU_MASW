@@ -11,7 +11,7 @@ function checkLanguagePost($post,$file) {
             (((strlen($post["name"])>0 && strlen($post["name"])<50) && strlen($post["rfc_code"])<8)) )
     {
         // tiene que haber nombre del idioma y código rfc_code.
-        $languageCreated = createLanguage($_POST["name"],$_POST["rfc_code"]);
+        $languageCreated = createLanguage($post["name"],$post["rfc_code"]);
 
         if ($languageCreated) {
             // idioma creado
@@ -23,7 +23,7 @@ function checkLanguagePost($post,$file) {
     } else if ((isset($post["Editar"]) && isset($post["name"]) && isset($post["id"])) && 
                 (((strlen($post["name"])>0 && strlen($post["name"])<50) && $post["id"]>0)) && strlen($post["rfc_code"])<8)
     {
-        $episodeUpdated = editLanguage($_POST["id"],$_POST["name"],$_POST["rfc_code"]);
+        $episodeUpdated = editLanguage($post["id"],$post["name"],$post["rfc_code"]);
 
         if ($episodeUpdated) {
             // idioma actualizado

@@ -11,12 +11,18 @@ require_once(__DIR__."/../controllers/helpers.php");
 class Episode {
     private $id;
     private $name;
+    private $season;
+    private $episode;
+    private $sinopsis;
     private $released;
     private TVShow $tvshow;
 
-    public function __construct($id, $name,$tvshow_id,$released="",) {
+    public function __construct($id, $name, $season, $episode, $sinopsis, $tvshow_id, $released="",) {
         $this->id = $id;
         $this->name = $name;
+        $this->season = $season;
+        $this->episode = $episode;
+        $this->sinopsis = $sinopsis;
         $this->released  = $released;
         $this->tvshow = getTVShow($tvshow_id);
     }
@@ -36,6 +42,44 @@ class Episode {
     public function setName($name)
     {
         $this->name = $name;
+
+        return $this;
+    }
+
+    public function getSeason()
+    {
+        return $this->season;
+    }
+
+    public function setSeason($season)
+    {
+        $this->season = $season;
+
+        return $this;
+    }
+
+
+    public function getEpisode()
+    {
+        return $this->episode;
+    }
+
+    public function setEpisode($episode)
+    {
+        $this->episode = $episode;
+
+        return $this;
+    }
+
+    public function getSinopsis()
+    {
+        return $this->sinopsis;
+    }
+
+
+    public function setSinopsis($sinopsis)
+    {
+        $this->sinopsis = $sinopsis;
 
         return $this;
     }

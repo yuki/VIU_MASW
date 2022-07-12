@@ -6,6 +6,44 @@ require_once(__DIR__."/../models/Language.php");
 require_once(__DIR__."/../controllers/CelebrityController.php");
 
 
+// comprueba el parámetro POST para ver si se puede crear o editar el episodio
+function checkEpisodePost($post,$file) {
+
+    if ( (isset($post["Crear"]) && isset($post["name"]) && $post["tvshow_id"]) && 
+            (((strlen($post["name"])>0 && strlen($post["name"])<50) && $post["tvshow_id"]>0)) && strlen($post["sinopsis"])<512 )
+    {
+        // tiene que haber nombre del capítulo y haber elegido la serie.
+        $episodeCreated = createEpisode($post["name"],$post["season"],$post["episode"],$post["sinopsis"],$post["released"],$post["tvshow_id"]);
+
+        if ($episodeCreated) {
+             // guardamos la imagen
+            if (isset($file)){
+                $episodeExists = checkEpisodeName($post["name"],$post["tvshow_id"]);
+                saveImage($file,$episodeExists->fetch_array()["id"],"episode");
+            }
+            // capítulo creado
+            return getAlert("el episodio","crear","success","index.php");
+        } else {
+            // ha habido error al crear el capítulo
+            return getAlert("el episodio","crear","danger","index.php");
+        }
+    } else if ((isset($post["Editar"]) && isset($post["name"]) && isset($post["id"]) && isset($post["tvshow_id"])) && 
+                (((strlen($post["name"])>0 && strlen($post["name"])<50) && $post["tvshow_id"]>0)) && strlen($post["sinopsis"])<512 )
+    {
+        $episodeUpdated = editEpisode($post["id"],$post["name"],$post["season"],$post["episode"],$post["sinopsis"],$post["released"],$post["tvshow_id"]);
+
+        if ($episodeUpdated) {
+            // episodio actualizado
+            return getAlert("el episodio","editar","success","index.php");
+        } else {
+            // ha habido error
+            return getAlert("el episodio","editar","danger","index.php");
+        }
+    }
+    return getAlert("el episodio","falta","danger","index.php");
+}
+
+
 // devuelve el episodio
 function getEpisode($id) {
     if (!intval($id)){
@@ -15,7 +53,7 @@ function getEpisode($id) {
 
     $data = execQuery("SELECT * FROM episodes WHERE id = $id")->fetch_array();
     if ($data != NULL) {
-        $episode = new Episode($data["id"],$data["name"],$data["tvshow_id"],$data["released"]);
+        $episode = new Episode($data["id"],$data["name"],$data["season"],$data["episode"],$data["sinopsis"],$data["tvshow_id"],$data["released"]);
         return $episode;
     }
     return NULL;
@@ -27,7 +65,7 @@ function listEpisodes() {
 
     $episodes = [];
     foreach($episodeList as $item){
-        array_push($episodes,new Episode($item['id'],$item['name'],$item['tvshow_id'],$item['released']));
+        array_push($episodes,new Episode($item['id'],$item['name'],$item["season"],$item["episode"],$item["sinopsis"],$item['tvshow_id'],$item['released']));
     }
     
     return $episodes;
@@ -39,7 +77,7 @@ function checkEpisodeName($name,$tvhsow_id) {
 }
 
 // Creamos el capítulo
-function createEpisode($name,$released,$tvshow_id) {
+function createEpisode($name,$season,$episode_num,$sinopsis,$released,$tvshow_id) {
     $episodeCreated = false;
 
     //comprobamos que la serie existe
@@ -47,7 +85,8 @@ function createEpisode($name,$released,$tvshow_id) {
     $episodeExists = checkEpisodeName($name,$tvshow_id);
     // comprobamos que no existe otro capítulo para la serie que se llame igual
     if (!$episodeExists->num_rows && $tvshowExists){
-        $query = "INSERT INTO episodes(name,released,tvshow_id) VALUES ('$name',";
+        $query = "INSERT INTO episodes(name,season,episode,sinopsis,released,tvshow_id)
+                    VALUES ('$name',".intval($season).",".intval($episode_num).",'$sinopsis',";
         // por si  no se ha metido fecha.
         if (strlen($released) == 0) {
             $query .= "NULL";
@@ -65,7 +104,7 @@ function createEpisode($name,$released,$tvshow_id) {
 
 
 // Editamos el episodio
-function editEpisode($id,$name,$released,$tvshow_id) {
+function editEpisode($id,$name,$season,$episode_num,$sinopsis,$released,$tvshow_id) {
     if (!intval($id)){
         return NULL;
     }
@@ -74,7 +113,7 @@ function editEpisode($id,$name,$released,$tvshow_id) {
     $episodeUpdated = false;
 
     //generamos query de actualización
-    $query = "UPDATE episodes SET name = '$name', tvshow_id = $tvshow_id";
+    $query = "UPDATE episodes SET name = '$name', season = ".intval($season).",episode=".intval($episode_num).", sinopsis = '$sinopsis', tvshow_id = $tvshow_id";
     // por si  no se ha metido fecha.
     if (strlen($released) != 0) {
         $query .= ", released = '$released'";

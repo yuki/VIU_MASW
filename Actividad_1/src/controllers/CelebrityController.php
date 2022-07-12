@@ -12,7 +12,7 @@ function checkCelebrityPost($post,$file) {
             (((strlen($post["name"])>0 && strlen($post["name"])<50) && (strlen($post["surname"])>0 && strlen($post["surname"])<50))) && 
             strlen($post["nation"])<50 && strlen($post["url"])<100)
     {
-        $celebrityCreated = createCelebrity($_POST["name"],$_POST["surname"],$_POST["born"],$_POST["nation"],$_POST["url"]);
+        $celebrityCreated = createCelebrity($post["name"],$post["surname"],$post["born"],$post["nation"],$post["url"]);
 
         if ($celebrityCreated) {
             // guardamos la imagen
@@ -30,13 +30,12 @@ function checkCelebrityPost($post,$file) {
                 (((strlen($post["name"])>0 && strlen($post["name"])<50) && (strlen($post["surname"])>0 && strlen($post["surname"])<50))) && 
                 strlen($post["nation"])<50 && strlen($post["url"])<100)
     {
-        $celebrityEdited = editCelebrity($_POST["id"],$_POST["name"],$_POST["surname"],$_POST["born"],$_POST["nation"],$_POST["url"]);
+        $celebrityEdited = editCelebrity($post["id"],$post["name"],$post["surname"],$post["born"],$post["nation"],$post["url"]);
 
         if ($celebrityEdited) {
             // guardamos la imagen
             if (isset($file)){
-                $celebrityExists = checkCelebrityExists($post["name"],$post["surname"]);
-                saveImage($file,$celebrityExists->fetch_array()["id"],"celebrity");
+                saveImage($file,$post["id"],"celebrity");
             }
             // plataforma editada
             return getAlert("la celebrity","editar","success","index.php");

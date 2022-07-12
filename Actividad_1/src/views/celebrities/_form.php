@@ -22,10 +22,12 @@
     <label for="nation" class="form-label">País de origen</label>
     <input type="text" class="form-control" id="nation" name="nation"  value="<?php if (isset($celebrity)) {echo $celebrity->getNation();} ?>"/>
   </div>
+
   <div class="mb-3">
     <label for="url" class="form-label">URL en IMDB</label>
     <input type="text" class="form-control" id="url" name="url"  value="<?php if (isset($celebrity)) {echo $celebrity->getUrl();} ?>"/>
   </div>
+
   <div class="mb-3">
     <label for="file" class="form-label">Elige imagen</label>
     <input type="file" class="form-control" name="file" id="file">

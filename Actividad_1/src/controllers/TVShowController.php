@@ -30,12 +30,11 @@ function checkTVShowPost($post,$file) {
                 (((strlen($post["name"])>0 && strlen($post["name"])<50) && $post["platform_id"]>0)) && strlen($post["sinopsis"])<512)
     {
         // tiene que haber nombre de serie y haber elegido plataforma.
-        $tvshowCreated = editTVShow($_POST["id"],$_POST["name"],$_POST["sinopsis"],$_POST["url"],$_POST["platform_id"]);
+        $tvshowCreated = editTVShow($post["id"],$post["name"],$post["sinopsis"],$post["url"],$post["platform_id"]);
         if ($tvshowCreated) {
              // plataforma creada y guardamos la imagen
              if (isset($file)){
-                $tvshowExists = checkTVShowName($post["name"]);
-                saveImage($file,$tvshowExists->fetch_array()["id"],"tvshow");
+                saveImage($file,$post["id"],"tvshow");
             }
             // serie creada
             return getAlert("la serie","editar","success","index.php");
@@ -155,7 +154,7 @@ function getTVShowEpisodes($id) {
     $list = execQuery("SELECT * FROM episodes WHERE tvshow_id = $id");
 
     foreach ($list as $item) {
-        array_push($episodes,new Episode($item["id"],$item["name"],$item["tvshow_id"],$item["released"]));
+        array_push($episodes,new Episode($item["id"],$item["name"],$item["season"],$item["episode"],$item["sinopsis"],$item["tvshow_id"],$item["released"]));
     }
 
     return $episodes;
