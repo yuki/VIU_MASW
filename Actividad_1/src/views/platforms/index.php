@@ -5,9 +5,10 @@ require_once("../../controllers/PlatformController.php");
 ?>
 
 <div class="col-md-7">
-<h1>Plataformas</h1>
+  <h1 class="text-center">Plataformas 
+      <span class="botones"><a class="btn btn-outline-primary" href="new.php" role="button">Nueva Plataforma</a></span>
+  </h1>
 
-<a class="btn btn-outline-primary" href="new.php" role="button">Nueva Plataforma</a>
 
 <?php
   $platformList = listPlatforms();

@@ -5,9 +5,9 @@ require_once("../../controllers/LanguageController.php");
 ?>
 
 <div class="col-md-7">
-<h1>Idiomas</h1>
-
-<a class="btn btn-outline-primary" href="new.php" role="button">Nuevo Idioma</a>
+    <h1 class="text-center">Idiomas 
+        <span class="botones"><a class="btn btn-outline-primary" href="new.php" role="button">Nuevo Idioma</a></span>
+    </h1>
 
 <?php
   $languages = listLanguages();

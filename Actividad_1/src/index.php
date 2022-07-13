@@ -8,7 +8,7 @@ require_once("controllers/CelebrityController.php");
   if ($celebrities){
     ?>
     <div class="container">
-        <h1>Celebrities en la cresta</h1>
+        <h1>Celebrities populares</h1>
           <div class="row">
               <?php
               foreach ($celebrities as $celebrity) {

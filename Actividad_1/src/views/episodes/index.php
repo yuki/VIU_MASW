@@ -5,9 +5,9 @@ require_once("../../controllers/TVShowController.php");
 require_once("../../controllers/EpisodeController.php");
 ?>
 <div class="col-md-7">
-    <h1>Episodios</h1>
-
-    <a class="btn btn-outline-primary" href="new.php" role="button">Nuevo Episodio</a>
+    <h1 class="text-center">Episodios 
+        <span class="botones"><a class="btn btn-outline-primary" href="new.php" role="button">Nuevo Episodio</a></span>
+    </h1>
 
     <?php
       $episodeList = listEpisodes();

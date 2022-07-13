@@ -5,9 +5,10 @@ require_once("../../controllers/CelebrityController.php");
 ?>
 
 <div class="col-md-7">
-<h1>Celebrities</h1>
+    <h1 class="text-center">Celebrities 
+        <span class="botones"><a class="btn btn-outline-primary" href="new.php" role="button">Nueva Celebrity</a></span>
+    </h1>
 
-<a class="btn btn-outline-primary" href="new.php" role="button">Nueva Celebrity</a>
 
 <?php
   $celebritiesList = listCelebrities();

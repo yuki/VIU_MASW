@@ -20,7 +20,7 @@ if (!$platform) {
 ?>
 <div class="container">
   <div class="row">
-    <div class="offset-md-1 col-md-3">
+    <div class="text-center">
         <?php
 
         $tvshowImage=getImagePath($platform->getId(),"platform");
@@ -29,8 +29,6 @@ if (!$platform) {
             echo "<img class='imagen_grande' src='$tvshowImage[1]'>";
         }
         ?>
-    </div>
-    <div class='col offset-md-1'>
         <h1>Series de <?php echo $platform->getName()?></h1>
     </div>
   </div>
