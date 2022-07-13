@@ -33,7 +33,7 @@ if (!$tvshow) {
     </div>
     <div class='col'>
         
-        <h1>Episodios de '<?php echo $tvshow->getName() ?>'
+        <h1><?php echo $tvshow->getName() ?>
             <a class="btn btn-outline-warning btn-sm" href="/views/tvshows/edit.php?id=<?php echo $tvshow->getId() ?>" role="button">Editar</a>
         </h1>
 

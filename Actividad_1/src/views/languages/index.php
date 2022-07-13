@@ -16,7 +16,7 @@ require_once("../../controllers/LanguageController.php");
   } else {
     echo "<p class='mt-3'>No hay idiomas. Vete y crea una en <a href='/views/languages/new.php'>este enlace</a>.</p>";
   }
-  
-  include_once("../template/html_tail.php");
 ?>
 </div>
+
+<?php include_once("../template/html_tail.php"); ?>

@@ -16,7 +16,7 @@ require_once(__DIR__."/../../controllers/helpers.php");
   } else {
     include("_form.php");
   }
-
-  include_once("../template/html_tail.php");
 ?>
 </div>
+
+<?php include_once("../template/html_tail.php"); ?>

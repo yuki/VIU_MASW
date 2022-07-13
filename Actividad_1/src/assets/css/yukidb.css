@@ -39,7 +39,16 @@ img.platform_mini{
 img.imagen{
     max-width: 230px;
     max-height: 150px;
-    margin-right: 20px;
+    /* margin-right: 20px; */
+}
+
+img.imagen_episodio{
+    max-width: 150px;
+    /* margin-right: 15px; */
+}
+img.imagen_platform {
+    max-width: 150px;
+    margin-right: 15px;  
 }
 
 img.imagen_mini{

@@ -22,7 +22,7 @@ require_once("../../controllers/EpisodeController.php");
           }
           
       }
-      
-      include_once("../template/html_tail.php");
     ?>
 </div>
+
+<?php include_once("../template/html_tail.php"); ?>

@@ -1,4 +1,4 @@
-<table class="table mt-3 align-middle">
+<table class="table mt-3 align-middle text-center">
     <tbody>
       <thead>
         <tr>
@@ -10,6 +10,7 @@
             }
           ?>
           <th>Función</th>
+          <th></th>
           <th>Acciones</th>
         </tr>
       </thead>
@@ -22,7 +23,7 @@
                   echo "<td><a href='/views/celebrities/show.php?id=".$filmography[0]->getId()."'>";
                     $imageExists = getImagePath($filmography[0]->getId(),"celebrity");
                     if ($imageExists[0]){
-                      echo "<img class='imagen' src='".$imageExists[1]."'>";
+                      echo "<img class='imagen' src='".$imageExists[1]."'><br>";
                     }
                 echo "".$filmography[0]->getName()." ".$filmography[0]->getSurname()."</a></td>";
               } else {
@@ -32,6 +33,22 @@
             ?>
             
             <td><?php echo $filmography[1] ?></td>
+            <?php
+              if (strpos($_SERVER["DOCUMENT_URI"],"celebrities") != true){
+                  //si hay URL de IMDB
+                  if ($filmography[0]->getUrl()) {
+                    ?>
+                    <td><a target="_blank" href="<?php echo $filmography[0]->getUrl() ?>">IMDB</a></td>
+                    <?php
+                  } else {
+                    ?>
+                    <td></td>
+                    <?php
+                  }
+              } else {
+                  echo "<td></td>";
+              }
+            ?>
             <td>
               <?php
                 if (strpos($_SERVER["DOCUMENT_URI"],"celebrities") != true){

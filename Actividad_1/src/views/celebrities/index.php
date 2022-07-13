@@ -16,7 +16,7 @@ require_once("../../controllers/CelebrityController.php");
   } else {
         echo "<p class='mt-3'>No hay celebrities. Crea una a través del botón.</p>";      
   }
-  
-  include_once("../template/html_tail.php");
 ?>
 </div>
+
+<?php include_once("../template/html_tail.php"); ?>

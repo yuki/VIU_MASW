@@ -23,7 +23,7 @@ require_once("../../controllers/PlatformController.php");
       }
       
   }
-  
-  include_once("../template/html_tail.php");
 ?>
 </div>
+
+<?php include_once("../template/html_tail.php"); ?>

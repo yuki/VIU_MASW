@@ -1,12 +1,13 @@
 </div>
-<table class="table mt-5 align-middle">
+<div class=" col-md-7">
+  <table class="table mt-5 align-middle text-center">
     <tbody>
       <thead>
         <tr>
-          <th class="text-center">Nombre y apellidos</th>
-          <th>Fecha de nacimiento</th>
+          <th>Nombre y apellidos</th>
+          <th>Nacimiento</th>
           <th>Nacionalidad</th>
-          <th>URL en IMDB</th>
+          <th></th>
           <th>Acciones</th></tr>
       </thead>
       <?php
@@ -18,10 +19,12 @@
                 <?php
                     $imageExists = getImagePath($celebrity->getId(),"celebrity");
                     if ($imageExists[0]){
-                      echo "<img class='imagen' src='".$imageExists[1]."'>";
+                      echo "<img class='imagen' src='".$imageExists[1]."'><br>";
                     }
                 ?>
-             <?php echo $celebrity->getName() .' '. $celebrity->getSurname() ?></a></td>
+               <?php echo $celebrity->getName() .' '. $celebrity->getSurname() ?>
+              </a>
+            </td>
             <td><?php echo $celebrity->getBorn(); ?></td>
             <td><?php echo $celebrity->getNation(); ?></td>
             <?php 
@@ -52,4 +55,5 @@
       ?>
       
     </tbody>
-</table>
+  </table>
+</div>

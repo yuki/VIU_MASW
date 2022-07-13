@@ -1,9 +1,10 @@
 </div>
-<table class="table mt-5 align-middle">
+<div class="offset-md-1 col-md-10">
+  <table class="table mt-5 align-middle text-center">
     <tbody>
       <thead>
         <tr>
-          <th class="text-center">Nombre</th>
+          <th>Nombre</th>
           <?php
               if (strpos($_SERVER["DOCUMENT_URI"],"episodes") == true){
                 ?>
@@ -11,8 +12,8 @@
                 <?php
               }
             ?>
-          <th>Temporada</th>
-          <th>Episodio</th>
+          <th>T</th>
+          <th>E</th>
           <th>Sinopsis</th>
           <th>Emisión</th>
           <th>Acciones</th>
@@ -27,7 +28,7 @@
                     <?php
                         $imageExists = getImagePath($episode->getId(),"episode");
                         if ($imageExists[0]){
-                          echo "<img class='imagen' src='".$imageExists[1]."'>";
+                          echo "<img class='imagen_episodio' src='".$imageExists[1]."'><br>";
                         }
                     ?>
                     <?php echo $episode->getName() ?>
@@ -52,7 +53,7 @@
             ?>
             <td><?php echo $episode->getSeason() ?></td>
             <td><?php echo $episode->getEpisode() ?></td>
-            <td class="col-md-2"><?php echo $episode->getSinopsis() ?></td>
+            <td class="col-md-3"><?php echo $episode->getSinopsis() ?></td>
             <td><?php echo $episode->getReleased() ?></td>
             <td>
                 <a class="btn btn-outline-warning btn-sm" href="/views/episodes/edit.php?id=<?php echo $episode->getId() ?>" role="button">Editar</a>
@@ -70,4 +71,5 @@
       ?>
       
     </tbody>
-</table>
+  </table>
+</div>

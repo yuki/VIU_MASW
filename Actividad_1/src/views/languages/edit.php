@@ -17,7 +17,7 @@ require_once("../../controllers/helpers.php");
   } else {
     include_once("_form.php");
   }
-
-include_once("../template/html_tail.php");
 ?>
 </div>
+
+<?php include_once("../template/html_tail.php"); ?>

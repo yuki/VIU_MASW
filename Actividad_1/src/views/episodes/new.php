@@ -17,7 +17,7 @@ require_once("../../controllers/helpers.php");
         $tvshowList = listTVShows();
         include("_form.php");
       }
-
-    include_once("../template/html_tail.php");
     ?>
 </div>
+
+<?php include_once("../template/html_tail.php"); ?>

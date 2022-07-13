@@ -83,3 +83,5 @@ if (!$celebrity) {
 <?php
 include_once("../template/episodes_celebrities_modal.php");
 ?>
+
+<?php include_once("../template/html_tail.php"); ?>

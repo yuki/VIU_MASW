@@ -18,7 +18,7 @@ require_once("../../controllers/helpers.php");
     $platformList = listPlatforms();
     include("_form.php");
   }
-
-include_once("../template/html_tail.php");
 ?>
 </div>
+
+<?php include_once("../template/html_tail.php"); ?>

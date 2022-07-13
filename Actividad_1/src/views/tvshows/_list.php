@@ -1,5 +1,6 @@
 </div>
-<table class="table mt-5 align-middle">
+<div class="col-md-10 offset-md-1">
+  <table class="table mt-5 align-middle text-center">
     <tbody>
       <thead>
         <tr>
@@ -10,9 +11,9 @@
                 <?php
               }
             ?>
-          <th class="text-center">Nombre</th>
+          <th>Nombre</th>
           <th>Sinopsis</th>
-          <th>enlace IMDB</th>
+          <th></th>
           <th>Acciones</th>
         </tr>
       </thead>
@@ -37,17 +38,17 @@
                 <?php
               }
             ?>
-            <td>
+            <td class="text-center">
               <a href="/views/tvshows/show.php?id=<?php echo $tvshow->getId() ?>">
                 <?php
                     $imageExists = getImagePath($tvshow->getId(),"tvshow");
                     if ($imageExists[0]){
-                      echo "<img class='imagen' src='".$imageExists[1]."'>";
+                      echo "<img class='imagen' src='".$imageExists[1]."'><br>";
                     }
                 ?>
                 <?php echo $tvshow->getName() ?></a>
             </td>
-            <td class="col-md-2"><?php echo $tvshow->getSinopsis() ?></td>
+            <td class="col-md-3"><?php echo $tvshow->getSinopsis() ?></td>
             <?php 
               //si hay URL de IMDB
               if ($tvshow->getUrl()) {
@@ -61,7 +62,7 @@
               }
             ?>
             
-            <td>
+            <td class="text-center">
                 <a class="btn btn-outline-success btn-sm" href="/views/episodes/new.php?tvshow_id=<?php echo $tvshow->getId() ?>" role="button">Crear Episodio</a>
                 <a class="btn btn-outline-warning btn-sm" href="/views/tvshows/edit.php?id=<?php echo $tvshow->getId() ?>" role="button">Editar</a>
                 <a class="btn btn-outline-danger btn-sm" 
@@ -78,4 +79,5 @@
       ?>
       
     </tbody>
-</table>
+  </table>
+</div>

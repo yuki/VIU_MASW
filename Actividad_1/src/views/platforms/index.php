@@ -15,7 +15,7 @@ require_once("../../controllers/PlatformController.php");
   ?>
 
   
-  <table class="table mt-5 align-middle">
+  <table class="table mt-5 align-middle text-center">
     <tbody>
       <?php
         foreach ($platformList as $platform){
@@ -26,12 +26,12 @@ require_once("../../controllers/PlatformController.php");
                 <?php
                     $imageExists = getImagePath($platform->getId(),"platform");
                     if ($imageExists[0]){
-                      echo "<img class='imagen' src='".$imageExists[1]."'>";
+                      echo "<img class='imagen_platform' src='".$imageExists[1]."'><br>";
                     }
                 ?>
               <?php echo $platform->getName(); ?></a>
             </td>
-            <td class="">
+            <td>
                 <a class="btn btn-outline-success btn-sm" href="/views/tvshows/new.php?platform_id=<?php echo $platform->getId() ?>" role="button">Crear Serie</a>
                 <a class="btn btn-outline-warning btn-sm" href="edit.php?id=<?php echo $platform->getId() ?>" role="button">Editar</a>
                 <a class="btn btn-outline-danger btn-sm" 
@@ -56,7 +56,7 @@ require_once("../../controllers/PlatformController.php");
     } else {
       echo "<p class='mt-3'>No hay plataformas. Crea una a través del botón.</p>";
     }
-    
-    include_once("../template/html_tail.php");
   ?>
 </div>
+
+<?php include_once("../template/html_tail.php"); ?>

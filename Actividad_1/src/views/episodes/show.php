@@ -70,7 +70,7 @@ if (!$episode) {
         ?>
     </div>
     <div class='col'>
-        <h1>'<?php echo $episode->getName() ?>'
+        <h1><?php echo $episode->getName() ?>
             <a class="btn btn-outline-warning btn-sm" href="/views/episodes/edit.php?id=<?php echo $episode->getId() ?>" role="button">Editar</a>
         </h1>
         
@@ -96,7 +96,7 @@ if (!$episode) {
         $funciones = getFunciones();
 
         if ($listCelebrities) {
-            echo "<a class='btn btn-outline-primary' role='button' onclick='FilmographyModal()'>Añadir casting</a>";
+            echo "<a class='mt-3 btn btn-outline-primary' role='button' onclick='FilmographyModal()'>Añadir casting</a>";
             if ($celebrityFilmography) {
                 include_once("../celebrities/_episodes_celebrities.php");
             } else {

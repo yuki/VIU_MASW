@@ -30,8 +30,11 @@ if (!$platform) {
         }
         ?>
     </div>
-    <div class='col'>
-        <h1>Series de "<?php echo $platform->getName()?>"</h1>
+    <div class='col offset-md-1'>
+        <h1>Series de <?php echo $platform->getName()?></h1>
+    </div>
+  </div>
+    
         <?php 
         $tvshowList = getPlatformShows($platform->getId());
 
@@ -40,9 +43,10 @@ if (!$platform) {
         } else {
             echo '<p>Esta plataforma no tiene series. <a href="/views/tvshows/new.php?platform_id='.$platform->getId().'">Vete y crea una.</a></p>';
         }
-        include_once("../template/html_tail.php");
         ?>
 
     </div>
   </div>
 </div>
+
+<?php include_once("../template/html_tail.php"); ?>
