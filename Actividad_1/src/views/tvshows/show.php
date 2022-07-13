@@ -3,6 +3,7 @@ include_once("../template/html_head.php");
 include_once("../template/delete_modal.php");
 require_once("../../controllers/helpers.php");
 require_once("../../controllers/TVShowController.php");
+include_once("../template/delete_modal.php");
 
 $error = false;
 // si no hay ID ponemos error
@@ -34,7 +35,17 @@ if (!$tvshow) {
     <div class='col'>
         
         <h1><?php echo $tvshow->getName() ?>
-            <a class="btn btn-outline-warning btn-sm" href="/views/tvshows/edit.php?id=<?php echo $tvshow->getId() ?>" role="button">Editar</a>
+            <span class="botones">
+                <a class="btn btn-outline-success btn-sm" href="/views/episodes/new.php?tvshow_id=<?php echo $tvshow->getId() ?>" role="button">Crear Episodio</a>
+                <a class="btn btn-outline-warning btn-sm" href="/views/tvshows/edit.php?id=<?php echo $tvshow->getId() ?>" role="button">Editar</a>
+                <a class="btn btn-outline-danger btn-sm" 
+                  onclick="getDependencies(<?php echo $tvshow->getId() ?> ,
+                                          'tvshows',
+                                          'serie',
+                                          'episodios'
+                                          )" 
+                  role="button">Borrar</a>
+            </span>
         </h1>
 
     

@@ -71,7 +71,16 @@ if (!$episode) {
     </div>
     <div class='col'>
         <h1><?php echo $episode->getName() ?>
-            <a class="btn btn-outline-warning btn-sm" href="/views/episodes/edit.php?id=<?php echo $episode->getId() ?>" role="button">Editar</a>
+            <span class="botones">
+                <a class="btn btn-outline-warning btn-sm" href="/views/episodes/edit.php?id=<?php echo $episode->getId() ?>" role="button">Editar</a>
+                <a class="btn btn-outline-danger btn-sm" 
+                  onclick="getDependencies(<?php echo $episode->getId() ?> ,
+                                          'episodes',
+                                          '',
+                                          ''
+                                          )" 
+                  role="button">Borrar</a>
+            </span>
         </h1>
         
         <p class=''><a href='/views/tvshows/show.php?id=<?php echo $episode->getTVShow()->getId()?>'>

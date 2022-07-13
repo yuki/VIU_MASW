@@ -54,7 +54,19 @@ if (!$celebrity) {
         ?>
     </div>
     <div class='col'>
-        <h1><?php echo $celebrity->getName() ." ". $celebrity->getSurname() ?></h1>
+        <h1><?php echo $celebrity->getName() ." ". $celebrity->getSurname() ?>
+                <span class="botones">
+                    <a class="btn btn-outline-warning btn-sm" href="/views/celebrities/edit.php?id=<?php echo $celebrity->getId() ?>" role="button">Editar</a>
+                    <a class="btn btn-outline-danger btn-sm" 
+                        onclick="getDependencies(<?php echo $celebrity->getId() ?> ,
+                                          'celebrities',
+                                          'celebrity',
+                                          'apariciones'
+                                          )"
+                        role="button">Borrar</a>
+                </span>
+        </h1>
+        
 
         <?php
         // cogemos todas las series con sus capítulos

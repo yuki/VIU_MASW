@@ -25,6 +25,11 @@ div.carrousel{
 
 
 /* Resto de CSS */
+
+span.botones {
+    float:right;
+}
+
 img.casting_mini{
     max-width: 150px;
     max-height: 150px;
