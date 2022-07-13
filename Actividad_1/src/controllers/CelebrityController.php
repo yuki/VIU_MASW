@@ -74,6 +74,18 @@ function listCelebrities() {
     return $celebrities;
 }
 
+// Devuelve un array de 5 los celebrities
+function listRandomCelebrities() {
+    $celebritiesList = execQuery("SELECT * FROM celebrities ORDER BY rand() ASC limit 5");
+
+    $celebrities = [];
+    foreach($celebritiesList as $item){
+        array_push($celebrities,new Celebrity($item["id"],$item["name"],$item["surname"],$item["born"],$item["nation"],$item["url"]));
+    }
+    
+    return $celebrities;
+}
+
 // comprobamos que no exista otra celebrity con el mismo nombre y apellidos
 function checkCelebrityExists($name,$surname){
     // TODO: cambiar y meter la fecha de nacimiento?

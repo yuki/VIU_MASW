@@ -5,9 +5,26 @@
 }
 
 a {
-    color: #f25416;
+    color: var(--corporativo);
 }
 
+/* Para la página inicial */
+.fila_imagenes {
+    display: inline;
+}
+
+img.imagen_carrousel{
+    max-width: 100%;
+    /* margin-right: 15px; */
+}
+div.carrousel{
+    display: inline;
+    max-width: 140px;
+    margin-right: 5px;
+}
+
+
+/* Resto de CSS */
 img.casting_mini{
     max-width: 150px;
     max-height: 150px;
@@ -45,3 +62,4 @@ img.imagen_grande{
     padding-left: 50px;
     border-left: 10px solid var(--corporativo);
 }
+

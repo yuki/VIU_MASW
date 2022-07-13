@@ -79,6 +79,22 @@ function listEpisodes() {
     return $episodes;
 }
 
+// Devuelve un array de 4  episodios
+function listRandomEpisodes() {
+    $episodeList = execQuery("SELECT e.id AS id, e.name AS name, e.season AS season, e.episode AS episode, 
+                                    e.sinopsis AS sinopsis, e.released AS released, e.tvshow_id AS tvshow_id 
+                                FROM episodes AS e, tvshows as t 
+                                WHERE e.tvshow_id = t.id
+                                ORDER BY rand() limit 5");
+
+    $episodes = [];
+    foreach($episodeList as $item){
+        array_push($episodes,new Episode($item['id'],$item['name'],$item["season"],$item["episode"],$item["sinopsis"],$item['tvshow_id'],$item['released']));
+    }
+    
+    return $episodes;
+}
+
 // comprobamos que no exista un capítulo con el mismo episodio para la misma serie
 function checkEpisodeName($name,$tvhsow_id) {
     return execQuery("SELECT * FROM episodes WHERE lower(name) = '".strtolower($name)."' AND tvshow_id = ".$tvhsow_id);

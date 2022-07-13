@@ -75,6 +75,18 @@ function listTVShows() {
     return $tvshows;
 }
 
+// Devuelve un array random de series
+function listRandomTVShows() {
+    $tvshowList = execQuery("SELECT * FROM tvshows ORDER BY rand() ASC limit 5");
+
+    $tvshows = [];
+    foreach($tvshowList as $item){
+        array_push($tvshows,new TVShow($item["id"],$item["name"],$item["sinopsis"],$item["platform_id"],$item["url"]));
+    }
+    
+    return $tvshows;
+}
+
 // comprobamos que no exista otro show igual
 function checkTVShowName($name) {
     // TODO: Esto quedaría mejor intentando hacer el insert, MySQL falla y recogiendo la
@@ -175,7 +187,7 @@ function getAllTVShowsComplete() {
     return $episodes;
 }
 
-
+// devolvemos el casting para una serie
 function getTVShowCasting($id) {
     if (!intval($id)){
         return NULL;
@@ -195,6 +207,5 @@ function getTVShowCasting($id) {
 
     return $celebrities;
 }
-
 
 ?>
