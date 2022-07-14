@@ -14,9 +14,9 @@ global $conf;
     <link href="/assets/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- estilos propios -->
-    <link href="/assets/css/yukidb.css" rel="stylesheet">
+    <link href="/assets/css/viudb.css" rel="stylesheet">
     <!-- funciones propias javascripts -->
-    <script src="/assets/js/yukidb.js"></script>
+    <script src="/assets/js/viudb.js"></script>
     <script defer src="/assets/js/bootstrap.bundle.min.js"></script>
 
     <title><?php echo $conf["app_name"] ?></title>

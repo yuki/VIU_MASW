@@ -38,7 +38,7 @@
                 <?php
               }
             ?>
-            <td class="text-center">
+            <td>
               <a href="/views/tvshows/show.php?id=<?php echo $tvshow->getId() ?>">
                 <?php
                     $imageExists = getImagePath($tvshow->getId(),"tvshow");
@@ -48,7 +48,7 @@
                 ?>
                 <?php echo $tvshow->getName() ?></a>
             </td>
-            <td class="col-md-3"><?php echo $tvshow->getSinopsis() ?></td>
+            <td class="col-md-3 text-start"><?php echo $tvshow->getSinopsis() ?></td>
             <?php 
               //si hay URL de IMDB
               if ($tvshow->getUrl()) {
@@ -62,7 +62,7 @@
               }
             ?>
             
-            <td class="text-center">
+            <td>
                 <a class="btn btn-outline-success btn-sm" href="/views/episodes/new.php?tvshow_id=<?php echo $tvshow->getId() ?>" role="button">Crear Episodio</a>
                 <a class="btn btn-outline-warning btn-sm" href="/views/tvshows/edit.php?id=<?php echo $tvshow->getId() ?>" role="button">Editar</a>
                 <a class="btn btn-outline-danger btn-sm" 

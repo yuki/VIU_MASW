@@ -40,9 +40,8 @@ function execQuery($query){
     } catch (\Throwable $th) {
         //lanzamos error si entramos aquí
         die("
-            <h1>Error fatal al conectar a la base de datos</h1>
-            <div>Comprueba el fichero <strong>config.php</strong> y confirma que los datos son correctos.</div><br><br><br>
-            <div>".$th."</div>
+            <h1 class='error'>Error fatal al conectar a la base de datos</h1>
+            <div class='error'>Comprueba el fichero <strong>config.php</strong> y confirma que los datos son correctos.</div>
         ");
     }
     
@@ -52,14 +51,13 @@ function execQuery($query){
         $mysqli->close();
         return $data;
     } catch (\Throwable $th) {
-        return NULL;
+        // return NULL;
         //para debug
-        // die("
-        //     <h1>Error fatal con la base de datos</h1>
-        //     <div>Existe algún problema con la <strong>base de datos</strong> al realizar una sentencia.</div>
-        //     <div>Hable con el administrador del servidor para que pueda comprobar qué es.</div><br><br><br>
-        //     <div>".$th."</div>
-        // ");
+        die("
+            <h1 class='error'>Error fatal con la base de datos</h1>
+            <div class='error'>Existe algún problema con la <strong>base de datos</strong> al realizar una sentencia.</div>
+            <div class='error'>Hable con el administrador del servidor para que pueda comprobar qué es.</div>
+        ");
         
     }
 }

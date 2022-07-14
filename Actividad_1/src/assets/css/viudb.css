@@ -8,6 +8,10 @@ a {
     color: var(--corporativo);
 }
 
+.error {
+    color: red;
+}
+
 /* Para la página inicial */
 .fila_imagenes {
     display: inline;

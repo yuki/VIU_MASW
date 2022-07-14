@@ -53,7 +53,7 @@
             ?>
             <td><?php echo $episode->getSeason() ?></td>
             <td><?php echo $episode->getEpisode() ?></td>
-            <td class="col-md-3"><?php echo $episode->getSinopsis() ?></td>
+            <td class="col-md-3 text-start"><?php echo $episode->getSinopsis() ?></td>
             <td><?php echo $episode->getReleased() ?></td>
             <td>
                 <a class="btn btn-outline-warning btn-sm" href="/views/episodes/edit.php?id=<?php echo $episode->getId() ?>" role="button">Editar</a>

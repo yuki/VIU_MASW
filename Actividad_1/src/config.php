@@ -12,7 +12,7 @@
  */
 
 // Nombre de la aplicación
-$conf["app_name"] = "YukiDB";
+$conf["app_name"] = "ViuDB";
 
 // Configuraciones de bases de datos
 $conf["db_host"] = "mysql"; // IP/hostname del servidor
