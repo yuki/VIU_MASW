@@ -20,7 +20,8 @@ function connectDB() {
         $conf["db_host"],
         $conf["db_user"],
         $conf["db_pass"],
-        $conf["db_name"]
+        $conf["db_name"],
+        $conf["db_port"]
     );
 
     if ($mysqli->connect_error) {

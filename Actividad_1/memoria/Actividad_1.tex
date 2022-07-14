@@ -148,7 +148,7 @@ Este fichero actualmente cuenta con una variable \inlineconsole{$conf}, que es u
 \vspace{-1em}
 \begin{itemize}
     \item \textbf{Nombre de la aplicación}: De esta manera, podemos reutilizar el código de la aplicación, y creando de manera sencilla distintas instancias de la misma.
-    \item \textbf{Acceso a base de datos}: Para configurar el acceso a base de datos tenemos los apartados de servidor, usuario, contraseña y nombre de la base de datos.
+    \item \textbf{Acceso a base de datos}: Para configurar el acceso a base de datos tenemos las opciones: servidor, puerto, usuario, contraseña y nombre de la base de datos. \textbf{Estas opciones deben ser configuradas para el servidor correspondiente}.
     \item \textbf{Rutas}: Para configurar dónde se van a guardar las imágenes subidas a través de la aplicación.
 \end{itemize}
 \vspace{-1em}
@@ -156,7 +156,7 @@ Este fichero actualmente cuenta con una variable \inlineconsole{$conf}, que es u
 \section{Modelo MVC}
 Uno de los requisitos era hacer uso del modelo Modelo-Vista-Controlador (\textbf{MVC}), a la hora de programar. Es por ello que dentro del directorio entregado con el código fuente existen tres directorios principales dedicados a este modelo de programación:
 
-
+\vspace{-1em}
 \begin{itemize}
     \item \configdir{models} Dentro de este directorio se encuentran los distintos modelos de datos que se utilizan dentro de la aplicación web. Estos modelos son creados a través de clases en PHP, que generan objetos. Debido al modelo relacional creado, algunas de las clases contienen como atributos otros objetos.
 

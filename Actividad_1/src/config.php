@@ -15,7 +15,8 @@
 $conf["app_name"] = "ViuDB";
 
 // Configuraciones de bases de datos
-$conf["db_host"] = "mysql"; // IP/hostname del servidor
+$conf["db_host"] = "mysql";      // IP/hostname del servidor. "mysql" sirve para Docker
+$conf["db_port"] = 3306;         // Puerto de acceso a la base de datos
 $conf["db_name"] = "actividad1"; // Nombre de la base de datos
 $conf["db_user"] = "actividad1"; // Nombre del usuario para la conexión
 $conf["db_pass"] = "4ct1v1d4d1"; // Password del usuario
