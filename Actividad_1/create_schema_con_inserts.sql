@@ -310,7 +310,7 @@ ALTER TABLE `episodes_celebrities`
 --
 ALTER TABLE `episodes_languages`
   ADD CONSTRAINT `episodes_languages_ibfk_1` FOREIGN KEY (`episode_id`) REFERENCES `episodes` (`id`) ON DELETE CASCADE,
-  ADD CONSTRAINT `episodes_languages_ibfk_2` FOREIGN KEY (`language_id`) REFERENCES `languages` (`id`) ON DELETE SET;
+  ADD CONSTRAINT `episodes_languages_ibfk_2` FOREIGN KEY (`language_id`) REFERENCES `languages` (`id`) ON DELETE CASCADE;
 
 --
 -- Filtros para la tabla `tvshows`

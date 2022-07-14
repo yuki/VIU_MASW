@@ -4,6 +4,23 @@
     --bs-bg-opacity: var(--corporativo); */
 }
 
+main {
+    min-height: 85vh;
+    padding-bottom: 60px;
+}
+
+#footer {
+    /* margin-top: 50px;
+    padding-top: 20px; */
+    width: 100%;
+    height: 30px;
+    border-top: 2px solid #ddd;
+    color: rgb(190, 190, 190);
+    background-color: #ffffff;
+    /* bottom: 0;
+    position:fixed; */
+  }
+
 a {
     color: var(--corporativo);
 }

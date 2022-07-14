@@ -33,8 +33,8 @@ CREATE TABLE episodes (
 CREATE TABLE episodes_languages (
     episode_id  INTEGER NOT NULL,
     FOREIGN KEY (episode_id) REFERENCES episodes(id) ON DELETE CASCADE,
-    language_id INTEGER DEFAULT 0,
-    FOREIGN KEY (language_id) REFERENCES languages(id) ON DELETE SET DEFAULT,
+    language_id INTEGER NOT NULL,
+    FOREIGN KEY (language_id) REFERENCES languages(id) ON DELETE CASCADE,
     type ENUM('audio','subtitle'),
     PRIMARY KEY (episode_id,language_id,type)
 );
