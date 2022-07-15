@@ -48,7 +48,7 @@ Como todo proyecto, existen unos requisitos que deben ser cumplidos al terminar 
 \end{itemize}
 \vspace{-1em}
 
-Como se verá a continuación, todos los requisitos se han cumplimentando, tras realizar una pequeña modificación al modelo de datos.
+Como se verá a continuación, todos los requisitos se han cumplido, tras realizar una pequeña modificación al modelo de datos.
 
 \chapter{Modelo de datos}
 A la hora de gestionar una biblioteca de series, hay que tener en cuenta que estas cuentan con episodios, por lo que se ha añadido esta nueva entidad.
@@ -62,7 +62,7 @@ El esquema \textbf{Entidad - Relación} final queda de la siguiente forma:
 \end{center}
 
 
-Este esquema entidad-relación ha dado lugar a un total de siete tablas cuyo esquema físico se puede importar desde el fichero \configfile{create_schema.sql} a MySQL, tal como veremos más adelante.
+Este esquema entidad-relación ha dado lugar a un total de siete tablas cuyo esquema físico se puede importar tal como veremos más adelante.
 
 \chapter{Despliegue de la aplicación}
 Antes de entrar en detalle en cómo se ha desarrollado la aplicación es importante conocer cómo podemos realizar el despliegue de la aplicación, ya sea para utilizarla o para realizar modificaciones sobre la misma.
@@ -103,7 +103,7 @@ Al levantar los servicios con el comando \textbf{docker-compose up} se hará uso
 \begin{itemize}
     \item \textbf{80}: Para el entorno web.
     \item \textbf{3306}: Para la base de datos.
-    \item \textbf{3307}: Para phpmyadmin.
+    \item \textbf{3307}: Para el acceso web a phpmyadmin.
 \end{itemize}
 \vspace{-1em}
 
@@ -125,7 +125,7 @@ El servicio de MySQL se encarga de crear una base de datos llamada \textbf{activ
 \vspace{-1em}
 
 \section{Despliegue de datos}
-Para realizar el despliegue de datos, vamos a hacer uso de los siguientes ficheros que acompañan esta memoria y el código fuente:
+Para realizar el despliegue de datos, vamos a hacer uso de uno de los siguientes ficheros que acompañan esta memoria y el código fuente:
 
 \vspace{-1em}
 \begin{itemize}
@@ -224,6 +224,7 @@ Por ejemplo, si queremos borrar una serie, se realiza una petición consultando 
 \end{center}
 \vspace{-1.5em}
 
+De manera similar ocurre si queremos borrar una plataforma, que nos mostrará el número de series que tiene. Si aceptamos el borrado de datos, entrará en juego \textbf{las funciones internas de bases de datos referenciales, realizando un borrado en cascada}, lo que facilita la programación.
 
 \chapter{Dificultades del proyecto}
 
