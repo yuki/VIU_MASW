@@ -1,0 +1,10 @@
+img.celebrity_img {
+    max-width: 120px;
+    max-height: 220px;
+    margin-right: 10px;
+    border-radius: 15px;
+}
+
+td {
+    padding-bottom: 10px;
+}

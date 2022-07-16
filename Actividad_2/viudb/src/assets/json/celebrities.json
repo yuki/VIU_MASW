@@ -1,0 +1,4 @@
+[
+    {"id":1,"nombre":"Jennifer","apellidos":"Aniston","nacimiento":"1969-02-11","nacionalidad":"USA","url":"https://www.imdb.com/name/nm0000098/", "photo":"https://m.media-amazon.com/images/M/MV5BNjk1MjIxNjUxNF5BMl5BanBnXkFtZTcwODk2NzM4Mg@@._V1_UY317_CR3,0,214,317_AL_.jpg"},
+    {"id":2,"nombre":"Courtney","apellidos":"Cox","nacimiento":"1964-06-15","nacionalidad":"USA","url":"https://www.imdb.com/name/nm0001073","photo":"https://m.media-amazon.com/images/M/MV5BMTA4OTczNDExNDNeQTJeQWpwZ15BbWU3MDUyNTIzMTM@._V1_UY317_CR7,0,214,317_AL_.jpg"}
+]

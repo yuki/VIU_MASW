@@ -1,0 +1,21 @@
+<h1 class="titulo">Celebrities</h1>
+<div class="row">
+
+<table class="offset-md-2 col-md-8 text-center">
+    <tr>
+      <th></th>
+      <th>Nombre y apellidos</th>
+      <th>Nacimiento</th>
+      <th>Nacionalidad</th>
+      <th>URL</th>
+    </tr>
+    <tr *ngFor="let item of celebrities">
+      <td><img class="celebrity_img" src="{{item.photo}}"></td>
+      <td> {{item.nombre}} {{item.apellidos}}</td>
+      <td>{{item.nacimiento}}</td>
+      <td>{{item.nacionalidad}}</td>
+      <td><a href="{{item.url}}">IMDB</a></td>
+    </tr>
+</table>
+
+</div>

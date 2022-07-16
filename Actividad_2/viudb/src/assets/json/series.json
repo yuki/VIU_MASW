@@ -1,0 +1,5 @@
+[
+    {"id":1,"nombre":"Friends","sinopsis":"La vida personal y profesional de seis amigos, de veinte a treinta y tantos años, que viven en Manhattan.",
+        "inicio":1997,"fin":2004, "photo":"https://m.media-amazon.com/images/M/MV5BNDVkYjU0MzctMWRmZi00NTkxLTgwZWEtOWVhYjZlYjllYmU4XkEyXkFqcGdeQXVyNTA4NzY1MzY@._V1_QL75_UY562_CR1,0,380,562_.jpg", 
+        "url": "https://www.imdb.com/title/tt0108778", "plataforma_id":1}
+]

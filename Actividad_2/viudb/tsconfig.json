@@ -21,7 +21,9 @@
     "lib": [
       "es2020",
       "dom"
-    ]
+    ],
+    "resolveJsonModule": true, //para importar json
+    "esModuleInterop": true //allows default imports from modules with no default export. This is required since a .json file has no default output.
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,
