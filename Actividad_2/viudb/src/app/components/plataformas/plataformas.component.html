@@ -1,14 +1,12 @@
 <h1 class="titulo">Plataformas</h1>
-<div class="row">
-<table class="offset-md-2 col-md-8 text-center">
+<table class="offset-2 col-8 text-center">
     <tr>
       <th></th>
-      <th>Plataforma</th>
+      <th  class="text-start">Plataforma</th>
     </tr>
     <tr *ngFor="let item of plataformas">
-      <td><img class="plataforma_img" src="assets/img/plataforma_{{item.id}}.jpg"></td>
-      <td> {{item.nombre}}</td>
+      <td><a href="/plataformas/{{item.id}}"><img class="plataforma_img" src="assets/img/plataforma_{{item.id}}.jpg"></a></td>
+      <td class="text-start"><a href="/plataformas/{{item.id}}">{{item.nombre}}</a></td>
     </tr>
 </table>
 
-</div>

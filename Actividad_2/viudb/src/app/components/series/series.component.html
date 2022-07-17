@@ -1,22 +1,28 @@
 <h1 class="titulo">Series</h1>
 <div class="row">
 
-<table class="offset-md-2 col-md-8 text-center">
-    <tr>
-      <th></th>
-      <th>Nombre</th>
-      <th class="col-md-3">Sinopsis</th>
-      <th>Emisión</th>
-      <th>URL</th>
+  <table *ngIf="this.series.length>0;else elseBlock"  class="offset-md-2 col-md-8 text-center">
+      <tr>
+        <th></th>
+        <th>Nombre</th>
+        <th class="col-md-3">Sinopsis</th>
+        <th>Emisión</th>
+        <th>URL</th>
 
-    </tr>
-    <tr *ngFor="let item of series">
-      <td><img class="serie_img" src="{{item.photo}}"></td>
-      <td>{{item.nombre}}</td>
-      <td class="text-start">{{item.sinopsis}}</td>
-      <td>{{item.inicio}} - {{item.fin}}</td>
-      <td><a href="{{item.url}}">IMDB</a></td>
-    </tr>
-</table>
+      </tr>
+      <tr *ngFor="let item of series">
+        <td><img class="serie_img" src="{{item.photo}}"></td>
+        <td>{{item.nombre}}</td>
+        <td class="text-start">{{item.sinopsis}}</td>
+        <td>{{item.inicio}} - {{item.fin}}</td>
+        <td><a href="{{item.url}}">IMDB</a></td>
+      </tr>
+  </table>
+
+  <ng-template #elseBlock>
+    <div class="alert alert-danger text-center offset-4 col-4" role="alert">
+        No hay series
+    </div>
+  </ng-template>
 
 </div>

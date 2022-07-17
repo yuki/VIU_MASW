@@ -12,7 +12,8 @@
     <tr *ngFor="let item of celebrities">
       <td><img class="celebrity_img" src="{{item.photo}}"></td>
       <td> {{item.nombre}} {{item.apellidos}}</td>
-      <td>{{item.nacimiento}}</td>
+      <!-- TODO: USO DE PIPES PARA LA FECHA!-->
+      <td>{{item.nacimiento | date: "dd/MM/yyyy"}}</td>
       <td>{{item.nacionalidad}}</td>
       <td><a href="{{item.url}}">IMDB</a></td>
     </tr>

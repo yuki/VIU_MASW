@@ -1,0 +1,17 @@
+<div *ngIf="id;else elseBlock">
+    <div class="align-items-center text-center">
+        <!-- <div class="offset-1 col-3"> -->
+            <img class="imagen_plataforma" src="assets/img/plataforma_{{plataforma.id}}.jpg">
+        <!-- </div> -->
+        <!-- <div class="col"> -->
+            <!-- <span class="plataforma">{{plataforma.nombre}}</span> -->
+        <!-- </div> -->
+    </div>
+    <app-series [plataforma_id]="plataforma.id"></app-series>
+</div>
+
+<ng-template #elseBlock>
+    <div class="alert alert-danger text-center" role="alert">
+        <h1>La plataforma no existe</h1>
+    </div>
+</ng-template>

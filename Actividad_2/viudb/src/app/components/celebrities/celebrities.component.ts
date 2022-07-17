@@ -13,18 +13,15 @@ export class CelebritiesComponent implements OnInit {
 
   constructor() {
     this.celebrities = [];
+  }
+
+  ngOnInit(): void {
     let jsonObject = JSON.parse(JSON.stringify(data));
 
     jsonObject.forEach((element: any) => {
       console.log(element)
       this.celebrities.push(new Celebrity(element.id, element.nombre, element.apellidos, element.nacimiento, element.nacionalidad, element.url, element.photo));
     });
-
-    
-  }
-
-  ngOnInit(): void {
-    
   }
 
 }
