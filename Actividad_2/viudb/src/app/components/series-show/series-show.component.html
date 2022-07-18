@@ -14,8 +14,13 @@
             <p class="sinopsis">{{serie.sinopsis}}</p>
             <p class="emision"><strong>Emisión:</strong> {{serie.inicio}} - <span *ngIf="serie.fin">{{serie.fin}}</span></p>
             <p><a href="{{serie.url}}">Ficha en IMDB</a></p>
+
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#trailerModal">
+                Ver trailer
+              </button>
         </div>
     </div>
+    <app-modal [serie]="serie"></app-modal>
     
     <div id="celebrities">
         <app-celebrities [serie_id]="serie.id" (celebrity_count)="show_celebrities($event)" #celebrities></app-celebrities>

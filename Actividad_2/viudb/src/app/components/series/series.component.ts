@@ -23,11 +23,11 @@ export class SeriesComponent implements OnInit {
 
     jsonObject.forEach((element: any) => {
       if (!this.plataforma_id && !this.celebrity_id){
-        this.series.push(new Serie(element.id, element.nombre, element.sinopsis, element.inicio, element.fin, element.photo, element.url, element.plataforma_id,element.celebrities));
+        this.series.push(new Serie(element.id, element.nombre, element.sinopsis, element.inicio, element.fin, element.photo, element.url, element.trailer, element.plataforma_id,element.celebrities));
       } else if (this.plataforma_id && this.plataforma_id === element.plataforma_id){
-        this.series.push(new Serie(element.id, element.nombre, element.sinopsis, element.inicio, element.fin, element.photo, element.url, element.plataforma_id,element.celebrities));
+        this.series.push(new Serie(element.id, element.nombre, element.sinopsis, element.inicio, element.fin, element.photo, element.url, element.trailer, element.plataforma_id,element.celebrities));
       } else if (this.celebrity_id && element.celebrities.indexOf(this.celebrity_id)>=0) {
-        this.series.push(new Serie(element.id, element.nombre, element.sinopsis, element.inicio, element.fin, element.photo, element.url, element.plataforma_id,element.celebrities));
+        this.series.push(new Serie(element.id, element.nombre, element.sinopsis, element.inicio, element.fin, element.photo, element.url, element.trailer, element.plataforma_id,element.celebrities));
       }
     });
     this.series_count.emit(this.series.length);

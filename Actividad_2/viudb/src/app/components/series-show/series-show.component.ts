@@ -11,7 +11,7 @@ import data from 'src/assets/json/series.json';
 })
 export class SeriesShowComponent implements OnInit {
   public id: number = 0;
-  public serie: Serie = new Serie(0,'','',0,0,'','',0,[])
+  public serie: Serie = new Serie(0,'','',0,0,'','','',0,[])
   public celebrity_count = 0;
 
 
@@ -29,7 +29,7 @@ export class SeriesShowComponent implements OnInit {
       let jsonObject = JSON.parse(JSON.stringify(data));
       jsonObject.forEach((element: any) => {
         if (this.id === element.id){
-          this.serie = new Serie(element.id, element.nombre, element.sinopsis, element.inicio, element.fin, element.photo, element.url, element.plataforma_id,element.celebrities);
+          this.serie = new Serie(element.id, element.nombre, element.sinopsis, element.inicio, element.fin, element.photo, element.url, element.trailer, element.plataforma_id,element.celebrities);
         }
       });
     }

@@ -12,6 +12,7 @@ import { ErrorComponent } from './components/error/error.component';
 import { PlataformasShowComponent } from './components/plataformas-show/plataformas-show.component';
 import { SeriesShowComponent } from './components/series-show/series-show.component';
 import { CelebritiesShowComponent } from './components/celebrities-show/celebrities-show.component';
+import { ModalComponent } from './components/modal/modal.component';
 
 @NgModule({
   declarations: [
@@ -25,6 +26,7 @@ import { CelebritiesShowComponent } from './components/celebrities-show/celebrit
     PlataformasShowComponent,
     SeriesShowComponent,
     CelebritiesShowComponent,
+    ModalComponent,
   ],
   imports: [
     BrowserModule,
