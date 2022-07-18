@@ -12,6 +12,8 @@ import data from 'src/assets/json/series.json';
 export class SeriesShowComponent implements OnInit {
   public id: number = 0;
   public serie: Serie = new Serie(0,'','',0,0,'','',0,[])
+  public celebrity_count = 0;
+
 
   constructor(
     private route:ActivatedRoute,
@@ -32,5 +34,15 @@ export class SeriesShowComponent implements OnInit {
       });
     }
   }
+
+  show_celebrities(celebrity_count:number) {
+    if (celebrity_count > 0){
+      this.celebrity_count = celebrity_count;
+    } else {
+      // TODO: mejorar esto de alguna manera
+      document.getElementById('celebrities')!.style.visibility = 'hidden';
+    }
+  }
+
 
 }

@@ -12,15 +12,24 @@
         <div class="col">
             <h1>{{serie.nombre}}</h1>
             <p class="sinopsis">{{serie.sinopsis}}</p>
-            <p class="emision"><strong>Emisión:</strong> {{serie.inicio}} - {{serie.fin}}</p>
+            <p class="emision"><strong>Emisión:</strong> {{serie.inicio}} - <span *ngIf="serie.fin">{{serie.fin}}</span></p>
             <p><a href="{{serie.url}}">Ficha en IMDB</a></p>
         </div>
     </div>
-    <app-celebrities [serie_id]="serie.id"></app-celebrities>
+    
+    <div id="celebrities">
+        <app-celebrities [serie_id]="serie.id" (celebrity_count)="show_celebrities($event)" #celebrities></app-celebrities>
+    </div>
+
+    <div class="d-flex align-items-center justify-content-center" *ngIf="celebrity_count==0">
+        <div class="col-4 alert alert-warning text-center" role="alert">
+            <h5>Esta serie todavía no tiene celebrities</h5>
+        </div>
+    </div>
 </div>
 
 <ng-template #elseBlock>
     <div class="alert alert-danger text-center" role="alert">
         <h1>La serie no existe</h1>
     </div>
-</ng-template>
+</ng-template>  

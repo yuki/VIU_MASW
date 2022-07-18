@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Celebrity } from 'src/app/models/celebrity';
 
 import data from 'src/assets/json/celebrities.json';
@@ -12,6 +12,7 @@ export class CelebritiesComponent implements OnInit {
   
   public celebrities:Array<Celebrity>;
   @Input() public serie_id!: Number;
+  @Output() public celebrity_count = new EventEmitter;
 
 
   constructor() {
@@ -29,6 +30,7 @@ export class CelebritiesComponent implements OnInit {
         this.celebrities.push(new Celebrity(element.id, element.nombre, element.apellidos, element.nacimiento, element.nacionalidad, element.url, element.photo,element.series));
       }
     });
+    this.celebrity_count.emit(this.celebrities.length);
   }
 
 }
