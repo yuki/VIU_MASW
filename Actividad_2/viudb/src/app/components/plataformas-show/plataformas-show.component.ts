@@ -12,11 +12,14 @@ import data from 'src/assets/json/plataformas.json';
 export class PlataformasShowComponent implements OnInit {
   public id: number = 0;
   public plataforma: Plataforma = new Plataforma(0,'');
+  public series_count: number;
+  
 
   constructor(
-    private route:ActivatedRoute
+    private route:ActivatedRoute,
+    
   ) {
-
+    this.series_count = 0
   }
 
   ngOnInit(): void {

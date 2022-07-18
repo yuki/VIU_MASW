@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,Output, EventEmitter  } from '@angular/core';
 import { Plataforma } from 'src/app/models/plataforma';
 
 import data from 'src/assets/json/plataformas.json';
@@ -11,6 +11,7 @@ import data from 'src/assets/json/plataformas.json';
 export class PlataformasComponent implements OnInit {
 
   public plataformas:Array<Plataforma>;
+  @Output() public ruta = new EventEmitter();
   
 
   constructor() {
@@ -23,6 +24,8 @@ export class PlataformasComponent implements OnInit {
     jsonObject.forEach((element: any) => {
       this.plataformas.push(new Plataforma(element.id, element.nombre));
     });
+    this.ruta.emit("plataformas");
+    console.log("prueba");
   }
 
 }

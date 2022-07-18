@@ -1,8 +1,72 @@
 [
-    {"id":1,"nombre":"Friends","sinopsis":"La vida personal y profesional de seis amigos, de veinte a treinta y tantos años, que viven en Manhattan.",
-        "inicio":1997,"fin":2004, "photo":"https://m.media-amazon.com/images/M/MV5BNDVkYjU0MzctMWRmZi00NTkxLTgwZWEtOWVhYjZlYjllYmU4XkEyXkFqcGdeQXVyNTA4NzY1MzY@._V1_QL75_UY562_CR1,0,380,562_.jpg", 
-        "url": "https://www.imdb.com/title/tt0108778", "plataforma_id":1},
-    {"id":2,"nombre":"Dexter","sinopsis":"Durante el día, Dexter es un analista para la policía de Miami. Pero por la noche, es un asesino en serie que solo ataca a otros asesinos.",
-    "inicio":2006,"fin":2013, "photo":"https://m.media-amazon.com/images/M/MV5BZjkzMmU5MjMtODllZS00OTA5LTk2ZTEtNjdhYjZhMDA5ZTRhXkEyXkFqcGdeQXVyOTA3MTMyOTk@._V1_QL75_UY562_CR17,0,380,562_.jpg", 
-    "url": "https://www.imdb.com/title/tt0773262", "plataforma_id":4}
+    {
+        "id": 1,
+        "nombre": "Friends",
+        "sinopsis": "La vida personal y profesional de seis amigos, de veinte a treinta y tantos años, que viven en Manhattan.",
+        "inicio": 1997,
+        "fin": 2004,
+        "photo": "https://m.media-amazon.com/images/M/MV5BNDVkYjU0MzctMWRmZi00NTkxLTgwZWEtOWVhYjZlYjllYmU4XkEyXkFqcGdeQXVyNTA4NzY1MzY@._V1_QL75_UY562_CR1,0,380,562_.jpg",
+        "url": "https://www.imdb.com/title/tt0108778",
+        "plataforma_id": 1
+    },
+    {
+        "id": 2,
+        "nombre": "Dexter",
+        "sinopsis": "Durante el día, Dexter es un analista para la policía de Miami. Pero por la noche, es un asesino en serie que solo ataca a otros asesinos.",
+        "inicio": 2006,
+        "fin": 2013,
+        "photo": "https://m.media-amazon.com/images/M/MV5BZjkzMmU5MjMtODllZS00OTA5LTk2ZTEtNjdhYjZhMDA5ZTRhXkEyXkFqcGdeQXVyOTA3MTMyOTk@._V1_QL75_UY562_CR17,0,380,562_.jpg",
+        "url": "https://www.imdb.com/title/tt0773262",
+        "plataforma_id": 4
+    },
+    {
+        "id": 3,
+        "nombre": "Stranger Things",
+        "sinopsis": "Cuando un chico desaparece, su madre, el jefe de policía y sus amigos deben enfrentarse a fuerzas terroríficas para traerlo de vuelta.",
+        "inicio": 2016,
+        "fin": 0,
+        "photo": "https://m.media-amazon.com/images/M/MV5BMjEzMDAxOTUyMV5BMl5BanBnXkFtZTgwNzAxMzYzOTE@._V1_FMjpg_UX510_.jpg",
+        "url": "https://www.imdb.com/title/tt4574334/",
+        "plataforma_id": 1
+    },
+    {
+        "id": 4,
+        "nombre": "The Boys",
+        "sinopsis": "Cuando un chico desaparece, su madre, el jefe de policía y sus amigos deben enfrentarse a fuerzas terroríficas para traerlo de vuelta.",
+        "inicio": 2019,
+        "fin": 0,
+        "photo": "https://m.media-amazon.com/images/M/MV5BOTEyNDJhMDAtY2U5ZS00OTMzLTkwODktMjU3MjFkZWVlMGYyXkEyXkFqcGdeQXVyMjkwOTAyMDU@._V1_QL75_UY562_CR35,0,380,562_.jpg",
+        "url": "https://www.imdb.com/title/tt1190634",
+        "plataforma_id": 3
+    },
+    {
+        "id": 5,
+        "nombre": "Hermanos de sangre",
+        "sinopsis": "La historia de la Easy Company de la División Aerotransportada 101 del Ejército de los Estados Unidos y su misión en la Segunda Guerra Mundial en Europa, desde la Operación Overlord hasta el Día V-J.",
+        "inicio": 2001,
+        "fin": 2001,
+        "photo": "https://m.media-amazon.com/images/M/MV5BMTI3ODc2ODc0M15BMl5BanBnXkFtZTYwMjgzNjc3._V1_QL75_UX380_CR0,10,380,562_.jpg",
+        "url": "https://www.imdb.com/title/tt0185906/",
+        "plataforma_id": 2
+    },
+    {
+        "id": 6,
+        "nombre": "Homeland",
+        "sinopsis": "Un agente bipolar de la CIA se convence de que al-Qaeda ha convertido a un prisionero de guerra y planea llevar a cabo un ataque terrorista en suelo estadounidense.",
+        "inicio": 2011,
+        "fin": 2020,
+        "photo": "https://m.media-amazon.com/images/M/MV5BM2Q1YzUxYTYtOTkwZC00Mjk3LTllZWQtNThjYjllZjE2OTQwXkEyXkFqcGdeQXVyOTA3MTMyOTk@._V1_QL75_UX380_CR0,4,380,562_.jpg",
+        "url": "https://www.imdb.com/title/tt1796960",
+        "plataforma_id": 4
+    },
+    {
+        "id": 7,
+        "nombre": "A dos metros bajo tierra",
+        "sinopsis": "Una comedia negra que sigue la vida de una disfuncional familia californiana que se dedica a llevar unas pompas fúnebres.",
+        "inicio": 2001,
+        "fin": 2005,
+        "photo": "https://m.media-amazon.com/images/M/MV5BN2FmMjg0Y2YtYmMyYi00MTBjLTllYzMtN2VjYzRhOTVmNWRlXkEyXkFqcGdeQXVyNDIzMzcwNjc@._V1_QL75_UY562_CR7,0,380,562_.jpg",
+        "url": "https://www.imdb.com/title/tt0248654/",
+        "plataforma_id": 2
+    }
 ]

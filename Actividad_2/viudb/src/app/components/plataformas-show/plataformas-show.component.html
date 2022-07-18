@@ -1,13 +1,22 @@
 <div *ngIf="id;else elseBlock">
     <div class="align-items-center text-center">
-        <!-- <div class="offset-1 col-3"> -->
-            <img class="imagen_plataforma" src="assets/img/plataforma_{{plataforma.id}}.jpg">
-        <!-- </div> -->
-        <!-- <div class="col"> -->
-            <!-- <span class="plataforma">{{plataforma.nombre}}</span> -->
-        <!-- </div> -->
+        <!-- align-items-center text-center   d-flex align-items-center justify-content-center-->
+        <div class="">
+            <!-- <div class="offset-1 col-3"> -->
+                <img class="imagen_plataforma" src="assets/img/plataforma_{{plataforma.id}}.jpg">
+
+                <br>
+                {{series_count}}
+            <!-- </div> -->
+            <!-- <div class="col"> -->
+                <!-- <span class="plataforma">{{plataforma.nombre}}</span> -->
+            <!-- </div> -->
+        </div>
+        <div class="">
+            <app-series [plataforma_id]="plataforma.id" (series_count)="series_count=$event"></app-series>
+            
+        </div>
     </div>
-    <app-series [plataforma_id]="plataforma.id"></app-series>
 </div>
 
 <ng-template #elseBlock>

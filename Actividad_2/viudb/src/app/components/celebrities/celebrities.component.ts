@@ -20,7 +20,7 @@ export class CelebritiesComponent implements OnInit {
 
     jsonObject.forEach((element: any) => {
       console.log(element)
-      this.celebrities.push(new Celebrity(element.id, element.nombre, element.apellidos, element.nacimiento, element.nacionalidad, element.url, element.photo));
+      this.celebrities.push(new Celebrity(element.id, element.nombre, element.apellidos, element.nacimiento, element.nacionalidad, element.url, element.photo,element.tvshows));
     });
   }
 

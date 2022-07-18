@@ -1,5 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { Plataforma } from 'src/app/models/plataforma';
+import { Component, Input, OnInit,Output, EventEmitter } from '@angular/core';
 import { Serie } from 'src/app/models/serie';
 import data from 'src/assets/json/series.json';
 
@@ -12,6 +11,7 @@ export class SeriesComponent implements OnInit {
   public series:Array<Serie>;
   // con el "!" indicamos que puede estar undefined
   @Input() plataforma_id!: Number;
+  @Output() public series_count = new EventEmitter();
 
   constructor() {
     this.series = [];
@@ -27,6 +27,7 @@ export class SeriesComponent implements OnInit {
         this.series.push(new Serie(element.id, element.nombre, element.sinopsis, element.inicio, element.fin, element.photo, element.url, element.plataforma_id));
       }
     });
+    this.series_count.emit(this.series.length);
   }
 
 }

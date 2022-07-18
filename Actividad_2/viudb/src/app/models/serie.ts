@@ -1,5 +1,3 @@
-import { Plataforma } from "./plataforma";
-
 export class Serie {
 
     constructor(
@@ -10,7 +8,7 @@ export class Serie {
         public fin: number,
         public photo: string,
         public url: string,
-        public plataforma_id: Plataforma
+        public plataforma_id: number
     ){}
 }
 

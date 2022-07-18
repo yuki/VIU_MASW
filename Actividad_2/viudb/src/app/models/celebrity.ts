@@ -7,7 +7,8 @@ export class Celebrity {
         public nacimiento: Date,
         public nacionalidad: string,
         public url: string,
-        public photo: string
+        public photo: string,
+        public tvshows: Array<number>
     ){}
 }
 

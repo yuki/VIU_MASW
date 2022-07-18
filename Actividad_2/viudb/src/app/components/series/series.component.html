@@ -1,7 +1,7 @@
 <h1 class="titulo">Series</h1>
-<div class="row">
+<div class="row justify-content-center">
 
-  <table *ngIf="this.series.length>0;else elseBlock"  class="offset-md-2 col-md-8 text-center">
+  <table *ngIf="this.series.length>0;else elseBlock"  class="col-8 text-center">
       <tr>
         <th></th>
         <th>Nombre</th>
@@ -11,10 +11,10 @@
 
       </tr>
       <tr *ngFor="let item of series">
-        <td><img class="serie_img" src="{{item.photo}}"></td>
+        <td><img class="serie_img"src="{{item.photo}}"></td>
         <td>{{item.nombre}}</td>
         <td class="text-start">{{item.sinopsis}}</td>
-        <td>{{item.inicio}} - {{item.fin}}</td>
+        <td>{{item.inicio}} - <span *ngIf="item.fin>0">{{item.fin }}</span></td>
         <td><a href="{{item.url}}">IMDB</a></td>
       </tr>
   </table>
