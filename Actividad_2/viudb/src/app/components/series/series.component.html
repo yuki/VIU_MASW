@@ -11,8 +11,8 @@
 
       </tr>
       <tr *ngFor="let item of series">
-        <td><img class="serie_img"src="{{item.photo}}"></td>
-        <td>{{item.nombre}}</td>
+        <td><a href="/series/{{item.id}}"><img class="serie_img"src="{{item.photo}}"></a></td>
+        <td><a href="/series/{{item.id}}">{{item.nombre}}</a></td>
         <td class="text-start">{{item.sinopsis}}</td>
         <td>{{item.inicio}} - <span *ngIf="item.fin>0">{{item.fin }}</span></td>
         <td><a href="{{item.url}}">IMDB</a></td>

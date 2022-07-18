@@ -8,7 +8,8 @@ export class Serie {
         public fin: number,
         public photo: string,
         public url: string,
-        public plataforma_id: number
+        public plataforma_id: number,
+        public celebrities: Array<number>
     ){}
 }
 

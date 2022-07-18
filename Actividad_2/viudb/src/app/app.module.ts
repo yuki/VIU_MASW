@@ -10,6 +10,8 @@ import { SeriesComponent } from './components/series/series.component';
 import { CelebritiesComponent } from './components/celebrities/celebrities.component';
 import { ErrorComponent } from './components/error/error.component';
 import { PlataformasShowComponent } from './components/plataformas-show/plataformas-show.component';
+import { SeriesShowComponent } from './components/series-show/series-show.component';
+import { CelebritiesShowComponent } from './components/celebrities-show/celebrities-show.component';
 
 @NgModule({
   declarations: [
@@ -21,6 +23,8 @@ import { PlataformasShowComponent } from './components/plataformas-show/platafor
     CelebritiesComponent,
     ErrorComponent,
     PlataformasShowComponent,
+    SeriesShowComponent,
+    CelebritiesShowComponent,
   ],
   imports: [
     BrowserModule,

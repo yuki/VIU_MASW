@@ -17,7 +17,6 @@ export class PlataformasShowComponent implements OnInit {
 
   constructor(
     private route:ActivatedRoute,
-    
   ) {
     this.series_count = 0
   }

@@ -1,0 +1,26 @@
+<div *ngIf="serie.id>0;else elseBlock">
+    <div class="row align-items-center">
+        <!-- align-items-center text-center   d-flex align-items-center justify-content-center-->
+        <div class="col-3">
+            <!-- <div class="offset-1 col-3"> -->
+                <img class="serie_big" src="{{serie.photo}}">
+            <!-- </div> -->
+            <!-- <div class="col"> -->
+                <!-- <span class="plataforma">{{plataforma.nombre}}</span> -->
+            <!-- </div> -->
+        </div>
+        <div class="col">
+            <h1>{{serie.nombre}}</h1>
+            <p class="sinopsis">{{serie.sinopsis}}</p>
+            <p class="emision"><strong>Emisión:</strong> {{serie.inicio}} - {{serie.fin}}</p>
+            <p><a href="{{serie.url}}">Ficha en IMDB</a></p>
+        </div>
+    </div>
+    <app-celebrities [serie_id]="serie.id"></app-celebrities>
+</div>
+
+<ng-template #elseBlock>
+    <div class="alert alert-danger text-center" role="alert">
+        <h1>La serie no existe</h1>
+    </div>
+</ng-template>

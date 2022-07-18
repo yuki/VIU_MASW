@@ -10,8 +10,8 @@
       <th>URL</th>
     </tr>
     <tr *ngFor="let item of celebrities">
-      <td><img class="celebrity_img" src="{{item.photo}}"></td>
-      <td> {{item.nombre}} {{item.apellidos}}</td>
+      <td><a href="celebrities/{{item.id}}"><img class="celebrity_img" src="{{item.photo}}"></a></td>
+      <td><a href="celebrities/{{item.id}}">{{item.nombre}} {{item.apellidos}}</a></td>
       <!-- TODO: USO DE PIPES PARA LA FECHA!-->
       <td>{{item.nacimiento | date: "dd/MM/yyyy"}}</td>
       <td>{{item.nacionalidad}}</td>

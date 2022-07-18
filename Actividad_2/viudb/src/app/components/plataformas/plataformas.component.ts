@@ -25,7 +25,6 @@ export class PlataformasComponent implements OnInit {
       this.plataformas.push(new Plataforma(element.id, element.nombre));
     });
     this.ruta.emit("plataformas");
-    console.log("prueba");
   }
 
 }

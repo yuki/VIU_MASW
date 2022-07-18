@@ -1,0 +1,19 @@
+<div *ngIf="celebrity.id>0;else elseBlock">
+    <div class="row align-items-center">
+        <div class="col-3">
+                <img class="celebrity_big" src="{{celebrity.photo}}">
+        </div>
+        <div class="col">
+            <h1>{{celebrity.nombre}} {{celebrity.apellidos}}</h1>
+            <p class="nacimiento">{{celebrity.nacimiento}} ({{celebrity.nacionalidad}})</p>
+            <p><a href="{{celebrity.url}}">Ficha en IMDB</a></p>
+        </div>
+    </div>
+    <app-series [celebrity_id]="celebrity.id"></app-series>
+</div>
+
+<ng-template #elseBlock>
+    <div class="alert alert-danger text-center" role="alert">
+        <h1>La serie no existe</h1>
+    </div>
+</ng-template>

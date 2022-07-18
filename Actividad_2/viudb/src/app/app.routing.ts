@@ -8,6 +8,8 @@ import { PlataformasShowComponent } from "./components/plataformas-show/platafor
 import { SeriesComponent } from "./components/series/series.component";
 import { CelebritiesComponent } from "./components/celebrities/celebrities.component";
 import { ErrorComponent } from "./components/error/error.component";
+import { SeriesShowComponent } from "./components/series-show/series-show.component";
+import { CelebritiesShowComponent } from "./components/celebrities-show/celebrities-show.component";
 
 
 // Rutas que necesitamos
@@ -16,7 +18,9 @@ const appRoutes: Routes = [
     {path: 'plataformas', component: PlataformasComponent},
     {path: 'plataformas/:id', component: PlataformasShowComponent},
     {path: 'series', component: SeriesComponent},
+    {path: 'series/:id', component: SeriesShowComponent},
     {path: 'celebrities', component: CelebritiesComponent},
+    {path: 'celebrities/:id', component: CelebritiesShowComponent},
     {path: '**', component: ErrorComponent},
 ];
 

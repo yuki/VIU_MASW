@@ -7,7 +7,8 @@
         "fin": 2004,
         "photo": "https://m.media-amazon.com/images/M/MV5BNDVkYjU0MzctMWRmZi00NTkxLTgwZWEtOWVhYjZlYjllYmU4XkEyXkFqcGdeQXVyNTA4NzY1MzY@._V1_QL75_UY562_CR1,0,380,562_.jpg",
         "url": "https://www.imdb.com/title/tt0108778",
-        "plataforma_id": 1
+        "plataforma_id": 1,
+        "celebrities": [1,2,3]
     },
     {
         "id": 2,
@@ -17,7 +18,8 @@
         "fin": 2013,
         "photo": "https://m.media-amazon.com/images/M/MV5BZjkzMmU5MjMtODllZS00OTA5LTk2ZTEtNjdhYjZhMDA5ZTRhXkEyXkFqcGdeQXVyOTA3MTMyOTk@._V1_QL75_UY562_CR17,0,380,562_.jpg",
         "url": "https://www.imdb.com/title/tt0773262",
-        "plataforma_id": 4
+        "plataforma_id": 4,
+        "celebrities": [5]
     },
     {
         "id": 3,
@@ -27,7 +29,8 @@
         "fin": 0,
         "photo": "https://m.media-amazon.com/images/M/MV5BMjEzMDAxOTUyMV5BMl5BanBnXkFtZTgwNzAxMzYzOTE@._V1_FMjpg_UX510_.jpg",
         "url": "https://www.imdb.com/title/tt4574334/",
-        "plataforma_id": 1
+        "plataforma_id": 1,
+        "celebrities": []
     },
     {
         "id": 4,
@@ -37,7 +40,8 @@
         "fin": 0,
         "photo": "https://m.media-amazon.com/images/M/MV5BOTEyNDJhMDAtY2U5ZS00OTMzLTkwODktMjU3MjFkZWVlMGYyXkEyXkFqcGdeQXVyMjkwOTAyMDU@._V1_QL75_UY562_CR35,0,380,562_.jpg",
         "url": "https://www.imdb.com/title/tt1190634",
-        "plataforma_id": 3
+        "plataforma_id": 3,
+        "celebrities": []
     },
     {
         "id": 5,
@@ -47,7 +51,8 @@
         "fin": 2001,
         "photo": "https://m.media-amazon.com/images/M/MV5BMTI3ODc2ODc0M15BMl5BanBnXkFtZTYwMjgzNjc3._V1_QL75_UX380_CR0,10,380,562_.jpg",
         "url": "https://www.imdb.com/title/tt0185906/",
-        "plataforma_id": 2
+        "plataforma_id": 2,
+        "celebrities": [3,4]
     },
     {
         "id": 6,
@@ -57,7 +62,8 @@
         "fin": 2020,
         "photo": "https://m.media-amazon.com/images/M/MV5BM2Q1YzUxYTYtOTkwZC00Mjk3LTllZWQtNThjYjllZjE2OTQwXkEyXkFqcGdeQXVyOTA3MTMyOTk@._V1_QL75_UX380_CR0,4,380,562_.jpg",
         "url": "https://www.imdb.com/title/tt1796960",
-        "plataforma_id": 4
+        "plataforma_id": 4,
+        "celebrities": [4]
     },
     {
         "id": 7,
@@ -67,6 +73,7 @@
         "fin": 2005,
         "photo": "https://m.media-amazon.com/images/M/MV5BN2FmMjg0Y2YtYmMyYi00MTBjLTllYzMtN2VjYzRhOTVmNWRlXkEyXkFqcGdeQXVyNDIzMzcwNjc@._V1_QL75_UY562_CR7,0,380,562_.jpg",
         "url": "https://www.imdb.com/title/tt0248654/",
-        "plataforma_id": 2
+        "plataforma_id": 2,
+        "celebrities": [5]
     }
 ]

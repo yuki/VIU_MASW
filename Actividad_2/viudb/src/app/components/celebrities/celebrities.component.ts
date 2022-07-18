@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Celebrity } from 'src/app/models/celebrity';
+
 import data from 'src/assets/json/celebrities.json';
 
 @Component({
@@ -10,6 +11,8 @@ import data from 'src/assets/json/celebrities.json';
 export class CelebritiesComponent implements OnInit {
   
   public celebrities:Array<Celebrity>;
+  @Input() public serie_id!: Number;
+
 
   constructor() {
     this.celebrities = [];
@@ -19,8 +22,12 @@ export class CelebritiesComponent implements OnInit {
     let jsonObject = JSON.parse(JSON.stringify(data));
 
     jsonObject.forEach((element: any) => {
-      console.log(element)
-      this.celebrities.push(new Celebrity(element.id, element.nombre, element.apellidos, element.nacimiento, element.nacionalidad, element.url, element.photo,element.tvshows));
+      if (!this.serie_id) {
+        this.celebrities.push(new Celebrity(element.id, element.nombre, element.apellidos, element.nacimiento, element.nacionalidad, element.url, element.photo,element.series));
+      } else if (element.series.indexOf(this.serie_id)>=0) {
+        //celebrity aparece en la serie
+        this.celebrities.push(new Celebrity(element.id, element.nombre, element.apellidos, element.nacimiento, element.nacionalidad, element.url, element.photo,element.series));
+      }
     });
   }
 
