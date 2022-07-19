@@ -22,7 +22,7 @@ export class SeriesComponent implements OnInit {
     let jsonObject = JSON.parse(JSON.stringify(data));
 
     jsonObject.forEach((element: any) => {
-      if (!this.plataforma_id && !this.celebrity_id){
+      if (!this.plataforma_id && !this.celebrity_id || this.plataforma_id == -1){
         this.series.push(new Serie(element.id, element.nombre, element.sinopsis, element.inicio, element.fin, element.photo, element.url, element.trailer, element.plataforma_id,element.celebrities));
       } else if (this.plataforma_id && this.plataforma_id === element.plataforma_id){
         this.series.push(new Serie(element.id, element.nombre, element.sinopsis, element.inicio, element.fin, element.photo, element.url, element.trailer, element.plataforma_id,element.celebrities));
@@ -30,6 +30,12 @@ export class SeriesComponent implements OnInit {
         this.series.push(new Serie(element.id, element.nombre, element.sinopsis, element.inicio, element.fin, element.photo, element.url, element.trailer, element.plataforma_id,element.celebrities));
       }
     });
+
+    if (this.plataforma_id == -1){
+      // si es -1, vengo desde el componente "inicio", y sólo cojo un random de 3
+      this.series = this.series.sort(() => Math.random() - 0.5).slice(0,4)
+    }
+
     this.series_count.emit(this.series.length);
   }
 

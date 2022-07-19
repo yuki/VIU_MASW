@@ -1,22 +1,39 @@
-<h1 class="titulo">Celebrities</h1>
-<div class="row">
+<div *ngIf="celebrities.length">
+  <div *ngIf="serie_id!=-1;else elseBlock">
+    <h1 class="titulo">Celebrities</h1>
+    <div class="row">
 
-<table class="offset-md-2 col-md-8 text-center">
-    <tr>
-      <th></th>
-      <th>Nombre y apellidos</th>
-      <th>Nacimiento</th>
-      <th>Nacionalidad</th>
-      <th>URL</th>
-    </tr>
-    <tr *ngFor="let item of celebrities">
-      <td><a href="celebrities/{{item.id}}"><img class="celebrity_img" src="{{item.photo}}"></a></td>
-      <td><a href="celebrities/{{item.id}}">{{item.nombre}} {{item.apellidos}}</a></td>
-      <!-- TODO: USO DE PIPES PARA LA FECHA!-->
-      <td>{{item.nacimiento | date: "dd/MM/yyyy"}}</td>
-      <td>{{item.nacionalidad}}</td>
-      <td><a href="{{item.url}}">IMDB</a></td>
-    </tr>
-</table>
+    <table class="offset-md-2 col-md-8 text-center">
+        <tr>
+          <th></th>
+          <th>Nombre y apellidos</th>
+          <th>Nacimiento</th>
+          <th>Nacionalidad</th>
+          <th>URL</th>
+        </tr>
+        <tr *ngFor="let item of celebrities">
+          <td><a href="celebrities/{{item.id}}"><img class="celebrity_img" src="{{item.photo}}"></a></td>
+          <td><a href="celebrities/{{item.id}}">{{item.nombre}} {{item.apellidos}}</a></td>
+          <!-- TODO: USO DE PIPES PARA LA FECHA!-->
+          <td>{{item.nacimiento | date: "dd/MM/yyyy"}}</td>
+          <td>{{item.nacionalidad}}</td>
+          <td><a href="{{item.url}}">IMDB</a></td>
+        </tr>
+    </table>
 
+    </div>
+  </div>
+
+  <ng-template #elseBlock>
+    <h1 class="titulo">Celebrities en la cresta de la ola</h1>
+    <div class="row justify-content-center">
+      <!-- Vista si se llama desde INICIO -->
+      <div *ngFor="let item of celebrities" class="text-center carrousel">
+        <a href="celebrities/{{item.id}}">
+          <img class="celebrity_img" src="{{item.photo}}">
+          {{item.nombre}} {{item.apellidos}}
+        </a>
+      </div>
+    </div> 
+  </ng-template>
 </div>

@@ -36,10 +36,10 @@ export class SeriesShowComponent implements OnInit {
   }
 
   show_celebrities(celebrity_count:number) {
+    this.celebrity_count = celebrity_count;
     if (celebrity_count > 0){
       this.celebrity_count = celebrity_count;
     } else {
-      // TODO: mejorar esto de alguna manera
       document.getElementById('celebrities')!.style.visibility = 'hidden';
     }
   }

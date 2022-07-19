@@ -8,3 +8,9 @@ img.celebrity_img {
 td {
     padding-bottom: 10px;
 }
+
+div.carrousel{
+    display: inline;
+    max-width: 140px;
+    margin-right: 5px;
+}

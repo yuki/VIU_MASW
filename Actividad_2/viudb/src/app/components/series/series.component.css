@@ -1,6 +1,19 @@
 img.serie_img {
-    max-width: 120px;
-    max-height: 220px;
+    min-width: 100px;
+    max-width: 90%;
     margin-right: 10px;
     border-radius: 15px;
+}
+td {
+    padding-bottom: 10px;
+}
+
+img.serie_carrousel_img {
+    max-width: 99%;
+    border-radius: 15px;
+}
+
+div.carrousel{
+    display: inline;
+    /* margin-right: 15px; */
 }
