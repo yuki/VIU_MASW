@@ -40,6 +40,10 @@ class PlatformController extends Controller
         $platform = new Platform();
         $platform->name = $request->name;
         $platform->save();
+        // si viene con imagen, la guardamos
+        if (isset($request->file)) {
+            saveImage($request,$platform->id,'platform');
+        }
         return redirect()->route('platforms.index')->with('success',__('viudb.platform_created'));
     }
 
@@ -80,6 +84,10 @@ class PlatformController extends Controller
             $platform->name = $request->name;
             $platform->save();
         }
+        // si viene con imagen, la guardamos
+        if (isset($request->file)) {
+            saveImage($request,$platform->id,'platform');
+        }
         return redirect()->route('platforms.index')->with('success',__('viudb.platform_updated'));
     }
 
@@ -91,7 +99,7 @@ class PlatformController extends Controller
      */
     public function destroy(Platform $platform)
     {
-        //
+        // TODO: hacer el borrado
     }
 
     protected function validatePlatform($request) {
