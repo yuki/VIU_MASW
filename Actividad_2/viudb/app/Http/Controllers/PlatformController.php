@@ -14,7 +14,7 @@ class PlatformController extends Controller
      */
     public function index()
     {
-        $platforms = Platform::paginate(10);
+        $platforms = Platform::orderBy('name')->paginate(5);
         return view('platforms.list', ['platforms' => $platforms]);
     }
 
@@ -25,7 +25,7 @@ class PlatformController extends Controller
      */
     public function create()
     {
-        //
+        return view('platforms.create');
     }
 
     /**
@@ -36,7 +36,11 @@ class PlatformController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validatePlatform($request);
+        $platform = new Platform();
+        $platform->name = $request->name;
+        $platform->save();
+        return redirect()->route('platforms.index')->with('success',__('viudb.platform_created'));
     }
 
     /**
@@ -47,7 +51,7 @@ class PlatformController extends Controller
      */
     public function show(Platform $platform)
     {
-        //
+        return view('platforms.show', ['platform' => $platform]);
     }
 
     /**
@@ -58,7 +62,7 @@ class PlatformController extends Controller
      */
     public function edit(Platform $platform)
     {
-        //
+        return view('platforms.edit', ['platform' => $platform]);
     }
 
     /**
@@ -70,7 +74,13 @@ class PlatformController extends Controller
      */
     public function update(Request $request, Platform $platform)
     {
-        //
+        // si el nombre anterior y el actualizado es el mismo, no hacemos nada
+        if ($platform->name != $request->name){
+            $this->validatePlatform($request);
+            $platform->name = $request->name;
+            $platform->save();
+        }
+        return redirect()->route('platforms.index')->with('success',__('viudb.platform_updated'));
     }
 
     /**
@@ -82,5 +92,12 @@ class PlatformController extends Controller
     public function destroy(Platform $platform)
     {
         //
+    }
+
+    protected function validatePlatform($request) {
+        return $request->validate(
+                [
+                    'name' => 'required|unique:platforms|min:3|max:255'
+                ]);
     }
 }

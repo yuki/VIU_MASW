@@ -1,0 +1,17 @@
+
+
+- Para que el app/helpers.php funcione:
+  - he modificado el fichero **composer.json** y he añadido en la sección **autoload**:
+```
+"autoload": {
+        ...
+
+        "files": [
+            "app/helpers.php"
+        ]
+```
+  - y luego ejecutar:
+```composer dump-autoload```
+
+- Para el Storage:
+    ```php artisan storage:link``

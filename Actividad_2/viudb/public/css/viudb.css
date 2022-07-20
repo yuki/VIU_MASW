@@ -1,0 +1,35 @@
+:root {
+    --corporativo: #F25416;
+}
+
+a {
+    color: var(--corporativo);
+}
+
+.titulo {
+    text-align: center;
+    margin-top: 30px;
+    margin-bottom: 50px;
+}
+
+span.botones {
+    float:right;
+}
+
+img.plataforma_img {
+    max-width: 220px;
+    max-height: 420px;
+}
+
+img.imagen_grande{
+    max-width: 95%;
+    margin-right: 20px;
+}
+
+td {
+    padding-bottom: 30px;
+}
+
+.paginate {
+    margin-top: 40px;
+}

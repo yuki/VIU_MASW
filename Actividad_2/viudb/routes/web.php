@@ -15,6 +15,11 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+// TODO: cómo se cambia el idioma?
+Route::get('/locale/{locale}', function ($locale) {
+    App::setLocale($locale);
+});
+
 Auth::routes();
 
 /**
@@ -26,7 +31,7 @@ Route::group(['prefix' => 'platforms'], function() {
     Route::post('/create', 'PlatformController@store')->name('platforms.store');
     Route::get('/{platform}/show', 'PlatformController@show')->name('platforms.show');
     Route::get('/{platform}/edit', 'PlatformController@edit')->name('platforms.edit');
-    Route::patch('/{platform}/update', 'PlatformController@update')->name('platforms.update');
+    Route::post('/{platform}/update', 'PlatformController@update')->name('platforms.update');
     Route::delete('/{platform}/delete', 'PlatformController@destroy')->name('platforms.destroy');
 });
 
