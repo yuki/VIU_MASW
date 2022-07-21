@@ -15,3 +15,9 @@
 
 - Para el Storage:
     ```php artisan storage:link``
+
+
+- Seeders:
+php artisan db:seed --class=PlatformSeeder
+php artisan db:seed --class=CelebritySeeder
+

@@ -78,12 +78,9 @@ class PlatformController extends Controller
      */
     public function update(Request $request, Platform $platform)
     {
-        // si el nombre anterior y el actualizado es el mismo, no hacemos nada
-        if ($platform->name != $request->name){
-            $this->validatePlatform($request);
-            $platform->name = $request->name;
-            $platform->save();
-        }
+        $this->validatePlatform($request,$platform);
+        $platform->name = $request->name;
+        $platform->save();
         // si viene con imagen, la guardamos
         if (isset($request->file)) {
             saveImage($request,$platform->id,'platform');
@@ -102,10 +99,12 @@ class PlatformController extends Controller
         // TODO: hacer el borrado
     }
 
-    protected function validatePlatform($request) {
+    protected function validatePlatform($request,$platform=null) {
         return $request->validate(
                 [
-                    'name' => 'required|unique:platforms|min:3|max:255'
+                    // si estamos actualizando, que no se queje si mantenemos el nombre original
+                    'name' => 'required|'.\Illuminate\Validation\Rule::unique('platforms')->ignore($platform).'|min:3|max:255,',
+                    'file' => 'nullable|image|mimes:jpg,png,jpeg'
                 ]);
     }
 }
