@@ -1,12 +1,11 @@
 @extends('layouts.app')
 @section('content')
 
-<h1 class="titulo">{{__('viudb.celebrities')}}
-    <span class="botones"><a class="btn btn-outline-primary" href="{{route('celebrities.create')}}" role="button">{{__('viudb.create_celebrity')}}</a></span>
-</h1>
+<h1 class="titulo">{{__('viudb.celebrities')}}</h1>
+<p class="botones mb-4"><span ><a class="btn btn-outline-primary" href="{{route('celebrities.create')}}" role="button">{{__('viudb.create_celebrity')}}</a></span></p>
 
 @if (count($celebrities)> 0)
-    <table class="col-12 text-center">
+    <table class="offset-2 col-8 text-center">
         <thead>
             <tr>
                 <th></th>
@@ -19,10 +18,10 @@
         </thead>
         @foreach ($celebrities as $celebrity)
             <tr>
-                <td>
+                <td class="col-2">
                     @if (Storage::disk('public')->exists("img/celebrity_".$celebrity->id.".jpg"))
                         <a href="{{route('celebrities.show',$celebrity)}}">
-                            <img class="celebrity_img" src="@php
+                            <img class="celebrity" src="@php
                                 echo Storage::disk('public')->url('img/celebrity_'.$celebrity->id.'.jpg')
                             @endphp ">
                         </a>

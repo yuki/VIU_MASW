@@ -3,18 +3,18 @@
 
     <div class="container">
         <div class="row">
-            <div class="col-4">
+            <div class="col-4 text-center">
                 @if (Storage::disk('public')->exists("img/celebrity_".$celebrity->id.".jpg"))
 
-                    <a class='imagen_grande' href="{{route('celebrities.show',$celebrity)}}">
-                        <img class="celebrity_img" src="@php
+                    <a href="{{route('celebrities.show',$celebrity)}}">
+                        <img class="show" src="@php
                             echo Storage::disk('public')->url('img/celebrity_'.$celebrity->id.'.jpg')
                         @endphp ">
                     </a>
                 @endif
             </div>
             <div class="col align-self-center">
-                <h1>{{ $celebrity->name }} {{ $celebrity->surname }}
+                <h1 class="show">{{ $celebrity->name }} {{ $celebrity->surname }}
                     <span class="botones">
                         {{-- TODO: cambiar --}}
                         <a class="btn btn-outline-warning btn-sm" href="{{route('celebrities.edit',$celebrity)}}" role="button">{{__('viudb.edit')}}</a>
@@ -27,7 +27,7 @@
                             role="button">{{__('viudb.delete')}}</a>
                     </span>
                 </h1>
-                <div class="celebrity_info">
+                <div class="info">
                     <p>{{__('viudb.born')}} {{$celebrity->born}}</p>
                     <p>{{__('viudb.nation')}} {{$celebrity->nation}}</p>
                     <p>{{__('viudb.ficha')}} <a href="{{$celebrity->url}}">IMDB</a></p>

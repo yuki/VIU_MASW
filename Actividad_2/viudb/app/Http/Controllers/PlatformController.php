@@ -54,7 +54,7 @@ class PlatformController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show(Platform $platform)
-    {
+    {;
         return view('platforms.show', ['platform' => $platform]);
     }
 
@@ -99,6 +99,8 @@ class PlatformController extends Controller
         // TODO: hacer el borrado
     }
 
+
+    // Validación de los campos
     protected function validatePlatform($request,$platform=null) {
         return $request->validate(
                 [

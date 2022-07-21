@@ -14,33 +14,52 @@ th {
     padding-bottom: 30px;
 }
 
-.titulo {
+h1, .titulo {
     text-align: center;
     margin-top: 30px;
     margin-bottom: 50px;
 }
 
-span.botones {
-    float:right;
+h1.show {
+    text-align: left;
 }
 
-img.plataforma_img {
+.botones {
+    /* text-align: center; */
+    float:right;
+    /* padding-right: 150px; */
+}
+
+img.plataforma {
     max-width: 220px;
     max-height: 420px;
 }
 
-img.imagen_grande{
-    max-width: 95%;
-    margin-right: 20px;
+img.mini_platform {
+    max-width: 90%;
 }
 
-img.celebrity_img {
-    max-width: 150px;
-    max-height: 320px;
+img.tvshow {
+    min-width: 30%;
+    max-width: 65%;
+    margin-right: 20px;
     border-radius: 15px;
 }
 
-.celebrity_info {
+img.celebrity {
+    max-width: 90%;
+    /* max-width: 150px;
+    max-height: 320px; */
+    border-radius: 15px;
+}
+
+img.show {
+    max-width: 85%;
+    border-radius: 15px;
+    margin-right: 20px;
+}
+
+.info {
     padding-left: 10px;
     border-left: 5px solid var(--corporativo);
 }

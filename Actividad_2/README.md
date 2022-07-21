@@ -18,6 +18,11 @@
 
 
 - Seeders:
-php artisan db:seed --class=PlatformSeeder
-php artisan db:seed --class=CelebritySeeder
+El general: 
 
+```php artisan db:seed --class=DatabaseSeeder ```
+
+  - Ejecuta por debajo: 
+        php artisan db:seed --class=PlatformSeeder
+        php artisan db:seed --class=CelebritySeeder
+        php artisan db:seed --class=TVShowSeeder

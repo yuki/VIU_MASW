@@ -1,18 +1,20 @@
 @extends('layouts.app')
 @section('content')
 
-<h1 class="titulo">{{__('viudb.platforms')}}
-    <span class="botones"><a class="btn btn-outline-primary" href="{{route('platforms.create')}}" role="button">{{__('viudb.create_platform')}}</a></span>
-</h1>
+<h1 class="titulo">{{__('viudb.platforms')}}</h1>
+<p class="botones">
+    <span ><a class="btn btn-outline-primary" href="{{route('platforms.create')}}" role="button">{{__('viudb.create_platform')}}</a></span>
+</p>
+
 
 @if (count($platforms)> 0)
-    <table class="col-12 text-center">
+    <table class="offset-2 col-8 text-center">
         @foreach ($platforms as $platform)
             <tr>
                 <td>
                     @if (Storage::disk('public')->exists("img/platform_".$platform->id.".jpg"))
                         <a href="{{route('platforms.show',$platform)}}">
-                            <img class="plataforma_img" src="@php
+                            <img class="plataforma" src="@php
                                 echo Storage::disk('public')->url('img/platform_'.$platform->id.'.jpg')
                             @endphp ">
                         </a>
@@ -20,7 +22,7 @@
                 </td>
                 <td class="text-start"><a href="{{route('platforms.show',$platform)}}">{{$platform->name}}</a></td>
                 <td>
-                    <a class="btn btn-outline-success" href="{{route('platforms.create')}}" role="button">Crear Serie</a>
+                    <a class="btn btn-outline-success" href="{{route('tvshows.create')}}" role="button">{{__('viudb.create_tvshow')}}</a>
                     <a class="btn btn-outline-warning" href="{{route('platforms.edit',$platform)}}" role="button">{{__('viudb.edit')}}</a>
                     <a class="btn btn-outline-danger"
                     {{-- TODO: cambiar --}}

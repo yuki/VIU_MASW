@@ -37,7 +37,7 @@
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto">
                         <li class="nav-item"><a class="nav-link" href="{{route('platforms.index')}}">{{__('viudb.platforms')}}</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#">Series</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{{route('tvshows.index')}}">{{__('viudb.tvshows')}}</a></li>
                         <li class="nav-item"><a class="nav-link" href="#">Episodios</a></li>
                         <li class="nav-item"><a class="nav-link" href="{{route('celebrities.index')}}">Celebrities</a></li>
                         <li class="nav-item"><a class="nav-link" href="#">Idiomas</a></li>
@@ -79,7 +79,7 @@
             </div>
         </nav>
 
-        <main class="py-4 mx-auto col-6">
+        <main class="py-4 mx-auto col-8">
             {{-- success message --}}
             @if(session()->has('success'))
                 <div class="alert alert-success  alert-dismissible fade show" role="alert">

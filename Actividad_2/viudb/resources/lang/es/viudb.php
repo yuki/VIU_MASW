@@ -48,4 +48,16 @@ return [
     'celebrity_updated' => 'La celebrity se ha actualizado correctamente',
     'ficha' => 'Ficha:',
 
+    /*
+    * TVSHOWS
+    */
+    'tvshows' => 'Series',
+    'no_tvshows' => 'No hay series actualmente. Crea una a través del botón.',
+    'create_tvshow' => 'Crear serie',
+    'edit_tvshow' => 'Editar serie',
+    'tvshow_created' => 'La serie se ha creado correctamente',
+    'tvshow_updated' => 'La serie se ha actualizado correctamente',
+    'sinopsis' => 'Sinopsis',
+    'platform_emision' => 'Elige plataforma donde se emite',
+    'choose_platform' => 'Elige plataforma',
 ];

@@ -35,7 +35,7 @@ Route::group(['prefix' => 'platforms'], function() {
     Route::delete('/{platform}/delete', 'PlatformController@destroy')->name('platforms.destroy');
 });
 
-Route::group(['prefix' => 'celebrities'], function() {
+Route::group(['prefix' => 'celebrities','middleware' => ['auth']], function() {
     Route::get('/', 'CelebrityController@index')->name('celebrities.index');
     Route::get('/create', 'CelebrityController@create')->name('celebrities.create');
     Route::post('/create', 'CelebrityController@store')->name('celebrities.store');
@@ -43,6 +43,16 @@ Route::group(['prefix' => 'celebrities'], function() {
     Route::get('/{celebrity}/edit', 'CelebrityController@edit')->name('celebrities.edit');
     Route::post('/{celebrity}/update', 'CelebrityController@update')->name('celebrities.update');
     Route::delete('/{celebrity}/delete', 'CelebrityController@destroy')->name('celebrities.destroy');
+});
+
+Route::group(['prefix' => 'tvshows','middleware' => ['auth']], function() {
+    Route::get('/', 'TVShowController@index')->name('tvshows.index');
+    Route::get('/create', 'TVShowController@create')->name('tvshows.create');
+    Route::post('/create', 'TVShowController@store')->name('tvshows.store');
+    Route::get('/{tvshow}/show', 'TVShowController@show')->name('tvshows.show');
+    Route::get('/{tvshow}/edit', 'TVShowController@edit')->name('tvshows.edit');
+    Route::post('/{tvshow}/update', 'TVShowController@update')->name('tvshows.update');
+    Route::delete('/{tvshow}/delete', 'TVShowController@destroy')->name('tvshows.destroy');
 });
 
 
