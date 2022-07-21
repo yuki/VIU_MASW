@@ -12,22 +12,17 @@
     @csrf
     <div class="form-group mb-3">
         <label for="name" class="form-label">{{__('viudb.name')}}</label>
-        <input type="text" class="form-control" id="name" name="name"
-
+        <input type="text" class="form-control" id="name" name="name" required
                 @if (isset($platform))
-                    value="{{$platform->name}}"
-
+                    value="{{old('name',$platform->name)}}"
+                @else
+                    value="{{old('name')}}"
                 @endif
         />
     </div>
     <div class="form-group mb-3">
         <label for="file" class="form-label">{{__('viudb.select_img')}}</label>
         <input type="file" class="form-control-file" name="file" id="file">
-    </div>
-    <div class="form-group mb-3">
-        @if (isset($platform))
-            <input type="hidden" class="form-control" id="id" name="id" value="'.$platform->getId().'" />
-        @endif
     </div>
     <button type="submit" class="btn btn-primary" name="{{$button_name}}">{{$button_name}}</button>
   </form>

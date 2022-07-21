@@ -23,6 +23,7 @@
                     <a class="btn btn-outline-success" href="{{route('platforms.create')}}" role="button">Crear Serie</a>
                     <a class="btn btn-outline-warning" href="{{route('platforms.edit',$platform)}}" role="button">{{__('viudb.edit')}}</a>
                     <a class="btn btn-outline-danger"
+                    {{-- TODO: cambiar --}}
                       onclick="getDependencies(,
                                               'platforms',
                                               'plataforma',

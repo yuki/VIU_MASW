@@ -35,5 +35,15 @@ Route::group(['prefix' => 'platforms'], function() {
     Route::delete('/{platform}/delete', 'PlatformController@destroy')->name('platforms.destroy');
 });
 
+Route::group(['prefix' => 'celebrities'], function() {
+    Route::get('/', 'CelebrityController@index')->name('celebrities.index');
+    Route::get('/create', 'CelebrityController@create')->name('celebrities.create');
+    Route::post('/create', 'CelebrityController@store')->name('celebrities.store');
+    Route::get('/{celebrity}/show', 'CelebrityController@show')->name('celebrities.show');
+    Route::get('/{celebrity}/edit', 'CelebrityController@edit')->name('celebrities.edit');
+    Route::post('/{celebrity}/update', 'CelebrityController@update')->name('celebrities.update');
+    Route::delete('/{celebrity}/delete', 'CelebrityController@destroy')->name('celebrities.destroy');
+});
+
 
 Route::get('/home', 'HomeController@index')->name('home');

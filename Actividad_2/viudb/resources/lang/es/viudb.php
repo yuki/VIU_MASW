@@ -12,11 +12,12 @@ return [
     'crear' => 'Crear',
     'edit' => 'Editar',
     'delete' => 'Borrar',
+    'actions' => 'Acciones',
 
-    // columnas y formularios
+    // columnas y formularios comunes
     'name' => 'Nombre',
+    'url' => 'URL en IMDB',
     'select_img' => 'Elige imagen',
-
 
     /*
     * PLATFORMS
@@ -30,4 +31,21 @@ return [
 
     // platform/X/show
     'tvshows_from' => 'Series de :platform',
+
+
+    /*
+    * CELEBRITIES
+    */
+    'name_surname' => 'Nombre y apellidos',
+    'surname' => 'Apellidos',
+    'born' => 'Fecha de nacimiento:',
+    'nation' => 'Nacionalidad:',
+    'celebrities' => 'Celebrities',
+    'no_celebrities' => 'No hay celebrities actualmente. Crea una a través del botón.',
+    'create_celebrity' => 'Crear celebrity',
+    'edit_celebrity' => 'Editar celebrity',
+    'celebrity_created' => 'La celebrity se ha creado correctamente',
+    'celebrity_updated' => 'La celebrity se ha actualizado correctamente',
+    'ficha' => 'Ficha:',
+
 ];
