@@ -1,9 +1,9 @@
 <div *ngIf="celebrity.id>0;else elseBlock">
-    <div class="row align-items-center">
-        <div class="col-3">
+    <div class="row justify-content-end ">
+        <div class="offset-2 col-3 align-self-center">
                 <img class="celebrity_big" src="{{celebrity.photo}}">
         </div>
-        <div class="col">
+        <div class="col align-self-center">
             <h1>{{celebrity.nombre}} {{celebrity.apellidos}}</h1>
             <p class="nacimiento">{{celebrity.nacimiento}} ({{celebrity.nacionalidad}})</p>
             <p><a href="{{celebrity.url}}">Ficha en IMDB</a></p>
