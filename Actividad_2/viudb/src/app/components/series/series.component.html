@@ -12,10 +12,11 @@
 
         </tr>
         <tr *ngFor="let item of series">
+          <td class="col-1" *ngIf="plataforma_id==0"><a href="/platforms/{{item.id}}"><img class="serie_img"src="assets/img/plataforma_{{item.plataforma_id}}.jpg"></a></td>
           <td class="col-2"><a href="/series/{{item.id}}"><img class="serie_img"src="{{item.photo}}"></a></td>
-          <td><a href="/series/{{item.id}}">{{item.nombre}}</a></td>
+          <td class="col-3"><a href="/series/{{item.id}}">{{item.nombre}}</a></td>
           <td class="text-start">{{item.sinopsis}}</td>
-          <td>{{item.inicio}} - <span *ngIf="item.fin>0">{{item.fin }}</span></td>
+          <td class="col-2">{{item.inicio}} - <span *ngIf="item.fin>0">{{item.fin }}</span></td>
           <td><a href="{{item.url}}">IMDB</a></td>
         </tr>
     </table>
@@ -31,7 +32,7 @@
           {{item.nombre}}
         </a>
       </div>
-    </div> 
+    </div>
   </ng-template>
 
 </div>

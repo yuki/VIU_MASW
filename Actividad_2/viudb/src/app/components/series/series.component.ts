@@ -16,6 +16,7 @@ export class SeriesComponent implements OnInit {
 
   constructor() {
     this.series = [];
+    this.plataforma_id = 0;
   }
 
   ngOnInit(): void {
