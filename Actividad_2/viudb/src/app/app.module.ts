@@ -13,6 +13,7 @@ import { PlataformasShowComponent } from './components/plataformas-show/platafor
 import { SeriesShowComponent } from './components/series-show/series-show.component';
 import { CelebritiesShowComponent } from './components/celebrities-show/celebrities-show.component';
 import { ModalComponent } from './components/modal/modal.component';
+import { FooterComponent } from './components/footer/footer.component';
 
 @NgModule({
   declarations: [
@@ -27,6 +28,7 @@ import { ModalComponent } from './components/modal/modal.component';
     SeriesShowComponent,
     CelebritiesShowComponent,
     ModalComponent,
+    FooterComponent,
   ],
   imports: [
     BrowserModule,
