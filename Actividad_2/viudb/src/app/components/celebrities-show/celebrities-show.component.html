@@ -5,8 +5,8 @@
         </div>
         <div class="col align-self-center">
             <h1>{{celebrity.nombre}} {{celebrity.apellidos}}</h1>
-            <p class="nacimiento">{{celebrity.nacimiento}} ({{celebrity.nacionalidad}})</p>
-            <p><a href="{{celebrity.url}}">Ficha en IMDB</a></p>
+            <p class="nacimiento">{{celebrity.nacimiento | date: "dd/MM/yyyy"}} ({{celebrity.nacionalidad}})</p>
+            <p><a href="{{celebrity.url}}" target="_blank">Ficha en IMDB</a></p>
         </div>
     </div>
     <app-series [celebrity_id]="celebrity.id"></app-series>

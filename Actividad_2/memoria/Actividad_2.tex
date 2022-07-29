@@ -35,33 +35,38 @@ A lo largo de este documento se van a explicar las decisiones tomadas, tanto en 
 
 Para realizar este desarrollo se ha hecho uso del \textit{framework} de \textit{front-end} \href{https://angular.io/}{Angular}, que hace uso del lenguaje de programación \href{https://www.typescriptlang.org/}{Typescript}, y para dar un aspecto visual más cuidado se ha utilizado el \textit{framework} de estilos \href{https://getbootstrap.com/}{Bootstrap}.
 
-\chapter{Finalizad del desarrollo}
+\chapter{Objetivo del desarrollo}
 
 La aplicación realizada es una biblioteca multimedia que contiene información acerca de las principales plataformas de \textit{streaming} que existen en la actualidad, con las series que se emiten en ellas y los actores/celebrities que participan en las mismas.
 
+\vspace{-1.2em}
 \begin{center}
-    \includegraphics[frame,width=0.6\linewidth]{img/inicio.png}
+    \includegraphics[frame,width=0.58\linewidth]{img/inicio.png}
 \end{center}
+\vspace{-1.2em}
 
 No sólo vamos a poder visualizar la información de las distintas series, si no que también podremos visualizar el trailer de las mismas, y de esta manera saber si nos puede interesar empezar a ver la serie.
 
+Como último objetivo, está el de aprender a programar en Angular y hacer uso de distintas características que ofrece el \textit{framework}.
+
 \chapter{Desarrollo realizado}
-Tal como se ha indicado previamente, para realizar este proyecto se ha utilizado \href{https://angular.io/}{Angular} como \textit{framework} de desarrollo, por lo que vamos a diferenciar distintos aspectos utilizados con él.
+Tal como se ha indicado previamente, para realizar este proyecto se ha utilizado \href{https://angular.io/}{Angular} como \textit{framework} de desarrollo, por lo que vamos a diferenciar distintos recursos utilizados con él.
 
 \section{Uso de componentes}
 Una de las características de Angular es la creación de componentes, para de esta manera poder separar la aplicación en distintos apartados que se pueden programar de manera separada, y tener su estilo propio.
 
 Por ello, antes de comenzar con el desarrollo, se pensó cómo iba a ser el aspecto final de la aplicación y en cuántos componentes se iba a separar, así como la manera de poder reutilizarlos.
 
-Si miramos, por ejemplo, la web de detalle de una plataforma, podemos diferenciar los siguientes componentes, que han sido diferenciados con distintos colores:
+Si miramos, por ejemplo, la web de detalle de una plataforma, podemos diferenciar los siguientes componentes, que en la imagen han sido destacados con distintos colores:
 
-\vspace{-1em}
+\vspace{-1.2em}
 \begin{center}
-    \includegraphics[frame,width=0.6\linewidth]{img/componentes.png}
+    \includegraphics[frame,width=0.58\linewidth]{img/componentes.png}
 \end{center}
+\vspace{-1em}
 
 \begin{itemize}
-    \item \textbf{Cabecera}: La cabecera, o \textit{\textbf{navbar}}, nos permite ir a cualquiera de las secciones principales de la aplicación desde cualquier lugar de la misma, ya que siempre es visible. Nos indicará en qué sección estamos cambiando el color de la misma.
+    \item \textbf{Cabecera}: La cabecera, o \textit{\textbf{navbar}}, nos permite ir a cualquiera de las secciones principales de la aplicación desde cualquier lugar de la misma, ya que siempre es visible. Nos indicará en qué sección estamos, porque se destaca con un color distinto.
 
     \item \textbf{Sección principal}: Es donde se va a visualizar el contenido dinámico de la aplicación. Esta sección puede contener a su vez otros componentes “hijos”.
 
@@ -119,13 +124,16 @@ Este componente se reutiliza (y por tanto, recibe parámetros), desde tres sitio
 
     \item \textbf{Información de una plataforma}: Al ir al detalle de una plataforma nos muestra todas las series de esa plataforma. Se llama al componente Series pasando como parámetro el identificador de la plataforma, para así sólo visualizar sus series.
 
-    En este caso, el aspecto visual es similar al caso anterior, pero no se muestra la primera columna, que es la plataforma en el caso anterior, ya que quedaría redundante.
-
     \vspace{-0.2em}
     \begin{center}
         \includegraphics[frame,width=0.7\linewidth]{img/series-3.png}
     \end{center}
 \end{itemize}
+
+En este caso, el aspecto visual es similar al caso anterior, pero no se muestra la primera columna, que es la plataforma en el caso anterior, ya que quedaría redundante.
+
+Esto se controla a la hora de dibujar la primera columna en la vista,  con la directiva \textbf{*ngIf}: \inlineconsole{<td class="col-1" *ngIf="plataforma_id==0">}, que sólo pondrá la columna si “plataforma\_id” es cero (vista principal).
+
 
 
 \subsection{Información desde el componente hijo al padre}
@@ -160,15 +168,22 @@ Una vez más, se ha hecho uso de un componente separado para esta característic
     \includegraphics[frame,width=0.7\linewidth]{img/video.png}
 \end{center}
 
+
+\section{Uso de tuberías}
+A la hora de mostrar ciertos datos en una vista podemos crearnos una función que modifique la información para que se muestre como nos interesa, o podemos hacer uso de las “tuberías” (o \textit{pipes}).
+
+Angular tiene definidas varias tuberías, aunque también podríamos crearnos unas propias. En este caso se ha hecho uso de la \textit{\textbf{\href{https://angular.io/api/common/DatePipe}{DatePipe}}} que nos permite modificar el formato de una fecha. De esta manera, hemos podido poner las fechas de nacimiento de las celébrities en el formato en castellano.
+
+
 \section{Otras características}
 Aunque no eran requisitos del proyecto, se ha tenido especial cuidado en el diseño de la aplicación para evitar errores y tenerla preparada para el futuro.
 
 \subsection{Control de identificadores no existentes}
 Para evitar que la aplicación pueda dar información incorrecta o errores, se ha tenido especial cuidado en aquellas rutas en las que se recibe un parámetro a través de la URL.
 
-En todos los componentes en los que se recibe un identificador se comprueba que este exista, y en caso de no ser así, la aplicación muestra un error controlado.
+En todos los componentes en los que se recibe un identificador se comprueba que este exista, y en caso de no ser así, la aplicación muestra un mensaje de error.
 
-Así mismo, y tal como se ha dicho previamente, se cuenta con un componente que se visualiza cuando la ruta no coincide con ninguna otra válida. A continuación se pueden ver ambos errores controlados.
+Así mismo, y tal como se ha dicho previamente, se cuenta con un componente que se visualiza cuando la ruta no coincide con ninguna otra válida. A continuación se pueden ver ambos el aspecto de los mensajes.
 
 {
     \hfill
@@ -184,7 +199,7 @@ Así mismo, y tal como se ha dicho previamente, se cuenta con un componente que 
 
 
 \subsection{Datos en formato JSON}
-Aunque el contenido de la información es estático (no se hace uso de peticiones a servicios externos), la información está contenida en unos ficheros JSON que emulan peticiones a una API externa.
+Aunque el contenido de la información es estático (no se hace uso de peticiones a servicios externos), la información está contenida en unos ficheros JSON que emulan lo recibido tras realizar peticiones a una API externa.
 
 Estos ficheros están dentro del directorio \configdir{src/assets/json/}, diferenciados para cada uno de los modelos utilizados para la aplicación: \textbf{celebrity, plataforma} y \textbf{serie}.
 
@@ -208,7 +223,7 @@ Existen distintos servicios que se podrían utilizar:  \href{https://imdb-api.co
 
 \chapter{Conclusiones}
 
-A la hora de afrontar un proyecto nuevo utilizando un lenguaje de programación, o \textit{framework}, no visto hasta el momento, es importante tratar de tener una mente abierta y evitar realizar comparaciones con lo ya conocido.
+A la hora de afrontar un proyecto utilizando un lenguaje de programación y un \textit{framework} no vistos hasta el momento, es importante tratar de tener una mente abierta y evitar realizar comparaciones con lo ya conocido.
 
 Es beneficioso aplicar los conocimientos previos y la experiencia sobre un desarrollo nuevo, pero al hacerlo sobre un lenguaje o un \textit{framework} puede suponer realizar comparaciones injustas.
 

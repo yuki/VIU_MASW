@@ -13,7 +13,7 @@
             <h1>{{serie.nombre}}</h1>
             <p class="sinopsis">{{serie.sinopsis}}</p>
             <p class="emision"><strong>Emisión:</strong> {{serie.inicio}} - <span *ngIf="serie.fin">{{serie.fin}}</span></p>
-            <p><a href="{{serie.url}}">Ficha en IMDB</a></p>
+            <p><a href="{{serie.url}}" target="_blank">Ficha en IMDB</a></p>
 
             <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#trailerModal">
                 Ver trailer
