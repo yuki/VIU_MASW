@@ -33,7 +33,7 @@
 
 \href{https://www.nytimes.com/games/wordle/index.html}{Wordle} es un juego  que ha adquirido bastante fama debido a su sencillez, pero que al mismo tiempo tiene una mecánica adictiva: tratar de adivinar una palabra en un número máximo de intentos.
 
-A lo largo de este documento se va a explicar cómo se ha realizado un “clon” del juego, habiendo decidido ampliar las posibilidades del juego.
+A lo largo de este documento se va a explicar cómo se ha realizado un “clon” del juego, habiendo decidido ampliar las posibilidades del original.
 
 Para realizar este desarrollo se ha hecho uso del \textit{framework} de \textit{front-end} \href{https://angular.io/}{Angular}, que hace uso del lenguaje de programación \href{https://www.typescriptlang.org/}{Typescript}, y para dar un aspecto visual más cuidado se ha utilizado el \textit{framework} de estilos \href{https://getbootstrap.com/}{Bootstrap}.
 
@@ -194,7 +194,7 @@ El desarrollo final cuenta con un array que se crea al iniciar la partida que co
 
 De esta manera, la cuadrícula de intentos se dibuja teniendo en cuenta las dos primeras dimensiones de este \textit{array}, que llaman al componente \textbf{letra} pasando como parámetro el \textit{array} de cada letra (para que dibuje la propia letra y su estado).
 
-Este array se actualiza cada vez que el usuario pulsa “intro”, lo que llama a la función \inlineconsole{check_word()} que realiza la comprobación de la palabra y actualiza el \textit{array}. Esto hace que cuando haya modificaciones, los componentes se actualizan.
+Este array se actualiza cada vez que el usuario pulsa “intro”, lo que llama a la función \inlineconsole{check_word()} que realiza la comprobación de la palabra y actualiza el \textit{array}. Esto hace que cuando haya modificaciones, los componentes se actualicen.
 
 Para dibujar el teclado virtual se hace de manera similar, pero en este caso sólo es necesario un \textit{array} de una dimensión que se va actualizando con las letras introducidas.
 
