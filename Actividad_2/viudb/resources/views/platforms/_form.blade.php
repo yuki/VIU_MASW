@@ -1,14 +1,4 @@
-@if ($errors->any())
-    <div class="alert alert-danger">
-        <ul>
-            @foreach ($errors->all() as $error)
-                <li>{{ $error }}</li>
-            @endforeach
-        </ul>
-    </div>
-@endif
-
-<form class="mt-2 offset-2 col-5" name="create_platform" action="{{$route_path}}" method="POST" enctype="multipart/form-data">
+<form class="mt-2" name="create_platform" action="{{$route_path}}" method="POST" enctype="multipart/form-data">
     @csrf
     <div class="form-group mb-3">
         <label for="name" class="form-label">{{__('viudb.name')}}</label>

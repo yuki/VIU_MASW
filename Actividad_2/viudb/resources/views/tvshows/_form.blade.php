@@ -1,14 +1,4 @@
-@if ($errors->any())
-    <div class="alert alert-danger">
-        <ul>
-            @foreach ($errors->all() as $error)
-                <li>{{ $error }}</li>
-            @endforeach
-        </ul>
-    </div>
-@endif
-
-<form class="mt-2 offset-2 col-5" name="create_tvshow" action="{{$route_path}}" method="POST" enctype="multipart/form-data">
+<form class="mt-2" name="create_tvshow" action="{{$route_path}}" method="POST" enctype="multipart/form-data">
     @csrf
     <div class="form-group mb-3">
         <label for="name" class="form-label">{{__('viudb.name')}}</label>
@@ -47,7 +37,7 @@
     <div class="form-group mb-3">
         <label for="sinopsis" class="form-label">{{__('viudb.sinopsis')}}</label>
         {{-- pongo todo seguido el contenido del textarea porque si no se llena de espacios --}}
-        <textarea type="textarea" rows="3" class="form-control" id="sinopsis" name="sinopsis">@if(isset($tvshow)){{old('sinopsis',$tvshow->sinopsis)}}@else{{old('sinopsis')}}@endif</textarea
+        <textarea type="textarea" rows="3" class="form-control" id="sinopsis" name="sinopsis">@if(isset($tvshow)){{old('sinopsis',$tvshow->sinopsis)}}@else{{old('sinopsis')}}@endif</textarea>
     </div>
     <div class="form-group mb-3">
         <label for="url" class="form-label">{{__('viudb.url')}}</label>

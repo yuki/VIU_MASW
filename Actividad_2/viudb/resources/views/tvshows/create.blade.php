@@ -1,13 +1,15 @@
 @extends('layouts.app')
 @section('content')
 
-<div class="col-10">
-    <h1 class="titulo">{{__('viudb.create_tvshow')}}</h1>
-</div>
+<h1 class="titulo">{{__('viudb.create_tvshow')}}</h1>
 
-@include('tvshows._form', [
+@include('layouts._errors')
+
+@include('layouts._centered', [
+    'width' => 'col-4',
+    'include' => 'tvshows._form',
     'route_path' => route('tvshows.store'),
     'button_name'=>__('viudb.crear')
-    ])
+])
 
 @endsection
