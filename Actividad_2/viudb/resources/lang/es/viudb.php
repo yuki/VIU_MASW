@@ -11,8 +11,9 @@ return [
     // botones comunes:
     'crear' => 'Crear',
     'edit' => 'Editar',
-    'delete' => 'Borrar',
+    'delete'  => 'Borrar',
     'actions' => 'Acciones',
+    'buscar' => 'Buscar',
 
     // columnas y formularios comunes
     'name' => 'Nombre',

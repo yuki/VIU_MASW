@@ -1,6 +1,14 @@
+/*
+ * Variables
+ */
+
 :root {
     --corporativo: #F25416;
 }
+
+/*
+ * CSS Generales
+ */
 
 a {
     color: var(--corporativo);
@@ -26,9 +34,14 @@ h1.show {
 
 .botones {
     /* text-align: center; */
-    float:right;
+    /* float:right; */
     /* padding-right: 150px; */
 }
+
+
+/*
+ * CSS Específicos
+ */
 
 img.plataforma {
     max-width: 220px;

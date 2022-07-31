@@ -12,10 +12,16 @@ class PlatformController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $platforms = Platform::orderBy('name')->paginate(5);
-        return view('platforms.list', ['platforms' => $platforms]);
+        $name = null;
+        if ($request->has('name')) {
+            $name = $request->name;
+            $platforms = Platform::where('name','like','%'.$name.'%')->paginate(env('VIEW_PAGINATE'));
+        } else {
+            $platforms = Platform::orderBy('name')->paginate(env('VIEW_PAGINATE'));
+        }
+        return view('platforms.list', ['platforms' => $platforms, 'name'=>$name]);
     }
 
     /**

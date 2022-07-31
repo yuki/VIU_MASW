@@ -26,7 +26,7 @@ Auth::routes();
 * Platforms Routes
 */
 Route::group(['prefix' => 'platforms'], function() {
-    Route::get('/', 'PlatformController@index')->name('platforms.index');
+    Route::match(['get','post'],'/', 'PlatformController@index')->name('platforms.index');
     Route::get('/create', 'PlatformController@create')->name('platforms.create');
     Route::post('/create', 'PlatformController@store')->name('platforms.store');
     Route::get('/{platform}/show', 'PlatformController@show')->name('platforms.show');

@@ -2,9 +2,13 @@
 @section('content')
 
 <h1 class="titulo">{{__('viudb.platforms')}}</h1>
-<p class="botones">
-    <span ><a class="btn btn-outline-primary" href="{{route('platforms.create')}}" role="button">{{__('viudb.create_platform')}}</a></span>
-</p>
+
+<div class="row pb-3">
+    @include('layouts._search')  {{-- Formulario de búsqueda --}}
+    <div class="col text-center align-self-center">
+        <a class="btn btn-outline-primary" href="{{route('platforms.create')}}" role="button">{{__('viudb.create_platform')}}</a>
+    </div>
+</div>
 
 
 @if (count($platforms)> 0)
@@ -41,7 +45,6 @@
     </div>
 
 @else
-
     <div class="alert alert-warning mt-3 text-center">
         <strong>{{__('viudb.no_platforms')}}</strong>
     </div>
