@@ -2,10 +2,16 @@
 @section('content')
 
 <h1 class="titulo">{{__('viudb.celebrities')}}</h1>
-<p class="botones mb-4"><span ><a class="btn btn-outline-primary" href="{{route('celebrities.create')}}" role="button">{{__('viudb.create_celebrity')}}</a></span></p>
+
+<div class="row pb-3">
+    @include('layouts._search')  {{-- Formulario de búsqueda --}}
+    <div class="col text-center align-self-center">
+        <a class="btn btn-outline-primary" href="{{route('celebrities.create')}}" role="button">{{__('viudb.create_celebrity')}}</a>
+    </div>
+</div>
 
 @if (count($celebrities)> 0)
-    <table class="offset-2 col-8 text-center">
+    <table class="offset-2 offset-sm-0 col-sm-12 col-8 text-center">
         <thead>
             <tr>
                 <th></th>
@@ -28,7 +34,7 @@
                     @endif
                 </td>
                 <td class="text-start"><a href="{{route('celebrities.show',$celebrity)}}">{{$celebrity->name}} {{$celebrity->surname}}</a></td>
-                <td class="text-start">{{$celebrity->born}}</td>
+                <td class="text-start">{{$celebrity->fecha()}}</td>
                 <td class="text-start">{{$celebrity->nation}}</td>
                 <td class="text-start"><a href="{{$celebrity->url}}">IMDB</a></td>
                 <td>

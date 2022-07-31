@@ -12,7 +12,7 @@
     @csrf
     <div class="form-group mb-3">
         <label for="name" class="form-label">{{__('viudb.name')}}</label>
-        <input type="text" class="form-control" id="name" name="name" required
+        <input type="text" class="form-control @error('name') is-invalid @enderror" id="name" name="name" required
                 @if (isset($platform))
                     value="{{old('name',$platform->name)}}"
                 @else

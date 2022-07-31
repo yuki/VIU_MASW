@@ -12,7 +12,7 @@
     @csrf
     <div class="form-group mb-3">
         <label for="name" class="form-label">{{__('viudb.name')}}</label>
-        <input type="text" class="form-control" id="name" name="name"
+        <input type="text" class="form-control @error('name') is-invalid @enderror" id="name" name="name"
                 @if (isset($celebrity))
                     value="{{old('name',$celebrity->name)}}"
                 @else
@@ -22,7 +22,7 @@
     </div>
     <div class="form-group mb-3">
         <label for="surname" class="form-label">{{__('viudb.surname')}}</label>
-        <input type="text" class="form-control" id="surname" name="surname"
+        <input type="text" class="form-control @error('surname') is-invalid @enderror" id="surname" name="surname"
                 @if (isset($celebrity))
                     value="{{old('surname',$celebrity->surname)}}"
                 @else

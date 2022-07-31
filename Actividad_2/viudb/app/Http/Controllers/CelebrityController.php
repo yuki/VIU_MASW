@@ -12,9 +12,18 @@ class CelebrityController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $celebrities = Celebrity::orderBy('name')->paginate(5);
+        $name = null;
+        if ($request->has('name')) {
+            $name = $request->name;
+            $celebrities = Celebrity::where('name','like','%'.$name.'%')
+                ->orWhere('surname','like','%'.$name.'%')
+                ->paginate(env('VIEW_PAGINATE'));
+            $celebrities->appends(['name' => $request->name]);
+        } else {
+            $celebrities = Celebrity::orderBy('name')->paginate(env('VIEW_PAGINATE'));
+        }
         return view('celebrities.list', ['celebrities' => $celebrities]);
     }
 

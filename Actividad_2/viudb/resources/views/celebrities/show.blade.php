@@ -28,7 +28,7 @@
                     </span>
                 </h1>
                 <div class="info">
-                    <p>{{__('viudb.born')}} {{$celebrity->born}}</p>
+                    <p>{{__('viudb.born')}} {{$celebrity->fecha()}}</p>
                     <p>{{__('viudb.nation')}} {{$celebrity->nation}}</p>
                     <p>{{__('viudb.ficha')}} <a href="{{$celebrity->url}}">IMDB</a></p>
                 </div>

@@ -36,7 +36,7 @@ Route::group(['prefix' => 'platforms'], function() {
 });
 
 Route::group(['prefix' => 'celebrities','middleware' => ['auth']], function() {
-    Route::get('/', 'CelebrityController@index')->name('celebrities.index');
+    Route::match(['get','post'],'/', 'CelebrityController@index')->name('celebrities.index');
     Route::get('/create', 'CelebrityController@create')->name('celebrities.create');
     Route::post('/create', 'CelebrityController@store')->name('celebrities.store');
     Route::get('/{celebrity}/show', 'CelebrityController@show')->name('celebrities.show');
@@ -46,7 +46,7 @@ Route::group(['prefix' => 'celebrities','middleware' => ['auth']], function() {
 });
 
 Route::group(['prefix' => 'tvshows','middleware' => ['auth']], function() {
-    Route::get('/', 'TVShowController@index')->name('tvshows.index');
+    Route::match(['get','post'],'/', 'TVShowController@index')->name('tvshows.index');
     Route::get('/create', 'TVShowController@create')->name('tvshows.create');
     Route::post('/create', 'TVShowController@store')->name('tvshows.store');
     Route::get('/{tvshow}/show', 'TVShowController@show')->name('tvshows.show');

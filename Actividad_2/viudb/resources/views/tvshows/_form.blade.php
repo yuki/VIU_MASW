@@ -12,7 +12,7 @@
     @csrf
     <div class="form-group mb-3">
         <label for="name" class="form-label">{{__('viudb.name')}}</label>
-        <input type="text" class="form-control" id="name" name="name"
+        <input type="text" class="form-control @error('name') is-invalid @enderror" id="name" name="name"
                 @if (isset($tvshow))
                     value="{{old('name',$tvshow->name)}}"
                 @else
@@ -23,7 +23,7 @@
 
     <div class="form-group mb-3">
         <label for="platform_id" class="form-label">{{__('viudb.platform_emision')}}</label>
-        <select class="form-control" aria-label="default-select" id="platform_id" name="platform_id" required>
+        <select class="form-control @error('platform_id') is-invalid @enderror" aria-label="default-select" id="platform_id" name="platform_id" required>
             <option value=0>{{__('viudb.choose_platform')}}</option>
             @foreach ($platforms as $platform)
                 <option value={{$platform->id}}

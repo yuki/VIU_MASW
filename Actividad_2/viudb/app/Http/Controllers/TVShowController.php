@@ -14,10 +14,17 @@ class TVShowController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $tvshows = TVShow::orderBy('name')->paginate(5);
-        return view('tvshows.list', ['tvshows' => $tvshows]);
+        $name = null;
+        if ($request->has('name')) {
+            $name = $request->name;
+            $tvshows = TVShow::where('name','like','%'.$name.'%')->paginate(env('VIEW_PAGINATE'));
+            $tvshows->appends(['name' => $request->name]);
+        } else {
+            $tvshows = TVShow::orderBy('name')->paginate(env('VIEW_PAGINATE'));
+        }
+        return view('tvshows.list', ['tvshows' => $tvshows, 'name'=> $name]);
     }
 
     /**
