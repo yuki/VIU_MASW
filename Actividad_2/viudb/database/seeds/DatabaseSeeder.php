@@ -15,5 +15,6 @@ class DatabaseSeeder extends Seeder
         $this->call(PlatformSeeder::class);
         $this->call(CelebritySeeder::class);
         $this->call(TVShowSeeder::class);
+        $this->call(LanguageSeeder::class);
     }
 }

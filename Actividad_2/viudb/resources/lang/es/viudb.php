@@ -61,4 +61,16 @@ return [
     'sinopsis' => 'Sinopsis',
     'platform_emision' => 'Elige plataforma donde se emite',
     'choose_platform' => 'Elige plataforma',
+
+    /*
+    * LANGUAGES
+    */
+    'languages' => 'Idiomas',
+    'rfc_code' => 'Código ',
+    'no_languages' => 'No hay idiomas actualmente. Crea uno a través del botón.',
+    'create_language' => 'Crear idioma',
+    'edit_language' => 'Editar idioma',
+    'language_created' => 'El idioma se ha creado correctamente',
+    'language_updated' => 'El idioma se ha actualizado correctamente',
+
 ];
