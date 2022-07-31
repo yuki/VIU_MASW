@@ -43,13 +43,24 @@ img.plataforma {
 }
 
 img.mini_platform {
-    max-width: 90%;
+    max-width: 95%;
+}
+img.micro_platform {
+    max-width: 100px;
 }
 
+span.sinopsis {
+    padding-bottom: 10px;
+    display: block;
+}
+
+a.tvshow_name {
+    font-size: 120%;
+    font-weight: bold;
+}
 img.tvshow {
     min-width: 30%;
-    max-width: 65%;
-    margin-right: 20px;
+    max-width: 90%;
     border-radius: 15px;
 }
 

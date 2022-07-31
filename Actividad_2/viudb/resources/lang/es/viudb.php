@@ -59,6 +59,7 @@ return [
     'tvshow_created' => 'La serie se ha creado correctamente',
     'tvshow_updated' => 'La serie se ha actualizado correctamente',
     'sinopsis' => 'Sinopsis',
+    'you_can_see' => 'Puedes verla en ',
     'platform_emision' => 'Elige plataforma donde se emite',
     'choose_platform' => 'Elige plataforma',
 

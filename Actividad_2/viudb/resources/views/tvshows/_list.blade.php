@@ -1,22 +1,9 @@
 @if (count($tvshows)> 0)
-    <table class="offset-1 col-10">
+    <table class="col">
         @foreach ($tvshows as $tvshow)
             <tr>
-                @if ($paginate)
-                    <td class="col-1 text-center">
-                        @if (Storage::disk('public')->exists("img/platform_".$tvshow->platform->id.".jpg"))
-                            <a href="{{route('platforms.show',$tvshow->platform)}}">
-                                <img class="mini_platform" src="@php
-                                    echo Storage::disk('public')->url('img/platform_'.$tvshow->platform->id.'.jpg')
-                                @endphp ">
-                            </a>
-                        @endif
-                        <br>
-                        <a href="{{route('platforms.show',$tvshow->platform)}}">{{$tvshow->platform->name}}</a>
-                    </td>
-                @endif
-
                 <td class="col-3 text-center">
+
                     @if (Storage::disk('public')->exists("img/tvshow_".$tvshow->id.".jpg"))
                         <a href="{{route('tvshows.show',$tvshow)}}">
                             <img class="tvshow" src="@php
@@ -24,11 +11,25 @@
                             @endphp ">
                         </a>
                     @endif
-                    <br>
-                    <a href="{{route('tvshows.show',$tvshow)}}">{{$tvshow->name}}</a>
+
                 </td>
-                <td class="text-start col-4">{{$tvshow->sinopsis}}</td>
-                <td>
+                <td class="text-start col-5">
+                    <a class="tvshow_name" href="{{route('tvshows.show',$tvshow)}}">{{$tvshow->name}}</a><br>
+                    <span class="sinopsis">{{$tvshow->sinopsis}}</span>
+                    @if ($paginate)
+                        <a href="{{route('platforms.show',$tvshow->platform)}}">
+                            {{__('viudb.you_can_see')}}
+                            @if (Storage::disk('public')->exists("img/platform_".$tvshow->platform->id.".jpg"))
+                                <img class="micro_platform" src="@php
+                                    echo Storage::disk('public')->url('img/platform_'.$tvshow->platform->id.'.jpg')
+                                @endphp ">
+                            @else
+                                {{$tvshow->platform->name}}
+                            @endif
+                        </a>
+                    @endif
+                </td>
+                <td class="col">
                     {{-- TODO cambiar --}}
                     <a class="btn btn-outline-success" href="{{route('tvshows.create')}}" role="button">Crear Episodio</a>
                     <a class="btn btn-outline-warning" href="{{route('tvshows.edit',$tvshow)}}" role="button">{{__('viudb.edit')}}</a>

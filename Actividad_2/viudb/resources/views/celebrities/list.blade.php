@@ -3,18 +3,14 @@
 
 <h1 class="titulo">{{__('viudb.celebrities')}}</h1>
 
-<div class="row pb-3">
-    @include('layouts._search')  {{-- Formulario de búsqueda --}}
-    <div class="col text-center align-self-center">
-        <a class="btn btn-outline-primary" href="{{route('celebrities.create')}}" role="button">{{__('viudb.create_celebrity')}}</a>
-    </div>
-</div>
+{{-- Formulario de búsqueda y botón de crear --}}
+@include('layouts._search', ['route_path' => route('celebrities.create'),'button_name'=>__('viudb.create_celebrity')])
 
 @if (count($celebrities)> 0)
     <table class="offset-2 offset-sm-0 col-sm-12 col-8 text-center">
         <thead>
             <tr>
-                <th></th>
+                {{-- <th></th> --}}
                 <th>{{__('viudb.name_surname')}}</th>
                 <th>{{__('viudb.born')}}</th>
                 <th>{{__('viudb.nation')}}</th>
@@ -31,9 +27,11 @@
                                 echo Storage::disk('public')->url('img/celebrity_'.$celebrity->id.'.jpg')
                             @endphp ">
                         </a>
+                        <br>
                     @endif
+                    <a href="{{route('celebrities.show',$celebrity)}}">{{$celebrity->name}} {{$celebrity->surname}}</a>
                 </td>
-                <td class="text-start"><a href="{{route('celebrities.show',$celebrity)}}">{{$celebrity->name}} {{$celebrity->surname}}</a></td>
+                {{-- <td class="text-start"></td> --}}
                 <td class="text-start">{{$celebrity->fecha()}}</td>
                 <td class="text-start">{{$celebrity->nation}}</td>
                 <td class="text-start"><a href="{{$celebrity->url}}">IMDB</a></td>
@@ -48,6 +46,7 @@
                                               )"
                       role="button">{{__('viudb.delete')}}</a>
                 </td>
+
             </tr>
         @endforeach
     </table>

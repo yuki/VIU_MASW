@@ -3,12 +3,8 @@
 
 <h1 class="titulo">{{__('viudb.platforms')}}</h1>
 
-<div class="row pb-3">
-    @include('layouts._search')  {{-- Formulario de búsqueda --}}
-    <div class="col text-center align-self-center">
-        <a class="btn btn-outline-primary" href="{{route('platforms.create')}}" role="button">{{__('viudb.create_platform')}}</a>
-    </div>
-</div>
+{{-- Formulario de búsqueda y botón de crear --}}
+@include('layouts._search', ['route_path' => route('platforms.create'),'button_name'=>__('viudb.create_platform')])
 
 
 @if (count($platforms)> 0)
