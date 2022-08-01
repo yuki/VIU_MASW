@@ -62,6 +62,7 @@ return [
     'you_can_see' => 'Puedes verla en ',
     'platform_emision' => 'Elige plataforma donde se emite',
     'choose_platform' => 'Elige plataforma',
+    'tvshows_episodes' => 'Episodios de la serie',
 
     /*
     * EPISODES

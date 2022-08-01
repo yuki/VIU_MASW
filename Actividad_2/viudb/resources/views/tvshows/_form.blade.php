@@ -21,6 +21,10 @@
                         @if ($tvshow->platform->id == $platform->id)
                             selected
                         @endif
+                    @elseif (isset($_GET["platform_id"]))
+                        @if ($_GET["platform_id"] == $platform->id)
+                            selected
+                        @endif
                     @else
                         @if (old('platform_id') == $platform->id)
                             selected

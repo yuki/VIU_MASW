@@ -27,6 +27,10 @@
                         @if ($episode->tvshow->id == $tvshow->id)
                             selected
                         @endif
+                    @elseif (isset($_GET["tvshow_id"]))
+                        @if ($_GET["tvshow_id"] == $tvshow->id)
+                            selected
+                        @endif
                     @else
                         @if (old('tvshow_id') == $tvshow->id)
                             selected
