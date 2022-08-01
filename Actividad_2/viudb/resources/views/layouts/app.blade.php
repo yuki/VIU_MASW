@@ -38,7 +38,7 @@
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item"><a class="nav-link" href="{{route('platforms.index')}}">{{__('viudb.platforms')}}</a></li>
                     <li class="nav-item"><a class="nav-link" href="{{route('tvshows.index')}}">{{__('viudb.tvshows')}}</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#">Episodios</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{route('episodes.index')}}">Episodios</a></li>
                     <li class="nav-item"><a class="nav-link" href="{{route('celebrities.index')}}">Celebrities</a></li>
                     <li class="nav-item"><a class="nav-link" href="{{route('languages.index')}}">Idiomas</a></li>
                 </ul>

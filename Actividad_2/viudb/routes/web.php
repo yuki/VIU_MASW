@@ -55,6 +55,16 @@ Route::group(['prefix' => 'tvshows','middleware' => ['auth']], function() {
     Route::delete('/{tvshow}/delete', 'TVShowController@destroy')->name('tvshows.destroy');
 });
 
+Route::group(['prefix' => 'episodes','middleware' => ['auth']], function() {
+    Route::match(['get','post'],'/', 'EpisodeController@index')->name('episodes.index');
+    Route::get('/create', 'EpisodeController@create')->name('episodes.create');
+    Route::post('/create', 'EpisodeController@store')->name('episodes.store');
+    Route::get('/{episode}/show', 'EpisodeController@show')->name('episodes.show');
+    Route::get('/{episode}/edit', 'EpisodeController@edit')->name('episodes.edit');
+    Route::post('/{episode}/update', 'EpisodeController@update')->name('episodes.update');
+    Route::delete('/{episode}/delete', 'EpisodeController@destroy')->name('episodes.destroy');
+});
+
 Route::group(['prefix' => 'languages','middleware' => ['auth']], function() {
     Route::match(['get','post'],'/', 'LanguageController@index')->name('languages.index');
     Route::get('/create', 'LanguageController@create')->name('languages.create');

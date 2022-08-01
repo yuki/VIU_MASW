@@ -58,7 +58,14 @@ a.tvshow_name {
     font-size: 120%;
     font-weight: bold;
 }
+
 img.tvshow {
+    min-width: 30%;
+    max-width: 90%;
+    border-radius: 15px;
+}
+
+img.micro_tvshow {
     min-width: 30%;
     max-width: 90%;
     border-radius: 15px;

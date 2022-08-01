@@ -16,4 +16,10 @@ class TVShow extends Model
     {
         return $this->belongsTo('App\Platform');
     }
+
+    //devuelve los episodios que tiene.
+    public function episodes()
+    {
+        return $this->hasMany('App\Episode','tvshow_id');
+    }
 }

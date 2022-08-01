@@ -64,6 +64,24 @@ return [
     'choose_platform' => 'Elige plataforma',
 
     /*
+    * EPISODES
+    */
+    'episodes' => 'Episodios',
+    'season' => 'T',
+    'season_long' => 'Temporada',
+    'episode' => 'E',
+    'episode_long' => 'Episodio',
+    'released' => 'Fecha de emisión',
+    'no_episodes' => 'No hay episodios actualmente. Crea uno a través del botón.',
+    'create_episode' => 'Crear episodio',
+    'edit_episode' => 'Editar episodio',
+    'episode_created' => 'El episodio se ha creado correctamente',
+    'episode_updated' => 'El episodio se ha actualizado correctamente',
+    'tvshow_emision' => 'Elige la serie a la que pertenece',
+    'choose_tvshow' => 'Elige la serie',
+
+
+    /*
     * LANGUAGES
     */
     'languages' => 'Idiomas',

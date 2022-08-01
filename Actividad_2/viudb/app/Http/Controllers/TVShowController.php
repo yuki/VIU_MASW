@@ -69,7 +69,7 @@ class TVShowController extends Controller
      */
     public function show(TVShow $tvshow)
     {
-        return view('tvshows.show', ['tvshow' => $tvshow]);
+        return view('tvshows.show', ['tvshow' => $tvshow,'episodes'=>$tvshow->episodes]);
     }
 
     /**
