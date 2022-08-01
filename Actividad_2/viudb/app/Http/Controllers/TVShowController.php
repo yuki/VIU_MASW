@@ -19,7 +19,7 @@ class TVShowController extends Controller
         $name = null;
         if ($request->has('name')) {
             $name = $request->name;
-            $tvshows = TVShow::where('name','like','%'.$name.'%')->paginate(env('VIEW_PAGINATE'));
+            $tvshows = TVShow::where('name','like','%'.$name.'%')->orderBy('name')->paginate(env('VIEW_PAGINATE'));
             $tvshows->appends(['name' => $request->name]);
         } else {
             $tvshows = TVShow::orderBy('name')->paginate(env('VIEW_PAGINATE'));

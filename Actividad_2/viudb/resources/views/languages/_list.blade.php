@@ -2,9 +2,9 @@
     <table class="offset-3 col-6">
         @foreach ($languages as $language)
             <tr>
-                <td class="text-start col3">{{$language->name}}</td>
-                <td class="text-start col-2">{{$language->rfc_code}}</td>
-                <td>
+                <td class="text-start">{{$language->name}}</td>
+                <td class="text-start">{{$language->rfc_code}}</td>
+                <td class="text-start">
                     {{-- TODO cambiar --}}
                     <a class="btn btn-outline-warning" href="{{route('languages.edit',$language)}}" role="button">{{__('viudb.edit')}}</a>
                     <a class="btn btn-outline-danger"

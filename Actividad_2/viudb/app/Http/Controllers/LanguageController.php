@@ -17,7 +17,7 @@ class LanguageController extends Controller
         $name = null;
         if ($request->has('name')) {
             $name = $request->name;
-            $languages = Language::where('name','like','%'.$name.'%')->paginate(env('VIEW_PAGINATE'));
+            $languages = Language::where('name','like','%'.$name.'%')->orderBy('name')->paginate(env('VIEW_PAGINATE'));
             $languages->appends(['name' => $request->name]);
         } else {
             $languages = Language::orderBy('name')->paginate(env('VIEW_PAGINATE'));
