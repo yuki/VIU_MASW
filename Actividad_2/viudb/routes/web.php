@@ -54,6 +54,7 @@ Route::group(['prefix' => 'tvshows','middleware' => ['auth']], function() {
     Route::get('/{tvshow}/edit', 'TVShowController@edit')->name('tvshows.edit');
     Route::post('/{tvshow}/update', 'TVShowController@update')->name('tvshows.update');
     Route::delete('/{tvshow}/delete', 'TVShowController@destroy')->name('tvshows.destroy');
+    Route::get('/{tvshow}/info', 'TVShowController@info');
 });
 
 Route::group(['prefix' => 'episodes','middleware' => ['auth']], function() {

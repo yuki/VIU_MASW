@@ -107,15 +107,29 @@ class TVShowController extends Controller
         return redirect()->route('tvshows.index')->with('success',__('viudb.tvshow_updated'));
     }
 
+    // Devuelve información de dependencias antes de ser borrado
+    public function info(TVShow $tvshow)
+    {
+        return count($tvshow->episodes);
+    }
+
+
     /**
      * Remove the specified resource from storage.
      *
      * @param  \App\TVShow  $tVShow
      * @return \Illuminate\Http\Response
      */
-    public function destroy(TVShow $tvshow)
+    public function destroy(Request $request, TVShow $tvshow)
     {
-        //
+        if ($tvshow != null){
+            foreach ($tvshow->episodes as $episode) {
+                $episode->delete();
+            }
+            $tvshow->delete();
+            return 'OK';
+        }
+        return 'ERROR';
     }
 
     // Validación de los campos

@@ -16,15 +16,7 @@
             <div class="col align-self-center">
                 <h1 class="show">{{ $tvshow->name }} {{ $tvshow->surname }}
                     <span class="botones">
-                        {{-- TODO: cambiar --}}
-                        <a class="btn btn-outline-warning btn-sm" href="{{route('tvshows.edit',$tvshow)}}" role="button">{{__('viudb.edit')}}</a>
-                        <a class="btn btn-outline-danger btn-sm"
-                            onclick="getDependencies(<?php echo $tvshow->id ?> ,
-                                              'tvshows',
-                                              'tvshow',
-                                              'apariciones'
-                                              )"
-                            role="button">{{__('viudb.delete')}}</a>
+                        @include('tvshows._buttons')
                     </span>
                 </h1>
                 <div class="info">
