@@ -33,7 +33,7 @@ function deleteOrigin(id,path,csrf_token){
     var url =  window.location.origin + "/"+path+"/"+id+"/delete";
 
     fetch(`${url}`,{
-        method: 'POST',
+        method: 'DELETE',
         headers: {
             'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
             "X-CSRF-TOKEN": csrf_token
