@@ -71,7 +71,7 @@ class EpisodeController extends Controller
      */
     public function show(Episode $episode)
     {
-        return view('episodes.show', ['episode' => $episode]);
+        return view('episodes.show', ['episode' => $episode,'celebrities'=>$episode->celebrities()->paginate(env('VIEW_PAGINATE'))]);
     }
 
     /**

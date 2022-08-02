@@ -48,6 +48,7 @@ return [
     'celebrity_created' => 'La celebrity se ha creado correctamente',
     'celebrity_updated' => 'La celebrity se ha actualizado correctamente',
     'ficha' => 'Ficha:',
+    'celebrity_episodes' => 'Apariciones del celebrity',
 
     /*
     * TVSHOWS
@@ -80,6 +81,7 @@ return [
     'episode_updated' => 'El episodio se ha actualizado correctamente',
     'tvshow_emision' => 'Elige la serie a la que pertenece',
     'choose_tvshow' => 'Elige la serie',
+    'episode_celebrities' => 'Celebrities en el episodio',
 
 
     /*

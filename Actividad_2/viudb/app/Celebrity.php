@@ -14,4 +14,12 @@ class Celebrity extends Model
         $date = date_create($this->born);
         return date_format($date, 'd/m/Y');
     }
+
+    // devuelve los episodios en los que participa a través de la tabla celebrity_episode
+    // hay que indicar la columna extra que tiene la tabla.
+    public function episodes() {
+        return $this->belongsToMany('App\Episode')->withPivot([
+            'perform_as',
+        ]);
+    }
 }

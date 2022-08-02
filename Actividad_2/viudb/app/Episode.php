@@ -14,4 +14,12 @@ class Episode extends Model
     {
         return $this->belongsTo('App\TVShow');
     }
+
+    // devuelve las celebrities que tiene el capítulo a través de la tabla celebrity_episode
+    // hay que indicar la columna extra que tiene la tabla.
+    public function celebrities() {
+        return $this->belongsToMany('App\Celebrity')->withPivot([
+            'perform_as',
+        ]);
+    }
 }

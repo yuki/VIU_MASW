@@ -17,5 +17,6 @@ class DatabaseSeeder extends Seeder
         $this->call(TVShowSeeder::class);
         $this->call(LanguageSeeder::class);
         $this->call(EpisodeSeeder::class);
+        $this->call(celebrity_episodeSeeder::class);
     }
 }

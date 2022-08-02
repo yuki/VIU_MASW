@@ -32,8 +32,9 @@
             </div>
 
         </div>
-        <div class="row">
-            {{-- @include('episodes._list', ['episodes'=>$episodes, 'paginate'=>false]) --}}
+        <div class="">
+            <h2 class="pt-5 pb-5 text-center">{{__('viudb.episode_celebrities')}}</h2>
+            @include('celebrities._list', ['celebrities'=>$celebrities])
         </div>
   </div>
 

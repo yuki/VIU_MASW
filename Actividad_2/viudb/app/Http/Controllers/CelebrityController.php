@@ -69,8 +69,8 @@ class CelebrityController extends Controller
      */
     public function show(Celebrity $celebrity)
     {
-        // TODO: hacer másc osas
-        return view('celebrities.show', ['celebrity' => $celebrity]);
+        $episodes = $celebrity->episodes()->paginate(env('VIEW_PAGINATE'));
+        return view('celebrities.show', ['celebrity' => $celebrity, 'episodes' => $episodes]);
     }
 
     /**
