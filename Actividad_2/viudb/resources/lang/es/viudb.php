@@ -82,12 +82,15 @@ return [
     'tvshow_emision' => 'Elige la serie a la que pertenece',
     'choose_tvshow' => 'Elige la serie',
     'episode_celebrities' => 'Celebrities en el episodio',
+    'episode_languages' => 'Idiomas en el episodio',
 
 
     /*
     * LANGUAGES
     */
     'languages' => 'Idiomas',
+    'language' => 'Idioma',
+    'type' => 'Tipo',
     'rfc_code' => 'Código ',
     'no_languages' => 'No hay idiomas actualmente. Crea uno a través del botón.',
     'create_language' => 'Crear idioma',

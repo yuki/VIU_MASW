@@ -22,4 +22,12 @@ class Episode extends Model
             'perform_as',
         ]);
     }
+
+    // devuelve los languages que tiene el capítulo a través de la tabla episode_language
+    // hay que indicar la columna extra que tiene la tabla.
+    public function languages() {
+        return $this->belongsToMany('App\Language')->withPivot([
+            'type',
+        ]);
+    }
 }

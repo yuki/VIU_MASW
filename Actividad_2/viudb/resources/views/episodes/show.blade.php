@@ -32,6 +32,12 @@
             </div>
 
         </div>
+
+        <div class="">
+            <h2 class="pt-5 pb-5 text-center">{{__('viudb.episode_languages')}}</h2>
+            @include('languages._list', ['languages'=>$languages])
+        </div>
+
         <div class="">
             <h2 class="pt-5 pb-5 text-center">{{__('viudb.episode_celebrities')}}</h2>
             @include('celebrities._list', ['celebrities'=>$celebrities])
