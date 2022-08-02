@@ -3,17 +3,24 @@
 
     <div class="container">
         <div class="row">
-            <div class="col-4 text-center">
-                @if (Storage::disk('public')->exists("img/episode_".$episode->id.".jpg"))
+            @if (Storage::disk('public')->exists("img/episode_".$episode->id.".jpg"))
+                <div class="col-4 text-center">
+
                     <a href="{{route('episodes.show',$episode)}}">
                         <img class="show" src="@php
                             echo Storage::disk('public')->url('img/episode_'.$episode->id.'.jpg')
                         @endphp ">
                     </a>
-                @endif
-            </div>
+
+                </div>
+            @endif
             <div class="col align-self-center">
-                <h1 class="show">{{ $episode->name }}
+                <h1 class='show
+                    {{-- text-center si no hay imagen --}}
+                    @if (!Storage::disk("public")->exists("img/episode_".$episode->id.".jpg"))
+                        text-center
+                    @endif
+                '>{{ $episode->name }}
                     <span class="botones">
                         @include('episodes._buttons')
                     </span>
