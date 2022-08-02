@@ -26,10 +26,11 @@
                     <a class="btn btn-outline-warning" href="{{route('platforms.edit',$platform)}}" role="button">{{__('viudb.edit')}}</a>
                     <a class="btn btn-outline-danger"
                     {{-- TODO: cambiar --}}
-                      onclick="getDependencies(,
+                      onclick="getDependencies({{$platform->id}},
                                               'platforms',
                                               'plataforma',
-                                              'series'
+                                              'series',
+                                              '{{csrf_token()}}'
                                               )"
                       role="button">{{__('viudb.delete')}}</a>
                 </td>

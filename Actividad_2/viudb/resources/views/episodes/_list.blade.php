@@ -3,9 +3,9 @@
         <thead>
             <tr>
                 <th></th>
-                {{-- @if ($paginate) --}}
+                @if ($show_cover)
                     <th></th>
-                {{-- @endif --}}
+                @endif
                 <th class="text-center">{{__('viudb.sinopsis')}}</th>
                 <th class="text-center">{{__('viudb.season')}} - {{__('viudb.episode')}}</th>
                 @if (isset($celebrity))
@@ -16,7 +16,7 @@
         </thead>
         @foreach ($episodes as $episode)
             <tr>
-                {{-- @if ($paginate) --}}
+                @if ($show_cover)
                     <td class="col-2 text-center">
                         <a href="{{route('tvshows.show',$episode->tvshow->id)}}">
                             @if (Storage::disk('public')->exists("img/tvshow_".$episode->tvshow->id.".jpg"))
@@ -28,7 +28,7 @@
                             @endif
                         </a>
                     </td>
-                {{-- @endif --}}
+                @endif
                 <td  class="col-3 text-center">
                     <a href="{{route('episodes.show',$episode)}}">
                         @if (Storage::disk('public')->exists("img/episode_".$episode->id.".jpg"))
@@ -61,11 +61,11 @@
         @endforeach
     </table>
 
-    {{-- @if ($paginate) --}}
+    @if ($show_cover)
         <div class="paginate d-flex justify-content-center">
             {{ $episodes->links() }}
         </div>
-    {{-- @endif --}}
+    @endif
 
 @else
     <div class="alert alert-warning mt-3 text-center">

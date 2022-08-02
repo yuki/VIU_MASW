@@ -95,15 +95,34 @@ class PlatformController extends Controller
         return redirect()->route('platforms.index')->with('success',__('viudb.platform_updated'));
     }
 
+
+    // Devuelve información de dependencias antes de ser borrado
+    public function info(Platform $platform)
+    {
+        return count($platform->tvshows);
+    }
+
     /**
      * Remove the specified resource from storage.
      *
      * @param  \App\Platform  $platform
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Platform $platform)
+    public function destroy(Request $request, Platform $platform)
     {
-        // TODO: hacer el borrado
+        if ($platform != null){
+            $platform->delete();
+            foreach ($platform->tvshows as $tvshow) {
+                foreach ($tvshow->episodes as $episode) {
+                    $episode->delete();
+                }
+                $tvshow->delete();
+            }
+            return 'OK';
+            // return redirect()->route('platforms.index')->with('success',__('viudb.platform_deleted'));
+        }
+        return 'ERROR';
+        // return redirect()->route('platforms.index')->with('error',__('viudb.platform_deleted_error'));
     }
 
 

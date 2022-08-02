@@ -20,6 +20,13 @@ return [
     'url' => 'URL en IMDB',
     'select_img' => 'Elige imagen',
 
+
+    // delete modal
+    'sure?' => '¿Está seguro?',
+    'cannot_undone' => '¡Está a punto de hacer una acción que no se puede deshacer!',
+    'close' => 'Cerrar',
+    'sure' => '¡Seguro! Borra',
+
     /*
     * PLATFORMS
     */
@@ -29,6 +36,8 @@ return [
     'edit_platform' => 'Editar plataforma',
     'platform_created' => 'La plataforma se ha creado correctamente',
     'platform_updated' => 'La plataforma se ha actualizado correctamente',
+    'platform_deleted' => 'La plataforma se ha borrado correctamente',
+    'platform_deleted_error' => 'Ha habido errores al borrar la plataforma',
 
     // platform/X/show
     'tvshows_from' => 'Series de :platform',

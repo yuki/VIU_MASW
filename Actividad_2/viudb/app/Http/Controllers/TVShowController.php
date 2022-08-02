@@ -69,7 +69,7 @@ class TVShowController extends Controller
      */
     public function show(TVShow $tvshow)
     {
-        return view('tvshows.show', ['tvshow' => $tvshow,'episodes'=>$tvshow->episodes()->paginate(env('VIEW_PAGINATE'))]);
+        return view('tvshows.show', ['tvshow' => $tvshow,'episodes'=>$tvshow->episodes()->paginate(env('VIEW_PAGINATE')), 'show_cover'=> false]);
     }
 
     /**

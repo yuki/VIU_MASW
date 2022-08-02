@@ -36,7 +36,7 @@
         </div>
         <div class="">
             <h2 class="pt-5 pb-5 text-center">{{__('viudb.celebrity_episodes')}}</h2>
-            @include('episodes._list', ['episodes'=>$episodes,'celebrity'=>$celebrity])
+            @include('episodes._list', ['episodes'=>$episodes,'celebrity'=>$celebrity, 'show_cover'=> true])
         </div>
   </div>
 

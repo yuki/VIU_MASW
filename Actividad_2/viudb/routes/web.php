@@ -32,7 +32,8 @@ Route::group(['prefix' => 'platforms'], function() {
     Route::get('/{platform}/show', 'PlatformController@show')->name('platforms.show');
     Route::get('/{platform}/edit', 'PlatformController@edit')->name('platforms.edit');
     Route::post('/{platform}/update', 'PlatformController@update')->name('platforms.update');
-    Route::delete('/{platform}/delete', 'PlatformController@destroy')->name('platforms.destroy');
+    Route::post('/{platform}/delete', 'PlatformController@destroy')->name('platforms.destroy');
+    Route::get('/{platform}/info', 'PlatformController@info');
 });
 
 Route::group(['prefix' => 'celebrities','middleware' => ['auth']], function() {
