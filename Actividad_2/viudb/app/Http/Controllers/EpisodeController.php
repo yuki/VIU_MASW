@@ -124,7 +124,11 @@ class EpisodeController extends Controller
      */
     public function destroy(Episode $episode)
     {
-        //
+        if ($episode != null){
+            $episode->delete();
+            return 'OK';
+        }
+        return 'ERROR';
     }
 
     // Validación de los campos

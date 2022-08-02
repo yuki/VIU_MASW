@@ -119,10 +119,8 @@ class PlatformController extends Controller
                 $tvshow->delete();
             }
             return 'OK';
-            // return redirect()->route('platforms.index')->with('success',__('viudb.platform_deleted'));
         }
         return 'ERROR';
-        // return redirect()->route('platforms.index')->with('error',__('viudb.platform_deleted_error'));
     }
 
 
