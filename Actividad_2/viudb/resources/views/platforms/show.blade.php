@@ -16,15 +16,7 @@
     <div class="col align-self-center mb-5">
         <h1>{{__('viudb.tvshows_from', ['platform' => $platform->name])}}
             <span class="botones">
-                {{-- TODO: cambiar --}}
-                <a class="btn btn-outline-warning btn-sm" href="/views/celebrities/edit.php?id=<?php echo $platform->id ?>" role="button">Editar</a>
-                <a class="btn btn-outline-danger btn-sm"
-                    onclick="getDependencies(<?php echo $platform->id ?> ,
-                                        'celebrities',
-                                        'celebrity',
-                                        'apariciones'
-                                        )"
-                    role="button">Borrar</a>
+                @include('platforms._buttons')
             </span>
         </h1>
     </div>

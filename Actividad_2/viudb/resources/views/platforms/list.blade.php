@@ -22,17 +22,7 @@
                 </td>
                 <td class="text-start"><a href="{{route('platforms.show',$platform)}}">{{$platform->name}}</a></td>
                 <td>
-                    <a class="btn btn-outline-success" href="{{route('tvshows.create')}}?platform_id={{$platform->id}}" role="button">{{__('viudb.create_tvshow')}}</a>
-                    <a class="btn btn-outline-warning" href="{{route('platforms.edit',$platform)}}" role="button">{{__('viudb.edit')}}</a>
-                    <a class="btn btn-outline-danger"
-                    {{-- TODO: cambiar --}}
-                      onclick="getDependencies({{$platform->id}},
-                                              'platforms',
-                                              'plataforma',
-                                              'series',
-                                              '{{csrf_token()}}'
-                                              )"
-                      role="button">{{__('viudb.delete')}}</a>
+                    @include('platforms._buttons')
                 </td>
             </tr>
         @endforeach

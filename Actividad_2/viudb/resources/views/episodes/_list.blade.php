@@ -46,17 +46,7 @@
                     <td class="col-1 text-center">{{$episode->pivot->perform_as}}</td>
                 @endif
                 <td class="col text-center">
-                    {{-- TODO cambiar --}}
-                    <a class="btn btn-outline-warning" href="{{route('episodes.edit',$episode)}}" role="button">{{__('viudb.edit')}}</a>
-                    <a class="btn btn-outline-danger"
-                    {{-- TODO: cambiar --}}
-                      onclick="getDependencies({{$episode->id}},
-                                              'episodes',
-                                              'plataforma',
-                                              'series',
-                                              '{{csrf_token()}}'
-                                              )"
-                      role="button">{{__('viudb.delete')}}</a>
+                    @include('episodes._buttons')
                 </td>
             </tr>
         @endforeach
