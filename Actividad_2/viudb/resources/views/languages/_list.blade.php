@@ -22,11 +22,11 @@
                         <a class="btn btn-outline-warning" href="{{route('languages.edit',$language)}}" role="button">{{__('viudb.edit')}}</a>
                     @endif
                     <a class="btn btn-outline-danger"
-                    {{-- TODO: cambiar --}}
-                      onclick="getDependencies(,
+                      onclick="getDependencies({{$language->id}},
                                               'languages',
-                                              'plataforma',
-                                              'series'
+                                              'languages',
+                                              'languages',
+                                              '{{csrf_token()}}'
                                               )"
                       role="button">{{__('viudb.delete')}}</a>
                 </td>

@@ -34,15 +34,7 @@
                     <td class="col-1 text-center">{{$celebrity->pivot->perform_as}}</td>
                 @endif
                 <td>
-                    <a class="btn btn-outline-warning" href="{{route('celebrities.edit',$celebrity)}}" role="button">{{__('viudb.edit')}}</a>
-                    <a class="btn btn-outline-danger"
-                    {{-- TODO: cambiar --}}
-                      onclick="getDependencies(,
-                                              'celebrities',
-                                              'plataforma',
-                                              'series'
-                                              )"
-                      role="button">{{__('viudb.delete')}}</a>
+                    @include('celebrities._buttons')
                 </td>
 
             </tr>

@@ -95,9 +95,15 @@ class LanguageController extends Controller
      * @param  \App\Language  $language
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Language $language)
+    public function destroy(Request $request, Language $language)
     {
-        //
+        if ($language != null){
+            //borra las relaciones de la tabla intermedia episode_language
+            $language->episodes()->detach();
+            $language->delete();
+            return 'OK';
+        }
+        return 'ERROR';
     }
 
 

@@ -113,9 +113,15 @@ class CelebrityController extends Controller
      * @param  \App\Celebrity  $celebrity
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Celebrity $celebrity)
+    public function destroy(Request $request, Celebrity $celebrity)
     {
-        // TODO: hacer cosas
+        if ($celebrity != null){
+            // borra los datos de la tabla intermedia celebrity_episode
+            $celebrity->episodes()->detach();
+            $celebrity->delete();
+            return 'OK';
+        }
+        return 'ERROR';
     }
 
     protected function validateCelebrity($request,$celebrity=null) {

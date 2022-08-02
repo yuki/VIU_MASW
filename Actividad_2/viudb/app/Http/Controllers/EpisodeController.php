@@ -126,6 +126,10 @@ class EpisodeController extends Controller
     {
         if ($episode != null){
             $episode->delete();
+            // borra los datos de la tabla intermedia celebrity_episode
+            $episode->celebrities()->detach();
+            // borra los datos de la tabla intermedia episode_language
+            $episode->languages()->detach();
             return 'OK';
         }
         return 'ERROR';
