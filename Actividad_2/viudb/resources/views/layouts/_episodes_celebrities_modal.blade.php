@@ -56,13 +56,6 @@
                         @endforeach
                     </select>
                 </div>
-
-                {{-- @if (isset($celebrity))
-                    <input type="hidden" class="form-control" id="celebrity_id" name="celebrity_id" value="{{$celebrity->id}}" />
-                @else
-                    <input type="hidden" class="form-control" id="episode_id" name="episode_id" value="{{$episode->id}}" />
-                @endif --}}
-
                 <button type="submit" class="btn btn-success" id="addFilmography" name="addFilmography">Añadir</button>
             </form>
 

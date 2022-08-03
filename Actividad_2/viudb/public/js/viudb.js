@@ -59,3 +59,45 @@ function FilmographyModal() {
     $('#FilmographyModal').modal('show');
 }
 
+//preguntamos si queremos borrar la filmografía de un celebrity
+function confirmDeleteFilmography(celebrity_id, episode_id, funcion,csrf_token){
+    // sacamos el modal para confirmar el borrado
+    $('#deleteModal').modal('show');
+
+    document.getElementById('borrar').onclick = function() {deleteFilmography(celebrity_id, episode_id, funcion,'celebrities',csrf_token)};
+}
+
+//preguntamos si queremos borrar parte del casting de un episodio
+function confirmDeleteCasting(episode_id, celebrity_id, funcion,csrf_token){
+    // sacamos el modal para confirmar el borrado
+    $('#deleteModal').modal('show');
+
+    document.getElementById('borrar').onclick = function() {deleteFilmography(celebrity_id, episode_id, funcion,'episodes',csrf_token)};
+}
+
+// borramos parte de la filmografía de una celebrity
+function deleteFilmography(celebrity_id, episode_id, funcion,origin,csrf_token){
+    var url = window.location.origin + "/deleteFilmography";
+
+    reqData = 'celebrity_id='+  celebrity_id + '&episode_id=' + episode_id+ '&funcion=' +funcion;
+    fetch(`${url}`,{
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
+            "X-CSRF-TOKEN": csrf_token
+          },
+
+        body: reqData
+    })
+    .then((response) => response.text())
+    .then(response => {
+        if (response) {
+            // al borrar redirigimos al listado
+            window.location='show'
+        }
+    })
+    .catch(error => function(){
+        alert("Error al borrar" + error);
+    });
+}
+

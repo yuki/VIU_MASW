@@ -70,7 +70,7 @@ class CelebrityController extends Controller
      */
     public function show(Request $request,Celebrity $celebrity)
     {
-        if ($request->has('episode_id') && $request->has('funcion')) {
+        if ($request->has('episode_id') && $request->has('funcion') && $request->funcion != '0') {
             if (count($celebrity->episodes()->where('episode_id','=',$request->episode_id)->wherePivot('perform_as',$request->funcion)->get())==0){
                 $celebrity->episodes()->attach($request->episode_id,['perform_as' => $request->funcion]);
             }

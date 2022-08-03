@@ -46,7 +46,21 @@
                     <td class="col-1 text-center">{{$episode->pivot->perform_as}}</td>
                 @endif
                 <td class="col text-center">
-                    @include('episodes._buttons')
+                    @if (isset($celebrity))
+                        <a class="btn btn-outline-danger btn"
+                            onclick="confirmDeleteFilmography({{$celebrity->id}},
+                                            {{$episode->id}},
+                                            '{{$episode->pivot->perform_as}}',
+                                            '{{csrf_token()}}'
+                                            )"
+                            role="button">
+                            Borrar aparición
+                        </a>
+                    @else
+                        @include('episodes._buttons')
+                    @endif
+
+
                 </td>
             </tr>
         @endforeach

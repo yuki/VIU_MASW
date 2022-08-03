@@ -77,5 +77,10 @@ Route::group(['prefix' => 'languages','middleware' => ['auth']], function() {
     Route::delete('/{language}/delete', 'LanguageController@destroy')->name('languages.destroy');
 });
 
+// para borrar la filmografía
+Route::middleware('auth')->group( function (){
+    Route::post('/deleteFilmography', 'Controller@deleteFilmography')->name('controller.deleteFilmography');
+});
+
 
 Route::get('/home', 'HomeController@index')->name('home');

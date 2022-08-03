@@ -34,7 +34,19 @@
                     <td class="col-1 text-center">{{$celebrity->pivot->perform_as}}</td>
                 @endif
                 <td>
-                    @include('celebrities._buttons')
+                    @if (isset($episode))
+                        <a class="btn btn-outline-danger btn"
+                            onclick="confirmDeleteCasting({{$episode->id}},
+                                            {{$celebrity->id}},
+                                            '{{$celebrity->pivot->perform_as}}',
+                                            '{{csrf_token()}}'
+                                            )"
+                            role="button">
+                            Borrar aparición
+                        </a>
+                    @else
+                        @include('celebrities._buttons')
+                    @endif
                 </td>
 
             </tr>

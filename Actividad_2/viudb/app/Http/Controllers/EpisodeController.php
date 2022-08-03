@@ -71,7 +71,7 @@ class EpisodeController extends Controller
      */
     public function show(Request $request,Episode $episode)
     {
-        if ($request->has('celebrity_id') && $request->has('funcion')) {
+        if ($request->has('celebrity_id') && $request->has('funcion') && $request->funcion != '0') {
             if (count($episode->celebrities()->where('celebrity_id','=',$request->celebrity_id)->wherePivot('perform_as',$request->funcion)->get())==0){
                 $episode->celebrities()->attach($request->celebrity_id,['perform_as' => $request->funcion]);
             }
