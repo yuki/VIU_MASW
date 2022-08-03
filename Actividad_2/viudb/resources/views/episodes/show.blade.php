@@ -38,9 +38,15 @@
         </div>
 
         <div class="">
-            <h2 class="pt-5 pb-5 text-center">{{__('viudb.episode_celebrities')}}</h2>
+            <h2 class="pt-5 pb-5 text-center">
+                {{__('viudb.episode_celebrities')}}
+                <a class="btn btn-outline-primary" role="button"
+                    onclick="FilmographyModal()">{{__('viudb.add_celebrities')}}</a>
+            </h2>
             @include('celebrities._list', ['celebrities'=>$celebrities])
         </div>
-  </div>
+    </div>
+
+    @include('layouts._episodes_celebrities_modal',['all_celebrities' => $all_celebrities,'performances'=>$performances])
 
 @endsection

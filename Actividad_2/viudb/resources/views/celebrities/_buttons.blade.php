@@ -1,3 +1,4 @@
+
 <a class="btn btn-outline-warning" href="{{route('celebrities.edit',$celebrity)}}" role="button">{{__('viudb.edit')}}</a>
 <a class="btn btn-outline-danger"
     onclick="getDependencies({{$celebrity->id}},

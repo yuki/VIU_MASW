@@ -19,7 +19,7 @@ function getDependencies(id,path,origin,dependencies,csrf_token) {
         }
 
         // sacamos el modal para confirmar el borrado
-        $('#deleteModal').modal('show')
+        $('#deleteModal').modal('show');
 
         document.getElementById('borrar').onclick = function() {deleteOrigin(id,path,csrf_token)};
     })
@@ -45,12 +45,17 @@ function deleteOrigin(id,path,csrf_token){
     .then(response => {
         if (response) {
             // al borrar redirigimos al listado
-            console.log("III");
             window.location="/"+path;
         }
     })
     .catch(error => function(){
         alert("Error al borrar" + error);
     });
+}
+
+// abrimos el modal para añadir filmografía
+function FilmographyModal() {
+    // sacamos el modal para añadir filmografía
+    $('#FilmographyModal').modal('show');
 }
 

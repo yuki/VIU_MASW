@@ -40,7 +40,7 @@ Route::group(['prefix' => 'celebrities','middleware' => ['auth']], function() {
     Route::match(['get','post'],'/', 'CelebrityController@index')->name('celebrities.index');
     Route::get('/create', 'CelebrityController@create')->name('celebrities.create');
     Route::post('/create', 'CelebrityController@store')->name('celebrities.store');
-    Route::get('/{celebrity}/show', 'CelebrityController@show')->name('celebrities.show');
+    Route::match(['get','post'],'/{celebrity}/show', 'CelebrityController@show')->name('celebrities.show');
     Route::get('/{celebrity}/edit', 'CelebrityController@edit')->name('celebrities.edit');
     Route::post('/{celebrity}/update', 'CelebrityController@update')->name('celebrities.update');
     Route::delete('/{celebrity}/delete', 'CelebrityController@destroy')->name('celebrities.destroy');
@@ -61,7 +61,7 @@ Route::group(['prefix' => 'episodes','middleware' => ['auth']], function() {
     Route::match(['get','post'],'/', 'EpisodeController@index')->name('episodes.index');
     Route::get('/create', 'EpisodeController@create')->name('episodes.create');
     Route::post('/create', 'EpisodeController@store')->name('episodes.store');
-    Route::get('/{episode}/show', 'EpisodeController@show')->name('episodes.show');
+    Route::match(['get','post'],'/{episode}/show', 'EpisodeController@show')->name('episodes.show');
     Route::get('/{episode}/edit', 'EpisodeController@edit')->name('episodes.edit');
     Route::post('/{episode}/update', 'EpisodeController@update')->name('episodes.update');
     Route::delete('/{episode}/delete', 'EpisodeController@destroy')->name('episodes.destroy');

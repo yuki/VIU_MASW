@@ -58,6 +58,7 @@ return [
     'celebrity_updated' => 'La celebrity se ha actualizado correctamente',
     'ficha' => 'Ficha:',
     'celebrity_episodes' => 'Apariciones del celebrity',
+    'add_filmography' => 'Añadir filmografía',
 
     /*
     * TVSHOWS
@@ -92,6 +93,7 @@ return [
     'choose_tvshow' => 'Elige la serie',
     'episode_celebrities' => 'Celebrities en el episodio',
     'episode_languages' => 'Idiomas en el episodio',
+    'add_celebrities' => 'Añadir reparto',
 
 
     /*

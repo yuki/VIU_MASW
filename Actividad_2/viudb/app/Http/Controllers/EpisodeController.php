@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Celebrity;
 use App\Episode;
 use App\TVShow;
 use Illuminate\Http\Request;
@@ -22,7 +23,6 @@ class EpisodeController extends Controller
             $episodes->appends(['name' => $request->name]);
         } else {
             $episodes = Episode::orderBy('name')->paginate(env('VIEW_PAGINATE'));
-            // dd($episodes[0]->tvshow());
         }
         return view('episodes.list', ['episodes' => $episodes, 'name'=> $name]);
     }
@@ -69,13 +69,22 @@ class EpisodeController extends Controller
      * @param  \App\Episode  $episode
      * @return \Illuminate\Http\Response
      */
-    public function show(Episode $episode)
+    public function show(Request $request,Episode $episode)
     {
+        if ($request->has('celebrity_id') && $request->has('funcion')) {
+            if (count($episode->celebrities()->where('celebrity_id','=',$request->celebrity_id)->wherePivot('perform_as',$request->funcion)->get())==0){
+                $episode->celebrities()->attach($request->celebrity_id,['perform_as' => $request->funcion]);
+            }
+        }
+        $all_celebrities = Celebrity::orderBy('name')->get();;
+        $performances = celebrity_episode_performances();
         return view('episodes.show',
                     [
                         'episode' => $episode,
-                        'celebrities' => $episode->celebrities()->paginate(env('VIEW_PAGINATE')),
+                        'celebrities' => $episode->celebrities()->orderBy('name')->paginate(env('VIEW_PAGINATE')),
                         'languages' => $episode->languages()->paginate(env('VIEW_PAGINATE')),
+                        'performances'=> $performances,
+                        'all_celebrities' => $all_celebrities,
                     ]);
     }
 

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Celebrity;
+use App\Episode;
 use Illuminate\Http\Request;
 
 class CelebrityController extends Controller
@@ -67,10 +68,17 @@ class CelebrityController extends Controller
      * @param  \App\Celebrity  $celebrity
      * @return \Illuminate\Http\Response
      */
-    public function show(Celebrity $celebrity)
+    public function show(Request $request,Celebrity $celebrity)
     {
-        $episodes = $celebrity->episodes()->paginate(env('VIEW_PAGINATE'));
-        return view('celebrities.show', ['celebrity' => $celebrity, 'episodes' => $episodes]);
+        if ($request->has('episode_id') && $request->has('funcion')) {
+            if (count($celebrity->episodes()->where('episode_id','=',$request->episode_id)->wherePivot('perform_as',$request->funcion)->get())==0){
+                $celebrity->episodes()->attach($request->episode_id,['perform_as' => $request->funcion]);
+            }
+        }
+        $episodes = $celebrity->episodes()->orderBy('name')->paginate(env('VIEW_PAGINATE'));
+        $all_episodes = Episode::orderBy('name')->get();
+        $performances = celebrity_episode_performances();
+        return view('celebrities.show', ['celebrity' => $celebrity, 'episodes' => $episodes, 'all_episodes'=>$all_episodes,'performances'=> $performances]);
     }
 
     /**
