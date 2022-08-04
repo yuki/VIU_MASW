@@ -40,7 +40,10 @@
                         {{$episode->name}}
                     </a>
                 </td>
-                <td class="col-4">{{$episode->sinopsis}}</td>
+                <td class="col-4">
+                    {{$episode->sinopsis}} <br>
+                    <strong>{{__('viudb.released')}}:</strong> {{$episode->fecha()}}
+                </td>
                 <td class="col-1 text-center">{{$episode->season}} - {{$episode->episode}}</td>
                 @if (isset($celebrity))
                     <td class="col-1 text-center">{{$episode->pivot->perform_as}}</td>

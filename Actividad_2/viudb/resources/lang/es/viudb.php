@@ -94,6 +94,7 @@ return [
     'episode_celebrities' => 'Celebrities en el episodio',
     'episode_languages' => 'Idiomas en el episodio',
     'add_celebrities' => 'Añadir reparto',
+    'add_languages' => 'Añadir idiomas',
 
 
     /*

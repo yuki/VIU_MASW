@@ -27,6 +27,7 @@
                 </h1>
                 <div class="info">
                     <p>{{$episode->sinopsis}}</p>
+                    <p>{{__('viudb.released')}}: {{$episode->fecha()}}</p>
                 </div>
             </div>
 
@@ -35,7 +36,7 @@
         <div class="">
             <h2 class="pt-5 pb-5 text-center">
                 {{__('viudb.episode_languages')}}
-                <a class="btn btn-outline-primary" role="button" onclick="languageModal()">Añadir Idiomas</a>
+                <a class="btn btn-outline-primary" role="button" onclick="languageModal()">{{__('viudb.add_languages')}}</a>
             </h2>
             @include('languages._list', ['languages'=>$languages])
         </div>

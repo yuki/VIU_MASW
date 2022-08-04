@@ -15,6 +15,12 @@ class Episode extends Model
         return $this->belongsTo('App\TVShow');
     }
 
+    // cambiamos el formato de la fecha
+    public function fecha() {
+        $date = date_create($this->released);
+        return date_format($date, 'd/m/Y');
+    }
+
     // devuelve las celebrities que tiene el capítulo a través de la tabla celebrity_episode
     // hay que indicar la columna extra que tiene la tabla.
     public function celebrities() {
