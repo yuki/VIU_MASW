@@ -18,17 +18,19 @@
                     <td>{{$language->pivot->type}}</td>
                 @endif
                 <td class="text-center">
-                    @if (!isset($episode))
-                        <a class="btn btn-outline-warning" href="{{route('languages.edit',$language)}}" role="button">{{__('viudb.edit')}}</a>
+                    @if (isset($episode))
+                        <a class="btn btn-outline-danger btn"
+                            onclick="confirmDeleteLanguageEpisode({{$episode->id}},
+                                            {{$language->id}},
+                                            '{{$language->pivot->type}}',
+                                            '{{csrf_token()}}'
+                                            )"
+                            role="button">
+                            Borrar idioma del episodio
+                        </a>
+                    @else
+                        @include('languages._buttons')
                     @endif
-                    <a class="btn btn-outline-danger"
-                      onclick="getDependencies({{$language->id}},
-                                              'languages',
-                                              'languages',
-                                              'languages',
-                                              '{{csrf_token()}}'
-                                              )"
-                      role="button">{{__('viudb.delete')}}</a>
                 </td>
             </tr>
         @endforeach

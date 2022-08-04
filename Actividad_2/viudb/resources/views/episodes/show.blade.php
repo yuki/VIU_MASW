@@ -33,7 +33,10 @@
         </div>
 
         <div class="">
-            <h2 class="pt-5 pb-5 text-center">{{__('viudb.episode_languages')}}</h2>
+            <h2 class="pt-5 pb-5 text-center">
+                {{__('viudb.episode_languages')}}
+                <a class="btn btn-outline-primary" role="button" onclick="languageModal()">Añadir Idiomas</a>
+            </h2>
             @include('languages._list', ['languages'=>$languages])
         </div>
 
@@ -48,5 +51,6 @@
     </div>
 
     @include('layouts._episodes_celebrities_modal',['all_celebrities' => $all_celebrities,'performances'=>$performances])
+    @include('layouts._episodes_languages_modal',['types' => $types,'performances'=>$performances])
 
 @endsection

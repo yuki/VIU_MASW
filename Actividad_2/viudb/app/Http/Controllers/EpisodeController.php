@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Celebrity;
 use App\Episode;
 use App\TVShow;
+use App\Language;
 use Illuminate\Http\Request;
 
 class EpisodeController extends Controller
@@ -71,13 +72,30 @@ class EpisodeController extends Controller
      */
     public function show(Request $request,Episode $episode)
     {
+        // para añadir celebrity al episodio
         if ($request->has('celebrity_id') && $request->has('funcion') && $request->funcion != '0') {
             if (count($episode->celebrities()->where('celebrity_id','=',$request->celebrity_id)->wherePivot('perform_as',$request->funcion)->get())==0){
                 $episode->celebrities()->attach($request->celebrity_id,['perform_as' => $request->funcion]);
             }
         }
-        $all_celebrities = Celebrity::orderBy('name')->get();;
+
+        // para añadir/borrar idiomas al episodio
+        if ($request->has('language_id') && $request->has('type') && $request->type != '0') {
+            if ($request->has('action') && $request->action == 'delete_language'){
+                // toca borrar el idioma
+                $episode->languages()->where('language_id','=',$request->language_id)->wherePivot('type',$request->type)->detach($request->language_id);
+            } else {
+                // añadimos el idioma
+                if (count($episode->languages()->where('language_id','=',$request->language_id)->wherePivot('type',$request->type)->get())==0){
+                    $episode->languages()->attach($request->language_id,['type' => $request->type]);
+                }
+            }
+        }
+
+        $all_celebrities = Celebrity::orderBy('name')->get();
+        $all_languages = Language::orderBy('name')->get();
         $performances = celebrity_episode_performances();
+        $types = language_episode_types();
         return view('episodes.show',
                     [
                         'episode' => $episode,
@@ -85,6 +103,8 @@ class EpisodeController extends Controller
                         'languages' => $episode->languages()->paginate(env('VIEW_PAGINATE')),
                         'performances'=> $performances,
                         'all_celebrities' => $all_celebrities,
+                        'all_languages' => $all_languages,
+                        'types' => $types,
                     ]);
     }
 

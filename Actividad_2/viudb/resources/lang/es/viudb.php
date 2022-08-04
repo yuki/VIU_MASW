@@ -109,4 +109,23 @@ return [
     'language_created' => 'El idioma se ha creado correctamente',
     'language_updated' => 'El idioma se ha actualizado correctamente',
 
+
+    /*
+    * Modals
+    */
+    // language modal
+    'add_language_to' => 'Añadir idioma a',
+    'choose_language' => 'Elige Idioma',
+    'choose_episode_language' => 'Elige Idioma del episodio',
+    'choose_type' => 'Elige tipo',
+    'type' => 'Tipo',
+    'add' => 'Añadir',
+    // filmography modal
+    'add_filmography_to' => 'Añadir filmografía a ',
+    'add_casting_to' => 'Añadir casting a',
+    'choose_tvshow' => 'Elige serie',
+    'choose_tvshow_episode' => 'Elige episodio de serie',
+    'choose_celebrity' => 'Elige celebrity',
+    'choose_perform' => 'Elige función',
+    'perform_as' => 'Función realizada',
 ];

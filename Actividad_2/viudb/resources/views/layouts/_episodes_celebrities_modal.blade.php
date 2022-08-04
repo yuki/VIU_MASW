@@ -5,9 +5,9 @@
         <div class="modal-header">
             <h5 class="modal-title" id="FilmographyModalLabel">
                 @if (isset($celebrity))
-                    Añadir filmografía a {{$celebrity->name}}  {{$celebrity->surname}}
+                    {{__('viudb.add_filmography_to')}}{{$celebrity->name}}  {{$celebrity->surname}}
                 @else
-                    Añadir casting a {{$episode->name}}
+                {{__('viudb.add_casting_to')}} {{$episode->name}}
                 @endif
             </h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -19,9 +19,9 @@
                 @csrf
                 @if (isset($celebrity))
                     <div class="form-group mb-3">
-                    <label for="episode_id" class="form-label">Elige Serie</label>
+                    <label for="episode_id" class="form-label">{{__('viudb.choose_tvshow')}}</label>
                     <select class="form-control" aria-label="default-select" id="episode_id" name="episode_id" required>
-                        <option value=0>Elige Episodio de serie</option>
+                        <option value=0>{{__('viudb.choose_tvshow_episode')}}</option>
                         @foreach ($all_episodes as $epi)
                             <option value="{{$epi->id}}">
                                 {{$epi->name}} - {{$epi->tvshow->name}}
@@ -32,9 +32,9 @@
                     </div>
                 @else
                     <div class="form-group mb-3">
-                        <label for="celebrity_id" class="form-label">Elige Celebrity</label>
+                        <label for="celebrity_id" class="form-label">{{__('viudb.choose_celebrity')}}</label>
                         <select class="form-control" aria-label="default-select" id="celebrity_id" name="celebrity_id" required>
-                            <option value=0>Elige Celebrity</option>
+                            <option value=0>{{__('viudb.choose_celebrity')}}</option>
                             @foreach ($all_celebrities as $celeb)
                                 <option value="{{$celeb->id}}">
                                     {{$celeb->name}} {{$celeb->surname}}
@@ -46,9 +46,9 @@
                 @endif
 
                 <div class="mb-3">
-                    <label for="funcion_id" class="form-label">Elige Función</label>
+                    <label for="funcion_id" class="form-label">{{__('viudb.choose_perform')}}</label>
                     <select class="form-control" aria-label="default-select" id="funcion_id" name="funcion" required>
-                        <option value=0>Función realizada</option>
+                        <option value=0>{{__('viudb.perform_as')}}</option>
                         @foreach ($performances as $performance)
                             <option value="{{$performance}}">
                                 {{$performance}}
@@ -56,7 +56,7 @@
                         @endforeach
                     </select>
                 </div>
-                <button type="submit" class="btn btn-success" id="addFilmography" name="addFilmography">Añadir</button>
+                <button type="submit" class="btn btn-success" id="addFilmography" name="addFilmography">{{__('viudb.add')}}</button>
             </form>
 
 
