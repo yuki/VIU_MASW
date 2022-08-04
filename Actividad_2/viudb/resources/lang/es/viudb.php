@@ -27,6 +27,9 @@ return [
     'close' => 'Cerrar',
     'sure' => '¡Seguro! Borra',
 
+    // inicio
+    'must_be_logged' => 'Si quiere ver más información necesita estar logueado',
+
     /*
     * PLATFORMS
     */

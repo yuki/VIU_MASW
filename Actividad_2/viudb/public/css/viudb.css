@@ -32,6 +32,23 @@ h1.show {
     text-align: left;
 }
 
+/*
+ * Welcome page
+ */
+
+div.carrousel{
+    display: inline;
+    max-width: 140px;
+    margin-right: 50px;
+}
+
+
+img.carrousel_tvshow{
+    display: inline;
+    max-width: 140px;
+    margin-right: 50px;
+    border-radius: 15px;
+}
 
 /*
  * CSS Específicos

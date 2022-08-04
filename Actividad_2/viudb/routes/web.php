@@ -11,9 +11,7 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', 'Controller@welcome')->name('controller.welcome');
 
 // TODO: cómo se cambia el idioma?
 Route::get('/locale/{locale}', function ($locale) {
