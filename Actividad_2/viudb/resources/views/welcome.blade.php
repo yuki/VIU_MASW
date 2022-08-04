@@ -2,9 +2,9 @@
 
 @section('content')
 
-@if ($platforms)
+@if (count($platforms)>0)
     <div class="container">
-        <h1>Plataformas populares</h1>
+        <h1>{{__('viudb.popular_platforms')}}</h1>
         <div class="text-center">
             @foreach ($platforms as $platform)
                 <div class=" carrousel">
@@ -21,17 +21,17 @@
         </div>
     </div>
 @else
-    <h2>No hay plataformas</h2>
+    <h2 class="text-center pb-5">{{__('viudb.no_platforms')}}</h2>
 @endif
 
 
 @guest
-    <h2 class="text-center pt-5">{{__('viudb.must_be_logged')}}</h2>
+    <h2 class="text-center pb-5">{{__('viudb.must_be_logged')}}</h2>
 @else
 
-    @if ($platforms)
+    @if (count($platforms)>0)
         <div class="container">
-            <h1>Celebrities populares</h1>
+            <h1>{{__('viudb.popular_celebrities')}}</h1>
             <div class="text-center">
                 @foreach ($celebrities as $celebrity)
                     <div class=" carrousel">
@@ -48,12 +48,12 @@
             </div>
         </div>
     @else
-        <h2>No hay celebrities</h2>
+        <h2 class="text-center pb-5">{{__('viudb.no_celebrities')}}</h2>
     @endif
 
-    @if ($platforms)
+    @if (count($platforms)>0)
         <div class="container">
-            <h1>Quizá quieras ver...</h1>
+            <h1>{{__('viudb.want_to_see')}}</h1>
             <div class="text-center">
                 @foreach ($tvshows as $tvshow)
                     <div class=" carrousel">
@@ -70,12 +70,12 @@
             </div>
         </div>
     @else
-        <h2>No hay series</h2>
+        <h2 class="text-center pb-5">{{__('viudb.no_tvshows')}}</h2>
     @endif
 
-    @if ($platforms)
+    @if (count($platforms)>0)
         <div class="container">
-            <h1>¿Has visto estos episodios?</h1>
+            <h1>{{__('viudb.have_seen_episodes')}}</h1>
             <div class="text-center">
                 @foreach ($episodes as $episode)
                     <div class=" carrousel">
@@ -92,7 +92,7 @@
             </div>
         </div>
     @else
-        <h2>No hay episodios</h2>
+        <h2 class="text-center pb-5">{{__('viudb.no_episodes')}}</h2>
     @endif
 
 @endguest

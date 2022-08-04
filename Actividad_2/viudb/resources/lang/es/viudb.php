@@ -29,12 +29,16 @@ return [
 
     // inicio
     'must_be_logged' => 'Si quiere ver más información necesita estar logueado',
+    'popular_platforms' => 'Plataformas populares',
+    'popular_celebrities' => 'Celebrities populares',
+    'want_to_see' => 'Quizá quieras ver...',
+    'have_seen_episodes' => '¿Has visto estos episodios?',
 
     /*
     * PLATFORMS
     */
     'platforms' => 'Plataformas',
-    'no_platforms' => 'No hay plataformas actualmente. Crea una a través del botón.',
+    'no_platforms' => 'No hay plataformas actualmente.',
     'create_platform' => 'Crear plataforma',
     'edit_platform' => 'Editar plataforma',
     'platform_created' => 'La plataforma se ha creado correctamente',
@@ -54,7 +58,7 @@ return [
     'born' => 'Fecha de nacimiento:',
     'nation' => 'Nacionalidad:',
     'celebrities' => 'Celebrities',
-    'no_celebrities' => 'No hay celebrities actualmente. Crea una a través del botón.',
+    'no_celebrities' => 'No hay celebrities actualmente.',
     'create_celebrity' => 'Crear celebrity',
     'edit_celebrity' => 'Editar celebrity',
     'celebrity_created' => 'La celebrity se ha creado correctamente',
@@ -67,7 +71,7 @@ return [
     * TVSHOWS
     */
     'tvshows' => 'Series',
-    'no_tvshows' => 'No hay series actualmente. Crea una a través del botón.',
+    'no_tvshows' => 'No hay series actualmente.',
     'create_tvshow' => 'Crear serie',
     'edit_tvshow' => 'Editar serie',
     'tvshow_created' => 'La serie se ha creado correctamente',
@@ -87,7 +91,7 @@ return [
     'episode' => 'E',
     'episode_long' => 'Episodio',
     'released' => 'Fecha de emisión',
-    'no_episodes' => 'No hay episodios actualmente. Crea uno a través del botón.',
+    'no_episodes' => 'No hay episodios actualmente.',
     'create_episode' => 'Crear episodio',
     'edit_episode' => 'Editar episodio',
     'episode_created' => 'El episodio se ha creado correctamente',
@@ -107,7 +111,7 @@ return [
     'language' => 'Idioma',
     'type' => 'Tipo',
     'rfc_code' => 'Código ',
-    'no_languages' => 'No hay idiomas actualmente. Crea uno a través del botón.',
+    'no_languages' => 'No hay idiomas actualmente.',
     'create_language' => 'Crear idioma',
     'edit_language' => 'Editar idioma',
     'language_created' => 'El idioma se ha creado correctamente',
