@@ -46,9 +46,9 @@
 
                 <!-- Right Side Of Navbar -->
                 <ul class="navbar-nav ml-auto">
-                    {{-- TODO: hacer el search --}}
-                    <form role="search">
-                        <input class="form-control" type="search" placeholder="Search" aria-label="Search">
+                        <form  name="search" action="{{route('controller.search')}}" method="POST">
+                            @csrf
+                            <input class="form-control" name="name" type="search" placeholder="Search" aria-label="Search">
                         </form>
                     <!-- Authentication Links -->
                     @guest

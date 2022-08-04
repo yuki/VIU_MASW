@@ -50,6 +50,11 @@ img.carrousel_tvshow{
     border-radius: 15px;
 }
 
+/* search */
+span.searched {
+    background-color: yellow;
+}
+
 /*
  * CSS Específicos
  */

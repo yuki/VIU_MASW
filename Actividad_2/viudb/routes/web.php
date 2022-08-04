@@ -12,6 +12,7 @@
 */
 
 Route::get('/', 'Controller@welcome')->name('controller.welcome');
+Route::match(['get','post'],'/search', 'Controller@search')->name('controller.search');
 
 // TODO: cómo se cambia el idioma?
 Route::get('/locale/{locale}', function ($locale) {

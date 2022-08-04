@@ -18,10 +18,7 @@ class CelebrityController extends Controller
         $name = null;
         if ($request->has('name')) {
             $name = $request->name;
-            $celebrities = Celebrity::where('name','like','%'.$name.'%')
-                ->orWhere('surname','like','%'.$name.'%')
-                ->orderBy('name')
-                ->paginate(env('VIEW_PAGINATE'));
+            $celebrities = search_celebrity($name)->paginate(env('VIEW_PAGINATE'));
             $celebrities->appends(['name' => $request->name]);
         } else {
             $celebrities = Celebrity::orderBy('name')->paginate(env('VIEW_PAGINATE'));

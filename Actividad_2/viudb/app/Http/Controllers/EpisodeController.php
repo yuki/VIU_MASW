@@ -20,7 +20,7 @@ class EpisodeController extends Controller
         $name = null;
         if ($request->has('name')) {
             $name = $request->name;
-            $episodes = Episode::where('name','like','%'.$name.'%')->orderBy('name')->paginate(env('VIEW_PAGINATE'));
+            $episodes = search_episode($name)->paginate(env('VIEW_PAGINATE'));
             $episodes->appends(['name' => $request->name]);
         } else {
             $episodes = Episode::orderBy('name')->paginate(env('VIEW_PAGINATE'));

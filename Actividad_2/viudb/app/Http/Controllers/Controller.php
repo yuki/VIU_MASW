@@ -17,7 +17,7 @@ class Controller extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 
-
+    // para el listado de la página de inicio
     function welcome(){
         $platforms = Platform::inRandomOrder()->limit(3)->get();
         $celebrities = Celebrity::inRandomOrder()->limit(3)->get();
@@ -31,6 +31,25 @@ class Controller extends BaseController
                         'episodes' => $episodes,
                         'languages' => $languages,
         ]);
+    }
+
+
+    // para la búsqueda global del navbar
+    function search(Request $request){
+        $name = $request->name;
+        $celebrities = search_celebrity($name)->get();
+        $episodes = search_episode($name)->get();
+        $tvshows = search_tvshow($name)->get();
+        $platforms = search_platform($name)->get();
+        $languages = search_language($name)->get();
+        return view('search',[
+                    'name' => $name,
+                    'celebrities' => $celebrities,
+                    'episodes' => $episodes,
+                    'tvshows' => $tvshows,
+                    'platforms' => $platforms,
+                    'languages' => $languages,
+            ]);
     }
 
 

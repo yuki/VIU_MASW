@@ -17,7 +17,7 @@ class PlatformController extends Controller
         $name = null;
         if ($request->has('name')) {
             $name = $request->name;
-            $platforms = Platform::where('name','like','%'.$name.'%')->orderBy('name')->paginate(env('VIEW_PAGINATE'));
+            $platforms = search_platform($name)->paginate(env('VIEW_PAGINATE'));
             $platforms->appends(['name' => $request->name]);
         } else {
             $platforms = Platform::orderBy('name')->paginate(env('VIEW_PAGINATE'));
