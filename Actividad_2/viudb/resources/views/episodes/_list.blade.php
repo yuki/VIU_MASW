@@ -57,7 +57,7 @@
                                             '{{csrf_token()}}'
                                             )"
                             role="button">
-                            Borrar aparición
+                            {{__('viudb.delete_episode_celebrity')}}
                         </a>
                     @else
                         @include('episodes._buttons')

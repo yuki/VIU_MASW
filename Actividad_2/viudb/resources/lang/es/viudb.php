@@ -102,6 +102,7 @@ return [
     'episode_languages' => 'Idiomas en el episodio',
     'add_celebrities' => 'Añadir reparto',
     'add_languages' => 'Añadir idiomas',
+    'delete_episode_celebrity' => 'Borrar aparición',
 
 
     /*
@@ -116,6 +117,7 @@ return [
     'edit_language' => 'Editar idioma',
     'language_created' => 'El idioma se ha creado correctamente',
     'language_updated' => 'El idioma se ha actualizado correctamente',
+    'delete_language_from_episode' => 'Borrar idioma del episodio',
 
 
     /*

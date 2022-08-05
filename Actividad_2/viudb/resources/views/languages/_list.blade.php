@@ -26,7 +26,7 @@
                                             '{{csrf_token()}}'
                                             )"
                             role="button">
-                            Borrar idioma del episodio
+                            {{__('viudb.delete_language_from_episode')}}
                         </a>
                     @else
                         @include('languages._buttons')

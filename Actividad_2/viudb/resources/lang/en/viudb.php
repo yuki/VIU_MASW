@@ -102,6 +102,7 @@ return [
     'episode_languages' => 'Languages in the episode',
     'add_celebrities' => 'Add celebrities',
     'add_languages' => 'Add languages',
+    'delete_episode_celebrity' => 'Delete from episode',
 
 
     /*
@@ -116,6 +117,7 @@ return [
     'edit_language' => 'Edit language',
     'language_created' => 'The language  has been created',
     'language_updated' => 'The language has been updated',
+    'delete_language_from_episode' => 'Delete language from episode',
 
 
     /*
