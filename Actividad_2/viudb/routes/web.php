@@ -11,12 +11,17 @@
 |
 */
 
+// la página de inicio
 Route::get('/', 'Controller@welcome')->name('controller.welcome');
+
+// la búsqueda general
 Route::match(['get','post'],'/search', 'Controller@search')->name('controller.search');
 
-// TODO: cómo se cambia el idioma?
+// para cambiar el idioma
 Route::get('/locale/{locale}', function ($locale) {
-    App::setLocale($locale);
+    app()->setLocale($locale);
+    session()->put('locale', $locale);
+    return redirect()->back();
 });
 
 Auth::routes();

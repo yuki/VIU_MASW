@@ -39,17 +39,25 @@
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item"><a class="nav-link" href="{{route('platforms.index')}}">{{__('viudb.platforms')}}</a></li>
                     <li class="nav-item"><a class="nav-link" href="{{route('tvshows.index')}}">{{__('viudb.tvshows')}}</a></li>
-                    <li class="nav-item"><a class="nav-link" href="{{route('episodes.index')}}">Episodios</a></li>
-                    <li class="nav-item"><a class="nav-link" href="{{route('celebrities.index')}}">Celebrities</a></li>
-                    <li class="nav-item"><a class="nav-link" href="{{route('languages.index')}}">Idiomas</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{route('episodes.index')}}">{{__('viudb.episodes')}}</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{route('celebrities.index')}}">{{__('viudb.celebrities')}}</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{route('languages.index')}}">{{__('viudb.languages')}}</a></li>
                 </ul>
 
                 <!-- Right Side Of Navbar -->
                 <ul class="navbar-nav ml-auto">
+                        {{-- Search bar --}}
                         <form  name="search" action="{{route('controller.search')}}" method="POST">
                             @csrf
                             <input class="form-control" name="name" type="search" placeholder="Search" aria-label="Search">
                         </form>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" aria-expanded="false">Lang</a>
+                            <div class="dropdown-menu">
+                              <a class="dropdown-item" href="/locale/es">Es</a>
+                              <a class="dropdown-item" href="/locale/en">En</a>
+                            </div>
+                          </li>
                     <!-- Authentication Links -->
                     @guest
                         <li class="nav-item">
