@@ -8,7 +8,7 @@
     <div class="row justify-content-center">
         <form  name="search" action="{{route('controller.search')}}" method="POST" class="col-5">
             @csrf
-            <input class="form-control" name="name"  type="search" placeholder="Search" aria-label="Search">
+            <input class="form-control" name="name"  type="search" placeholder="Search" aria-label="Search" value="{{$name}}">
         </form>
     </div>
 </div>

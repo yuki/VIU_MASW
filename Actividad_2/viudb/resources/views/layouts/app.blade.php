@@ -49,7 +49,7 @@
                         {{-- Search bar --}}
                         <form  name="search" action="{{route('controller.search')}}" method="POST">
                             @csrf
-                            <input class="form-control" name="name" type="search" placeholder="Search" aria-label="Search">
+                            <input class="form-control" name="name" type="search" placeholder="Search" aria-label="Search" value="{{$name}}">
                         </form>
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" aria-expanded="false">Lang</a>
