@@ -31,12 +31,16 @@ function language_episode_types() {
 function search_celebrity($name) {
     return Celebrity::where('name','like','%'.$name.'%')
             ->orWhere('surname','like','%'.$name.'%')
+            ->orWhere('born','like','%'.$name.'%')
             ->orderBy('name');
 }
 
 // buscar episodio
 function search_episode($name) {
-    return Episode::where('name','like','%'.$name.'%')->orWhere('sinopsis','like','%'.$name.'%')->orderBy('name');
+    return Episode::where('name','like','%'.$name.'%')
+                    ->orWhere('sinopsis','like','%'.$name.'%')
+                    ->orWhere('released','like','%'.$name.'%')
+                    ->orderBy('name');
 }
 
 // buscar language
