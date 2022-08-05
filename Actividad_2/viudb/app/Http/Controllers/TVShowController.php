@@ -138,7 +138,6 @@ class TVShowController extends Controller
                 [
                     // si estamos actualizando, que no se queje si mantenemos el nombre original
                     'name' => 'required|'.\Illuminate\Validation\Rule::unique('tvshows')->ignore($tvshow).'|min:3|max:255,',
-                    // TODO: modificar el mensaje de validación del platform_id
                     'platform_id' => 'required|integer|gt:0',
                     'sinopsis' => 'nullable|max:512',
                     'file' => 'nullable|image|mimes:jpg,png,jpeg'

@@ -56,7 +56,7 @@
 
     <div class="form-outline mb-3">
         <label for="season" class="form-label">{{__('viudb.season_long')}}</label>
-        <input type="number"  class="form-control" id="season" name="season"
+        <input type="number"  class="form-control @error('tvshow_id') is-invalid @enderror" id="season" name="season"
                 @if (isset($episode))
                     value="{{old('season',$episode->season)}}"
                 @else
@@ -67,7 +67,7 @@
 
     <div class="form-outline mb-3">
         <label for="episode" class="form-label">{{__('viudb.episode_long')}}</label>
-        <input type="number"  class="form-control" id="episode" name="episode"
+        <input type="number"  class="form-control @error('tvshow_id') is-invalid @enderror" id="episode" name="episode"
                 @if (isset($episode))
                     value="{{old('episode',$episode->episode)}}"
                 @else

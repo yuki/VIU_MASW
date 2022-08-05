@@ -130,22 +130,25 @@ class CelebrityController extends Controller
     }
 
     protected function validateCelebrity($request,$celebrity=null) {
-        // dd($request->surname);
-        // TODO: mejorar la validación
-        return $request->validate(
+        if ($celebrity){
+            return $request->validate(
                 [
                     // validación conjunta de nombre y apellidos
                     // 'name' => 'unique:table,field,NULL,id,field1,value1,field2,value2,field3,value3'
-                    // 'name' => 'required|min:3|max:255,',
                     'surname' => 'required|min:3|max:255,',
-                    'name' => ['required', 'unique:celebrities,name,'.$celebrity.',id,surname,'.$request->surname],
-
+                    'name' => 'required|unique:celebrities,name,'.$celebrity->id.',id,name,'.$request->name.',surname,'.$request->surname,
                     'file' => 'nullable|image|mimes:jpg,png,jpeg'
                 ]);
-
-                // 'data.ip' => ['required', 'unique:servers,ip,'.$this->id.',NULL,id,hostname,'.$request->input('hostname')]
-                // 'data.ip' => ['required', 'unique:servers,ip,'.$this->id.','.$request->input('id').',id,hostname,'.$request->input('hostname')]
-
+        } else {
+            return $request->validate(
+                [
+                    // validación conjunta de nombre y apellidos
+                    // 'name' => 'unique:table,field,NULL,id,field1,value1,field2,value2,field3,value3'
+                    'surname' => 'required|min:3|max:255,',
+                    'name' => 'required|unique:celebrities,name,NULL,id,name,'.$request->name.',surname,'.$request->surname,
+                    'file' => 'nullable|image|mimes:jpg,png,jpeg'
+                ]);
+        }
 
     }
 }

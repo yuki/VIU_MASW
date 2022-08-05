@@ -108,7 +108,6 @@ class LanguageController extends Controller
 
 
     protected function validateLanguage($request,$language=null) {
-        // TODO: mejorar la validación
         return $request->validate(
                 [
                     'name' => 'required|'.\Illuminate\Validation\Rule::unique('languages')->ignore($language).'|min:3|max:255,',
