@@ -181,38 +181,98 @@ public function celebrities() {
 
 De esta manera, a través de un episodio podremos obtener a qué serie pertenece y qué \textit{celebrities} aparecen en ese episodio y qué función realizan en el mismo.
 
-\section{Validación de datos en formularios}
 
+\section{Validación de datos en formularios}
+A la hora de introducir o actualizar datos es importante que exista una validación previa, para que así no llegue el error hasta la base de datos.
+
+A lo largo del proyecto, para todos los modelos, se ha realizado la validación en todos los formularios en donde se ha tenido en cuenta alguna (o varias) de las siguientes validaciones, entre otras:
+
+\vspace{-1em}
+\begin{itemize}
+    \item Existencia de datos en un campo.
+    \item Número mínimo de caracteres introducidos.
+    \item No duplicidad en alguno de los campos.
+\end{itemize}
+\vspace{-1em}
+
+\begin{center}
+    \includegraphics[frame,width=0.5\linewidth]{img/validacion.png}
+\end{center}
+
+En caso de que la validación de error, se vuelve al formulario y aparecerá el error y el campo del formulario que debe ser corregido, tal como aparece en la imagen.
+
+\section{Autenticación y autorización}
+Como parte del proyecto, era necesario crear un sistema de autenticación y autorización.
+
+\vspace{-1em}
+\begin{itemize}
+    \item \textbf{Autenticación}: Proceso que se encarga de confirmar que un usuario es quien dice ser. Normalmente se valida con un usuario o e-mail y contraseña.
+    \item \textbf{Autorización}: Proceso que permite a un usuario autenticado visitar, visualizar o utilizar ciertos recursos del proyecto.
+\end{itemize}
+\vspace{-1em}
+
+\begin{center}
+    \includegraphics[width=0.5\linewidth]{img/login.png}
+\end{center}
+
+En este proyecto sólo el apartado de “plataformas” es público, por lo que para poder utilizar cualquier otro es necesario haberse autenticado. Usando el sistema de despliegue de datos se ha añadido un usuario para poder acceder todos a los apartados, siendo los credenciales:
+
+\vspace{-1em}
+\begin{itemize}
+    \item \textbf{e-mail}: example@example.com
+    \item \textbf{Password}: password
+\end{itemize}
+\vspace{-1em}
 
 
 
 \section{Localización del proyecto}
+Se denomina “localización” (o internacionalización) al diseño de software que tiene en cuenta que el proyecto realizado será utilizado en distintos idiomas. Este diseño permite que la traducción a otros idiomas que no sea el original sea más sencillo de realizar y que mediante una directiva de configuración se pueda cambiar.
 
+\begin{center}
+    \includegraphics[width=0.5\linewidth]{img/languages.png}
+\end{center}
+
+En la barra de navegación, junto al sistema de búsqueda y de acceso se ha añadido un menú desplegable con los dos idiomas que se pueden utilizar actualmente en el desarrollo.
 
 
 \section{Búsqueda de datos}
 
+Para facilitar el acceso de los datos por parte de los usuarios se han añadido distintas cajas de búsqueda:
+
+\vspace{-1em}
+\begin{itemize}
+    \item \textbf{Búsqueda general}: Se encuentra en la barra de navegación superior, para realizar una búsqueda entre todos los datos guardados de la aplicación
+    \item \textbf{Búsqueda simple}: Dentro de cada apartado de la web hay otro buscador, pero este sólo busca en dicho apartado.
+\end{itemize}
+\vspace{-1em}
+
+\begin{center}
+    \includegraphics[frame,width=0.5\linewidth]{img/buscar.png}
+\end{center}
+
+Si se usa el buscador general los resultados de búsqueda nos llevará a una página en la que aparecerán los resultados de la misma, resaltando el término buscado, tal como aparece en la imagen.
 
 
 \chapter{Dificultades del proyecto}
 
-Como todo proyecto de programación, durante el desarrollo nos podemos encontrar con ciertas dificultades que deben ser subsanadas para llegar a cumplir los requisitos planteados al comienzo del proyecto.
+Teniendo en cuenta que este proyecto es la continuación de uno anterior, se puede determinar que se han subsanado ciertas dificultadas expuestas en el anterior proyecto.
 
-
-
-\chapter{Mejoras a realizar}
-Como todo proyecto, y más cuando se realiza en un tiempo limitado, existen distintos aspectos que se pueden mejorar pero que son relegados para terminar en tiempo y forma. A continuación se detallan algunas posibles mejoras:
+Ahora bien, eso no quita que hayan existido otras, que se exponen a continuación:
 
 \vspace{-1em}
 \begin{itemize}
-    \item \textbf{Frameworks}:
+    \item \textbf{Desconocimiento al usar el \textit{framework}}: A la hora de hacer uso de un \textit{framework} hay que conocer sus particularidades, pero bien es cierto que al haber usado otros (como Ruby on Rails), la curva de aprendizaje es menor. Aunque bien es cierto que el proceso de adaptación, conocer dónde se sitúan los ficheros, ver cómo se traspasa el conocimiento que se tiene de uno a otro, ... lleva su tiempo.
+    \item \textbf{Falta de utilidades}: Teniendo en cuenta el punto anterior, se han echado de menos utilidades que otros frameworks incorporan de manera automática, como es el sistema de \textit{\textbf{scaffolding}} que genere: creación del \textit{migrate} pudiendo pasar los campos por línea de comandos; vistas CRUD para los modelos de datos; funciones CRUD que puedan ser utilizadas (no que están vacías)... Algunos de estos aspectos no se entienden ya que otros frameworks los tienen implementados desde el año 2006, por lo que es fácil coger esas ideas.
+    \item \textbf{Uso de las validaciones}: El crear el sistema de validación teniendo en cuenta que no se repitan varios campos no es demasiado intuitivo, y en la documentación oficial no aparece rastro de ello.
 \end{itemize}
+\vspace{-1em}
 
 
 \chapter{Conclusiones}
 
-A la hora de desarrollar una aplicación web es importante conocer cómo se gestiona la información en el lado de servidor. Este proyecto ha permitido profundizar en diferentes ámbitos utilizados en el desarrollo \textbf{back-end} como son: el patrón \textbf{MVC}, la validación de datos obtenidos en peticiones, gestión a base de datos, ...
+A la hora de desarrollar una aplicación web es importante conocer cómo se gestiona la información en el lado de servidor. Este proyecto ha permitido profundizar en diferentes ámbitos utilizados en el desarrollo \textbf{back-end} como son: el patrón \textbf{MVC}, la validación de datos obtenidos en peticiones, la creación de una aplicación multi-idioma, ...
 
-Por otro lado, es importante conocer el lenguaje de programación que se va a utilizar antes de afrontar un proyecto. Y aunque no se tenía demasiada experiencia con el lenguaje \textbf{PHP}, este no ha dado problemas durante el desarrollo. Aunque es cierto que se ha notado la ausencia del uso de un \textit{framework} que facilite ciertas tareas durante el proceso.
+El uso de Laravel como framework ha facilitado la labor de crear el proyecto en un tiempo ajustado, gracias a las implementaciones propias que tiene, lo que hace que también haya surgido un interés en comprobar las novedades que tienen las últimas versiones, y hacer un seguimiento del mismo.
 
 \end{document}
