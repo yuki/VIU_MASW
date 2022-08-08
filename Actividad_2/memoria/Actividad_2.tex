@@ -54,23 +54,8 @@ Añadido a eso, los \textit{frameworks} nos van a otorgar distintas librerías q
 \end{itemize}
 \vspace{-1em}
 
-Laravel es un \textit{framework} que hace uso de la arquitectura conocida como “\href{https://es.wikipedia.org/wiki/Modelo%E2%80%93vista%E2%80%93controlador}{modelo-vista-controlador}”, que nos permite separar la lógica de negocio de la aplicación de la representación visual mostrada.
+Laravel es un \textit{framework} que hace uso de la arquitectura conocida como “\href{https://es.wikipedia.org/wiki/Modelo%E2%80%93vista%E2%80%93controlador}{modelo-vista-controlador}”, que nos permite separar la lógica de negocio de la representación visual mostrada.
 
-
-
-\chapter{Modelo de datos}
-A la hora de gestionar una biblioteca de series, hay que tener en cuenta que estas cuentan con episodios, por lo que se ha añadido esta nueva entidad.
-
-Por otro lado, dado que actor y director pueden ser el mismo, y aparte, puede haber mucha más gente involucrada en una serie, por lo tanto se ha decidido unificar dichas entidades en una, para después gestionar el papel que realizan por cada episodio.
-
-El esquema \textbf{Entidad - Relación} final queda de la siguiente forma:
-
-\begin{center}
-    \includegraphics[width=0.8\linewidth]{img/entidad-relacion.png}
-\end{center}
-
-
-Este esquema entidad-relación ha dado lugar a un total de siete tablas cuyo esquema físico se puede importar tal como veremos más adelante.
 
 \chapter{Despliegue de la aplicación}
 Antes de entrar en detalle en cómo se ha desarrollado la aplicación es importante conocer cómo podemos realizar el despliegue de la aplicación, ya sea para utilizarla o para realizar modificaciones sobre la misma.
@@ -145,7 +130,7 @@ Seeded:  UserSeeder (0.06 seconds)
 Una vez tenemos realizado el despliegue, se va a profundizar en el desarrollo realizado, destacando los siguientes aspectos:
 
 \section{Configuración de la aplicación}
-Otro de los aspectos en los que Laravel nos facilita el desarrollo es en la creación de un fichero de que podemos utilizar para realizar la configuración de la aplicación: \configfile{.env}.
+Otro de los aspectos en los que Laravel nos facilita el desarrollo es en la creación de un fichero que podemos utilizar para realizar la configuración de la aplicación: \configfile{.env}.
 
 Este fichero se crea con configuración que se debe modificar para la gestión de distintas configuraciones, y lo hemos utilizado para:
 \vspace{-1em}
@@ -158,7 +143,7 @@ Este fichero se crea con configuración que se debe modificar para la gestión d
 \vspace{-1em}
 
 \section{Relación entre modelos}
-A la hora de crear la base de datos se ha tenido en cuenta ciertas relaciones en los datos, y por ello los modelos también se tienen que relacionar entre sí.
+A la hora de crear la base de datos se ha tenido en cuenta ciertas relaciones en los datos (teniendo en cuenta el esquema Entidad-Relación del proyecto anterior), y por ello los modelos también se tienen que relacionar entre sí.
 
 Laravel nos permite crear dicha relación a través de los modelos, en donde se indica si un modelo pertenece a otro, o si tiene varios elementos de otro modelo.
 
@@ -199,7 +184,7 @@ A lo largo del proyecto, para todos los modelos, se ha realizado la validación 
     \includegraphics[frame,width=0.5\linewidth]{img/validacion.png}
 \end{center}
 
-En caso de que la validación de error, se vuelve al formulario y aparecerá el error y el campo del formulario que debe ser corregido, tal como aparece en la imagen.
+En caso de que la validación no sea correcta y devuelva un error, la aplicación redirigirá al formulario y aparecerá el error en el campo del formulario que debe ser corregido, tal como aparece en la imagen.
 
 \section{Autenticación y autorización}
 Como parte del proyecto, era necesario crear un sistema de autenticación y autorización.
@@ -238,7 +223,7 @@ En la barra de navegación, junto al sistema de búsqueda y de acceso se ha aña
 
 \section{Búsqueda de datos}
 
-Para facilitar el acceso de los datos por parte de los usuarios se han añadido distintas cajas de búsqueda:
+Para facilitar el acceso a los datos por parte de los usuarios se han añadido distintas cajas de búsqueda:
 
 \vspace{-1em}
 \begin{itemize}
@@ -253,6 +238,7 @@ Para facilitar el acceso de los datos por parte de los usuarios se han añadido 
 
 Si se usa el buscador general los resultados de búsqueda nos llevará a una página en la que aparecerán los resultados de la misma, resaltando el término buscado, tal como aparece en la imagen.
 
+Las funciones de búsqueda, ya que se utilizan desde distintos apartados de la web, se encuentran en el fichero \configfile{app/helpers.php}.
 
 \chapter{Dificultades del proyecto}
 
@@ -263,8 +249,13 @@ Ahora bien, eso no quita que hayan existido otras, que se exponen a continuació
 \vspace{-1em}
 \begin{itemize}
     \item \textbf{Desconocimiento al usar el \textit{framework}}: A la hora de hacer uso de un \textit{framework} hay que conocer sus particularidades, pero bien es cierto que al haber usado otros (como Ruby on Rails), la curva de aprendizaje es menor. Aunque bien es cierto que el proceso de adaptación, conocer dónde se sitúan los ficheros, ver cómo se traspasa el conocimiento que se tiene de uno a otro, ... lleva su tiempo.
-    \item \textbf{Falta de utilidades}: Teniendo en cuenta el punto anterior, se han echado de menos utilidades que otros frameworks incorporan de manera automática, como es el sistema de \textit{\textbf{scaffolding}} que genere: creación del \textit{migrate} pudiendo pasar los campos por línea de comandos; vistas CRUD para los modelos de datos; funciones CRUD que puedan ser utilizadas (no que están vacías)... Algunos de estos aspectos no se entienden ya que otros frameworks los tienen implementados desde el año 2006, por lo que es fácil coger esas ideas.
-    \item \textbf{Uso de las validaciones}: El crear el sistema de validación teniendo en cuenta que no se repitan varios campos no es demasiado intuitivo, y en la documentación oficial no aparece rastro de ello.
+    \item \textbf{Falta de utilidades}: Teniendo en cuenta el punto anterior, se han echado de menos utilidades que otros frameworks incorporan de serie, como es el sistema de \textit{\textbf{scaffolding}} que permite crear el modelo pudiendo pasar los campos por línea de comandos (o a través de un asistente, como sucede en Symfony), creación de funciones y vistas CRUD para los modelos y controllers, ...
+
+    Algunos de estos aspectos no se entienden ya que otros frameworks los tienen implementados desde hace muchos años, por lo que es fácil coger esas ideas.
+
+    De todas maneras, el único inconveniente ha sido tener que dedicar tiempo a esas particularidades que en otros frameworks ya vienen hechas.
+
+    \item \textbf{Uso de las validaciones}: Al crear el sistema de validación teniendo en cuenta que no se repitan la combinación de varios campos (como el nombre y apellidos de los \textit{celebrities}) no es demasiado intuitivo, y en la documentación oficial no aparece.
 \end{itemize}
 \vspace{-1em}
 
@@ -273,6 +264,6 @@ Ahora bien, eso no quita que hayan existido otras, que se exponen a continuació
 
 A la hora de desarrollar una aplicación web es importante conocer cómo se gestiona la información en el lado de servidor. Este proyecto ha permitido profundizar en diferentes ámbitos utilizados en el desarrollo \textbf{back-end} como son: el patrón \textbf{MVC}, la validación de datos obtenidos en peticiones, la creación de una aplicación multi-idioma, ...
 
-El uso de Laravel como framework ha facilitado la labor de crear el proyecto en un tiempo ajustado, gracias a las implementaciones propias que tiene, lo que hace que también haya surgido un interés en comprobar las novedades que tienen las últimas versiones, y hacer un seguimiento del mismo.
+El uso de Laravel como framework ha facilitado la labor de crear el proyecto en un tiempo ajustado, gracias a las implementaciones propias que tiene, lo que hace que también haya surgido un interés en comprobar las novedades que tienen las últimas versiones, y hacer un seguimiento del mismo para el futuro.
 
 \end{document}
