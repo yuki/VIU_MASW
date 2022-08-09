@@ -12,7 +12,7 @@
         </thead>
         @foreach ($languages as $language)
             <tr>
-                <td class="text-start">{{$language->name}}</td>
+                <td class="text-start"><a href="{{route('languages.show',$language)}}">{{$language->name}}</a></td>
                 <td class="text-start">{{$language->rfc_code}}</td>
                 @if (isset($episode))
                     <td>{{$language->pivot->type}}</td>

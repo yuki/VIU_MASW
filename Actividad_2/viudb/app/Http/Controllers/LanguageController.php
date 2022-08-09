@@ -59,7 +59,8 @@ class LanguageController extends Controller
      */
     public function show(Language $language)
     {
-        // TODO: de momento no es necesario
+        $episodes = $language->episodes;
+        return view('languages.show', ['language' => $language,'episodes'=>$episodes]);
     }
 
     /**

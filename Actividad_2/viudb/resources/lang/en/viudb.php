@@ -118,6 +118,7 @@ return [
     'language_created' => 'The language  has been created',
     'language_updated' => 'The language has been updated',
     'delete_language_from_episode' => 'Delete language from episode',
+    'languages_episodes' => 'Episodes with this language',
 
 
     /*

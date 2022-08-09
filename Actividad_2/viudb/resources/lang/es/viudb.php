@@ -118,6 +118,7 @@ return [
     'language_created' => 'El idioma se ha creado correctamente',
     'language_updated' => 'El idioma se ha actualizado correctamente',
     'delete_language_from_episode' => 'Borrar idioma del episodio',
+    'languages_episodes' => 'Episodios con este idioma',
 
 
     /*

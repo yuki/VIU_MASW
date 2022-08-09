@@ -60,7 +60,11 @@
                             {{__('viudb.delete_episode_celebrity')}}
                         </a>
                     @else
-                        @include('episodes._buttons')
+                        @if (isset($language))
+                            {{$episode->pivot->type}}
+                        @else
+                            @include('episodes._buttons')
+                        @endif
                     @endif
 
 

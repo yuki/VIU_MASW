@@ -45,7 +45,7 @@
                 <li>{{__('viudb.celebrities')}}</li>
                 <ul>
                     @foreach ($celebrities as $celebrity)
-                        <li><a href="{{route('celebrities.show',$celebrity)}}">{!!searched($celebrity->name,$name)!!} {!!searched($celebrity->surname,$name)!!}</a></li>
+                        <li><a href="{{route('celebrities.show',$celebrity)}}">{!!searched($celebrity->name,$name)!!} </a></li>
                     @endforeach
                 </ul>
             @endif
@@ -53,7 +53,9 @@
                 <li>{{__('viudb.languages')}}</li>
                 <ul>
                     @foreach ($languages as $language)
-                        <li>{{$language->name}}</li>
+                        <li>
+                            <a href="{{route('languages.show',$language)}}">{!!searched($language->name,$name)!!}</a>
+                        </li>
                     @endforeach
                 </ul>
             @endif
