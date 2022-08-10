@@ -5,7 +5,7 @@
             @csrf
             <div class="row offset-4 col">
                 <div class="col">
-                    <input type="text" class="form-control" id="name" name="name" required placeholder="{{__('viudb.buscar')}}"
+                    <input type="text" class="form-control" id="name" name="name" placeholder="{{__('viudb.buscar')}}"
                         @if (isset($name))
                             value="{{$name}}"
                         @endif

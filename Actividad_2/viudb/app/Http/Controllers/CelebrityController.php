@@ -23,7 +23,7 @@ class CelebrityController extends Controller
         } else {
             $celebrities = Celebrity::orderBy('name')->paginate(env('VIEW_PAGINATE'));
         }
-        return view('celebrities.list', ['celebrities' => $celebrities]);
+        return view('celebrities.list', ['celebrities' => $celebrities, 'name'=> $name]);
     }
 
     /**
