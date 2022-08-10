@@ -35,6 +35,13 @@ php artisan db:seed
 
 Sólo es necesario ejecutar un comando de **seed** porque se han añadido todas las dependencias que se deben ejecutar en el fichero **viudb/database/seeds/DatabaseSeeder.php**
 
+### Usuarios de acceso a la aplicación
+Junto con los datos de pruebas del paso anterior se ha creado un usuario que tiene acceso a toda la plataforma. Los credenciales son:
+- **e-mail**: example@example.com
+- **contraseña**: password
+
+Estos credenciales están en el fichero **viudb/database/seeds/UserSeeder.php**.
+
 
 ## Otras cuestiones a tener en cuenta
 Se ha creado un fichero **app/helpers.php** con distintas funcione. Para que tenga en cuenta dicho fichero se ha modificado el fichero **composer.json** y he añadido en la sección **autoload**:
