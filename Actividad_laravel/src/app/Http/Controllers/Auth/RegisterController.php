@@ -4,6 +4,9 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
+use App\Rules\dni;
+use App\Rules\iban;
+use App\Rules\telefono;
 use App\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
@@ -50,9 +53,14 @@ class RegisterController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'name' => ['required', 'alpha', 'min:2,max:20'],
+            'surname' => ['required', 'alpha', 'min:2,max:40'],
+            'dni' => ['required', new dni],
+            'email' => ['required', 'email:filter', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
+            'telefono' => ['nullable',new telefono],
+            'iban' => ['required','string', new iban],
+            'about' => ['nullable','string', 'min:20,max:250'],
         ]);
     }
 

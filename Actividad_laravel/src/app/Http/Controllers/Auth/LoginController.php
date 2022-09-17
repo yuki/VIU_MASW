@@ -28,6 +28,11 @@ class LoginController extends Controller
      */
     protected $redirectTo = RouteServiceProvider::HOME;
 
+    // modificado para la actividad. Los valores originales están en
+    // vendor/laravel/framework/src/Illuminate/Foundation/Auth/ThrottlesLogins.php
+    public $decayMinutes = 180;
+    public $maxAttempts = 2;
+
     /**
      * Create a new controller instance.
      *
