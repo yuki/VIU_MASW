@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Country;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use App\Rules\dni;
@@ -43,6 +44,15 @@ class RegisterController extends Controller
     {
         $this->middleware('guest');
     }
+
+    // para poder añadir los paises sobreescribo la función original que está en:
+    // /app/vendor/laravel/framework/src/Illuminate/Foundation/Auth/RegistersUsers.php
+    public function showRegistrationForm()
+    {
+        $countries = Country::orderBy('name')->get();
+        return view('auth.register', ['countries' => $countries]);
+    }
+
 
     /**
      * Get a validator for an incoming registration request.

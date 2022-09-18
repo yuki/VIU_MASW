@@ -15,8 +15,11 @@ class UsersTableSeeder extends Seeder
     {
         DB::table('users')->insert([
             'name' => 'seguridadweb',
+            'surname' => 'seguro',
+            'dni' => '12345678A',
             'email' => 'seguridadweb@campusviu.es',
             'password' => Hash::make('S3gur1d4d?W3b'),
+            'iban'=> 'ES1112341234121234567890',
         ]);
     }
 }

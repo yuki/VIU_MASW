@@ -92,12 +92,12 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="telefono" class="col-md-4 col-form-label text-md-right">{{ __('formulario.telefono') }}</label>
+                            <label for="telephone" class="col-md-4 col-form-label text-md-right">{{ __('formulario.telephone') }}</label>
 
                             <div class="col-md-6">
-                                <input id="telefono" type="text" class="form-control @error('telefono') is-invalid @enderror" name="telefono" value="{{ old('telefono') }}" autocomplete="telefono" autofocus>
+                                <input id="telephone" type="text" class="form-control @error('telephone') is-invalid @enderror" name="telephone" value="{{ old('telephone') }}" autocomplete="telephone" autofocus>
 
-                                @error('telefono')
+                                @error('telephone')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
@@ -105,7 +105,21 @@
                             </div>
                         </div>
 
-                        PAIS
+                        <div class="form-group row">
+                            <label for="country_id" class="col-md-4 col-form-label text-md-right">{{__('formulario.country')}}</label>
+                            <div class="col-md-6">
+                                <select class="form-control col-md-6 @error('country_id') is-invalid @enderror" aria-label="default-select" id="country_id" name="country_id" required>
+                                    <option value=0>{{__('formulario.choose_country')}}</option>
+                                    @foreach ($countries as $country)
+                                        <option value={{$country->id}}>
+                                            {{$country->name}}
+                                        </option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+
+
 
                         <div class="form-group row">
                             <label for="iban" class="col-md-4 col-form-label text-md-right">{{ __('formulario.iban') }}</label>
