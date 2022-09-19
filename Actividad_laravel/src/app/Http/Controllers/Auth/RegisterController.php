@@ -72,7 +72,8 @@ class RegisterController extends Controller
             'password'  => ['required', 'string', 'min:12', new password, 'confirmed'],
             'telephone' => ['nullable', new telefono,'max:13'], // 13 porque es 12 y el "+", o 0034+9digitos
             'iban'      => ['required', new iban, 'max:24'],
-            'about'     => ['nullable','string', 'between:2,250'],
+            'about'     => ['nullable', 'string', 'between:20,250'],
+            'country_id'=> ['nullable', 'integer']
         ]);
     }
 
@@ -93,6 +94,7 @@ class RegisterController extends Controller
             'telephone' => $data['telephone'],
             'iban'      => str_replace(' ','',$data['iban']),
             'about'     => $data['about'],
+            'country_id'=> $data['country_id'],
         ]);
     }
 }
