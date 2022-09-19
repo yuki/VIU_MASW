@@ -4,7 +4,7 @@ namespace App\Rules;
 
 use Illuminate\Contracts\Validation\Rule;
 
-class iban implements Rule
+class password implements Rule
 {
     /**
      * Create a new rule instance.
@@ -25,9 +25,12 @@ class iban implements Rule
      */
     public function passes($attribute, $value)
     {
-        return preg_match("/[A-Z]{2}\d{22}/",$value)
-            // si queremos permitir espacios podríamos usar la siguiente regexp
-            // || preg_match("/[A-Z]{2}\d{2} \d{4} \d{4} \d{2} \d{10}/",$value)
+        return
+            // https://www.php.net/manual/en/regexp.reference.unicode.php
+            preg_match('/(.*\d){3,}/u',$value) // dígitos
+            && preg_match("/(.*\p{Ll}){3,}/u",$value)  //letras minúsculas
+            && preg_match("/(.*\p{Lu}){3,}/u",$value) //letras mayúsculas
+            && preg_match('/(.*\W){3,}/u',$value) // \W -> signos de puntuación
         ;
     }
 
@@ -38,6 +41,6 @@ class iban implements Rule
      */
     public function message()
     {
-        return __('formulario.iban_validation');
+        return __('formulario.password_validation');
     }
 }

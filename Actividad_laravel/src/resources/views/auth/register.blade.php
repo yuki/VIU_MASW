@@ -73,7 +73,9 @@
                             <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('formulario.password') }}</label>
 
                             <div class="col-md-6">
-                                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
+                                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password"
+                                {{-- onselectstart="return false" onpaste="return false;" onCopy="return false" onCut="return false" onDrag="return false" onDrop="return false" autocomplete=off/ --}}
+                                >
 
                                 @error('password')
                                     <span class="invalid-feedback" role="alert">
@@ -87,7 +89,9 @@
                             <label for="password-confirm" class="col-md-4 col-form-label text-md-right">{{ __('formulario.confirm_password') }}</label>
 
                             <div class="col-md-6">
-                                <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
+                                <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password"
+                                {{-- onselectstart="return false" onpaste="return false;" onCopy="return false" onCut="return false" onDrag="return false" onDrop="return false" autocomplete=off/ --}}
+                                >
                             </div>
                         </div>
 
@@ -111,7 +115,11 @@
                                 <select class="form-control col-md-6 @error('country_id') is-invalid @enderror" aria-label="default-select" id="country_id" name="country_id" required>
                                     <option value=0>{{__('formulario.choose_country')}}</option>
                                     @foreach ($countries as $country)
-                                        <option value={{$country->id}}>
+                                        <option value={{$country->id}}
+                                            @if (old('country_id') == $country->id)
+                                                selected
+                                            @endif
+                                        >
                                             {{$country->name}}
                                         </option>
                                     @endforeach

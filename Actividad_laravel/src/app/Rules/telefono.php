@@ -25,7 +25,14 @@ class telefono implements Rule
      */
     public function passes($attribute, $value)
     {
-        return preg_match("/(\+)*\d{9,12}/",$value);
+        /*
+            Para el que lo lea: XD
+            Las expresiones regulares de los teléfonos es un cristo. Intentar abarcarlo todo es muy complicado,
+            que se lo digan a cualquiera que haya tocado un sistema de VoIP (Asterisk, Kamailio y demás). Así que
+            esta regexp no es más que un triste ejemplo para números españoles.
+            Un ejemplo del caos que podría llegar a ser esto en la vida real: https://regexpattern.com/phone-number/
+        */
+        return preg_match("/(\+)*\d{9,12}/",$value) || preg_match("/0034\d{9}/",$value);
     }
 
     /**

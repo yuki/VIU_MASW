@@ -82,7 +82,9 @@
             <div class="content">
                 <div class="title m-b-md">
                     @guest
-                        Go to <a href="{{ route('login') }}">Login</a> page
+                        Go to <a href="{{ route('login') }}">Login</a> page <br><br>
+
+                        Or to <a href="{{ route('register') }}">Register</a> page
                     @else
                         You are logged
                     @endguest

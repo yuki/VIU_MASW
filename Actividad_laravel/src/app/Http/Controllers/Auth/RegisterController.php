@@ -8,6 +8,7 @@ use App\Providers\RouteServiceProvider;
 use App\Rules\dni;
 use App\Rules\iban;
 use App\Rules\telefono;
+use App\Rules\password;
 use App\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
@@ -63,14 +64,15 @@ class RegisterController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'name' => ['required', 'alpha', 'min:2,max:20'],
-            'surname' => ['required', 'alpha', 'min:2,max:40'],
-            'dni' => ['required', new dni],
-            'email' => ['required', 'email:filter', 'max:255', 'unique:users'],
-            'password' => ['required', 'string', 'min:8', 'confirmed'],
-            'telefono' => ['nullable',new telefono],
-            'iban' => ['required','string', new iban],
-            'about' => ['nullable','string', 'min:20,max:250'],
+            // si ponemos sólo "alpha" no se acepant espacios para nombres y/o apellidos compuestos
+            'name'      => ['required', 'string', 'between:2,20'],
+            'surname'   => ['required', 'string', 'between:2,20'],
+            'dni'       => ['required', new dni,'max:9'],
+            'email'     => ['required', 'email:filter', 'max:255', 'unique:users'],
+            'password'  => ['required', 'string', 'min:12', new password, 'confirmed'],
+            'telephone' => ['nullable', new telefono,'max:13'], // 13 porque es 12 y el "+", o 0034+9digitos
+            'iban'      => ['required', new iban, 'max:24'],
+            'about'     => ['nullable','string', 'between:2,250'],
         ]);
     }
 
@@ -83,9 +85,14 @@ class RegisterController extends Controller
     protected function create(array $data)
     {
         return User::create([
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'password' => Hash::make($data['password']),
+            'name'      => $data['name'],
+            'surname'   => $data['surname'],
+            'dni'       => $data['dni'],
+            'email'     => $data['email'],
+            'password'  => Hash::make($data['password']),
+            'telephone' => $data['telephone'],
+            'iban'      => str_replace(' ','',$data['iban']),
+            'about'     => $data['about'],
         ]);
     }
 }
