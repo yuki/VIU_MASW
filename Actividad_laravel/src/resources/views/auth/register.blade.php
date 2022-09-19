@@ -74,7 +74,13 @@
 
                             <div class="col-md-6">
                                 <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password"
-                                {{-- onselectstart="return false" onpaste="return false;" onCopy="return false" onCut="return false" onDrag="return false" onDrop="return false" autocomplete=off/ --}}
+                                onselectstart="return false"
+                                onpaste="return false;"
+                                onCopy="return false"
+                                onCut="return false"
+                                onDrag="return false"
+                                onDrop="return false"
+                                autocomplete=off/
                                 >
 
                                 @error('password')
@@ -90,7 +96,13 @@
 
                             <div class="col-md-6">
                                 <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password"
-                                {{-- onselectstart="return false" onpaste="return false;" onCopy="return false" onCut="return false" onDrag="return false" onDrop="return false" autocomplete=off/ --}}
+                                onselectstart="return false"
+                                onpaste="return false;"
+                                onCopy="return false"
+                                onCut="return false"
+                                onDrag="return false"
+                                onDrop="return false"
+                                autocomplete=off/
                                 >
                             </div>
                         </div>
