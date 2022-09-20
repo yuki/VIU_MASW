@@ -31,7 +31,7 @@
 
 \chapter{Introducción}
 
-La seguridad en la informática es algo que se debe pensar desde el inicio de un proyecto, ya que las decisiones tomadas pueden repercutir en las iteraciones y evolución del producto.
+La seguridad en informática es algo que se debe pensar desde el inicio de un proyecto, ya que las decisiones tomadas pueden repercutir en las iteraciones posteriores y en la evolución del producto.
 
 A lo largo de este documento se van a explicar las decisiones tomadas, tanto en el ámbito de programación como de diseño, durante la creación de un formulario de registro para un portal web creado con el \textit{framework} \href{https://laravel.com/}{Laravel}.
 
@@ -64,7 +64,7 @@ Para el correcto funcionamiento del contenedor se hace uso del fichero \configfi
 \section{Despliegue del código fuente}
 Para realizar el despliegue del código fuente sobre el contenedor del servicio web, el directorio \configdir{src} debe estar situado a la misma altura del fichero \configfile{compose.yaml}.
 
-De esta manera, a la hora de levantar el servicio se crea un volumen compartiendo el directorio local \configdir{viudb} con otro dentro del contenedor, en la ruta \configdir{/app}, que es de donde se nutre Nginx.
+De esta manera, a la hora de levantar el servicio se crea un volumen compartiendo el directorio local \configdir{src} con otro dentro del contenedor, en la ruta \configdir{/app}, que es de donde se nutre Nginx.
 
 
 \section{Creación de la base de datos}
@@ -91,13 +91,13 @@ Para realizar el despliegue de datos, se va a utilizar dos características que 
 Para realizar el despliegue debemos conectarnos al contenedor donde tenemos el proyecto y lanzar los comandos que realizan el “migrate” y crean los datos. A continuación aparecen los comandos:
 
 \begin{mycode}{Acceder al contenedor Docker para hacer el despliegue}{console}{}
-#nos conectamos al contenedor
+# nos conectamos al contenedor
 ruben@vega:~$ docker exec -it   actividad_1_php_1 /bin/bash
 
-#vamos al directorio donde está el desarrollo
+# vamos al directorio donde está el desarrollo
 root@a7913ac7b97a:/# cd /app
 
-#lanzamos el migrate
+# lanzamos el migrate
 root@a7913ac7b97a:/app# php artisan migrate
 
 #lanzamos el seed
@@ -112,9 +112,9 @@ root@a7913ac7b97a:/app# php artisan db:seed
 Una vez tenemos realizado el despliegue, se va a profundizar en el desarrollo realizado, destacando los siguientes aspectos:
 
 \section{Sistema de autenticación en Laravel}
-Laravel cuenta con un sistema de \href{https://laravel.com/docs/6.x/authentication}{autenticación} que nos permite la creación de usuarios de manera sencilla y gestionar las vistas dependiendo de si el usuario ha realizado \textit{login} o es un invitado.
+Laravel cuenta con un sistema de \href{https://laravel.com/docs/6.x/authentication}{autenticación} que nos permite la creación de usuarios de manera sencilla y también gestionar el contenido de las vistas dependiendo de si el usuario ha realizado \textit{login} o es un invitado.
 
-Aparte, gracias al sistema de \textit{\href{https://laravel.com/docs/6.x/frontend}{frontend scaffolding}}, podemos crear de las típicas vistas de registro de usuario, login  reseteo de contraseñas de manera automática, pudiendo elegir entre tres frameworks: \href{https://getbootstrap.com/}{Bootstrap}, \href{https://vuejs.org/}{Vue} o \href{https://es.reactjs.org/}{React}.
+Aparte, gracias al sistema de \textit{\href{https://laravel.com/docs/6.x/frontend}{frontend scaffolding}}, podemos crear las típicas vistas de registro de usuario, login, reseteo de contraseñas, etc., de manera automática, pudiendo elegir entre tres frameworks: \href{https://getbootstrap.com/}{Bootstrap}, \href{https://vuejs.org/}{Vue} o \href{https://es.reactjs.org/}{React}.
 
 Este sistema de autenticación ha sido modificado para que sea más seguro y realizando modificación en los campos que se piden durante el registro.
 
@@ -136,7 +136,7 @@ Por otro lado, para no dar pistas también se ha modificado el fichero \configfi
 \subsection{Bloqueo de cuentas por fallos de autenticación}
 Para asegurar que no se realiza un ataque por fuerza bruta  de contraseñas durante el login, Laravel permite el bloqueo una vez realizado un número de intentos fallidos. Por defecto la configuración se encuentra en el fichero \configfile{Illuminate/Foundation/Auth/ThrottlesLogins.php} dentro del directorio \configdir{vendor/laravel/framework/src/}, donde hay dos funciones que indican que el número máximo de intentos es de 5 y el bloqueo se efectuará durante 1 minuto.
 
-Para modificar esta configuración por defecto se debe modificar el fichero \configfile{app/Http/Controllers/Auth/LoginController.php} en el que añadiremos las variables \mintinline{php}{$decayMinutes} y \mintinline{php}{$maxAttempts} quedando como lo siguiente:
+Para ajustar esta configuración a nuestras necesidades, se ha modificado el fichero \configfile{app/Http/Controllers/Auth/LoginController.php} en el que añadiremos las variables \mintinline{php}{$decayMinutes} y \mintinline{php}{$maxAttempts} quedando:
 
 \begin{mycode}{Añadiendo seguridad durante el login}{php}{}
 <?php
@@ -158,30 +158,29 @@ De esta manera, si se intenta hacer login con una cuenta existente y se falla la
     \includegraphics[width=0.8\linewidth]{img/bloqueo.png}
 \end{center}
 
-Tal como aparece en el mensaje, ha habido demasiados intentos de acceso fallidos y habrá que esperar 10795 segundos (los casi 180 minutos indicados en la configuración).
+Tal como aparece en el mensaje, ha habido demasiados intentos de acceso fallidos y habrá que esperar un número de segundos (los 180 minutos indicados en la configuración).
 
 
 
 \section{Sistema de validación durante el registro}
 A la hora de registrarse en una plataforma, hay que asegurarse que los datos introducidos son válidos. Esta validación no sólo se debe realizar en el frontend, ya que ese sistema es fácilmente traspasable con unos mínimos conocimientos.
 
-Los datos deben de validarse antes de acceder a la base de datos, y por tanto se debe de realizar en el \textit{\textbf{backend}} del portal.
+Los datos deben de validarse antes de acceder a la base de datos, y por tanto se debe de realizar en el \textit{\textbf{backend}} de la aplicación web.
 
 Como ya se ha dicho previamente, Laravel cuenta con una \href{https://laravel.com/docs/6.x/validation}{documentación extensa} acerca de su sistema de validación y cómo lo podemos ampliar para adecuarlo a nuestras necesidades, tal como veremos a continuación.
 
 \subsection{Creación de campos propios}
-El sistema de registro de Laravel (a través del sistema de autenticación citado previamente) crea una página donde se puede elegir nombre, e-mail y contraseña.
+El sistema de registro de Laravel (a través del sistema de autenticación citado previamente) crea una página donde se puede insertar nombre, e-mail y contraseña.
 
-En caso de que queramos añadir nuevos campos deberemos de modificar el fichero de la vista \configfile{resources/views/auth/register.blade.php} y añadir los campos que nos interese.
+En caso de que queramos añadir nuevos campos debemos modificar el fichero de la vista \configfile{resources/views/auth/register.blade.php} y añadir los campos que nos interese.
 
-Modificaremos \configfile{app/Http/Controllers/Auth/RegisterController.php} para que estos campos posteriormente se inserten en la base de datos, dejando el fichero:
+Modificaremos \configfile{app/Http/Controllers/Auth/RegisterController.php} para que estos campos posteriormente se inserten en la base de datos, quedando la función \textit{\textbf{create}} de la siguiente manera:
 
 
 \begin{mycode}{Código para la creación de usuario }{php}{}
 <?php
 ...
-protected function create(array $data)
-{
+protected function create(array $data) {
     return User::create([
         'name'      => $data['name'],
         'surname'   => $data['surname'],
@@ -201,13 +200,13 @@ protected function create(array $data)
 \subsubsection{Modificación de la base de datos}
 Para que los cambios del paso anterior funcionen, lógicamente hay que realizar la modificación de la base de datos para aceptar los nuevos campos.
 
-Para ello se ha creado un fichero \textbf{\textit{migrate}} en el que se indica que se deben añadir los campos a la tabla \textbf{users}.
+Para ello se ha creado un fichero \textbf{\textit{migrate}} en el que se indica  los nuevos campos que se deben añadir a la tabla \textbf{users}.
 
 
 \subsection{Reglas propias de validación}
 Con los nuevos campos creados en la base de datos y con el formulario modificado, es momento de realizar las validaciones oportunas, paso previo a la inserción de datos.
 
-Laravel nos permite realizar validaciones sencillas teniendo en cuenta el campo, el tipo de datos longitud...
+Laravel nos permite realizar validaciones sencillas teniendo en cuenta el campo, el tipo de datos, longitud...
 
 \begin{mycode}{Validaciones realizadas}{php}{{\footnotesize }}
 <?php
@@ -228,20 +227,32 @@ protected function validator(array $data)
 }
 \end{mycode}
 
-En las validaciones expuestas, se han realizado validaciones propias para los campos \textbf{dni}, \textbf{teléfono} e \textbf{IBAN}. Estas validaciones propias están configuradas dentro del directorio \configdir{app/rules}, donde cada fichero es una validación y contienen básicamente dos secciones:
+En las validaciones expuestas, se han realizado validaciones propias para los campos \textbf{dni}, \textbf{password}, \textbf{teléfono} e \textbf{IBAN}. Estas validaciones propias se han creado dentro del directorio \configdir{app/rules}, donde cada fichero es una validación y contienen una clase con dos funciones importantes:
 
 \begin{itemize}
-    \item \textbf{passes}: función que recibe el contenido del campo del formulario y en el que realizaremos la validación propia. En este caso, todas las validaciones realizadas se han solucionado con una o varias expresiones regulares.
+    \item \textbf{passes}: función que recibe el contenido del campo del formulario y en el que realizaremos la validación. Las validaciones realizadas para este proyecto se han solucionado con una o varias expresiones regulares.
 
-    \item \textbf{messages}: devuelve el mensaje de error en caso de que la función “passes” devuelva error.
+    \item \textbf{messages}: devuelve el mensaje de error en caso de que la función “passes” \textbf{no devuelva true}.
 \end{itemize}
 
 En caso de que existan varios mensajes de error, aparecerán todos seguidos e indicando cuáles son los campos que han dado error, a través de un borde rojo:
 
 \begin{center}
-    \includegraphics[frame,width=0.8\linewidth]{img/errores.png}
+    \includegraphics[frame,width=0.9\linewidth]{img/errores.png}
 \end{center}
 
+
+Una de las validaciones más importantes realizadas ha sido la de la contraseña, la que se ha forzado que tenga que ser:
+
+\begin{itemize}
+    \item Al menos 12 caracteres, de los cuales:
+    \item Al menos 3 tienen que ser letras minúsculas.
+    \item Al menos 3 tienen que ser letras mayúsculas.
+    \item Tiene que haber al menos 3 números.
+    \item Tiene que incluir al menos 3 símbolos tipográficos.
+\end{itemize}
+
+Esta validación se ha conseguido mediante expresiones regulares en su fichero de reglas propio. De cara a futuro, se podría mejorar creando unas variables de entorno en el fichero \configfile{.env} donde se indique el la dificultad de la contraseña a introducir.
 
 \subsection{Mantener valores en el formulario tras un error}
 Tal como se ha visto en el paso anterior, en caso de que el registro de un error durante la validación, se le indicará al usuario, indicando los campos que debe de corregir.
@@ -258,20 +269,42 @@ Esto se ha conseguido en la vista del registro indicando en los apartados \texti
     required autocomplete="dni" autofocus>
 \end{mycode}
 
+Esto se ha repetido para todos los campos, a excepción de la contraseña.
+
+\subsection{No permitir “copiar-pegar” en la contraseña}
+Para mejorar la seguridad y evitar que algún atacante, mediante ingeniería social delante del ordenador, pueda copiar la contraseña introducida, se han modificado los campos de contraseña y validación de contraeña para no permitir copiar, seleccionar o pegar contraseña.
+
+No permitiendo “copiar-pegar” también nos estamos asegurando que el usuario introduce de manera correcta la contraseña que ha elegido, minimizando el riesgo de equivocarse.
+
+\begin{mycode}{No permitimos “copiar-pegar” en el input}{html+php}{}
+<input id="password" type="password" class="form-control
+    @error('password') is-invalid @enderror"
+    name="password" required autocomplete="new-password"
+    onselectstart="return false"
+    onpaste="return false;"
+    onCopy="return false"
+    onCut="return false"
+    onDrag="return false"
+    onDrop="return false"
+    autocomplete=off/
+>
+\end{mycode}
+
+Con el código expuesto, evitamos copiar, cortar, seleccionar, arrastrar y pegar el contenido de los textos que serán guardadas como contraseñas.
 
 \section{Traducciones}
 Tal como se ha visto en la imágenes, los mensajes de validación aparecen en castellano, ya que se han añadido traducciones de los mensajes originales y porque la aplicación ha sido configurada con el castellano como idioma principal.
 
 Las traducciones de los mensajes se han añadido en el directorio \configdir{resources/lang/es}, manteniendo la misma estructura de ficheros existente en el idioma inglés.
 
-
+Para realizar parte de las traducciones se ha utilizado las traducciones ya realizadas por Marco Gomes de su \href{https://github.com/MarcoGomesr/laravel-validation-en-espanol}{proyeto de GIthub}.
 
 \chapter{Conclusiones}
-Hoy en día es habitual que en cualquier portal web de servicios haya que realizar un registro con ciertos datos personales. Es importante que estos datos sean validados y se compruebe que la seguridad del portal no se ve comprometido por los datos introducidos.
+Hoy en día es habitual que en cualquier portal web de servicios haya que realizar un registro con ciertos datos personales. Es importante que estos datos sean validados y que se compruebe que la seguridad del portal no se ve comprometido por los datos introducidos.
 
 Es por eso que, previa a la inserción de los datos en la base de datos, resulta obligatorio realizar una validación de los datos introducidos en los formularios, tal como hemos visto a lo largo de este documento.
 
-Aunque de primeras quizá pueda parecer una labor tediosa, los framework como Laravel facilitan esa labor, por lo que no hay excusa para no hacer uso de estos sistemas de validaciones, que por otro lado también ayudan al usuario a utilizar nuestras aplicaciones.
+Aunque de primeras quizá pueda parecer una labor tediosa, los framework como Laravel facilitan esa labor. Es por eso que no hay excusa para no hacer uso de estos sistemas de validaciones, que por otro lado también ayudan al usuario a utilizar nuestras aplicaciones mejorando la usabilidad de la misma.
 
 
 
