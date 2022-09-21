@@ -1,0 +1,240 @@
+\newcommand{\ClassPath}{../VIU_TFM_LaTeX_template}
+\documentclass{\ClassPath/viu-tfm-template}
+\usepackage{multicol}
+
+\definecolor{maincolor}{HTML}{f25416}
+
+%--------------------------------------------------------------------------
+% Definiciones necesarias Modifica con tus datos
+%--------------------------------------------------------------------------
+\def\nombre{Gómez Olivencia, Rubén}
+\def\dni{78910013-A}
+\def\titulo{Análisis de vulnerabilidades \linebreak\linebreak de un portal web}
+\def\titulacion{Máster Universitario en Desarrollo de Aplicaciones y Servicios Web}
+\def\curso{2022-2023}
+
+%Los siguientes son opcionales: si no se ponen, la portada cambia un poco. Ideal para escribir artículos/trabajos cortos
+\def\dirige{}
+\def\convocatoria{}
+\def\asignatura{Seguridad Web}
+
+
+% importar fichero de Bibliografía
+%\addbibresource{Actividad_1.bib}
+
+\begin{document}
+
+
+\graphicspath{{../VIU_TFM_LaTeX_template/}}
+
+\coverpage
+
+\tableofcontents
+
+\chapter{Introducción}
+
+La seguridad en informática es algo que se debe pensar desde el inicio de un proyecto, ya que las decisiones tomadas pueden repercutir en las iteraciones posteriores y en la evolución del producto.
+
+Hoy en día es habitual hacer uso de \textit{frameworks} a la hora de facilitar la programación de una aplicación web. Gracias a ello nos va a permitir hacer uso de buenas prácticas, que junto con el funcionamiento interno del \textit{framework} van a evitar que tengamos ciertos fallos de seguridad habituales como puede ser el \textbf{\textit{SQL injection}}.
+
+Eso no quita que debamos de realizar un análisis de la aplicación que estamos desarrollando, tratando de buscar posibles vulnerabilidades antes de que el proyecto salga a producción.
+
+A lo largo de este documento se van a utilizar distintas herramientas de análisis que van a ser ejecutadas contra la web \href{http://testphp.vulnweb.com/}{http://testphp.vulnweb.com/}, ya que es un portal creado especialmente con vulnerabilidades con el propósito de enseñar.
+
+
+\chapter{Objetivo}
+El objetivo de este documento es el de aprender a utilizar ciertas herramientas que nos van a permitir realizar un análisis de un portal web para tratar de buscar las vulnerabilidades más habituales que nos encontramos hoy en día en el ámbito web:
+
+\begin{itemize}
+    \item \textbf{Inyección de SQL} (“\textit{SQL injection}” en inglés): Es una vulnerabilidad causada por no comprobar (o no hacerlo de  manera correcta) los valores de una variable que posteriormente es utilizada para realizar una sentencia SQL. De esta manera, se “inyecta” código que puede permitir realizar acciones sobre la base de datos que no deberían estar permitidas (obtener datos confidenciales, borrar datos, ...).
+
+    \item \textbf{\textit{Cross-site Scripting}} (\textbf{XSS}): En castellano “secuencia de comandos en sitios cruzados”, que significa que un atacante puede inyectar código javascript en ficheros del servidor. También permite obtener información como sesiones de usuarios o comprometer el navegador del visitante.
+
+    \item \textbf{\textit{Cross-site Request Forgery}} (\textbf{CSRF}): En castellano “falsificación de petición en sitios cruzados”, que se refiere a un tipo de  vulnerabilidad en el que un portal web ejecuta comandos no autorizados por ser transmitidos por un usuario desde el cual el sitio web confía.
+\end{itemize}
+
+Tal como se ha dicho previamente, el análisis va a ser realizado contra el portal web \href{http://testphp.vulnweb.com/}{http://testphp.vulnweb.com/}, pudiendo ser utilizado cualquiera que nos pertenezca.
+
+No sería ético realizar un análisis de un portal ajeno tratando de buscar vulnerabilidades que podamos atacar en nuestro beneficio.
+
+
+\chapter{Análisis general}
+
+Aunque alguna de las vulnerabilidades previamente descritas podrían ser fácilmente detectadas haciendo uso del método “prueba-error”, es más interesante hacer uso de herramientas que nos pueden realizar un informe tratando de buscar las vulnerabilidades más habituales.
+
+Una de estas herramientas es \href{https://www.arachni-scanner.com/}{Arachni Scanner}, que nos va a realizar un rastreo de todo el portal web que le indiquemos, realizando distintas comprobaciones y finalmente realizando un informe detallando todas las vulnerabilidades encontradas.
+
+\section{Arachni Scanner}
+\href{https://www.arachni-scanner.com/}{Arachni} permite ser usado a través de línea de comandos o desde un interfaz web propio que levanta con su propio servidor haciendo uso del comando \commandbox{./arachni_web} que se tiene que ejecutar desde el directorio creado tras realizar la \href{https://www.arachni-scanner.com/download/}{descarga}.
+
+La herramienta permite crear distintos perfiles con los que realizar los análisis que más nos interesen. Por defecto trae tres perfiles ya creados:
+
+\begin{itemize}
+    \item \textbf{Default}: Perfil por defecto que va a realizar un análisis profundo tratando de buscar todo tipo de vulnerabilidades.
+
+    También va a realizar la búsqueda de ficheros o directorios de backups (que en caso de ser descargados pueden obtener datos privados), ficheros con información sensible, interfaces de administración que deberían estar ocultas...
+
+    Es un análisis complejo que va a necesitar bastante tiempo, pero nos va a dar como resultado un informe muy detallado.
+
+    \item \textbf{SQL injection}: Perfil que sólo va a tratar de obtener las vulnerabilidades relacionadas con \textit{SQL inyection}.
+
+    \item \textbf{Cross-Site Scripting (XSS)}: Como el caso anterior, pero esta vez obteniendo las vulnerabilidades XSS.
+\end{itemize}
+
+\section{Informe obtenido}
+
+Para la realización de este documento se ha utilizado el perfil “\textit{default}” para tratar de buscar todas las vulnerabilidades posibles del portal.
+
+Esto ha hecho que el análisis haya tardado un total de 45 minutos y 37 segundos, pero que ha permitido obtener un total de 173 vulnerabilidades, que Arachni diferencia de la siguiente forma.
+
+{
+    \hfill
+    \begin{minipage}{0.4\linewidth}
+        \includegraphics[width=\linewidth]{img/total.png}
+    \end{minipage}
+    \hfill
+    \hfill
+    \begin{minipage}{0.3\linewidth}
+        \includegraphics[width=\linewidth]{img/grafico.png}
+    \end{minipage}
+    \hfill
+}
+
+Tal como se puede ver, el número de vulnerabilidades de medio y alto riesgo suponen un gran porcentaje de las obtenidas, por lo que a simple vista se puede asumir que el portal corre riesgo severo en su seguridad.
+
+Si entramos al listado detallado, Arachni nos las diferencia de la siguiente manera:
+
+\begin{center}
+    \includegraphics[width=0.5\linewidth]{img/lista.png}
+\end{center}
+\vspace{-20pt}
+
+Para cada uno de estas vulnerabilidades Arachni genera una página detallada con el ataque realizado y la prueba obtenida.
+
+
+\chapter{Vulnerabilidades XSS}
+Para el caso de vulnerabilidades \textit{Cross-Site Scripting} (\textbf{XSS}), Arachni nos da un resultado de 28 vulnerabilidades, separadas en dos tipos.
+
+Como ejemplo veremos lo detectado para la URL \href{http://testphp.vulnweb.com/guestbook.php}{http://testphp.vulnweb.com/guestbook.php} en el que nos indica lo realizado:
+
+\begin{center}
+    \vspace{-20pt}
+    \includegraphics[frame,width=0.9\linewidth]{img/informe_xss.png}
+\end{center}
+
+En este caso, lo que realiza Arachni es meter un javascript en el formulario de la URL, para luego comprobar si ese código aparece. Si realizamos la misma prueba, pero introduciendo el siguiente código:
+
+\begin{mycode}{Ejemplo de Cross-Site Scripting}{html}{}
+</script><script>alert('hacked')</script>
+\end{mycode}
+
+Obtendremos que la web ejecuta el script introducido:
+
+\vspace{15pt}
+\begin{center}
+    \vspace{-20pt}
+    \includegraphics[width=0.7\linewidth]{img/ejemplo_xss.png}
+\end{center}
+
+
+
+\chapter{Vulnerabilidades SQL injection}
+Para el caso de las \textit{SQL Injection}, Arachni nos ha encontrado 4 vulnerabilidades en varias URLs. Para profundizar en este tipo de vulnerabilidades vamos hacer uso de \href{https://sqlmap.org/}{SQLmap}, que es una herramienta de consola que nos va a permitir obtener información de la base de datos a través de estos fallos.
+
+Como ejemplo, se va a utilizar una de las URLs del informe de Arachni: \href{http://testphp.vulnweb.com/listproducts.php?cat=1}{http://testphp.vulnweb.com/listproducts.php?cat=1}
+
+\begin{mycode}{Obtención de información con SQLmap}{console}{}
+ruben@vega:/tmp/sqlmap-dev$ ./sqlmap.py \
+-u "http://testphp.vulnweb.com/listproducts.php?cat=1" --batch
+...
+[20:47:32] [INFO] the back-end DBMS is MySQL
+web server operating system: Linux Ubuntu
+web application technology: Nginx 1.19.0, PHP 5.6.40
+back-end DBMS: MySQL >= 5.6
+
+
+ruben@vega:/tmp/sqlmap-dev$ ./sqlmap.py \
+-u "http://testphp.vulnweb.com/listproducts.php?cat=1" \
+--batch --dbs
+...
+available databases [2]:
+[*] acuart
+[*] information_schema
+
+ruben@vega:/tmp/sqlmap-dev$ ./sqlmap.py \
+-u  "http://testphp.vulnweb.com/listproducts.php?cat=1" \
+--batch --tables -D acuart
+...
+Database: acuart
+[8 tables]
++-----------+
+| artists   |
+| carts     |
+| categ     |
+| featured  |
+| guestbook |
+| pictures  |
+| products  |
+| users     |
++-----------+
+\end{mycode}
+
+Tal como se puede ver, gracias a SQLmap se ha obtenido la versión del gestor de bases de datos (MySQL 5.6 o superior), y con otros comandos se ha podido obtener el nombre de la base de datos y las tablas que contiene.
+
+
+\chapter{Vulnerabilidades CSRF}
+Aunque Arachni también es capaz de buscar vulnerabilidades CSRF, no nos ha detectado ninguna en este caso. Es por eso que para asegurar se ha hecho uso de \href{https://github.com/s0md3v/Bolt}{Bolt}, que es un escaneador específico para vulnerabildiades CSRF.
+
+Es una aplicación de consola hecha en \href{https://www.python.org/}{Python}, que nos va a permitir desde consola obtener las URLs que contienen formularios inseguros.
+
+\begin{mycode}{Buscando vulnerabilidades CSRF con Bolt}{console}{{\small }}
+ruben@vega:/tmp/Bolt$ python3 bolt.py \
+-u  http://testphp.vulnweb.com/ -l 10 -t 10
+⚡ Phase: Crawling [1/6]
+[!] Crawled 13148 URL(s) and found 13148 form(s).
+⚡ Phase: Evaluating [2/6]
+[-] http://testphp.vulnweb.com/ [search.php?test=query]
+[-] http://testphp.vulnweb.com/login.php [userinfo.php]
+[-] http://testphp.vulnweb.com/login.php [search.php?test=query]
+[-] http://testphp.vulnweb.com/cart.php [search.php?test=query]
+[-] http://testphp.vulnweb.com/categories.php [search.php?test=query]
+[-] http://testphp.vulnweb.com/index.php [search.php?test=query]
+[-] http://testphp.vulnweb.com/guestbook.php [search.php?test=query]
+[-] http://testphp.vulnweb.com/disclaimer.php [search.php?test=query]
+[-] http://testphp.vulnweb.com/userinfo.php [userinfo.php]
+[-] http://testphp.vulnweb.com/userinfo.php [search.php?test=query]
+[-] http://testphp.vulnweb.com/artists.php [search.php?test=query]
+[-] http://testphp.vulnweb.com/signup.php [secured/newuser.php]
+[-] http://testphp.vulnweb.com/signup.php [search.php?test=query]
+[-] http://testphp.vulnweb.com/artists.php [search.php?test=query]
+[-] http://testphp.vulnweb.com/listproducts.php [search.php?test=query]
+[-] http://testphp.vulnweb.com/listproducts.php [search.php?test=query]
+[-] http://testphp.vulnweb.com/artists.php [search.php?test=query]
+[-] http://testphp.vulnweb.com/listproducts.php [search.php?test=query]
+[-] http://testphp.vulnweb.com/listproducts.php [search.php?test=query]
+[-] http://testphp.vulnweb.com/artists.php [search.php?test=query]
+...
+\end{mycode}
+
+Tal como se puede ver, Bolt ha realizado sus pruebas y ha encontrado varios formularios que son vulnerables.
+
+
+\chapter{Posibles soluciones a realizar}
+Para realizar un buen informe de vulnerabilidades detectadas, no sólo hay que nombrarlas, sino que hay que tratar de aportar información y posibles maneras para resolverlas.
+
+A continuación se detallan varios pasos para tratar de corregir algunas de ellas.
+
+
+NO
+
+ESTÁ
+
+TERMINADO
+
+
+\chapter{Conclusiones}
+Hoy en día es habitual que en cualquier portal web de servicios haya que realizar un registro con ciertos datos personales. Es importante que estos datos sean validados y que se compruebe que la seguridad del portal no se ve comprometido por los datos introducidos.
+
+
+
+\end{document}
