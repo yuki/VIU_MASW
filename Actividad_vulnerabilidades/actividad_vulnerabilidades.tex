@@ -111,7 +111,7 @@ Si entramos al listado detallado, Arachni nos las diferencia de la siguiente man
 
 Para cada uno de estas vulnerabilidades Arachni genera una página detallada con el ataque realizado y la prueba obtenida.
 
-
+\hypertarget{vulnerabilidad_xss}{}
 \chapter{Vulnerabilidades XSS}
 Para el caso de vulnerabilidades \textit{Cross-Site Scripting} (\textbf{XSS}), Arachni nos da un resultado de 28 vulnerabilidades, separadas en dos tipos.
 
@@ -183,7 +183,7 @@ Tal como se puede ver, gracias a SQLmap se ha obtenido la versión del gestor de
 
 
 \chapter{Vulnerabilidades CSRF}
-Aunque Arachni también es capaz de buscar vulnerabilidades CSRF, no nos ha detectado ninguna en este caso. Es por eso que para asegurar se ha hecho uso de \href{https://github.com/s0md3v/Bolt}{Bolt}, que es un escaneador específico para vulnerabildiades CSRF.
+Aunque Arachni también es capaz de buscar vulnerabilidades CSRF, no nos ha detectado ninguna en este caso. Es por eso que se ha hecho uso de \href{https://github.com/s0md3v/Bolt}{Bolt}, que es un escaneador específico para vulnerabildiades CSRF, para confirmar si existe alguna vulneravilidad o no.
 
 Es una aplicación de consola hecha en \href{https://www.python.org/}{Python}, que nos va a permitir desde consola obtener las URLs que contienen formularios inseguros.
 
@@ -222,19 +222,71 @@ Tal como se puede ver, Bolt ha realizado sus pruebas y ha encontrado varios form
 \chapter{Posibles soluciones a realizar}
 Para realizar un buen informe de vulnerabilidades detectadas, no sólo hay que nombrarlas, sino que hay que tratar de aportar información y posibles maneras para resolverlas.
 
-A continuación se detallan varios pasos para tratar de corregir algunas de ellas.
+Para cada tipo de vulnerabilidad sería necesario hacer un estudio del código fuente de la aplicación, así como de la configuración del servidor donde se encuentra. De esta manera, poder otorgar soluciones más precisas, ya que para cada vulnerabilidad pueden existir distintas posibles soluciones.
+
+A continuación se detallan algunas posibles soluciones para corregir algunas de las vulnerabilidades encontradas.
+
+\section{Corregir vulnerabilidades XSS}
+Debido a cómo funcionan las vulnerabilidades XSS, en las que mayormente es un ataque a través de cajas de texto (ya sea en formularios, páginas de búsqueda, inserción de comentarios ...) la primera solución a efectuar es comprobar el texto que recibimos en el backend.
+
+Existen distintas maneras de realizar dicha comprobación, pero alguna de ellas podría ser:
+
+\begin{itemize}
+    \item \textbf{Escapar carácteres}: Debido a que algunos caracteres introducidos pueden utilizarse como vector de ataque (tal como hemos visto \hyperlink{vulnerabilidad_xss}{previamente} con los “</script>”), la idea es convertir esos caracteres a formato html, o introduciendo “\" previamente a los carácteres.
+
+    \item \textbf{Eliminar carácteres no permitidos:} Una alternativa más radical a la anterior sería directamente eliminar todo carácter no permitido cuando un formulario es enviado.
+\end{itemize}
+
+A cualquiera de estas formas  se le suele denominar “\textbf{\textit{sanitize}}” en inglés, y hoy en día existen plugins (o los propios \textit{frameworks} traen funciones) que permiten realizar estas funciones de manera automática.
+
+Por supuesto, los lenguajes de programación (sobre todo los orientados a la web) también traen sus propias funciones. Y de no ser así, siempre podríamos crearnos una función propia añadiendo los caracteres que nos interese eliminar para que sean sustituidos.
 
 
-NO
+\section{Corregir vulnerabilidades SQL injection}
 
-ESTÁ
+Similar al caso anterior, las \textbf{\textit{SQL injection}} funcionan debido al código que se pasa a través de formularios que permiten ejecutar sentencias SQL que no deberían permitirse.
 
-TERMINADO
+Por lo tanto, la primera solución debería ser la misma que en el caso anterior, no permitir carácteres que puedan alterar la sentencia SQL que queremos ejecutar.
+
+Llo ideal es hacer uso un sistema de parametrización de sentencias SQL que suelen tener los frameworks actuales, ya que se encargan de realizar las funciones necesarias para evitar este tipo de ataques.
+
+En el caso del \textit{framework} \href{https://laravel.com/}{Laravel}, cuenta con el sistema \href{https://laravel.com/docs/6.x/eloquent}{Eloquent} que es el \textbf{ORM} (\textit{object–relational mapping} o asignación objeto-relacional) que viene incluído. De esta manera, antes de ejecutar la correspondiente sentencia SQL convertirá los datos al sistema esperado por la base de datos objeto. En caso de que la conversión de datos no sea correcta, habrá un error y por tanto la sentencia no será ejecutada.
+
+
+Por otro lado, también existe la posibilidad de tener distintos usuarios de base de datos para una misma aplicación, limitando las acciones que puede realizar cada usuario a nivel de sistema gestor de base de datos. Esta solución puede ser más compleja, y dependerá de la aplicación que estemos realizando, pero es conveniente tenerla en cuenta.
+
+
+\section{Corregir vulnerabilidades CSRF}
+Este tipo de ataques también se forma en los formularios , por lo que la manera en la que lo podemos corregir es añadiendo un \textit{\textbf{token CSRF}} que debe cumplir lo siguiente:
+
+\begin{itemize}
+    \item Debe ser \textbf{único por sesión}.
+    \item Debe ser secreto la manera en la que se genera.
+    \item \textbf{Impredicible}. Debe tener una buena longitud y que sea generado por un método seguro.
+\end{itemize}
+
+De nuevo nos podemos basar en las buenas prácticas de los \textit{framewors} para mitigar este tipo de ataques, ya que hoy en día cuentan con la generación de estos tokens de manera automatizada.
+
+En el caso de Laravel, en la documentación oficial se \href{https://laravel.com/docs/6.x/csrf}{explica cómo podemos adaptar nuestro código} incluyendo una directiva en nuestras vistas que generará el token.
+
+\begin{mycode}{Añadir token CSRF en Laravel}{html}{}
+<form method="POST" action="/profile">
+    @csrf
+    ...
+</form>
+\end{mycode}
+
+Tal como se puede ver, con una línea tan sencilla conseguimos evitar este tipo de vulnerabilidades.
+
+%Añadido a esto, y para mejorar la protección, también podemos realizar configuraciones en la parte del servidor web para limitar el origen de las peticiones. Podríamos crear una
 
 
 \chapter{Conclusiones}
-Hoy en día es habitual que en cualquier portal web de servicios haya que realizar un registro con ciertos datos personales. Es importante que estos datos sean validados y que se compruebe que la seguridad del portal no se ve comprometido por los datos introducidos.
 
+A la hora de crear nuestros proyectos web es importante conocer los distintos tipos de vulnerabilidades existentes para tratar de no cometer fallos que generen dichas vulnerabilidades.
 
+Como somos humanos, y cometemos errores, es importante conocer distintos sistemas capaces de encontrar  vulnerabilidades para que podamos corregirlas antes de pasar nuestra aplicación a producción.
+
+Interiorizar estos conocimientos, hacer uso de buenas prácticas y utilizar las distintas herramientas que nos proveen los \textit{frameworks} no va a evitar que realicemos errores en nuestro código, pero mejorará la seguridad y nos ayudará de prevenir las vulnerabilidades más habituales.
 
 \end{document}
