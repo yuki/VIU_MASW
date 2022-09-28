@@ -69,7 +69,7 @@ class RegisterController extends Controller
             'surname'   => ['required', 'string', 'between:2,20'],
             'dni'       => ['required', new dni,'max:9'],
             'email'     => ['required', 'email:filter', 'max:255', 'unique:users'],
-            'password'  => ['required', 'string', 'min:12', new password, 'confirmed'],
+            'password'  => ['required', 'string', 'min:10', new password, 'confirmed'],
             'telephone' => ['nullable', new telefono,'max:13'], // 13 porque es 12 y el "+", o 0034+9digitos
             'iban'      => ['required', new iban, 'max:24'],
             'about'     => ['nullable', 'string', 'between:20,250'],

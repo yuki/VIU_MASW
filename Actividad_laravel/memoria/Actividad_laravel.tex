@@ -31,7 +31,7 @@
 
 \chapter{Introducción}
 
-La seguridad en informática es algo que se debe pensar desde el inicio de un proyecto, ya que las decisiones tomadas pueden repercutir en las iteraciones posteriores y en la evolución del producto.
+La seguridad en un proyecto informático es algo que se debe pensar desde el inicio de un proyecto, ya que las decisiones tomadas pueden repercutir en las iteraciones posteriores y en la evolución del producto que estemos realizado.
 
 A lo largo de este documento se van a explicar las decisiones tomadas, tanto en el ámbito de programación como de diseño, durante la creación de un formulario de registro para un portal web creado con el \textit{framework} \href{https://laravel.com/}{Laravel}.
 
@@ -134,7 +134,7 @@ Por otro lado, para no dar pistas también se ha modificado el fichero \configfi
 
 
 \subsection{Bloqueo de cuentas por fallos de autenticación}
-Para asegurar que no se realiza un ataque por fuerza bruta  de contraseñas durante el login, Laravel permite el bloqueo una vez realizado un número de intentos fallidos. Por defecto la configuración se encuentra en el fichero \configfile{Illuminate/Foundation/Auth/ThrottlesLogins.php} dentro del directorio \configdir{vendor/laravel/framework/src/}, donde hay dos funciones que indican que el número máximo de intentos es de 5 y el bloqueo se efectuará durante 1 minuto.
+Para asegurar que no se realiza un ataque por fuerza bruta  de contraseñas  Laravel permite el bloqueo una vez realizado un número de intentos fallidos. Por defecto la configuración se encuentra en el fichero \configfile{Illuminate/Foundation/Auth/ThrottlesLogins.php} dentro del directorio \configdir{vendor/laravel/framework/src/}, donde aparece que el número máximo de intentos es de 5 y el bloqueo se efectuará durante 1 minuto.
 
 Para ajustar esta configuración a nuestras necesidades, se ha modificado el fichero \configfile{app/Http/Controllers/Auth/LoginController.php} en el que añadiremos las variables \mintinline{php}{$decayMinutes} y \mintinline{php}{$maxAttempts} quedando:
 
@@ -167,12 +167,12 @@ A la hora de registrarse en una plataforma, hay que asegurarse que los datos int
 
 Los datos deben de validarse antes de acceder a la base de datos, y por tanto se debe de realizar en el \textit{\textbf{backend}} de la aplicación web.
 
-Como ya se ha dicho previamente, Laravel cuenta con una \href{https://laravel.com/docs/6.x/validation}{documentación extensa} acerca de su sistema de validación y cómo lo podemos ampliar para adecuarlo a nuestras necesidades, tal como veremos a continuación.
+Como ya se ha dicho previamente, Laravel cuenta con una \href{https://laravel.com/docs/6.x/validation}{documentación extensa} acerca de su sistema de validación indicando cómo lo podemos ampliar para adecuarlo a nuestras necesidades, tal como veremos a continuación.
 
 \subsection{Creación de campos propios}
 El sistema de registro de Laravel (a través del sistema de autenticación citado previamente) crea una página donde se puede insertar nombre, e-mail y contraseña.
 
-En caso de que queramos añadir nuevos campos debemos modificar el fichero de la vista \configfile{resources/views/auth/register.blade.php} y añadir los campos que nos interese.
+Para añadir nuevos campos debemos modificar el fichero de la vista \configfile{resources/views/auth/register.blade.php} y añadir los campos que nos interese.
 
 Modificaremos \configfile{app/Http/Controllers/Auth/RegisterController.php} para que estos campos posteriormente se inserten en la base de datos, quedando la función \textit{\textbf{create}} de la siguiente manera:
 
@@ -204,7 +204,7 @@ Para ello se ha creado un fichero \textbf{\textit{migrate}} en el que se indica 
 
 
 \subsection{Reglas propias de validación}
-Con los nuevos campos creados en la base de datos y con el formulario modificado, es momento de realizar las validaciones oportunas, paso previo a la inserción de datos.
+Con los nuevos campos creados en la base de datos y con el formulario modificado, es momento de realizar las validaciones oportunas, paso previo a la inserción de datos en MySQL.
 
 Laravel nos permite realizar validaciones sencillas teniendo en cuenta el campo, el tipo de datos, longitud...
 
@@ -227,7 +227,7 @@ protected function validator(array $data)
 }
 \end{mycode}
 
-En las validaciones expuestas, se han realizado validaciones propias para los campos \textbf{dni}, \textbf{password}, \textbf{teléfono} e \textbf{IBAN}. Estas validaciones propias se han creado dentro del directorio \configdir{app/rules}, donde cada fichero es una validación y contienen una clase con dos funciones importantes:
+En las validaciones expuestas, se han realizado validaciones propias para los campos \textbf{dni}, \textbf{password}, \textbf{teléfono} e \textbf{IBAN}. Estas validaciones propias se han creado dentro del directorio \configdir{app/rules}, donde cada fichero es una validación y contienen una clase con dos funciones principales:
 
 \begin{itemize}
     \item \textbf{passes}: función que recibe el contenido del campo del formulario y en el que realizaremos la validación. Las validaciones realizadas para este proyecto se han solucionado con una o varias expresiones regulares.
@@ -238,28 +238,28 @@ En las validaciones expuestas, se han realizado validaciones propias para los ca
 En caso de que existan varios mensajes de error, aparecerán todos seguidos e indicando cuáles son los campos que han dado error, a través de un borde rojo:
 
 \begin{center}
-    \includegraphics[frame,width=0.9\linewidth]{img/errores.png}
+    \includegraphics[frame,width=0.8\linewidth]{img/errores.png}
 \end{center}
 
 
 Una de las validaciones más importantes realizadas ha sido la de la contraseña, la que se ha forzado que tenga que ser:
 
 \begin{itemize}
-    \item Al menos 12 caracteres, de los cuales:
-    \item Al menos 3 tienen que ser letras minúsculas.
-    \item Al menos 3 tienen que ser letras mayúsculas.
-    \item Tiene que haber al menos 3 números.
-    \item Tiene que incluir al menos 3 símbolos tipográficos.
+    \item Al menos 10 caracteres, de los cuales:
+    \item Al menos 2 tienen que ser letras minúsculas.
+    \item Al menos 2 tienen que ser letras mayúsculas.
+    \item Tiene que haber al menos 2 números.
+    \item Tiene que incluir al menos 1 símbolo tipográfico.
 \end{itemize}
 
 Esta validación se ha conseguido mediante expresiones regulares en su fichero de reglas propio. De cara a futuro, se podría mejorar creando unas variables de entorno en el fichero \configfile{.env} donde se indique el la dificultad de la contraseña a introducir.
 
 \subsection{Mantener valores en el formulario tras un error}
-Tal como se ha visto en el paso anterior, en caso de que el registro de un error durante la validación, se le indicará al usuario, indicando los campos que debe de corregir.
+Tal como se ha visto en el paso anterior, en caso de que el registro devuelva un error durante la validación, se le indicará al usuario, indicando los campos que debe corregir.
 
 Es por eso que es importante mantener los valores que ha introducido previamente, ya que de esta manera estaremos facilitando la usabilidad de la aplicación.
 
-Esto se ha conseguido en la vista del registro indicando en los apartados \textit{value} el valor previo que nos permite obtener Laravel.
+Esto se ha conseguido en la vista del registro indicando en los parámetros \textit{\textbf{value}} el valor previo que nos permite obtener Laravel.
 
 
 \begin{mycode}{Valores antiguos en el formulario}{html+php}{}
@@ -297,14 +297,19 @@ Tal como se ha visto en la imágenes, los mensajes de validación aparecen en ca
 
 Las traducciones de los mensajes se han añadido en el directorio \configdir{resources/lang/es}, manteniendo la misma estructura de ficheros existente en el idioma inglés.
 
-Para realizar parte de las traducciones se ha utilizado las traducciones ya realizadas por Marco Gomes de su \href{https://github.com/MarcoGomesr/laravel-validation-en-espanol}{proyeto de GIthub}.
+Para realizar parte de las traducciones se ha utilizado como base las traducciones ya realizadas por Marco Gomes de su \href{https://github.com/MarcoGomesr/laravel-validation-en-espanol}{proyeto de GIthub}.
+
+Las traducciones para los campos propios del proyecto se han añadido al fichero \configfile{formulario.php} dentro del directorio indicado previamente.
+
+\vfill
+\pagebreak
 
 \chapter{Conclusiones}
-Hoy en día es habitual que en cualquier portal web de servicios haya que realizar un registro con ciertos datos personales. Es importante que estos datos sean validados y que se compruebe que la seguridad del portal no se ve comprometido por los datos introducidos.
+Hoy en día es habitual que en cualquier portal web de servicios haya que realizar un registro con ciertos datos personales. Es importante que estos datos sean validados y que se compruebe que la seguridad del portal no se ve comprometida por los datos introducidos.
 
-Es por eso que, previa a la inserción de los datos en la base de datos, resulta obligatorio realizar una validación de los datos introducidos en los formularios, tal como hemos visto a lo largo de este documento.
+Es por eso que, previa a la inserción de los datos en la base de datos, es obligatorio realizar una validación de los datos introducidos en los formularios, tal como hemos visto a lo largo de este documento.
 
-Aunque de primeras quizá pueda parecer una labor tediosa, los framework como Laravel facilitan esa labor. Es por eso que no hay excusa para no hacer uso de estos sistemas de validaciones, que por otro lado también ayudan al usuario a utilizar nuestras aplicaciones mejorando la usabilidad de la misma.
+Aunque de primeras quizá pueda parecer una labor tediosa, los framework como Laravel facilitan esa labor. Por eso no hay excusa para no hacer uso de estos sistemas de validaciones, que por otro lado también ayudan al usuario a utilizar nuestras aplicaciones mejorando la usabilidad de la misma.
 
 
 

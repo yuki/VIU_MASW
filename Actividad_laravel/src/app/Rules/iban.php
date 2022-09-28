@@ -25,9 +25,9 @@ class iban implements Rule
      */
     public function passes($attribute, $value)
     {
-        return preg_match("/[A-Z]{2}\d{22}/",$value)
+        return preg_match("/ES\d{22}/",$value)
             // si queremos permitir espacios podríamos usar la siguiente regexp
-            // || preg_match("/[A-Z]{2}\d{2} \d{4} \d{4} \d{2} \d{10}/",$value)
+            // || preg_match("/ES\d{2} \d{4} \d{4} \d{2} \d{10}/",$value)
         ;
     }
 

@@ -27,10 +27,10 @@ class password implements Rule
     {
         return
             // https://www.php.net/manual/en/regexp.reference.unicode.php
-            preg_match('/(.*\d){3,}/u',$value) // dígitos
-            && preg_match("/(.*\p{Ll}){3,}/u",$value)  //letras minúsculas
-            && preg_match("/(.*\p{Lu}){3,}/u",$value) //letras mayúsculas
-            && preg_match('/(.*\W){3,}/u',$value) // \W -> signos de puntuación
+            preg_match('/(.*\d){2,}/u',$value) // dígitos
+            && preg_match("/(.*\p{Ll}){2,}/u",$value)  //letras minúsculas
+            && preg_match("/(.*\p{Lu}){2,}/u",$value) //letras mayúsculas
+            && preg_match('/(.*\W){1,}/u',$value) // \W -> signos de puntuación
         ;
     }
 
