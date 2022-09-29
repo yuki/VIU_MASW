@@ -124,8 +124,8 @@
                         <div class="form-group row">
                             <label for="country_id" class="col-md-4 col-form-label text-md-right">{{__('formulario.country')}}</label>
                             <div class="col-md-6">
-                                <select class="form-control col-md-6 @error('country_id') is-invalid @enderror" aria-label="default-select" id="country_id" name="country_id" required>
-                                    <option value=0>{{__('formulario.choose_country')}}</option>
+                                <select class="form-control col-md-6 @error('country_id') is-invalid @enderror" aria-label="default-select" id="country_id" name="country_id">
+                                    <option value=''>{{__('formulario.choose_country')}}</option>
                                     @foreach ($countries as $country)
                                         <option value={{$country->id}}
                                             @if (old('country_id') == $country->id)

@@ -2,12 +2,13 @@
 
 return [
     'name' => 'Nombre',
+    'name_validation' => 'El nombre y apellidos debe ser entre 2 y 20 caracteres y sólo puede contener letras y espacios',
     'surname' => 'Apellidos',
     'e-mail' => 'Dirección E-Mail',
     'dni' => 'DNI',
     'dni_validation' => 'El formato del DNI tiene que ser 8 números y una letra. Ej: 12345678A',
     'password' => 'Contraseña',
-    'password_validation' => 'El password debe contener al menos: 2 números, 2 letras mínusculas, 2 letras mayúsculas y 1 tipo de puntuación permitido: ¡!"·$%&\{}[]()=¿?,;.:<>-+*^|@#',
+    'password_validation' => 'El campo password debe contener al menos: 2 números, 2 letras mínusculas, 2 letras mayúsculas y 1 tipo de puntuación permitido: ¡!"·$%&\{}[]()=¿?,;.:<>-+*^|@#',
     'confirm_password' => 'Confirme contraseña',
     'telephone' => 'Teléfono',
     'telefono_validation' => 'El formato del teléfono es incorrecto. Mínimo 9 y máximo 12 números. También se acepta + al inicio',

@@ -9,6 +9,7 @@ use App\Rules\dni;
 use App\Rules\iban;
 use App\Rules\telefono;
 use App\Rules\password;
+use App\Rules\name;
 use App\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
@@ -65,8 +66,8 @@ class RegisterController extends Controller
     {
         return Validator::make($data, [
             // si ponemos sólo "alpha" no se acepant espacios para nombres y/o apellidos compuestos
-            'name'      => ['required', 'string', 'between:2,20'],
-            'surname'   => ['required', 'string', 'between:2,20'],
+            'name'      => ['required', new name, 'between:2,20'],
+            'surname'   => ['required', new name, 'between:2,20'],
             'dni'       => ['required', new dni,'max:9'],
             'email'     => ['required', 'email:filter', 'max:255', 'unique:users'],
             'password'  => ['required', 'string', 'min:10', new password, 'confirmed'],

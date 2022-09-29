@@ -16,7 +16,7 @@ class AddTablesToUsersTable extends Migration
         Schema::table('users', function (Blueprint $table) {
             $table->string('surname');
             $table->string('dni',9);
-            $table->string('telephone',9)->nullable();
+            $table->string('telephone',13)->nullable();
             $table->unsignedBigInteger('country_id')->nullable();
             $table->foreign('country_id')
                     ->references('id')->on('countries');
