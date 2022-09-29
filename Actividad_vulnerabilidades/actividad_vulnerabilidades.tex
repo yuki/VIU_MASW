@@ -33,20 +33,20 @@
 
 \chapter{Introducción}
 
-La seguridad en informática es algo que se debe pensar desde el inicio de un proyecto, ya que las decisiones tomadas pueden repercutir en las iteraciones posteriores y en la evolución del producto que estemos realizado.
+La seguridad en un proyecto informático es algo que se debe pensar desde el inicio del mismo, ya que las decisiones tomadas pueden repercutir en las iteraciones posteriores y en la evolución del producto que estemos realizado.
 
 Hoy en día es habitual hacer uso de \textit{frameworks} a la hora de facilitar la programación de una aplicación web. Gracias a ello nos va a permitir hacer uso de buenas prácticas, que junto con el funcionamiento interno del \textit{framework} van a evitar que tengamos ciertos fallos de seguridad habituales como puede ser el \textbf{\textit{SQL injection}}.
 
 Eso no quita que debamos de realizar un análisis de la aplicación que estamos desarrollando, tratando de buscar posibles vulnerabilidades antes de que el proyecto salga a producción.
 
-A lo largo de este documento se van a utilizar distintas herramientas de análisis que van a ser ejecutadas contra la web \href{http://testphp.vulnweb.com/}{http://testphp.vulnweb.com/}, ya que es un portal creado especialmente con vulnerabilidades con el propósito de ser analizado.
+A lo largo de este documento se van a utilizar distintas herramientas de análisis que van a ser ejecutadas contra la web \href{http://testphp.vulnweb.com/}{http://testphp.vulnweb.com/}, ya que es un portal creado especialmente con vulnerabilidades con el propósito de ser analizado y aprender en el proceso.
 
 
 \chapter{Objetivo}
 El objetivo de este documento es el de aprender a utilizar ciertas herramientas que nos van a permitir realizar un análisis de un portal web para tratar de buscar las vulnerabilidades más habituales que nos encontramos hoy en día en el ámbito web:
 
 \begin{itemize}
-    \item \textbf{Inyección de SQL} (“\textit{SQL injection}” en inglés): Es una vulnerabilidad causada por no comprobar (o no hacerlo de  manera correcta) los valores de una variable que posteriormente es utilizada para realizar una sentencia SQL. De esta manera, se “inyecta” código que puede permitir realizar acciones sobre la base de datos que no deberían estar permitidas (obtener datos confidenciales, borrar datos, ...).
+    \item \textbf{Inyección de SQL} (“\textit{SQL injection}” en inglés): Es una vulnerabilidad causada por no comprobar (o no hacerlo de  manera correcta) los valores de una variable que posteriormente es utilizada de forma incorrecta para realizar una sentencia SQL. De esta manera, se “inyecta” código que puede permitir realizar acciones sobre la base de datos que no deberían estar permitidas (obtener datos confidenciales, borrar datos, ...).
 
     \item \textbf{\textit{Cross-site Scripting}} (\textbf{XSS}): En castellano “secuencia de comandos en sitios cruzados”, que significa que un atacante puede inyectar código javascript en ficheros del servidor. También permite obtener información como sesiones de usuarios o comprometer el navegador del visitante.
 
@@ -123,7 +123,7 @@ Para el caso de vulnerabilidades \textit{Cross-Site Scripting} (\textbf{XSS}). E
 Si se hace click en algún icono de la izquierda del listado, nos llevará al informe detallado de la vulnerabilidad elegida. Por ejemplo, en el caso de la URL \href{http://testphp.vulnweb.com/guestbook.php}{http://testphp.vulnweb.com/guestbook.php} nos indica la prueba realizada y el resultado de la misma, dando en este caso como resultado que es vulnerable:
 
 \begin{center}
-    \vspace{-20pt}
+    \vspace{-10pt}
     \includegraphics[frame,width=0.9\linewidth]{img/informe_xss.png}
 \end{center}
 
@@ -137,11 +137,12 @@ Si realizamos la misma prueba, pero haciendo algo más evidente, como el siguien
 
 Obtendremos que la web ha insertado el código en el HTML, y en este caso ejecuta el script introducido:
 
-\vspace{15pt}
+
 \begin{center}
-    \vspace{-20pt}
+    \vspace{-10pt}
     \includegraphics[width=0.7\linewidth]{img/ejemplo_xss.png}
 \end{center}
+\vspace{-10pt}
 
 
 
@@ -194,7 +195,7 @@ SQLmap nos permite hacer mucho más a través de distintos parámetros, como es 
 \chapter{Vulnerabilidades CSRF}
 Aunque Arachni también es capaz de buscar vulnerabilidades CSRF, no nos ha detectado ninguna en este caso. Es por eso que se ha hecho uso de \href{https://github.com/s0md3v/Bolt}{Bolt}, que es un escaneador específico para vulnerabildiades CSRF, para confirmar si existe alguna vulneravilidad o no.
 
-Es una aplicación de consola hecha en \href{https://www.python.org/}{Python}, que nos va a permitir desde consola obtener las URLs que contienen formularios inseguros.
+Es una aplicación de consola hecha en \href{https://www.python.org/}{Python}, que nos va a permitir obtener las URLs que contienen formularios inseguros.
 
 \begin{mycode}{Buscando vulnerabilidades CSRF con Bolt}{console}{{\small }}
 ruben@vega:/tmp/Bolt$ python3 bolt.py \
@@ -257,12 +258,12 @@ Similar al caso anterior, las \textbf{\textit{SQL injection}} funcionan debido a
 
 Por lo tanto, la primera solución debería ser la misma que en el caso anterior, no permitir caracteres que puedan alterar la sentencia SQL que se van a ejecutar desde el código fuente.
 
-Lo ideal es hacer uso un sistema de parametrización de sentencias SQL que suelen tener los frameworks actuales, ya que se encargan de realizar las funciones necesarias para evitar este tipo de ataques.
+Por otro lado, lo ideal es hacer uso del sistema de parametrización de sentencias SQL que suelen tener los frameworks actuales, ya que se encargan de realizar las funciones necesarias para evitar este tipo de ataques.
 
 En el caso del \textit{framework} \href{https://laravel.com/}{Laravel}, cuenta con el sistema \href{https://laravel.com/docs/6.x/eloquent}{Eloquent} que es el \textbf{ORM} (\textit{object–relational mapping} o asignación objeto-relacional) que viene incluído. De esta manera, antes de ejecutar la correspondiente sentencia SQL convertirá los datos al sistema esperado por la base de datos objeto. En caso de que la conversión de datos no sea correcta, habrá un error y por tanto la sentencia no será ejecutada.
 
 
-Por otro lado, también existe la posibilidad de tener distintos usuarios de base de datos para una misma aplicación, limitando las acciones que puede realizar cada usuario a nivel de sistema gestor de base de datos. Esta solución puede ser más compleja, y dependerá de la aplicación que estemos realizando, pero es conveniente tenerla en cuenta.
+Por último, también existe la posibilidad de tener distintos usuarios de base de datos para una misma aplicación, limitando las acciones que puede realizar cada usuario a nivel de sistema gestor de base de datos. Esta solución puede ser más compleja, y dependerá de la aplicación que estemos realizando, pero es conveniente tenerla en cuenta.
 
 
 \section{Corregir vulnerabilidades CSRF}
