@@ -4,6 +4,7 @@ return [
     'name' => 'Nombre',
     'surname' => 'Apellidos',
     'e-mail' => 'Dirección E-Mail',
+    'dni' => 'DNI',
     'dni_validation' => 'El formato del DNI tiene que ser 8 números y una letra. Ej: 12345678A',
     'password' => 'Contraseña',
     'password_validation' => 'El password debe contener al menos: 2 números, 2 letras mínusculas, 2 letras mayúsculas y 1 tipo de puntuación permitido: ¡!"·$%&\{}[]()=¿?,;.:<>-+*^|@#',

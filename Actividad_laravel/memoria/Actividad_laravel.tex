@@ -31,7 +31,7 @@
 
 \chapter{Introducción}
 
-La seguridad en un proyecto informático es algo que se debe pensar desde el inicio de un proyecto, ya que las decisiones tomadas pueden repercutir en las iteraciones posteriores y en la evolución del producto que estemos realizado.
+La seguridad en un proyecto informático es algo que se debe pensar desde el inicio del mismo, ya que las decisiones tomadas pueden repercutir en las iteraciones posteriores y en la evolución del producto que estemos realizado.
 
 A lo largo de este documento se van a explicar las decisiones tomadas, tanto en el ámbito de programación como de diseño, durante la creación de un formulario de registro para un portal web creado con el \textit{framework} \href{https://laravel.com/}{Laravel}.
 
@@ -128,9 +128,9 @@ Si un atacante consigue un listado de posibles e-mails que pertenecen a nuestra 
     \includegraphics[width=0.8\linewidth]{img/error_simple.png}
 \end{center}
 
-Para mostrar este mensaje se ha creado un template en \configfile{resources/views/layouts/_errors.blade.php} que genera el listado visto previamente.
+Para mostrar este mensaje se ha creado un template en \configfile{resources/views/layouts/_errors.blade.php} que genera un listado con todos los errores, como aparece en la imagen.
 
-Por otro lado, para no dar pistas también se ha modificado el fichero \configfile{resources/views/auth/login.blade.php} quitando los bordes rojos que aparecen por defecto indicando si el error se ha producido en el login o en la contraseña.
+Por otro lado, para no dar pistas, también se ha modificado el fichero \configfile{resources/views/auth/login.blade.php} quitando los bordes rojos que aparecen por defecto indicando si el error se ha producido en el login o en la contraseña.
 
 
 \subsection{Bloqueo de cuentas por fallos de autenticación}
@@ -242,7 +242,7 @@ En caso de que existan varios mensajes de error, aparecerán todos seguidos e in
 \end{center}
 
 
-Una de las validaciones más importantes realizadas ha sido la de la contraseña, la que se ha forzado que tenga que ser:
+Una de las validaciones más importantes realizadas ha sido la de la contraseña, la que se ha forzado para que tenga que ser:
 
 \begin{itemize}
     \item Al menos 10 caracteres, de los cuales:
@@ -271,8 +271,8 @@ Esto se ha conseguido en la vista del registro indicando en los parámetros \tex
 
 Esto se ha repetido para todos los campos, a excepción de la contraseña.
 
-\subsection{No permitir “copiar-pegar” en la contraseña}
-Para mejorar la seguridad y evitar que algún atacante, mediante ingeniería social delante del ordenador, pueda copiar la contraseña introducida, se han modificado los campos de contraseña y validación de contraeña para no permitir copiar, seleccionar o pegar contraseña.
+\subsection{No permitir “copiar-pegar” la contraseña}
+Para mejorar la seguridad y evitar que algún atacante, mediante ingeniería social delante del ordenador, pueda copiar la contraseña introducida, se han modificado los campos de contraseña y validación de contraeña para no permitir copiar, seleccionar o pegar la contraseña o su confirmación.
 
 No permitiendo “copiar-pegar” también nos estamos asegurando que el usuario introduce de manera correcta la contraseña que ha elegido, minimizando el riesgo de equivocarse.
 
