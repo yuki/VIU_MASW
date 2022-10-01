@@ -44,68 +44,6 @@ La idea de todo \textit{framework} es la de crear un entorno de trabajo que unif
 
 Una de las muchas ventajas que nos proporciona Laravel es la de un sistema modular para la creación de validaciones en formularios, tal como nos indica su \href{https://laravel.com/docs/6.x/validation}{documentación}.
 
-\chapter{Despliegue de la aplicación}
-Antes de entrar en detalle en cómo se ha desarrollado la aplicación es importante conocer cómo podemos realizar el despliegue de la aplicación, ya sea para utilizarla o para realizar modificaciones sobre la misma.
-
-\section{Servicios Docker}
-Para realizar el desarrollo del proyecto se ha utilizado servicios a través de contenedores \textbf{\href{https://www.docker.com/}{Docker}}, los cuáles pueden ser levantados gracias al fichero \configfile{compose.yaml} y el comando \commandbox{docker-compose up}
-
-Al levantar los servicios con el comando \textbf{docker-compose up} se hará uso de los siguientes puertos:
-\vspace{-1em}
-\begin{itemize}
-    \item \textbf{80}: Para el entorno web, usando Nginx como servidor web.
-    \item \textbf{3306}: Para la base de datos.
-    \item \textbf{3307}: Para el acceso web a phpmyadmin.
-\end{itemize}
-\vspace{-1em}
-
-Para el correcto funcionamiento del contenedor se hace uso del fichero \configfile{vhost.conf} que modifica la configuración del servicio Nginx para que funcione de manera correcta con Laravel.
-
-\section{Despliegue del código fuente}
-Para realizar el despliegue del código fuente sobre el contenedor del servicio web, el directorio \configdir{src} debe estar situado a la misma altura del fichero \configfile{compose.yaml}.
-
-De esta manera, a la hora de levantar el servicio se crea un volumen compartiendo el directorio local \configdir{src} con otro dentro del contenedor, en la ruta \configdir{/app}, que es de donde se nutre Nginx.
-
-
-\section{Creación de la base de datos}
-
-El servicio de MySQL se encarga de crear una base de datos llamada \textbf{actividad1} en el momento en el que el servicio se levanta. También crea los siguientes credenciales de acceso a dicha base de datos:
-
-\vspace{-1em}
-\begin{itemize}
-    \item usuario:  \textbf{actividad1}
-    \item contraseña:  \textbf{4ct1v1d4d1}
-\end{itemize}
-\vspace{-1em}
-
-\section{Despliegue de datos}
-Para realizar el despliegue de datos, se va a utilizar dos características que tiene Laravel y que tienen que ver con el despliegue en la base de datos:
-
-\vspace{-1em}
-\begin{itemize}
-    \item \textbf{Migrate}: Es una forma de tener un sistema de control de versiones del esquema de base de datos. De esta manera, se puede hacer evolucionar el esquema (tablas, columnas, índices, ...) a lo largo del tiempo y también volver a un punto anterior del mismo.
-    \item \textbf{Seeds}: También conocido como “semillas”, nos posibilita añadir datos a las tablas que hemos creado. Normalmente se utiliza para crear datos al inicio del proyecto con datos que deben existir (o también datos de pruebas) para que se pueda utilizar el proyecto.
-\end{itemize}
-\vspace{-1em}
-
-Para realizar el despliegue debemos conectarnos al contenedor donde tenemos el proyecto y lanzar los comandos que realizan el “migrate” y crean los datos. A continuación aparecen los comandos:
-
-\begin{mycode}{Acceder al contenedor Docker para hacer el despliegue}{console}{}
-# nos conectamos al contenedor
-ruben@vega:~$ docker exec -it   actividad_1_php_1 /bin/bash
-
-# vamos al directorio donde está el desarrollo
-root@a7913ac7b97a:/# cd /app
-
-# lanzamos el migrate
-root@a7913ac7b97a:/app# php artisan migrate
-
-#lanzamos el seed
-root@a7913ac7b97a:/app# php artisan db:seed
-
-\end{mycode}
-
-
 
 \chapter{Desarrollo realizado}
 
@@ -128,7 +66,7 @@ Si un atacante consigue un listado de posibles e-mails que pertenecen a nuestra 
     \includegraphics[width=0.8\linewidth]{img/error_simple.png}
 \end{center}
 
-Para mostrar este mensaje se ha creado un template en \configfile{resources/views/layouts/_errors.blade.php} que genera un listado con todos los errores, como aparece en la imagen.
+Para mostrar este mensaje, y los del registro, se ha creado un template en \configfile{resources/views/layouts/_errors.blade.php} que genera un listado con todos los errores, como aparece en la imagen.
 
 Por otro lado, para no dar pistas, también se ha modificado el fichero \configfile{resources/views/auth/login.blade.php} quitando los bordes rojos que aparecen por defecto indicando si el error se ha producido en el login o en la contraseña.
 
@@ -170,7 +108,7 @@ Los datos deben de validarse antes de acceder a la base de datos, y por tanto se
 Como ya se ha dicho previamente, Laravel cuenta con una \href{https://laravel.com/docs/6.x/validation}{documentación extensa} acerca de su sistema de validación indicando cómo lo podemos ampliar para adecuarlo a nuestras necesidades, tal como veremos a continuación.
 
 \subsection{Creación de campos propios}
-El sistema de registro de Laravel (a través del sistema de autenticación citado previamente) crea una página donde se puede insertar nombre, e-mail y contraseña.
+El sistema de registro de Laravel (a través del sistema de autenticación propio) crea una página donde se puede insertar nombre, e-mail y contraseña.
 
 Para añadir nuevos campos debemos modificar el fichero de la vista \configfile{resources/views/auth/register.blade.php} y añadir los campos que nos interese.
 
@@ -208,14 +146,15 @@ Con los nuevos campos creados en la base de datos y con el formulario modificado
 
 Laravel nos permite realizar validaciones sencillas teniendo en cuenta el campo, el tipo de datos, longitud...
 
+\hypertarget{validator}{}
 \begin{mycode}{Validaciones realizadas}{php}{{\footnotesize }}
 <?php
 ...
 protected function validator(array $data)
 {
     return Validator::make($data, [
-        'name'      => ['required', 'string', 'between:2,20'],
-        'surname'   => ['required', 'string', 'between:2,20'],
+        'name'      => ['required', new name, 'between:2,20'],
+        'surname'   => ['required', new name, 'between:2,20'],
         'dni'       => ['required', new dni,'max:9'],
         'email'     => ['required', 'email:filter', 'max:255', 'unique:users'],
         'password'  => ['required', 'string', 'min:12', new password, 'confirmed'],
@@ -227,7 +166,7 @@ protected function validator(array $data)
 }
 \end{mycode}
 
-En las validaciones expuestas, se han realizado validaciones propias para los campos \textbf{dni}, \textbf{password}, \textbf{teléfono} e \textbf{IBAN}. Estas validaciones propias se han creado dentro del directorio \configdir{app/rules}, donde cada fichero es una validación y contienen una clase con dos funciones principales:
+En las validaciones expuestas, se han realizado validaciones propias para los campos \textbf{nombre}, \textbf{apellidos}, \textbf{dni}, \textbf{password}, \textbf{teléfono} e \textbf{IBAN}. Estas validaciones propias se han creado dentro del directorio \configdir{app/rules}, donde cada fichero es una validación y contienen una clase con dos funciones principales:
 
 \begin{itemize}
     \item \textbf{passes}: función que recibe el contenido del campo del formulario y en el que realizaremos la validación. Las validaciones realizadas para este proyecto se han solucionado con una o varias expresiones regulares.
@@ -235,7 +174,7 @@ En las validaciones expuestas, se han realizado validaciones propias para los ca
     \item \textbf{messages}: devuelve el mensaje de error en caso de que la función “passes” \textbf{no devuelva true}.
 \end{itemize}
 
-En caso de que existan varios mensajes de error, aparecerán todos seguidos e indicando cuáles son los campos que han dado error, a través de un borde rojo:
+En caso de que existan varios mensajes de error, aparecerán todos seguidos e indicando cuáles son los campos que han dado error, a través de un borde rojo, así como el mismo mensaje de error de validación para que el usuario lo tenga en cuenta:
 
 \begin{center}
     \includegraphics[frame,width=0.8\linewidth]{img/errores.png}
@@ -252,7 +191,27 @@ Una de las validaciones más importantes realizadas ha sido la de la contraseña
     \item Tiene que incluir al menos 1 símbolo tipográfico.
 \end{itemize}
 
-Esta validación se ha conseguido mediante expresiones regulares en su fichero de reglas propio. De cara a futuro, se podría mejorar creando unas variables de entorno en el fichero \configfile{.env} donde se indique el la dificultad de la contraseña a introducir.
+A continuación se expone la función \textit{\textbf{passes}} para la regla que valida si la contraseña se ha introducido de manera correcta.
+
+En esta función se comprueba que la contraseña contiene los caracteres que se piden para que se considere una contraseña segura, ya que la longitud se ha comprobado en la función \textbf{\textit{validator}} vista \hyperlink{validator}{previamente}.
+
+\begin{mycode}{Función \textbf{passes} del fichero app/Rules/password.php}{php}{{\small }}
+<?php
+...
+public function passes($attribute, $value) {
+    return
+        // https://www.php.net/manual/en/regexp.reference.unicode.php
+        preg_match('/(.*\d){2,}/u',$value) // dígitos
+        && preg_match("/(.*\p{Ll}){2,}/u",$value)  //letras minúsculas
+        && preg_match("/(.*\p{Lu}){2,}/u",$value) //letras mayúsculas
+        && preg_match('/(.*\W){1,}/u',$value) // \W -> signos de puntuación
+    ;
+}
+\end{mycode}
+
+De cara a futuro, se podría mejorar creando unas variables de entorno en el fichero \configfile{.env} donde se indique el la dificultad de la contraseña a introducir.
+
+El resto de  validaciones se han realizado también mediante \textbf{\href{https://es.wikipedia.org/wiki/Expresi\%C3\%B3n_regular}{expresiones regulares}} en su fichero de reglas correspondiente.
 
 \subsection{Mantener valores en el formulario tras un error}
 Tal como se ha visto en el paso anterior, en caso de que el registro devuelva un error durante la validación, se le indicará al usuario, indicando los campos que debe corregir.
@@ -301,8 +260,7 @@ Para realizar parte de las traducciones se ha utilizado como base las traduccion
 
 Las traducciones para los campos propios del proyecto se han añadido al fichero \configfile{formulario.php} dentro del directorio indicado previamente.
 
-\vfill
-\pagebreak
+
 
 \chapter{Conclusiones}
 Hoy en día es habitual que en cualquier portal web de servicios haya que realizar un registro con ciertos datos personales. Es importante que estos datos sean validados y que se compruebe que la seguridad del portal no se ve comprometida por los datos introducidos.

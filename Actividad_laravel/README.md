@@ -3,7 +3,7 @@
 Actividad para tratar las validaciones custom en Laravel v6.x
 
 ## Despligue con contenedor Docker
-Junto con el código fuente se acompaña de un fichero **compose.yaml** que facilita realizar el despliegue de la aplicación. Este fichero levanta 3 servicios:
+Junto con el código fuente se acompaña de un fichero **compose.yaml** que facilita realizar el despliegue de la aplicación con el comando ```docker-compose```. Este fichero levanta 3 servicios:
 
 - **Servidor web con Nginx**: usa el puerto 80.
 - **Servidor MySQL**: usa el puerto 3306.
