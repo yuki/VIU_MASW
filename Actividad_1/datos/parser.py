@@ -31,10 +31,17 @@ with open('eventos_items.json', 'r', encoding='utf8') as fichero:
                      o.update({"GPS":linea['municipalityLatitude']+','+linea['municipalityLongitude']})
               if 'municipalityEs' in linea:
                      o.update({"Municipio":linea['municipalityEs']})
+              if 'language' in linea:
+                     d = linea['language']
+                     d = re.sub('NA','',d)
+                     o.update({"Idioma":d})
+                     print(d)
+              else:
+                     o.update({"Idioma":''})
               if 'priceEs' in linea:
                      o.update({"Precio":linea['priceEs']})
               else:
-                     o.update({"Precio":0})
+                     o.update({"Precio":'Gratis'})
               if linea['provinceNoraCode'] == '48':
                      o.update({'Provincia':'Bizkaia'})
               if linea['provinceNoraCode'] == '1':
