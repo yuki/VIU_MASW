@@ -9,7 +9,7 @@ import org.w3c.dom.Text
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
-        d {"rugolid: oncreate... empezamos"}
+        d { "rugolid: oncreate... empezamos" }
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
@@ -41,25 +41,24 @@ class MainActivity : AppCompatActivity() {
         val tresult = findViewById<TextView>(R.id.result)
 
         // variables
-        var number1:Double = 0.0
-        var number2:Double = 0.0
         var result:Double = 0.0
-        val operations = arrayOf("+","-","*","/")
-        var operation:String = "+"
-        // true if we clean the tresult
+        var number:Double = 0.0
+        val operations = arrayOf("+", "-", "*", "/")
+        var operation:String = ""
+        // true if we need to clean the tresult
         var clean:Boolean = false
 
         // onclick actions for numbers
         val numbers = arrayOf(button0,button1,button2,button3,button4,button5,button6,button7,button8,button9)
-        for ((index, element) in numbers.withIndex()){
+        for ((index, element) in numbers.withIndex()) {
             element.setOnClickListener {
-                if (tresult.text.toString() == "0"){
+                if (tresult.text.toString() == "0") {
                     tresult.text = ""
                 }
-                if (clean){
+                if (clean) {
                     tresult.text = ""
                 }
-                tresult.text = tresult.text.toString() +  index.toString()
+                tresult.text = tresult.text.toString() + index.toString()
                 clean = false
             }
         }
@@ -67,44 +66,54 @@ class MainActivity : AppCompatActivity() {
         // onclick AC/reset button
         breset.setOnClickListener {
             tresult.text = "0"
+            result = 0.0
+            number = 0.0
             operation = ""
             clean = false
         }
 
-
         // onclick actions for operations
-        val boperations = arrayOf(bsumar,brestar,bmulti,bdividir)
-        for ((index, element) in boperations.withIndex()){
+        val boperations = arrayOf(bsumar, brestar, bmulti, bdividir)
+        for ((index, element) in boperations.withIndex()) {
             element.setOnClickListener {
                 operation = operations[index]
                 clean = true
+                number = 0.0
+                result = tresult.text.toString().toDouble()
+            }
+        }
 
-                if (number1 == 0.0){
-                    number1 = tresult.text.toString().toDouble()
-                } else {
-                    number2 = tresult.text.toString().toDouble()
-                    number1 = do_operation(operation,number1,number2)
-                    tresult.text = number1.toString()
-                }
-                // d {"rugolid " + number1.toString() + " " + operation}
+        // onclick action for bigual
+        bigual.setOnClickListener {
+            if (number == 0.0) {
+                number = tresult.text.toString().toDouble()
+            }
+            result = do_operation(operation,result,number)
+            if (result.toInt().toDouble() == result) {
+                tresult.text = result.toInt().toString()
+            } else {
+                tresult.text = result.toString()
             }
         }
 
     }
 
-    fun do_operation(operation:String,number1:Double,number2:Double):Double{
+    // check which operation must be done
+    fun do_operation(operation:String,n1:Double,n2:Double):Double{
         when (operation){
-            "+" -> return sumar(number1,number2)
-            "-" -> return restar(number1,number2)
-            "*" -> return multiplicar(number1,number2)
-            "/" -> return dividir(number1,number2)
+            "+" -> return sumar(n1,n2)
+            "-" -> return restar(n1,n2)
+            "*" -> return multiplicar(n1,n2)
+            "/" -> return dividir(n1,n2)
             else -> return 0.0
         }
     }
 
+    // operation functions
     fun sumar(n1:Double,n2:Double):Double {
         return n1+n2
     }
+
     fun restar(n1:Double,n2:Double):Double {
         return n1-n2
     }
@@ -112,6 +121,7 @@ class MainActivity : AppCompatActivity() {
     fun multiplicar(n1:Double,n2:Double):Double{
         return n1*n2
     }
+
     fun dividir(n1:Double,n2:Double):Double{
         return n1/n2
     }
