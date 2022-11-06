@@ -26,16 +26,10 @@ class ResultActivity : AppCompatActivity() {
         // share button
         val bshare = findViewById<Button>(R.id.bshare_result)
         // example from https://developer.android.com/guide/components/intents-filters#ForceChooser
-        val sendIntent = Intent(Intent.ACTION_SEND)
-        // Always use string resources for UI text.
-        // This says something like "Share this photo with"
-        val title: String = resources.getString(R.string.chooser_title)
-        // Create intent to show the chooser dialog
-        // TODO: esto no parece funcionar
-//        val chooser: Intent = Intent.createChooser(sendIntent, title)
-
-        // the result is a text, so we put this type
-        sendIntent.setType("text/plain")
+        val sendIntent = Intent(Intent.ACTION_SEND).apply {
+            // if the type is "text/plain" will not show all apps.
+            type = "*/*"
+        }
 
         bshare.setOnClickListener {
             // Verify the original intent will resolve to at least one activity
