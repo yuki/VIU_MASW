@@ -1,5 +1,6 @@
 package com.rugoli.calculator
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
@@ -111,6 +112,11 @@ class MainActivity : AppCompatActivity() {
             d {"rugolid: " + result.toString()}
         }
 
+        bshare.setOnClickListener {
+            val intent = Intent(this, ResultActivity::class.java)
+            intent.putExtra(ResultActivity.RESULT, format_result(result))
+            startActivity(intent)
+        }
     }
 
     // we need onResume to "repaint" the textView when changed state
@@ -127,8 +133,13 @@ class MainActivity : AppCompatActivity() {
             tresult.text = result.toInt().toString()
         } else {
             // change decimal "." into spanish ","
-            tresult.text = DecimalFormat("#.##########").format(result).replace('.',',')
+            tresult.text = format_result(result)
         }
+    }
+
+    // format the result, with spanish coma, and changing the number of decimals
+    fun format_result(result:Double): String {
+        return DecimalFormat("#.##########").format(result).replace('.',',')
     }
 
     // convert textview into double

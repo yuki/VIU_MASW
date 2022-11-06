@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">Calculator</string>
     <string name="share">Share</string>
+    <string name="sharing_text">The result of the operation is:</string>
 </resources>
