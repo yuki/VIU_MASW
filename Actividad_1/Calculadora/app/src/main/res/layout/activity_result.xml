@@ -7,8 +7,8 @@
     tools:context=".ResultActivity">
 
     <Button
-        android:id="@+id/button"
-        android:layout_width="150dp"
+        android:id="@+id/bshare_result"
+        android:layout_width="145dp"
         android:layout_height="64dp"
         android:autoSizeTextType="uniform"
         android:text="@string/share"
@@ -20,7 +20,7 @@
     <TextView
         android:id="@+id/infoText"
         android:layout_width="240dp"
-        android:layout_height="80dp"
+        android:layout_height="78dp"
         android:autoSizeTextType="uniform"
         android:gravity="center"
         android:text="@string/sharing_text"
@@ -38,7 +38,7 @@
         android:autoSizeTextType="uniform"
         android:gravity="center"
         android:text="123"
-        app:layout_constraintBottom_toTopOf="@+id/button"
+        app:layout_constraintBottom_toTopOf="@+id/bshare_result"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/infoText" />

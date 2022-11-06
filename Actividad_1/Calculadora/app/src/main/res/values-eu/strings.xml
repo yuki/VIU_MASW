@@ -3,4 +3,5 @@
     <string name="app_name">Kalkulatzaile</string>
     <string name="share">Partekatu</string>
     <string name="sharing_text">Lortutako emaitza:</string>
+    <string name="chooser_title" >Aukeratu</string>
 </resources>

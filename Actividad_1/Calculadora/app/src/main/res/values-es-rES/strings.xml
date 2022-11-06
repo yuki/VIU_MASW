@@ -3,4 +3,5 @@
     <string name="app_name">Calculadora</string>
     <string name="share">Compartir</string>
     <string name="sharing_text">El resultado de la operación es:</string>
+    <string name="chooser_title" >Elige</string>
 </resources>
