@@ -1,3 +1,6 @@
 [submodule "06masw_2022_04"]
 	path = 06masw_2022_04
 	url = https://gitlab+deploy-token-1397615:R22qLG9teh9GSrZnH2La@gitlab.com/robelor/06masw_2022_04.git
+[submodule "VIU_TFM_LaTeX_template"]
+	path = VIU_TFM_LaTeX_template
+	url = git@github.com:yuki/VIU_TFM_LaTeX_template
