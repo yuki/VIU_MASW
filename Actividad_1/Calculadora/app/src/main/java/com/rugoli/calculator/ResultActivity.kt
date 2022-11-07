@@ -26,15 +26,19 @@ class ResultActivity : AppCompatActivity() {
         // share button
         val bshare = findViewById<Button>(R.id.bshare_result)
         // example from https://developer.android.com/guide/components/intents-filters#ForceChooser
-        val sendIntent = Intent(Intent.ACTION_SEND).apply {
+        val sendIntent = Intent().apply {
+            action = Intent.ACTION_SEND
+            putExtra(Intent.EXTRA_TEXT,result)
             // if the type is "text/plain" will not show all apps.
-            type = "*/*"
+            type = "text/plain"
         }
+
+        val shareIntent = Intent.createChooser(sendIntent,null)
 
         bshare.setOnClickListener {
             // Verify the original intent will resolve to at least one activity
             if (sendIntent.resolveActivity(packageManager) != null) {
-                startActivity(sendIntent)
+                startActivity(shareIntent)
             }
         }
     }
