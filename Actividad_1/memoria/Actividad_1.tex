@@ -33,14 +33,14 @@
 
 Dentro de la programación móvil existen dos grandes sistemas operativos que abarcan casi toda la cuota de mercado actual: Android e iOS. El primero, bajo el paraguas de Google, y con kernel Linux, puede ser programado bajo cualquier sistema operativo, mientras que para el segundo se requiere de un ecosistema basado en MacOS.
 
-A la hora de aprender un nuevo lenguaje de programación, o \textit{framework}, la mejor manera es hacerlo creando un proyecto real. El proyecto a crear no tiene por qué ser complejo, pero sí que debe  tener unas funcionalidades básicas que permitan aprender ciertas características del lenguaje.
+A la hora de aprender un nuevo lenguaje de programación, o un \textit{framework} basado en él, la mejor manera es hacerlo creando un proyecto real. El proyecto a crear no tiene por qué ser complejo, pero sí que debe  tener unas funcionalidades básicas que permitan aprender ciertas características del lenguaje.
 
-Es por eso que en esta documentación se va a explicar los pasos realizados para la creación de una aplicación que funcionará en el sistema operativo Android y creada bajo el lenguaje de programación Kotlin.
+En esta documentación se va a explicar los pasos realizados para la creación de una aplicación que funcionará en el sistema operativo Android y creada bajo el lenguaje de programación Kotlin.
 
 
 \chapter{Requisitos del proyecto}
 
-Tal como se ha dicho, la mejor manera para aprender a programar es crear una aplicación sencilla, en este caso una calculadora. Que sea sencilla no es quita que deba cumplir con una serie de requisitos para poder satisfacer la adquisición de unos conocimientos básicos.
+Tal como se ha dicho, la mejor manera de aprender es crear una aplicación sencilla, en este caso una calculadora. Que sea sencilla no quita que deba cumplir con una serie de requisitos para poder satisfacer la adquisición de unos conocimientos básicos.
 
 Los requisitos establecidos son:
 
@@ -78,12 +78,12 @@ Para la creación de la aplicación primero se creó el diseño en modo vertical
     \end{minipage}
 }
 
-Para la correcta colocación de los botones, y que se ajusten en todo momento al interfaz (sin importar el tamaño de la pantalla), se ha hecho uso de las denominadas “cadenas”, tanto en sentido horizontal como vertical. De esta manera, los botones tienen unas relaciones entre sí mismos y con los bordes de la pantalla que hace que se coloquen de manera relativa al tamaño de la pantalla.
+Para la correcta colocación de los botones, y que se ajusten en todo momento al interfaz (sin importar el tamaño de la pantalla), se ha hecho uso de las denominadas “cadenas”, tanto en sentido horizontal como vertical. De esta manera, los botones tienen unas relaciones entre sí y con los bordes de la pantalla que hace que se coloquen de manera relativa al tamaño de la pantalla.
 
-Para el modo apaisado, se ha seguido la misma filosofía, pero esta vez se ha utilizado también una “guía de línea vertical” (\textbf{\textit{vertical guideline}}) colocada en el centro de la pantalla, que permite realizar una separación.
+Para el modo apaisado, se ha seguido la misma filosofía, pero esta vez se ha utilizado también una “guía de línea vertical” (\textbf{\textit{vertical guideline}}) colocada en el centro de la pantalla.
 
 
-\begin{mycode}{Código XML del Activity en modo landscape}{XML}{}
+\begin{mycode}{Parte del código XML del Activity en modo landscape}{XML}{}
 <androidx.constraintlayout.widget.Guideline
     android:id="@+id/guideline3"
     android:layout_width="wrap_content"
@@ -94,13 +94,13 @@ Para el modo apaisado, se ha seguido la misma filosofía, pero esta vez se ha ut
     app:layout_constraintStart_toStartOf="parent" />
 \end{mycode}
 
-Esta guía nos permite que los \textit{constraints} en lugar de ir hasta el borde de la pantalla, se conecten a esta guía. De esta manera, en el modo apaisado se puede diferenciar entre el lado izquierdo (con el resultado y los botones de acción) y el lado derecho (con los botones de los números y el igual).
+Esta guía nos permite que los \textit{constraints} en lugar de ir hasta el borde de la pantalla, se conecten a esta guía. De esta manera, en el modo apaisado se puede diferenciar entre el lado izquierdo (con el resultado y los botones de acción y operaciones) y el lado derecho (con los botones de los números y el igual).
 
-Por último, para que exista una diferenciación entre distintos botones, los botones de acción (ya sea de operaciones aritméticas, igual, reset y compartir) se les ha dado un color denominado “\textbf{\textit{design\_default\_color\_secondary}}”.
+Por último, para que exista una diferenciación, los botones de acción (ya sea de operaciones aritméticas, igual, reset y compartir) se les ha dado un color denominado “\textbf{\textit{design\_default\_color\_secondary}}”, que es distinto a los botones numéricos.
 
 
 \section{Lógica de la aplicación}
-Una vez realizado el interfaz, es el momento de hacer que los botones cumplan su función aplicando la lógica que debe de tener para que el proyecto cumpla con su función principal: calcular.
+Una vez realizado el interfaz, es el momento de hacer que los botones cumplan su función aplicando la lógica que deben de tener para que el proyecto cumpla con su función principal: calcular.
 
 A la hora de programar, se ha tratado de que el código sea lo más modular posible y eficaz, para que cualquier posible cambio futuro sea sencillo de realizar.
 
