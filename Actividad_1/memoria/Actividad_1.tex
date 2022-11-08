@@ -78,7 +78,21 @@ Para la creación de la aplicación primero se creó el diseño en modo vertical
     \end{minipage}
 }
 
-Para la correcta colocación de los botones, y que se ajusten en todo momento al interfaz (sin importar el tamaño de la pantalla), se ha hecho uso de las denominadas “cadenas”, tanto en sentido horizontal como vertical. De esta manera, los botones tienen unas relaciones entre sí y con los bordes de la pantalla que hace que se coloquen de manera relativa al tamaño de la pantalla.
+Para la correcta colocación de los botones, y que se ajusten en todo momento al interfaz (sin importar el tamaño de la pantalla), se ha hecho uso de las denominadas “cadenas”, tanto en sentido horizontal como vertical.
+
+De esta manera, los botones tienen unas relaciones entre sí y con los bordes de la pantalla que hace que se coloquen de manera relativa al tamaño de la pantalla, quedando de la siguiente manera:
+
+
+{
+    \begin{minipage}{0.4\linewidth}
+        \includegraphics[width=\linewidth]{img/phone1.png}
+    \end{minipage}
+    \hfill
+    \begin{minipage}{0.4\linewidth}
+        \includegraphics[width=\linewidth]{img/phone2.png}
+    \end{minipage}
+}
+
 
 Para el modo apaisado, se ha seguido la misma filosofía, pero esta vez se ha utilizado también una “guía de línea vertical” (\textbf{\textit{vertical guideline}}) colocada en el centro de la pantalla.
 
@@ -176,11 +190,74 @@ Para ello, se han generado los textos a través del \textit{\textbf{Translations
 De esta manera, al cambiar el terminal de idioma, obtendremos distintos resultados para la misma pantalla tal como se puede ver en las imágenes anteriores.
 
 
+\section{Guardar estados al girar la pantalla}
+
+Por cómo funcionan los ciclos de vida de los Activity, al girar la pantalla el Activity se reinicia, y eso hacía que se perdiese el resultado y la operación que se estaba realizando en el momento del giro.
+
+Para evitar eso, se han creado dos funciones para guardar el estado y posteriormente restaurarlo.
+
+\begin{mycode}{Función que guarda el estado}{kotlin}{}
+// Function to save the Instance state
+override fun onSaveInstanceState(outState: Bundle) {
+    super.onSaveInstanceState(outState)
+    outState.putDouble("result",result)
+    outState.putDouble("number",number)
+    outState.putString("operation",operation)
+    outState.putBoolean("clean",clean)
+}
+\end{mycode}
+
+La función guarda el estado del resultado actual, la operación que se está realizando, el número que realiza la operación y si hay que “limpiar” el resultado. La función de restauración recupera esos estados.
+
 \section{Navegación entre \textit{activities}}
 
+Para realizar otro de los requisitos exigidos era necesario crear un segundo Activity, en el que visualizaremos el resultado de la operación. En este Activity tendremos un botón que nos permite compartir el resultado con otras aplicaciones del sistema.
+
+\begin{center}
+    \includegraphics[width=0.4\linewidth]{img/share.png}
+\end{center}
+
+El Activity creado se llama “\textbf{activity\_result}, en el cual sólo aparece una frase, el resultado y el botón de compartir. Al dar al botón de compartir (con el texto en el idioma elegido), nos mostrará el \textit{pop-up} de la imagen de arriba.
+
+Para enviar el resultado al segundo Activity se hace a través del evento \textbf{setOnClickListener}:
+
+\begin{mycode}{Evento onClick del botón share}{kotlin}{}
+// share result into Result-Activity
+bshare.setOnClickListener {
+    val intent = Intent(this, ResultActivity::class.java)
+    intent.putExtra(ResultActivity.RESULT, format_result(result))
+    startActivity(intent)
+}
+\end{mycode}
+
+Mientras que para que aparezca el \textit{pop-up} de aplicaciones en el segundo Activity, al dar al botón, se realiza mediante:
+
+\begin{mycode}{Llamada al pop-up de aplicaciones}{kotlin}{}
+// share button
+val bshare = findViewById<Button>(R.id.bshare_result)
+
+val sendIntent = Intent().apply {
+    action = Intent.ACTION_SEND
+    putExtra(Intent.EXTRA_TEXT,result)
+    // if the type is "text/plain" will not show all apps.
+    type = "text/plain"
+}
+
+val shareIntent = Intent.createChooser(sendIntent,null)
+
+bshare.setOnClickListener {
+    if (sendIntent.resolveActivity(packageManager) != null) {
+        startActivity(shareIntent)
+    }
+}
+\end{mycode}
 
 
 \chapter{Conclusiones}
 
-A la hora de realizar un análisis de
+Aunque el proyecto de una calculadora \textit{a priori} no parece complejo, con lo realizado se ha podido aprender los fundamentos básicos para poder hacer aplicaciones más complejas: uso varios Activity, envío de información entre ellas, guardar estados al haber eventos, internacionalización...
+
+Con ello, también se ha visto el potencial que tiene Kotlin, un lenguaje de programación moderno que junto con el IDE Android Studio hace que realizar una aplicación móvil resulte sencillo y agradable.
+
+
 \end{document}
