@@ -110,8 +110,10 @@ class MainActivity : AppCompatActivity() {
             result = do_operation(operation,result,number)
             set_tresult(result,tresult)
             d {"rugolid: " + result.toString()}
+            d {"rugolid: " + format_result(result)}
         }
 
+        // share result into Result-Activity
         bshare.setOnClickListener {
             val intent = Intent(this, ResultActivity::class.java)
             intent.putExtra(ResultActivity.RESULT, format_result(result))
