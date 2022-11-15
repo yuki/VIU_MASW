@@ -50,7 +50,7 @@ Los requisitos establecidos son:
     \item La interfaz se debe adaptar al tamaño de la pantalla.
     \item La aplicación se deberá visualizar de forma diferente si se encuentra en modo vertical o horizontal.
     \item La aplicación estará en al menos dos idiomas.
-    \item A través de un botón se debe el resultado se mostrará en otro \textit{Activity}.
+    \item A través de un botón el resultado se mostrará en otro \textit{Activity}.
     \item En ese nuevo Activity, la aplicación permitirá compartir el resultado utilizando otras aplicaciones del sistema.
 \end{itemize}
 
@@ -170,7 +170,7 @@ Tal como se puede ver, a su vez llama a otras funciones que también han sido cr
 \section{Idiomas de la aplicación}
 Otro aspecto que se ha tenido en cuenta ha sido la internacionalización de la aplicación. Los pocos textos que contiene, se han generado en tres idiomas: inglés, castellano y euskera.
 
-Para ello, se han generado los textos a través del \textit{\textbf{Translations Editor}}, que por debajo hace uso de un fichero en formato XML para cada idioma. Luego cada \textit{TextView} ha hecho referencia a la clave del texto asociado.
+Para ello, se han generado los textos a través del \textit{\textbf{Translations Editor}}, que por debajo hace uso de un fichero en formato XML para cada idioma. Luego cada \textit{TextView} hace referencia a la clave del texto asociado.
 
 {
 \begin{minipage}{0.32\linewidth}
@@ -187,7 +187,7 @@ Para ello, se han generado los textos a través del \textit{\textbf{Translations
 
 }
 
-De esta manera, al cambiar el terminal de idioma, obtendremos distintos resultados para la misma pantalla tal como se puede ver en las imágenes anteriores.
+De esta manera, al cambiar el terminal de idioma, la aplicación detectará el cambio y obtendrá los textos para el idioma seleccionado, y se visualiza en dicho idioma, como se puede ver en las imágenes anteriores.
 
 
 \section{Guardar estados al girar la pantalla}
@@ -213,13 +213,8 @@ La función guarda el estado del resultado actual, la operación que se está re
 
 Para realizar otro de los requisitos exigidos era necesario crear un segundo Activity, en el que visualizaremos el resultado de la operación. En este Activity tendremos un botón que nos permite compartir el resultado con otras aplicaciones del sistema.
 
-\begin{center}
-    \includegraphics[width=0.4\linewidth]{img/share.png}
-\end{center}
 
-El Activity creado se llama “\textbf{activity\_result}, en el cual sólo aparece una frase, el resultado y el botón de compartir. Al dar al botón de compartir (con el texto en el idioma elegido), nos mostrará el \textit{pop-up} de la imagen de arriba.
-
-Para enviar el resultado al segundo Activity se hace a través del evento \textbf{setOnClickListener}:
+Para enviar el resultado al segundo Activity se hace a través del evento \textbf{setOnClickListener} que pertenece al botón “bshare” de la primera pantalla de la calculadora:
 
 \begin{mycode}{Evento onClick del botón share}{kotlin}{}
 // share result into Result-Activity
@@ -230,7 +225,25 @@ bshare.setOnClickListener {
 }
 \end{mycode}
 
-Mientras que para que aparezca el \textit{pop-up} de aplicaciones en el segundo Activity, al dar al botón, se realiza mediante:
+
+El Activity que recibe el resultado se llama “\textbf{activity\_result}, en el cual sólo aparece una frase, el resultado obtenido a través del evento anterior y el botón de compartir.
+
+\begin{center}
+    \includegraphics[frame,width=0.33\linewidth]{img/castellano.png}
+\end{center}
+
+
+\section{Compartir resultado}
+
+Al dar al botón de compartir (con el texto en el idioma con el que está configurado el terminal) de la imagen del apartado anterior, nos mostrará el \textit{pop-up} de la siguiente imagen.
+
+\begin{center}
+    \includegraphics[width=0.4\linewidth]{img/share.png}
+\end{center}
+
+
+
+Para que aparezca el \textit{pop-up} de aplicaciones en este segundo Activity, al dar al botón con el texto “compartir”, se realiza la siguiente ejecución:
 
 \begin{mycode}{Llamada al pop-up de aplicaciones}{kotlin}{}
 // share button
@@ -252,10 +265,14 @@ bshare.setOnClickListener {
 }
 \end{mycode}
 
+Lo que indica el código fuente es que cuando se pulsa el botón, comienza el evento “onClick” que lanzará un “\textbf{Intent}” que va a realizar la acción “\textit{ACTION\_SEND}”, con el \textit{EXTRA\_TEXT}” que tiene el resultado, que es del tipo “text/plain”.
+
+Dependiendo del tipo que se ponga, en el \textit{pop-up} aparecerán distintas aplicaciones. El tipo hace referencia a los \href{https://en.wikipedia.org/wiki/Media_type}{MIME types}, y Android lo tiene en cuenta a la hora de qué aplicaciones mostrar.
+
 
 \chapter{Conclusiones}
 
-Aunque el proyecto de una calculadora \textit{a priori} no parece complejo, con lo realizado se ha podido aprender los fundamentos básicos para poder hacer aplicaciones más complejas: uso varios Activity, envío de información entre ellas, guardar estados al haber eventos, internacionalización...
+Aunque el proyecto de una calculadora \textit{a priori} no parece complejo, con lo realizado se ha podido aprender los fundamentos básicos para poder hacer aplicaciones más complejas: uso de varios Activity, envío de información entre ellas, guardar estados al haber eventos, internacionalización...
 
 Con ello, también se ha visto el potencial que tiene Kotlin, un lenguaje de programación moderno que junto con el IDE Android Studio hace que realizar una aplicación móvil resulte sencillo y agradable.
 
