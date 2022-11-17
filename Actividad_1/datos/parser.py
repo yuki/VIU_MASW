@@ -35,7 +35,7 @@ with open('eventos_items.json', 'r', encoding='utf8') as fichero:
                      d = linea['language']
                      d = re.sub('NA','',d)
                      o.update({"Idioma":d})
-                     print(d)
+                     #print(d)
               else:
                      o.update({"Idioma":''})
               if 'priceEs' in linea:

@@ -31,11 +31,11 @@
 
 \chapter{Introducción}
 
-A la hora de realizar un análisis de datos (ya sean datos web, científicos, logs de servidores, meteorológicos, ...) no sólo es importante el propio análisis realizado y la información obtenida, sino que también es importante cómo se muestra.
+A la hora de realizar un análisis de datos (ya sean datos web, científicos, logs de servidores, meteorológicos, ...) no sólo es importante el propio análisis realizado y la información obtenida, ya que también es importante cómo se muestra.
 
 El aspecto que le damos a esa información, junto con la posibilidad de interactuar con ella, puede hacer que esa información llegue a más gente y que se entienda de mejor manera que si sólo es plasmada sin ningún tipo de cuidado.
 
-En este documento se va a explicar cómo se ha realizado la obtención de datos de eventos culturales obtenidos de la web OpenData del Gobierno Vasco, el análisis y procesado realizado, y cómo se ha creado un cuadro de mandos con la información obtenida.
+En este documento se va a explicar cómo se ha realizado la obtención de datos de eventos culturales obtenidos de la web \href{https://www.opendata.euskadi.eus/inicio/}{OpenData} del Gobierno Vasco, el análisis y procesado realizado, y cómo se ha creado un cuadro de mandos con la información obtenida.
 
 \chapter{Contexto de uso}
 
@@ -55,35 +55,34 @@ A continuación se va a exponer todo el proceso de obtención de datos, el anál
 \section{Fuente de datos}
 Tal como se ha dicho previamente, la fuente de datos ha sido el portal \href{https://www.opendata.euskadi.eus/inicio/}{Open Data Euskadi}, concretamente la sección creada para la \href{https://www.opendata.euskadi.eus/api-culture/?api=culture_events}{API de eventos}.
 
-Desde esta web se explica cómo realizar consultas a la API y para ello se ha hecho uso del comando \commandbox{curl} para realizar la siguiente consulta y obtención de datos.
+Desde esta web se explica cómo realizar consultas a la API y para ello se ha hecho uso del comando \commandbox{curl} para realizar la siguiente consulta y la obtención bruta de datos.
 
-\begin{mycode}{Extracción de datos}{console}{{\small }}
+\begin{mycode}{Obtención de los datos}{console}{{\small }}
 ruben@vega: ~$ curl -X GET \
-  "https://api.euskadi.eus/culture/events/v1.0/events?_elements=5000" \
+  "https://api.euskadi.eus/culture/events/v1.0/events?_elements=6845" \
   -H "accept: application/json" > eventos.json
 \end{mycode}
 
-De esta manera hemos obtenido un fichero \configfile{eventos.json} con los 5000 registros que la API nos devuelve, a los que hay que realizar un análisis de lo obtenido.
+De esta manera hemos obtenido un fichero \configfile{eventos.json} con los 6845 registros que la API nos devuelve, a los que hay que realizar un análisis de lo obtenido.
 
 
 \section{Análisis y transformación de datos}
 Tras obtener los datos, es momento de realizar un análisis del fichero obtenido. Dado que es un fichero \textbf{json}, es fácilmente parseable mediante el lenguaje de programación \href{URLhttps://www.python.org/}{Python}.
 
-En primer lugar es obtener los items de los eventos, ya que el fichero devuelto nos añade información extra previa, con la siguiente estructura:
+En primer lugar es obtener los items de los eventos, ya que el fichero devuelto nos añade información extra, con la siguiente estructura:
 
 \begin{mycode}{Estructura de datos original}{json}{}
 {
-    "totalItems": 5000,
+    "totalItems": 6845,
     "totalPages": 1,
     "currentPage": 1,
     "items": [
-    {
         ...
-    }]
+    ]
 }
 \end{mycode}
 
-Tras esto, ya podemos recorrer los datos, quedarnos con los índices que nos interesan y comenzar a realizar ciertas modificaciones necesarias. Para ello, se ha tenido que recorrer todos los items de la siguiente manera:
+Por ello, al abrir el fichero, tenemos que acceder al campo “items” y recorrerlos, para quedarnos con los índices que nos interesan y comenzar a realizar ciertas modificaciones necesarias. Para ello, se ha tenido que recorrer todos los items de la siguiente manera:
 
 \begin{mycode}{Parte del script de parseo de datos}{python}{}
 #!/usr/bin/env python3
@@ -92,8 +91,9 @@ import json
 import re
 # ...
 out = json.loads('[]')
+# abrimos el fichero
 with open('eventos.json', 'r', encoding='utf8') as fichero:
-   items = json.load(fichero)
+   # ...
    for item in items:
       o = json.loads('{}')
       o.update({"Nombre":re.sub('\"','',item['nameEs'].title())})
@@ -102,9 +102,9 @@ with open('eventos.json', 'r', encoding='utf8') as fichero:
 
 Dado que no nos interesan todos los índices de los datos obtenidos, se ha creado una variable “\textbf{o}” donde se irán añadiendo los índices, y renombrando los que sean necesarios.
 
-Los dos primeros campos son el nombre y el tipo de evento, que debido a que en los datos obtenidos también hay versión en euskera, tienen un nombre indicando el idioma. Esto ha habido que hacerlo con otros campos como son el precio y el municipio.
+Los dos primeros campos que vamos a usar son el nombre y el tipo de evento. Debido a que en los datos originales también hay versión en euskera, existen dos campos para el nombre del evento. Nos quedamos el de castellano y lo renombramos a “Nombre”. Esto ha habido que hacerlo también con otros campos.
 
-En el campo del nombre, se ha aprovechado a quitar las comillas, ya que varios registros hacían uso de ellas.
+En el campo del nombre, se ha aprovechado a quitar las comillas usando una \textbf{expresión regular}, ya que varios registros hacían uso de ellas.
 
 Por otro lado, también ha habido que realizar modificaciones en las fechas y con la posición de geolocalización:
 
@@ -120,9 +120,9 @@ if 'municipalityLatitude' in item and 'municipalityLongitude' in item:
     o.update({"GPS":item['municipalityLatitude']+','+item['municipalityLongitude']})
 \end{mycode}
 
-En el caso de las fechas, dado que \href{https://datastudio.google.com/}{Data Studio} no identificaba de manera correcta las fechas, ha habido que convertirlas al formato \textbf{20221103}, donde el año, mes y día está todo junto y en ese orden.
+En el caso de las fechas, dado que \href{https://datastudio.google.com/}{Data Studio} no identificaba de manera correcta las fechas, ha habido que convertirlas al formato \textbf{20221116}, donde el año, mes y día está todo junto y en ese orden.
 
-En lo que se refiere a la \textbf{geolocalización}, en los datos se obtenían la latitud y la longitud por separado, y se ha creado un índice juntando ambos datos, llamado \textbf{GPS}, para que después pueda ser utilizado.
+En lo que se refiere a la \textbf{geolocalización}, los datos originales contenían la latitud y la longitud por separado, por lo que se ha creado un índice juntando ambos datos, llamado \textbf{GPS}, para que después pueda ser utilizado.
 
 
 También ha habido que realizar modificaciones en lo que se refiere a la provincia, ya que en los datos no se obtenía el nombre, sino que aparecía el código de la misma. En la propia API hay un apartado donde se puede obtener una relación del código con el nombre. Con esa información se ha decidido realizar el siguiente código para hacer los cambios necesarios:
@@ -143,7 +143,7 @@ if item['provinceNoraCode'] == '-3':
 
 Ha habido algún otro cambio que ha habido que realizar, pero debido a que son similares a los casos expuestos previamente, se consideran irrelevantes en el ámbito general.
 
-Para finalizar con los datos, cada nuevo evento se ha añadido a un json de eventos (llamado “out”) y que posteriormente se ha convertido a formato \textbf{CSV} a través de la librería \href{https://pandas.pydata.org/}{Pandas}.
+Para finalizar con los datos, cada evento con los datos elegidos y transformados, se ha añadido a un array (llamado “out”) y que posteriormente se ha convertido a formato \textbf{CSV} a través de la librería \href{https://pandas.pydata.org/}{Pandas}.
 
 \begin{mycode}{Parte del script de parseo de datos}{python}{}
 df = pd.read_json(json.dumps(out),dtype=True)
@@ -169,12 +169,14 @@ Tras la transformación realizada en el paso previo, el modelo resultante de dat
 \end{itemize}
 
 
+Para finalizar, el fichero ha sido importado en \href{https://datastudio.google.com/}{Data Studio} para poder crear el cuadro de mandos.
+
 \chapter{Creación del cuadro de mandos}
 
 Para crear el \href{https://datastudio.google.com/reporting/2322c44e-ad75-4243-a4a5-257be6d754bf/page/9AT6C}{cuadro de mandos} se ha hecho uso de la aplicación \href{https://datastudio.google.com/}{Data Studio} de Google, ya que nos va a permitir realizar gráficas y mostrar la información de manera sencilla, pero con gran versatilidad.
 
 \section{Carga de datos}
-Para poder hacer uso de los datos que previamente se han transformado, hay que realizar la carga en Data Studio. Como ya se ha dicho previamente, el último paso ha sido generar un fichero CSV ya que es uno de los formatos aceptados por la aplicación.
+Como ya se ha dicho previamente, el último paso ha sido generar un fichero CSV ya que es uno de los formatos aceptados por la aplicación, y que ha sido añadido como fuente de datos.
 
 Tras la carga, y haber indicado que el índice GPS sirve para gelocalización, obtenemos el siguiente resultado:
 
@@ -189,7 +191,7 @@ El \href{https://datastudio.google.com/reporting/2322c44e-ad75-4243-a4a5-257be6d
 
 \subsection{Conjunto completo de datos}
 
-La primera sección se hace uso del conjunto completo de datos, en el que se puede ver el total de los datos, elegir por el tipo de evento, el territorio donde se realiza o elegir entre las fechas en las que se realiza.
+La primera sección se hace uso del conjunto completo de datos, en el que se puede ver el total de los datos, elegir por el tipo de evento, la provincia donde se realiza o elegir entre las fechas en las que se realiza.
 
 En caso de realizar alguna modificación en estos controles, se verá reflejado en la tabla que hay a continuación, así como en las gráficas creadas.
 
@@ -197,21 +199,21 @@ En caso de realizar alguna modificación en estos controles, se verá reflejado 
     \includegraphics[frame,width=0.83\linewidth]{img/cabecera.png}
 \end{center}
 
-Estas gráficas representan:
+Las gráficas creadas representan:
 \begin{itemize}
     \item \textbf{Geoposición de los eventos}: La posición geográfica de los eventos, diferenciando cada tipo de evento con un color distinto.
     \begin{center}
         \includegraphics[width=0.6\linewidth]{img/mapa1.png}
     \end{center}
 
-    \item \textbf{Porcentaje de tipos de eventos} en formato de círculo, donde se ve que el mayor porcentaje de eventos son conciertos.
+    \item \textbf{Porcentaje de tipos de eventos} en formato de círculo. En este caso se ve que el mayor porcentaje de eventos son conciertos.
     \begin{center}
         \includegraphics[width=0.6\linewidth]{img/circulo.png}
     \end{center}
 
     \item \textbf{Mapa de calor} de los eventos. Similar al mapa comentado previamente.
 
-    \item \textbf{Gráfica de barras} donde aparece que el territorio que más eventos tiene es Bizkaia seguido de Gipuzkoa con mucha diferencia respecto al resto.
+    \item \textbf{Gráfica de barras} donde aparecen los totales de eventos por territorio, teniendo en cuenta la selección que se haya realizado.
 \end{itemize}
 
 \subsection{Eventos esta semana}
@@ -242,7 +244,7 @@ Por tanto, se han creado tres filtros:
 \begin{itemize}
     \item \textbf{Filtro castellano}: Para la gráfica que sólo muestra eventos que se han especificado que van a ser en castellano.
     \item \textbf{Filtro Euskera}: Para la gráfica que sólo muestra eventos que se han especificado que van a ser en euskera.
-    \item \textbf{Filtro de fecha futuros}: Que sirve para que las gráficas de esta sección sólo incluyan eventos cuya fecha de inicio sea mayor o igual que el 10 de Noviembre.
+    \item \textbf{Filtro de fecha futuros}: Que sirve para que las gráficas de esta sección sólo incluyan eventos cuya fecha de inicio sea mayor o igual que el 18 de Noviembre.
 \end{itemize}
 
 \begin{center}
@@ -263,7 +265,7 @@ De esta manera, aplicando los filtros creados, cada uno en su correspondiente gr
     \includegraphics[frame,width=0.9\linewidth]{img/futuro2.png}
 \end{center}
 
-El tercer gráfico que hace uso del filtro “fechas futuros” es el cuadro de resultados, que muestra el total de eventos, en este caso 166.
+El tercer gráfico que hace uso del filtro “fechas futuros” es el cuadro de resultados, que muestra el total de eventos, en este caso 1841.
 
 
 \chapter{Conclusiones}
