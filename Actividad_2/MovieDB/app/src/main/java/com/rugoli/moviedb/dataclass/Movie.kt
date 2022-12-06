@@ -1,5 +1,6 @@
 package com.rugoli.moviedb.dataclass
 
+import com.rugoli.moviedb.StoredMovie
 import com.squareup.moshi.Json
 
 /**
@@ -26,4 +27,17 @@ data class Movie(
     val posterUrl: String,
     @Json(name = "gif")
     val gifUrl: String
-)
+) {
+    fun asStoredMovie(): StoredMovie {
+        return StoredMovie.newBuilder()
+            .setId(id)
+            .setName(name)
+            .setRelease(release)
+            .setPlaytime(playtime)
+            .setDescription(description)
+            .setPlot(plot)
+            .setPosterUrl(posterUrl)
+            .setGifUrl(gifUrl)
+            .build()
+    }
+}

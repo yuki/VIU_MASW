@@ -3,6 +3,7 @@ package com.rugoli.moviedb
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
+import com.github.ajalt.timberkt.d
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MainActivity : AppCompatActivity() {
@@ -13,9 +14,12 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        findViewById<Button>(R.id.button).setOnClickListener {
-            viewModel.loadData()
+        d { "rugolid: main activity onCreate" }
 
-        }
+        viewModel.loadData()
+        //findViewById<Button>(R.id.button).setOnClickListener {
+        //    viewModel.loadData()
+
+        //}
     }
 }

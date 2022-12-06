@@ -1,6 +1,8 @@
 package com.rugoli.moviedb
 
 import android.app.Application
+import androidx.datastore.core.DataStore
+import androidx.datastore.dataStore
 
 import com.rugoli.moviedb.interfaces.MoviesInterface
 import com.rugoli.moviedb.models.Movie
@@ -18,6 +20,13 @@ import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 
 class App:Application() {
+
+    private val moviesDataStore: DataStore<MovieStore> by dataStore(
+        fileName = "movies.pb",
+        serializer = MovieStoreSerializer
+    )
+
+
     override fun onCreate() {
         super.onCreate()
 
@@ -31,6 +40,7 @@ class App:Application() {
             androidLogger(Level.ERROR)
             androidContext(this@App)
             modules(
+                module { single { moviesDataStore } },
                 mainModule,
                 mainActivity
             )
@@ -57,7 +67,8 @@ val mainModule = module {
     }
 
     // app model
-    single { Movie(movieService = get()) }
+    //
+    single { com.rugoli.moviedb.models.Movie(movieService = get(), moviesDataStore = get()) }
 }
 
 val mainActivity = module {

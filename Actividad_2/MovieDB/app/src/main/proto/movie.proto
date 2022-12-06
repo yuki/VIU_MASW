@@ -1,0 +1,20 @@
+syntax = "proto3";
+
+option java_package = "com.rugoli.moviedb";
+option java_multiple_files = true;
+
+message MovieStore {
+  bool initialized = 1;
+  repeated StoredMovie movies = 2;
+}
+
+message StoredMovie{
+  int32 id = 1;
+  string name = 2;
+  int32 release = 3;
+  string playtime = 4;
+  string description = 5;
+  string plot = 6;
+  string posterUrl = 7;
+  string gifUrl = 8;
+}
