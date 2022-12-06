@@ -3,6 +3,8 @@ package com.rugoli.moviedb
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
+import androidx.lifecycle.lifecycleScope
+import androidx.recyclerview.widget.RecyclerView
 import com.github.ajalt.timberkt.d
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -10,16 +12,46 @@ class MainActivity : AppCompatActivity() {
 
     private val viewModel: MainActivityViewModel by viewModel()
 
+    private lateinit var movieAdapter: MovieAdapter
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
         d { "rugolid: main activity onCreate" }
 
-        viewModel.loadData()
+        // crate the adapter
+        movieAdapter = MovieAdapter(
+            movieSelected = {
+                d { "Selected movie $it!!!" }
+            },
+            removeMovie = {
+                d { "Remove animal $it !!!" }
+                removeMovie(it)
+            }
+        )
+
+        // set the adapter
+        findViewById<RecyclerView>(R.id.movieList).adapter = movieAdapter
+
+        d { "rugolid: main activity onCreate 2" }
+        // subscribe to data changes
+        lifecycleScope.launchWhenResumed {
+            viewModel.movies.collect {
+                // submit list
+                movieAdapter.submitList(it)
+                d { "rugolid: main activity onCreate 3" }
+            }
+        }
+
+        //viewModel.loadData()
         //findViewById<Button>(R.id.button).setOnClickListener {
         //    viewModel.loadData()
 
         //}
+    }
+
+    private fun removeMovie(movie: com.rugoli.moviedb.dataclass.Movie) {
+        viewModel.removeMovie(movie)
     }
 }

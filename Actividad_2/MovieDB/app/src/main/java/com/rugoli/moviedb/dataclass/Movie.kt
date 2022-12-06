@@ -3,7 +3,7 @@ package com.rugoli.moviedb.dataclass
 import com.rugoli.moviedb.StoredMovie
 import com.squareup.moshi.Json
 
-/**
+/**release
 {
   "id": 0,
   "name": "Frozen II",

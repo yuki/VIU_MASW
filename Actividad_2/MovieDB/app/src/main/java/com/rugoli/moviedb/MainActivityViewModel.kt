@@ -2,17 +2,24 @@ package com.rugoli.moviedb
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.github.ajalt.timberkt.d
 import com.rugoli.moviedb.models.Movie
 import kotlinx.coroutines.launch
 
-class MainActivityViewModel(application: Application, val model: Movie) : AndroidViewModel(application) {
+class MainActivityViewModel(application: Application, val model: Movie) : ViewModel() {
 
-    fun loadData() {
-        d { "rugolid: main activity view MODEL loadData" }
-        viewModelScope.launch {  }
-        model.loadData()
+    val movies = model.movies
+
+//    fun loadData() {
+//        d { "rugolid: main activity view MODEL loadData" }
+//        viewModelScope.launch {  }
+//        //model.loadData()
+//    }
+
+    fun removeMovie(movie: com.rugoli.moviedb.dataclass.Movie) {
+        model.removeMovie(movie)
     }
 
 }

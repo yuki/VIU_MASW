@@ -10,6 +10,8 @@ import com.rugoli.moviedb.models.Movie
 import com.github.ajalt.timberkt.d
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
+import com.squareup.picasso.OkHttp3Downloader
+import com.squareup.picasso.Picasso
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
 import org.koin.androidx.viewmodel.dsl.viewModel
@@ -34,6 +36,11 @@ class App:Application() {
             timber.log.Timber.plant(timber.log.Timber.DebugTree())
             d {"rugolid: estamos en modo debug"}
         }
+
+        // picasso
+        val picasso: Picasso =
+            Picasso.Builder(this).downloader(OkHttp3Downloader(cacheDir, 250000000)).build()
+        Picasso.setSingletonInstance(picasso)
 
         //koin
         startKoin {
