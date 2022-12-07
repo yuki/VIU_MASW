@@ -43,6 +43,10 @@ class Movie(private val movieService: MoviesInterface, private val moviesDataSto
             moviesDataStore.data
                 .collect { movieStore ->
                     d { "rugolid: Movies count: ${movieStore.moviesCount}" }
+                    if (movieStore.moviesCount == 0) {
+                        d{"rugolid: no more movies"}
+                        downloadMovies()
+                    }
                     val movies = movieStore.moviesList.map {
                         com.rugoli.moviedb.dataclass.Movie(
                             it.id,
@@ -69,6 +73,13 @@ class Movie(private val movieService: MoviesInterface, private val moviesDataSto
         val type = Types.newParameterizedType(List::class.java, com.rugoli.moviedb.dataclass.Movie::class.java)
         val adapter = moshi.adapter<List<com.rugoli.moviedb.dataclass.Movie>>(type)
 
+        downloadMovies()
+
+        d { "rugolid:  Movie initDataStore...end" }
+    }
+
+    //download movies from internet and insert into database
+    fun downloadMovies() {
         // get the data and store
         coroutineScope.launch {
             d { "rugolid:  Movie loadData from internet...start" }
@@ -90,8 +101,6 @@ class Movie(private val movieService: MoviesInterface, private val moviesDataSto
             }
             d { "rugolid: loadData...end" }
         }
-
-        d { "rugolid:  Movie initDataStore...end" }
     }
 
     fun removeMovie(movie: com.rugoli.moviedb.dataclass.Movie) {

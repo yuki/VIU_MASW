@@ -27,7 +27,7 @@ class MovieAdapter(
     ) : RecyclerView.ViewHolder(view) {
         private val nameTextView: TextView = view.findViewById(R.id.titleText)
         private val yearTextView: TextView = view.findViewById(R.id.yearText)
-        private val plotTextView: TextView = view.findViewById(R.id.plotText)
+        private val plotTextView: TextView = view.findViewById(R.id.infoplot)
         private val movieImage: ImageView = view.findViewById(R.id.movieImage)
 
         private val removeButton: ImageButton = view.findViewById(R.id.removeButton)
@@ -59,7 +59,7 @@ class MovieAdapter(
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MovieViewHolder {
         d { "rugolid: onCreateViewHolder()" }
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.movie, parent, false)
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.movie_item, parent, false)
         return MovieViewHolder(
             view,
             { movieSelected(getItem(it)) },

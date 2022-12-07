@@ -1,5 +1,6 @@
 package com.rugoli.moviedb
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
@@ -24,6 +25,14 @@ class MainActivity : AppCompatActivity() {
         movieAdapter = MovieAdapter(
             movieSelected = {
                 d { "Selected movie $it!!!" }
+                val intent = Intent(this, MovieInfo::class.java)
+                intent.putExtra(MovieInfo.NAME, it.name)
+                intent.putExtra(MovieInfo.RELEASE, it.release.toString())
+                intent.putExtra(MovieInfo.PLAYTIME, it.playtime)
+                intent.putExtra(MovieInfo.PLOT, it.plot)
+                intent.putExtra(MovieInfo.POSTER, it.posterUrl)
+                intent.putExtra(MovieInfo.DESCRIPTION, it.description)
+                startActivity(intent)
             },
             removeMovie = {
                 d { "Remove movie $it !!!" }
