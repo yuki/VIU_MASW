@@ -30,13 +30,15 @@
 
         <ImageButton
             android:id="@+id/removeButton"
-            android:layout_width="21dp"
+            android:layout_width="20dp"
             android:layout_height="18dp"
             android:layout_marginEnd="15dp"
             android:layout_marginBottom="15dp"
-            android:src="@drawable/trash_can_outline"
+            android:background="@drawable/trash_can_outline"
+            android:backgroundTint="#FF0000"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
+            app:layout_constraintEnd_toEndOf="parent"
+            tools:src="@drawable/trash_can_outline" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline2"

@@ -30,15 +30,17 @@ class MovieAdapter(
         private val plotTextView: TextView = view.findViewById(R.id.plotText)
         private val movieImage: ImageView = view.findViewById(R.id.movieImage)
 
+        private val removeButton: ImageButton = view.findViewById(R.id.removeButton)
+
         init {
             d { "rugolid: movie adapter init ()" }
             view.setOnClickListener {
                 movieSelected(adapterPosition)
             }
-//            removeButton.setOnClickListener {
-//                d { "Remove animal...." }
-//                removeMovie(adapterPosition)
-//            }
+            removeButton.setOnClickListener {
+                d { "rugolid: Remove movie...." }
+                removeMovie(adapterPosition)
+            }
         }
 
         fun bind(movie: Movie) {

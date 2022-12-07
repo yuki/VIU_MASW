@@ -12,12 +12,6 @@ class MainActivityViewModel(application: Application, val model: Movie) : ViewMo
 
     val movies = model.movies
 
-//    fun loadData() {
-//        d { "rugolid: main activity view MODEL loadData" }
-//        viewModelScope.launch {  }
-//        //model.loadData()
-//    }
-
     fun removeMovie(movie: com.rugoli.moviedb.dataclass.Movie) {
         model.removeMovie(movie)
     }

@@ -26,7 +26,7 @@ class MainActivity : AppCompatActivity() {
                 d { "Selected movie $it!!!" }
             },
             removeMovie = {
-                d { "Remove animal $it !!!" }
+                d { "Remove movie $it !!!" }
                 removeMovie(it)
             }
         )
@@ -34,21 +34,14 @@ class MainActivity : AppCompatActivity() {
         // set the adapter
         findViewById<RecyclerView>(R.id.movieList).adapter = movieAdapter
 
-        d { "rugolid: main activity onCreate 2" }
         // subscribe to data changes
         lifecycleScope.launchWhenResumed {
             viewModel.movies.collect {
                 // submit list
                 movieAdapter.submitList(it)
-                d { "rugolid: main activity onCreate 3" }
             }
         }
 
-        //viewModel.loadData()
-        //findViewById<Button>(R.id.button).setOnClickListener {
-        //    viewModel.loadData()
-
-        //}
     }
 
     private fun removeMovie(movie: com.rugoli.moviedb.dataclass.Movie) {

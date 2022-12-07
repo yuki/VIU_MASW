@@ -74,7 +74,6 @@ val mainModule = module {
     }
 
     // app model
-    //
     single { com.rugoli.moviedb.models.Movie(movieService = get(), moviesDataStore = get()) }
 }
 
