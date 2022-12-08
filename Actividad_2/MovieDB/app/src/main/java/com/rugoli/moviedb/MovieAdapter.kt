@@ -45,7 +45,6 @@ class MovieAdapter(
 
         fun bind(movie: Movie) {
             d { "rugolid: bind()" }
-
             nameTextView.text = movie.name
             yearTextView.text = movie.release.toString()
             //limit the plot text

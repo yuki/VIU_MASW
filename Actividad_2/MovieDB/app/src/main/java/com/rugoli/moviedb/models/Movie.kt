@@ -27,8 +27,6 @@ class Movie(private val movieService: MoviesInterface, private val moviesDataSto
     init {
         d { "rugolid:  Movie init" }
 
-        // TODO: if the database is empty, download again the json from internet
-
         coroutineScope.launch {
             moviesDataStore.data
                 .map { it.initialized }
@@ -45,7 +43,14 @@ class Movie(private val movieService: MoviesInterface, private val moviesDataSto
                     d { "rugolid: Movies count: ${movieStore.moviesCount}" }
                     if (movieStore.moviesCount == 0) {
                         d{"rugolid: no more movies"}
-                        downloadMovies()
+                        // TODO: if the database is empty, download again the json from internet
+                        // the database is empty, we set "initialized" to false.
+                        moviesDataStore.updateData { movieStore ->
+                            movieStore.toBuilder()
+                                .setInitialized(false)
+                                .build()
+                        }
+//                        downloadMovies()
                     }
                     val movies = movieStore.moviesList.map {
                         com.rugoli.moviedb.dataclass.Movie(
@@ -89,13 +94,18 @@ class Movie(private val movieService: MoviesInterface, private val moviesDataSto
                 // create the storedMovies list
                 val moviesToStore = movies.map { it.asStoredMovie() }
 
-                // store the data
-                moviesDataStore.updateData { movieStore ->
-                    movieStore.toBuilder()
-                        .addAllMovies(moviesToStore)
-                        .setInitialized(true)
-                        .build()
+                // if the dataStore is not initialized, it means it's empty. So we store the data.
+                val isInitialized: Boolean = moviesDataStore.data.map { movieStore -> movieStore.initialized }.toString().toBoolean()
+                if (isInitialized == false) {
+                    // store the data
+                    moviesDataStore.updateData { movieStore ->
+                        movieStore.toBuilder()
+                            .addAllMovies(moviesToStore)
+                            .setInitialized(true)
+                            .build()
+                    }
                 }
+
             } catch (e: HttpException) {
                 e(e)
             }

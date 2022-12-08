@@ -83,7 +83,7 @@
             android:layout_marginBottom="30dp"
             android:gravity="fill|fill_horizontal"
             android:justificationMode="inter_word"
-            android:text="TextView"
+            android:text="Plot de la peli"
             android:textSize="12sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
