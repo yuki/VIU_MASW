@@ -35,7 +35,7 @@ A la hora de crear una aplicación de móvil moderna podemos utilizar como fuent
 
 Si realizamos un pequeño análisis de las mismas, veremos que todas ellas hacen uso de la conectividad de red para obtener (o enviar) datos a internet, y que parte de esos datos serán almacenados en una base de datos interna en el propio móvil.
 
-En esta documentación se va a explicar los pasos realizados para la creación de una aplicación que funcionará en el sistema operativo Android y creada bajo el lenguaje de programación Kotlin. Se hará uso de un sistema de inyección de dependenciasm, acceso a internet, gestión de una base de datos propia y la visualización de datos se hará de manera eficiente.
+En esta documentación se va a explicar los pasos realizados para la creación de una aplicación que funcionará en el sistema operativo Android y creada bajo el lenguaje de programación Kotlin. Se hará uso de un sistema de inyección de dependencias, acceso a internet, gestión de una base de datos propia y la visualización de datos se hará de manera eficiente.
 
 
 \chapter{Requisitos del proyecto}
@@ -122,7 +122,7 @@ interface MoviesInterface {
 }
 \end{mycode}
 
-    \item Junto con el código anterior, se indica que el resultado obtenido se va a parsear para obtener una lista de objetos “Movie”, que está especificado dentro del paquete \textbf{dataclass.Movie}. En este fichero se indica cómo es la clase y los distintos atributos que contiene.
+    \item Junto con el código anterior, se indica que el resultado obtenido se va a parsear para obtener una lista de objetos “Movie”, que está especificado dentro del fichero \configfile{dataclass/Movie.kt}. En este fichero se indica cómo es la clase y los distintos atributos que contiene.
 
     \item Ya sólo queda realizar la llamada para obtener los datos, que en este caso se hace desde el modelo de datos, que posteriormente se explicará con más detalle.
 \end{itemize}
@@ -133,7 +133,7 @@ Con lo explicado la aplicación es capaz de realizar la descarga del fichero, pa
 \section{Data Store y Protocol Buffers}
 Una vez sabemos cómo realizar la descarga de datos, el siguiente paso es almacenarlos.
 
-Es importante entender que \textbf{Data Store} se puede utilizar con datos estructurados y con datos en formato “clave-valor”. El primer caso es habitual utilizarlo como si fuese una base de datos SQL, mientras que el uso de “clave-valor” es más habitual si sólo queremos guardar configuración de la aplicación.
+Es importante entender que \textbf{Data Store} se puede utilizar con datos estructurados y con datos en formato “clave-valor”. El primer caso es habitual utilizarlo como si fuese una base de datos SQL, mientras que el uso de “clave-valor” es más habitual a la hora de guardar configuración de la aplicación.
 
 En nuestro caso, que vamos a utilizar datos estructurados, vamos a diferenciar el desarrollo en dos apartados:
 \begin{itemize}
@@ -149,7 +149,25 @@ La configuración está dividida en distintos apartados que detallaremos a conti
 \begin{itemize}
     \item Hay que indicar que se va a utilizar Protocol Buffers, para ello se configura en el fichero \configfile{build.gradle}
 
-    \item \textbf{Estructura de los datos}, dentro del fichero de configuración \configfile{proto/movie.proto}. Este fichero sería el equivalente a un “\textit{schema}” de creación de una tabla en MySQL.
+    \item La \textbf{estructura de los datos} está dentro del fichero de configuración \configfile{proto/movie.proto}. Este fichero sería el equivalente a un “\textit{schema}” de creación de una tabla en MySQL.
+\begin{mycode}{Fichero \textbf{movie.proto}}{proto}{}
+syntax = "proto3";
+option java_package = "com.rugoli.moviedb";
+option java_multiple_files = true;
+message MovieStore {
+    repeated StoredMovie movies = 1;
+}
+message StoredMovie{
+    int32 id = 1;
+    string name = 2;
+    int32 release = 3;
+    string playtime = 4;
+    string description = 5;
+    string plot = 6;
+    string posterUrl = 7;
+    string gifUrl = 8;
+}
+\end{mycode}
 
     \item Creación de un \textbf{\textit{Serializer}} que le indica a Datastore cómo leer y escribir el tipo de datos. Está creado en el fichero \configfile{MovieStoreSerializer.kt}
 \end{itemize}
@@ -169,20 +187,22 @@ private val moviesDataStore: DataStore<MovieStore> by dataStore(
 Tras esto, hay que decidir dónde se va a hacer uso de los datos, y para ello se ha creado el modelo de datos \textbf{Movie} dentro del fichero \configfile{models/Movie.kt}. Este modelo de datos se encarga de:
 
 \begin{itemize}
-    \item \textbf{Guardar los datos} en el DataStore. Dependiendo de si la base de datos está vacía (ya sea porque es la primera vez que se ejecuta la aplicación o porque se han borrado todos los datos), descargará los datos de internet para después guardarlos.
-\begin{mycode}{Guardamos los datos con Datastore}{kotlin}{}
-if (isInitialized == false) {
-    moviesDataStore.updateData { movieStore ->
-        movieStore.toBuilder()
-        .addAllMovies(moviesToStore)
-        .setInitialized(true)
-        .build()
-    }
+    \item \textbf{Guardar los datos} en el DataStore. Si la base de datos está vacía, descargará los datos de internet para después guardarlos. Se ha decidido que \textbf{en caso de borrar todas las películas del listado, se volverán a descargar}.
+\begin{mycode}{Parte del fichero \textbf{models/Movie.kt}}{kotlin}{}
+if (movieStore.moviesCount == 0) {
+    downloadMovies()
+}
+// ...
+// store downloaded movies
+moviesDataStore.updateData { movieStore ->
+    movieStore.toBuilder()
+    .addAllMovies(moviesToStore)
+    .build()
 }
 \end{mycode}
     \item \textbf{Recuperar los datos} del DataStore al iniciar la aplicación. De esta manera se creará el RecyclerView que veremos posteriormente.
 
-    \item \textbf{Borrado de datos} al pulsar el icono de borrado/papelera que se encuentra junto a una película.
+    \item \textbf{Borrar de datos} al pulsar el icono de borrado/papelera que se encuentra junto a una película.
 \end{itemize}
 
 
@@ -190,7 +210,7 @@ if (isInitialized == false) {
 
 A la hora de visualizar un listado de elementos (conformados por datos), lo ideal es hacerlo con un sistema dinámico como RecyclerView, que está preparado para mostrar gran cantidad de elementos.
 
-Este sistema, como su propio nombre indica, se va a encargar de crear de manera dinámica los elementos que se deben mostrar y también reutilizará los elementos (actualizando los datos) cuando ya no se muestren por pantalla.
+Este sistema, como su propio nombre indica, se va a encargar de reciclar los elementos que se deben mostrar, actualizando los datos de manera dinámica por datos nuevos antes de que se vuelvan a mostrar por pantalla.
 
 De esta manera, en lugar de estar creando y destruyendo elementos de memoria, lo que se hará es cargar unos pocos elementos (los necesarios para ser mostrados por pantalla) que serán reutilizados, mejorando el uso de memoria y el rendimiento general.
 
@@ -205,36 +225,27 @@ Para visualizar los datos de cada película, se ha creado un \textit{layout} lla
 
 \begin{center}
     \vspace{-15pt}
-    \includegraphics[width=0.6\linewidth]{img/movie_item.png}
+    \includegraphics[width=0.4\linewidth]{img/movie_item.png}
     \vspace{-20pt}
 \end{center}
 
-Esta es la vista que en el \textbf{\textit{MovieAdapter}} se le indica al RecyclerView que debe de utilizar para \textit{bindear} los datos:
-
-\begin{mycode}{Función que guarda el estado}{kotlin}{}
-fun bind(movie: Movie) {
-    nameTextView.text = movie.name
-    yearTextView.text = movie.release.toString()
-    plotTextView.text = movie.plot.substring(0,250) + " ..."
-    Picasso.get().load(Uri.parse(movie.posterUrl))
-        .placeholder(R.drawable.ic_launcher_foreground)
-       .into(movieImage)
-}
-\end{mycode}
-
-De esta manera, RecyclerView creará los elementos necesarios del tipo vista \textbf{movie\_item.xml}, que contendrá los datos de cada película y que mostrará por pantalla.
+Esta es la vista \textbf{movie\_item.xml} que en el \textbf{\textit{MovieAdapter}} se le indica al RecyclerView que debe de utilizar. De esta manera, RecyclerView creará los elementos necesarios que contendrán los datos de cada película y que mostrará por pantalla.
 
 
 El resultado visual final será el siguiente:
 
 \begin{center}
-    \includegraphics[width=0.5\linewidth]{img/list.png}
+    \includegraphics[width=0.4\linewidth]{img/list.png}
 \end{center}
 
 
 Tal como se puede ver en la imagen, cada elemento de la lista tiene el mismo aspecto visual, pero con los datos distintos, que son los obtenidos de la base de datos DataStore.
 
 Al seleccionar un elemento de la lista, la aplicación nos enviará a otra pantalla donde veremos los datos completos de la película.
+
+\begin{center}
+    \includegraphics[width=0.4\linewidth]{img/movie.png}
+\end{center}
 
 \chapter{Conclusiones}
 
