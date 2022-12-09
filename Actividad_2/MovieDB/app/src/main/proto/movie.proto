@@ -4,8 +4,7 @@ option java_package = "com.rugoli.moviedb";
 option java_multiple_files = true;
 
 message MovieStore {
-  bool initialized = 1;
-  repeated StoredMovie movies = 2;
+  repeated StoredMovie movies = 1;
 }
 
 message StoredMovie{

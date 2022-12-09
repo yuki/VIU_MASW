@@ -5,9 +5,6 @@ import com.github.ajalt.timberkt.d
 import com.github.ajalt.timberkt.e
 import com.rugoli.moviedb.MovieStore
 import com.rugoli.moviedb.interfaces.MoviesInterface
-import com.squareup.moshi.Moshi
-import com.squareup.moshi.Types
-import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
@@ -29,28 +26,11 @@ class Movie(private val movieService: MoviesInterface, private val moviesDataSto
 
         coroutineScope.launch {
             moviesDataStore.data
-                .map { it.initialized }
-                .filter { !it }
-                .first {
-                    initDataStore()
-                    return@first true
-                }
-        }
-
-        coroutineScope.launch {
-            moviesDataStore.data
                 .collect { movieStore ->
                     d { "rugolid: Movies count: ${movieStore.moviesCount}" }
                     if (movieStore.moviesCount == 0) {
-                        d{"rugolid: no more movies"}
-                        // TODO: if the database is empty, download again the json from internet
-                        // the database is empty, we set "initialized" to false.
-                        moviesDataStore.updateData { movieStore ->
-                            movieStore.toBuilder()
-                                .setInitialized(false)
-                                .build()
-                        }
-//                        downloadMovies()
+                        d{"rugolid: no more movies wee need tod download them"}
+                        downloadMovies()
                     }
                     val movies = movieStore.moviesList.map {
                         com.rugoli.moviedb.dataclass.Movie(
@@ -69,41 +49,22 @@ class Movie(private val movieService: MoviesInterface, private val moviesDataSto
         }
     }
 
-    private fun initDataStore() {
-        d { "rugolid:  Movie initDataStore...start" }
-        // create moshi parser
-        val moshi = Moshi.Builder()
-            .add(KotlinJsonAdapterFactory())
-            .build()
-        val type = Types.newParameterizedType(List::class.java, com.rugoli.moviedb.dataclass.Movie::class.java)
-        val adapter = moshi.adapter<List<com.rugoli.moviedb.dataclass.Movie>>(type)
-
-        downloadMovies()
-
-        d { "rugolid:  Movie initDataStore...end" }
-    }
-
     //download movies from internet and insert into database
     fun downloadMovies() {
         // get the data and store
         coroutineScope.launch {
             d { "rugolid:  Movie loadData from internet...start" }
             try {
+                // download movies from internet
                 var movies = movieService.downloadMovies()
                 d { "rugolid: Movies actually downloaded now: " + movies.toString() }
                 // create the storedMovies list
                 val moviesToStore = movies.map { it.asStoredMovie() }
-
-                // if the dataStore is not initialized, it means it's empty. So we store the data.
-                val isInitialized: Boolean = moviesDataStore.data.map { movieStore -> movieStore.initialized }.toString().toBoolean()
-                if (isInitialized == false) {
-                    // store the data
-                    moviesDataStore.updateData { movieStore ->
-                        movieStore.toBuilder()
-                            .addAllMovies(moviesToStore)
-                            .setInitialized(true)
-                            .build()
-                    }
+                // store them
+                moviesDataStore.updateData { movieStore ->
+                    movieStore.toBuilder()
+                        .addAllMovies(moviesToStore)
+                        .build()
                 }
 
             } catch (e: HttpException) {
