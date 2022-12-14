@@ -1,11 +1,11 @@
-<?xml version="1.0" encoding="UTF-8"?><project name="Untitled Gantt Project" company="" webLink="http://" view-date="2022-12-07" view-index="0" gantt-divider-location="737" resource-divider-location="370" version="3.2.3240" locale="es_ES">
+<?xml version="1.0" encoding="UTF-8"?><project name="Untitled Gantt Project" company="" webLink="http://" view-date="2022-12-12" view-index="0" gantt-divider-location="348" resource-divider-location="370" version="3.2.3240" locale="es_ES">
     <description/>
-    <view zooming-state="default:2" id="gantt-chart">
-        <field id="tpd3" name="Nombre" width="232" order="0"/>
-        <field id="tpd4" name="Fecha de inicio" width="109" order="1"/>
-        <field id="tpd5" name="Fecha de fin" width="100" order="2"/>
-        <field id="tpd8" name="Coordinador" width="81" order="3"/>
-        <field id="tpd13" name="Recursos" width="214" order="4"/>
+    <view zooming-state="default:5" id="gantt-chart">
+        <field id="tpd3" name="Nombre" width="183" order="0"/>
+        <field id="tpd4" name="Fecha de inicio" width="81" order="1"/>
+        <field id="tpd5" name="Fecha de fin" width="83" order="2"/>
+        <option id="taskLabelUp" value=""/>
+        <option id="taskLabelDown" value=""/>
         <option id="filter.completedTasks" value="false"/>
         <option id="color.recent"><![CDATA[#ff3333]]></option>
     </view>
@@ -41,7 +41,7 @@
         <task id="3" name="Brainstorming" color="#8cb6ce" meeting="false" start="2022-12-12" duration="2" complete="0" thirdDate="2022-12-12" thirdDate-constraint="0" expand="true">
             <depend id="0" type="2" difference="0" hardness="Strong"/>
         </task>
-        <task id="0" name="Investigación" color="#000000" meeting="false" start="2022-12-14" duration="9" complete="0" thirdDate="2022-12-12" thirdDate-constraint="0" expand="true">
+        <task id="0" name="Investigación" color="#000000" meeting="false" start="2022-12-14" duration="9" complete="0" thirdDate="2022-12-12" thirdDate-constraint="0" expand="false">
             <depend id="14" type="2" difference="0" hardness="Strong"/>
             <task id="1" name="Entender API de Vault" color="#8cb6ce" meeting="false" start="2022-12-14" duration="7" complete="0" thirdDate="2022-12-12" thirdDate-constraint="0" expand="true"/>
             <task id="11" name="Crear concepto del interfaz de aplicación" color="#8cb6ce" meeting="false" start="2022-12-14" duration="5" complete="0" thirdDate="2022-12-12" thirdDate-constraint="0" expand="true"/>
@@ -50,7 +50,7 @@
         <task id="14" name="Puesta en conjunto" color="#8cb6ce" meeting="false" start="2022-12-27" duration="2" complete="0" thirdDate="2022-12-27" thirdDate-constraint="0" expand="true">
             <depend id="13" type="2" difference="0" hardness="Strong"/>
         </task>
-        <task id="13" name="Desarrollo" meeting="false" start="2022-12-29" duration="30" complete="0" expand="true">
+        <task id="13" name="Desarrollo" color="#000000" meeting="false" start="2022-12-29" duration="30" complete="0" thirdDate="2022-12-29" thirdDate-constraint="0" expand="false">
             <depend id="12" type="2" difference="0" hardness="Strong"/>
             <depend id="15" type="2" difference="0" hardness="Strong"/>
             <task id="18" name="Desarrollar interfaz web" color="#8cb6ce" meeting="false" start="2022-12-29" duration="8" complete="0" thirdDate="2022-12-29" thirdDate-constraint="0" expand="true">
@@ -86,15 +86,8 @@
             <task id="36" name="Imprimir secretos" color="#8cb6ce" meeting="false" start="2023-02-08" duration="2" complete="0" thirdDate="2023-02-08" thirdDate-constraint="0" expand="true"/>
             <task id="37" name="Borrar secretos" color="#8cb6ce" meeting="false" start="2023-02-08" duration="2" complete="0" thirdDate="2023-02-08" thirdDate-constraint="0" expand="true"/>
         </task>
-        <task id="15" name="Puesta en producción" color="#8cb6ce" meeting="false" start="2023-02-10" duration="10" complete="0" thirdDate="2022-12-12" thirdDate-constraint="0" expand="true">
-            <task id="16" name="Investigar proveedor donde ponerlo" color="#8cb6ce" meeting="false" start="2023-02-10" duration="5" complete="0" thirdDate="2022-12-12" thirdDate-constraint="0" expand="true">
-                <depend id="17" type="2" difference="0" hardness="Strong"/>
-            </task>
-            <task id="17" name="Implantar en producción" color="#8cb6ce" meeting="false" start="2023-02-17" duration="5" complete="0" thirdDate="2022-12-12" thirdDate-constraint="0" expand="true">
-                <depend id="22" type="2" difference="0" hardness="Strong"/>
-            </task>
-        </task>
-        <task id="19" name="Testeo" color="#8cb6ce" meeting="false" start="2023-01-11" duration="34" complete="0" thirdDate="2022-12-12" thirdDate-constraint="0" expand="true">
+        <task id="19" name="Testeo" color="#8cb6ce" meeting="false" start="2023-01-11" duration="34" complete="0" thirdDate="2022-12-12" thirdDate-constraint="0" expand="false">
+            <depend id="29" type="2" difference="0" hardness="Strong"/>
             <task id="21" name="Interfaz" color="#8cb6ce" meeting="false" start="2023-01-11" duration="1" complete="0" thirdDate="2022-12-12" thirdDate-constraint="0" expand="true">
                 <depend id="24" type="2" difference="0" hardness="Strong"/>
             </task>
@@ -103,7 +96,16 @@
                 <depend id="32" type="2" difference="0" hardness="Strong"/>
             </task>
         </task>
-        <task id="12" name="Documentación" meeting="false" start="2023-02-10" duration="16" complete="0" expand="true">
+        <task id="15" name="Puesta en producción" color="#8cb6ce" meeting="false" start="2023-02-10" duration="10" complete="0" thirdDate="2022-12-12" thirdDate-constraint="0" expand="false">
+            <depend id="29" type="2" difference="0" hardness="Strong"/>
+            <task id="16" name="Investigar proveedor donde ponerlo" color="#8cb6ce" meeting="false" start="2023-02-10" duration="5" complete="0" thirdDate="2022-12-12" thirdDate-constraint="0" expand="true">
+                <depend id="17" type="2" difference="0" hardness="Strong"/>
+            </task>
+            <task id="17" name="Implantar en producción" color="#8cb6ce" meeting="false" start="2023-02-17" duration="5" complete="0" thirdDate="2022-12-12" thirdDate-constraint="0" expand="true">
+                <depend id="22" type="2" difference="0" hardness="Strong"/>
+            </task>
+        </task>
+        <task id="12" name="Documentación" color="#000000" meeting="false" start="2023-02-10" duration="16" complete="0" thirdDate="2023-02-10" thirdDate-constraint="0" expand="false">
             <depend id="29" type="2" difference="0" hardness="Strong"/>
             <task id="31" name="Crear documentación" color="#8cb6ce" meeting="false" start="2023-02-10" duration="4" complete="0" thirdDate="2023-02-10" thirdDate-constraint="0" expand="true">
                 <depend id="30" type="2" difference="0" hardness="Strong"/>
@@ -111,9 +113,11 @@
             <task id="32" name="Ampliar documentación" color="#8cb6ce" meeting="false" start="2023-02-28" duration="2" complete="0" thirdDate="2023-02-28" thirdDate-constraint="0" expand="true">
                 <depend id="30" type="2" difference="0" hardness="Strong"/>
             </task>
-            <task id="30" name="Comprobar documentación" color="#8cb6ce" meeting="false" start="2023-03-02" duration="2" complete="0" thirdDate="2023-03-02" thirdDate-constraint="0" expand="true"/>
+            <task id="30" name="Comprobar documentación" color="#8cb6ce" meeting="false" start="2023-03-02" duration="2" complete="0" thirdDate="2023-03-02" thirdDate-constraint="0" expand="true">
+                <depend id="29" type="2" difference="0" hardness="Strong"/>
+            </task>
         </task>
-        <task id="29" name="Presentación y entrega" color="#8cb6ce" meeting="false" start="2023-03-06" duration="1" complete="0" thirdDate="2023-02-03" thirdDate-constraint="0" expand="true"/>
+        <task id="29" name="Presentación y entrega" color="#8cb6ce" meeting="false" start="2023-03-13" duration="1" complete="0" thirdDate="2023-03-13" thirdDate-constraint="1" expand="true"/>
     </tasks>
     <resources>
         <resource id="0" name="Rubén" function="Default:1" contacts="" phone=""/>
@@ -140,6 +144,9 @@
         <allocation task-id="0" resource-id="0" function="Default:1" responsible="true" load="10.0"/>
         <allocation task-id="1" resource-id="0" function="Default:1" responsible="true" load="90.0"/>
         <allocation task-id="15" resource-id="0" function="Default:1" responsible="true" load="50.0"/>
+        <allocation task-id="13" resource-id="0" function="Default:1" responsible="true" load="100.0"/>
+        <allocation task-id="19" resource-id="0" function="Default:1" responsible="true" load="100.0"/>
+        <allocation task-id="12" resource-id="0" function="Default:1" responsible="true" load="100.0"/>
         <allocation task-id="3" resource-id="1" function="SoftwareDevelopment:2" responsible="false" load="100.0"/>
         <allocation task-id="2" resource-id="1" function="SoftwareDevelopment:2" responsible="true" load="100.0"/>
         <allocation task-id="22" resource-id="1" function="SoftwareDevelopment:2" responsible="true" load="100.0"/>
