@@ -219,12 +219,61 @@ A continuación se va a mostrar la imagen del diagrama final completo, para hace
 \end{center}
 
 
-Y ahora se va a mostrar las tareas a realizar desplegadas, y mostrando quién se va a encargar en cada una de ellas y quién es el responsable de las mismas.
+Tras el diagrama general, se va a mostrar las tareas a realizar desplegadas, y mostrando quién va a ser el responsable (su nombre aparece entre llaves “{}”) de cada una de ellas y quiénes participarán en ellas.
 
+También se puede ver el nombre de la tarea, junto con el número de días que se ha estimado que se van a necesitar, encima de cada grafo de la tarea las fechas en las que se llevará a cabo, y debajo los participantes.
+
+Tal como se ha comentado previamente, el proyecto comienza con un \textit{brainstorming} en el que participa todo el equipo para pensar el proyecto que se va a realizar.
+
+Tras tomar la decisión de crear el “gestor de contraseñas y documentación sensible basado en una plataforma web”, entramos en una etapa de investigación. En esta etapa el equipo se divide para tratar de buscar el mejor framework web a utilizar, comenzar a hacer un boceto del interfaz de la aplicación y entender cómo funciona el sitema Vault y su API.
+
+Tras esto, se dedican dos días para poner las ideas en común, y tomar las decisiones para continuar con el proyecto.
+
+\begin{center}
+    \vspace{-20pt}
+    \includegraphics[frame,width=\linewidth]{img/gantt1.png}
+    \vspace{-20pt}
+\end{center}
+
+Para cada una de las tareas se va a contar con un responsable propio, pero para cada agrupación de las mismas (como en el caso anterior de “Investigación”) va a haber un responsable “general” que va a ser Rubén Gómez.
+
+Es por eso que a pesar de que él contará con sus propias tareas asignadas, se le reserva un porcentaje de tiempo para dedicar a conocer el estado general del resto de tareas y así que pueda planificar posibles modificaciones futuras.
+
+La estimación siguiente es todo el proceso de desarrollo de la aplicación que se puede ver en el siguiente diagrama desplegado.
+
+En este caso no todas las tareas se pueden paralelizar, ya que algunas son dependientes de otras y por tanto es necesario que estén realizadas para poder continuar.
+
+La primera parte del desarrollo se puede dividir en crear la base del proyecto con las dependencias necesarias con el \textit{framework elegido}, desarrollar el interfaz web y crear las llamadas a la API de Vault necesarias.
+
+Esta fase se va a mezclar con un testeo del interfaz web que es bloqueante (para ver si cumple con la usabilidad esperada) y con otra fase de integración.
+
+\begin{center}
+    \includegraphics[frame,width=\linewidth]{img/gantt2.png}
+\end{center}
+
+El resto de tareas a realizar, están asignadas y paralelizadas lo máximo posible para así tratar de acortar el tiempo lo máximo posible.
+
+La última parte del proyecto se puede dividir en dos grandes grupos, que son la puesta en producción y crear la documentación.
+
+Aunque ya se tiene experiencia en Amazon AWS para poner servicios en producción, se ha decidido reservar 5 días para investigar posibles alternativas (ya sea otro proveedor cloud o un proveedor de servidores donde realizar la configuración por nuestra cuenta). En caso de que las tareas del desarrollo comiencen a sufrir retrasos, se podría optar por no realizar esta investigación, usar AWS, y así ganar esos días.
+
+\begin{center}
+    \includegraphics[frame,width=\linewidth]{img/gantt3.png}
+\end{center}
+
+Durante la investigación del proveedor, otra parte de los recursos comenzarán a hacer la documentación del proyecto realizado. Es importante dedicarle tiempo a la documentación ya que el cliente debe conocer lo realizado, las decisiones tomadas y el por qué de las mismas.
+
+Se puede ver cómo tras la puesta en producción se van a utilizar 2 días para el “testo en producción”, y así confirmar que el proyecto funciona en producción como en el entorno de desarrollo.
+
+Tras esto, se termina la documentación, añadiendo la parte de la puesta en producción y el equipo dedica un tiempo a comprobar que cumple con lo esperado.
+
+Tal como se ha dicho previamente, desde la estimación de la última tarea a realizar hasta la presentación del proyecto se ha reservado una semana, para que en caso de que la estimación realizada no fuese muy precisa, contar con esos días de margen (junto con los otros días comentados anteriormente).
 
 
 \chapter{Conclusiones}
 
-Aunque el p
+La gestión de proyectos y la estimación de tiempos es una tarea compleja que requiere de experiencia para ser llevada a cabo de manera correcta. Es por eso que el usar aplicaciones que nos faciliten el trabajo debe ser obligatorio.
+
+Por otro lado, aunque hoy en día se haga más uso de las metodologías ágiles a la hora de gestionar un proyecto, hemos comprobado que mediante el clásico diagrama de Gantt podemos realizar una primera estimación de tiempos que nos puede seguir siendo muy útil. Es por eso que es conveniente no olvidar este tipo de herramientas aunque usemos otras metodologías más modernas.
 
 \end{document}
