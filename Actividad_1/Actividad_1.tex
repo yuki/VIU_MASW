@@ -79,7 +79,7 @@ No se ha añadido la regla del tráfico saliente, ya que mantenemos la regla cre
 
 De esta manera, a partir de ahora se podrá acceder al puerto 3306 con los credenciales que nos ha creado el asistente y podremos realizar la conexión utilizando el host \textbf{database-1.c92nioexause.us-east-1.rds.amazonaws.com}
 
-Para asegurar que tenemos acceso, se utiliza el programa \href{https://dbeaver.io/}{Dbeaver} para comprobar que se puede realizar la conexión y de paso crear la base de datos “flarum” para realizar posteriormente la aplicación:
+Para asegurar que tenemos acceso, se utiliza el programa \href{https://dbeaver.io/}{Dbeaver} para comprobar que se puede realizar la conexión y de paso crear la base de datos “flarum” para instalar posteriormente la aplicación:
 
 \begin{center}
     \includegraphics[frame,width=\linewidth]{img/db6.png}
@@ -88,7 +88,26 @@ Para asegurar que tenemos acceso, se utiliza el programa \href{https://dbeaver.i
 Tras crear la base de datos, se puede pasar a realizar la creación de la máquina virtual.
 
 
-% TODO: comando
+\section{Mediante CLI}
+Si queremos crear la instancia de RDS mediante el interfaz de línea de comandos se puede realizar a través del siguiente comando:
+
+\begin{mycode}{Crear instancia RDS mediante CLI}{console}{}
+ddd_v1_w_Hox_1818884@runweb70100:~$ aws --region us-east-1 \
+    rds create-db-instance \
+        --db-name mysqlcli \
+        --db-instance-identifier rds-cli \
+        --allocated-storage 20 \
+        --db-instance-class db.t3.micro \
+        --engine mysql \
+        --engine-version 5.7 \
+        --master-username admin \
+        --master-user-password p4isQW73QW9130aS \
+        --storage-encrypted \
+        --no-multi-az \
+        --backup-retention-period 10 \
+        --preferred-backup-window 03:00-03:30 \
+        --vpc-security-group-ids sg-03172af1cf7d57f66
+\end{mycode}
 
 
 \chapter{EC2 y despliegue de aplicación}
@@ -122,10 +141,22 @@ Tras asegurar que las opciones elegidas son las correctas, se confirma la creaci
 
 \includegraphics[frame,width=\linewidth]{img/estado.png}
 
+\subsection{Mediante CLI}
 Si queremos realizar la creación de la máquina virtual a través del interfaz de consola \textbf{aws}, deberíamos ejecutar el siguiente comando:
 
-%TODO: añadir comando
+\begin{mycode}{Crear instancia EC2 mediante CLI}{console}{}
+ddd_v1_w_Hox_1818884@runweb70100:~$ aws --region us-east-1 \
+  ec2 run-instances \
+    --instance-type t2.micro \
+    --key-name vockey \
+    --image-id ami-0b5eea76982371e91 \
+    --block-device-mappings \
+      '[{"DeviceName":"/dev/xvda","Ebs":{"VolumeSize":10}},
+      {"DeviceName":"/dev/xvdb","Ebs":{"VolumeSize":5}}]' \
+    --security-group-ids sg-0d13061c1e89dec15
+\end{mycode}
 
+La sección del parámetro “\textbf{block-device-mappings}” se podría pasar a un fichero \textbf{JSON} externo en lugar de ponerlo en el comando.
 
 \section{Configuración previa}
 
@@ -264,7 +295,46 @@ Tras crear el grupo lo que tenemos que hacer es asignarlo a la instancia creada 
 
 También podremos realizar la asignación en el momento en el que se crea una instancia nueva, de esta manera nos aseguramos que ya desde el momento de la creación sólo se tiene acceso desde las IPs que nos interese.
 
-%TODO: comando
+\section{Mediante CLI}
+
+Los grupos de seguridad también se pueden crear a través de línea de comandos, pero es necesario hacerlo en varios pasos. Primero se crea el “\textit{security group}” y después se le añaden las reglas.
+
+Se va a crear el ejemplo expuesto previamente a través del CLI, y para añdir las reglas es necesario conocer el \textbf{GroupID} que devuelve el primer comando:
+
+\begin{mycode}{Crear \textit{security group} y añadirle reglas}{console}{}
+ddd_v1_w_Hox_1818884@runweb70100:~$ aws --region us-east-1 \
+  ec2 create-security-group \
+    --group-name servidores-web \
+    --description “para servidores web”
+
+ddd_v1_w_Hox_1818884@runweb70100:~$ aws --region us-east-1 \
+  ec2 authorize-security-group-ingress \
+  --group-id sg-0d13061c1e89dec15 \
+  --protocol tcp --port 22 \
+  --cidr 83.138.41.161/32
+
+ddd_v1_w_Hox_1818884@runweb70100:~$ aws --region us-east-1 \
+  ec2 authorize-security-group-ingress \
+    --group-id sg-0d13061c1e89dec15 \
+    --protocol tcp --port 22 \
+    --cidr 47.61.134.184/32
+
+
+ddd_v1_w_Hox_1818884@runweb70100:~$ aws --region us-east-1 \
+  ec2 authorize-security-group-ingress \
+    --group-id sg-0d13061c1e89dec15 \
+    --protocol tcp --port 80 \
+    --cidr 0.0.0.0/0
+
+ddd_v1_w_Hox_1818884@runweb70100:~$ aws --region us-east-1 \
+  ec2 authorize-security-group-ingress \
+    --group-id sg-0d13061c1e89dec15 \
+    --protocol tcp --port 443 \
+    --cidr 0.0.0.0/0
+\end{mycode}
+
+Es importante darse cuenta que a la hora de crear mediante línea de comandos la instancia EC2 y la RDS se han añadido distintos IDs de \textit{security-groups}, que lógicamente deben existir previamente.
+
 
 \chapter{IP elástica}
 
@@ -280,9 +350,8 @@ Es por ello que hay que seleccionar la IP elástica recién creada, y a través 
 
 De esta manera, aunque ahora la instancia se pare, no pasará nada, ya que al volver a levantarse mantendrá la IP.
 
-Es importante acordarse que hemos modificado el fichero \configfile{/etc/hosts}, por lo que ahora deberemos reflejar la nueva IP para poder acceder al dominio de la aplicación.
+Es importante acordarse que hemos modificado el fichero \configfile{/etc/hosts}, por lo que ahora deberemos reflejar la nueva IP para poder acceder al dominio de la aplicación. Lo mismo para el acceso por SSH.
 
-% TODO: comando
 
 \chapter{Bucket S3}
 
@@ -323,7 +392,7 @@ Los objetos subidos pueden ser públicos a través de distintas ACLs que se pued
 \chapter{Costes estimados}
 Debido a todas las opciones con las que cuenta AWS, puede resultar confuso el precio final que se termina pagando. Es por eso que Amazon cuenta con el \href{https://calculator.aws/}{Amazon Pricing Calculator} para poder estimar los costes.
 
-A continuación se van a comparar dos regiones (España y USA-Virginia) teniendo en cuenta la siguiente estimación:
+Teniendo en cuenta las siguientes características:
 
 \begin{itemize}
     \item Instancias bajo demanda sin reserva.
@@ -332,8 +401,28 @@ A continuación se van a comparar dos regiones (España y USA-Virginia) teniendo
     \item Tráfico de salida del servicio de S3 10GB/mes.
 \end{itemize}
 
+En la siguiente tabla se van a comparar los costes estimados por mes para dos regiones (España y USA-Virginia) teniendo en cuenta todo lo visto hasta ahora:
 
+\begin{yukitblrcol}{X[3]X[1]X[1]}
+        & España & N. Virginia \\
+    Instancia EC2 t2.micro Linux, 15GB EBS gp2, con tráfico estimado
+        & \$9,97/mes \textbf{*} & \$9,97/mes \\
+    IP elástica
+        & \$0/mes & \$0/mes \\
+    Base de datos RDS MySQL db.t3.micro, single-AZ, sin proxy, almacenamiento 20GB, 40GB copias de seguridad \textbf{**}
+        & \$20,54/mes & \$18,51/mes \\
+    Bucket S3, 1GB de almacenamiento, con tráfico estimado de salida \textbf{***}
+        & \$0,02/mes & \$0,02/mes \\
+\end{yukitblrcol}
+\begin{itemize}
+    \item[*] En España sólo se puede coger una instancia \textbf{t3}.micro, que tiene más CPU.
+    \item[**] La estimación para los backups al comienzo del proyecto podría ser menor, pero si se pretende llegar a los 20GB de espacio, para una retención de 10 días los 40GB se quedarán cortos.
+    \item[***] Si el número de peticiones está por debajo de 100.000 el precio no varía. Tampoco se tiene en cuenta el cargar los datos iniciales.
+\end{itemize}
 
+Tal como se ha podido comprobar en la tabla, los precios son similares en ambas regiones. En el caso de la instancia EC2, por el mismo precio obtenemos una máquina virtual mejor, mientras que la instancia de base de datos es un poco más cara.
+
+De todas formas, también hay que tener en cuenta la latencia de acceso a las instancias. En el mejor de los casos el acceso a Virginia es dos veces más lento que a España, y en el peor hasta 6 veces. Para comprobarlo se pueden utilizar distintas herramientas que comprueban la latencia (\href{https://www.cloudping.info/}{enlace 1}, \href{https://www.awsspeedtest.com/latency}{enlace 2}).
 
 \chapter{Conclusiones}
 
