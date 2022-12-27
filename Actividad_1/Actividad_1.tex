@@ -33,9 +33,9 @@
 
 A la hora de poner un proyecto en producción es aconsejable conocer las distintas alternativas que podemos utilizar para llevarlo a cabo. Hasta hace no muchos años, lo habitual era realizar el despliegue en un servidor propio situado en algún CPD.
 
-Debido a las dificultades que puede suponer el gestionar unos servidores propios, junto con el no poder realizar el escalado del proyecto de manera sencilla, ha supuesto la mayor demanda de utilizar sistemas \textit{cloud} que facilitan dicha labor.
+Debido a las dificultades que puede suponer el gestionar unos servidores propios, junto con el no poder realizar el escalado del proyecto de manera sencilla, ha supuesto que la demanda de utilizar sistemas \textit{cloud} crezca, ya que facilitan dicha labor.
 
-Es por eso que a lo largo de este documento se va a realizar una introducción a \textbf{AWS} (Amazon Web Services) junto con el despliegue de la aplicación \href{https://flarum.org/}{Flarum} en un servidor creado en este \textit{cloud}
+A lo largo de este documento se va a realizar una introducción a \textbf{AWS} (Amazon Web Services) junto con el despliegue de la aplicación \href{https://flarum.org/}{Flarum} en un servidor creado en este \textit{cloud}.
 
 
 \chapter{Base de datos RDS}
@@ -68,7 +68,7 @@ A la hora de crear la base de datos se ha elegido crear una contraseña automát
 
 % admin  -    hVviJyUovlhwRrRSrrRd
 
-Hay que tener especial cuidado con el acceso al puerto 3306, por lo que se ha creado un grupo de seguridad propio que limitará únicamente el acceso a la IP pública de mi conexión y desde la IP de la instancia que se comentará posteriormente.
+Hay que tener especial cuidado con el acceso al puerto 3306, por lo que se ha creado un grupo de seguridad propio que limitará únicamente el acceso a la IP pública de mi conexión y desde la IP privada de la instancia que se comentará cómo se ha creado posteriormente.
 
 \begin{center}
     \includegraphics[frame,width=\linewidth]{img/db-reglas.png}
@@ -168,7 +168,7 @@ ruben@vega:~$ ssh -i labsuser.pem ec2-user@44.211.145.168
 
 
 \subsection{Creación del sistema de ficheros}
-Dado que se ha añadido un segundo volumen de 5GiB a la instancia, tenemos que hacer que este sea accesible. Este nuevo volumen está situado en la ruta Linux \configfile{/dev/xvdb}
+Dado que se ha añadido un segundo volumen de 5GiB a la instancia, tenemos que hacer que este sea accesible. Este nuevo volumen está situado en la ruta \configfile{/dev/xvdb}
 
 Por defecto no está formateado, por lo que debemos realizar:
 \begin{itemize}
@@ -205,7 +205,7 @@ La aplicación a desplegar, \href{https://flarum.org/}{Flarum}, es un desarrollo
     \item Base de datos MySQL 5.6 o superior
 \end{itemize}
 
-Para la gestión de la base de datos lo haremos mediante \textbf{RDS} que se comentará más adelante. Para realizar la instalación de Apache lo haremos mediante los repositorios de la distribución:
+Para la gestión de la base de datos lo haremos mediante la instancia \textbf{RDS} que se ha creado previamente. Para realizar la instalación de Apache lo haremos mediante los repositorios de la distribución:
 
 \begin{mycode}{Instalación y activación de Apache}{console}{}
 [root@ip-172-31-81-57 ec2-user]# yum install apache2
@@ -213,7 +213,7 @@ Para la gestión de la base de datos lo haremos mediante \textbf{RDS} que se com
 [root@ip-172-31-81-57 ec2-user]# systemctl start httpd
 \end{mycode}
 
-Se ha decidido utilizar la versión 8.0 de \href{https://www.php.net/}{PHP} y realizar la instalación a través de los repositorios “extra” de Amazon:
+Se ha decidido utilizar la versión 8.0 de \href{https://www.php.net/}{PHP} y realizar la instalación a través de los repositorios “extra” de Amazon, así como los módulos necesarios:
 
 \begin{mycode}{Instalación de PHP y las dependencias necesarias}{console}{{\small }}
 [root@ip-172-31-81-57 ec2-user]# amazon-linux-extras install php8.0
@@ -273,9 +273,9 @@ Se ha introducido la configuración obtenida de la creación de la base de datos
 \chapter{Grupos de seguridad}
 Para facilitar la seguridad de las instancias existen los \textbf{grupos de seguridad}. Con ellos, podemos crear reglas de entrada y reglas de salida, para distintos puertos y protocolos que nos interese filtrar.
 
-Podemos crear grupos de seguridad que posteriormente se asignan a instancias, y de esta manera centralizar la seguridad. En caso de necesitar añadir o quitar IPs o protocolos, al modificar el grupo de seguridad se aplicará a las instancias que hagan uso de dicho grupo.
+Podemos crear grupos de seguridad que posteriormente se asignan a instancias, y de esta manera centralizar la seguridad. En caso de necesitar añadir o quitar IPs o protocolos, al modificar el grupo de seguridad se aplicará a las instancias que hagan uso de dicho grupo de seguridad.
 
-A modo de pruebas se ha creado el grupo de seguridad “Servidores Web”, que cuenta con las siguientes reglas de entrada:
+A modo de ejemplo se ha creado el grupo de seguridad “Servidores Web”, que cuenta con las siguientes reglas de entrada:
 \begin{itemize}
     \item Aceptar cualquier conexión al puerto TCP 80 (conexión HTTP).
     \item Aceptar cualquier conexión al puerto TCP 443 (conexión HTTPS).
@@ -286,6 +286,8 @@ A modo de pruebas se ha creado el grupo de seguridad “Servidores Web”, que c
 \begin{center}
     \includegraphics[frame,width=\linewidth]{img/grupos.png}
 \end{center}
+
+De esta manera, podríamos aplicar este grupo de seguridad a todas las instancias que creemos a partir de ahora que van a hacer uso de un servidor web. Y en caso de querer tener alguna restricción más, modificando este grupo, hará que se aplique a todas las instancias, en lugar de ir una a una realizando la modificación.
 
 Tras crear el grupo lo que tenemos que hacer es asignarlo a la instancia creada previamente:
 
@@ -340,7 +342,7 @@ Es importante darse cuenta que a la hora de crear mediante línea de comandos la
 
 Por cómo funciona las instancias EC2, la asignación de IPs públicas es temporal, por lo que en el momento en el que una instancia se para, al volverla a levantar no obtendrá la misma IP pública.
 
-Para evitar esto están las \textbf{IP elásticas}, que se pueden crear desde el menú de EC2, en “\textbf{Red y Seguridad > Direcciones IP elásticas}”. Desde este apartado podremos realizar la solicitud de una IP elástica, pero que no se podrá utilizar mientras no sea asignada a una instancia.
+Para evitar esto están las \textbf{IP elásticas}, que se pueden crear desde el menú de EC2, en “\textbf{Red y Seguridad > Direcciones IP elásticas}”. Desde este apartado podremos realizar la solicitud de una IP elástica, y para poder utilizarla tiene que ser asignada a una instancia.
 
 Es por ello que hay que seleccionar la IP elástica recién creada, y a través del menú “Acciones” pulsar la opción “Asociar la dirección IP elástica. De esta manera podremos asociarla a la instancia que nos interese. En nuestro caso a la instancia creada previamente:
 
@@ -348,7 +350,7 @@ Es por ello que hay que seleccionar la IP elástica recién creada, y a través 
     \includegraphics[frame,width=\linewidth]{img/ip_elastica.png}
 \end{center}
 
-De esta manera, aunque ahora la instancia se pare, no pasará nada, ya que al volver a levantarse mantendrá la IP.
+De esta manera, aunque ahora la instancia se pare, no pasará nada, ya que cuando se vuelva a levantar mantendrá la IP.
 
 Es importante acordarse que hemos modificado el fichero \configfile{/etc/hosts}, por lo que ahora deberemos reflejar la nueva IP para poder acceder al dominio de la aplicación. Lo mismo para el acceso por SSH.
 
@@ -365,36 +367,52 @@ Otro de los servicios que ofrece AWS es \textbf{S3} (de “\textit{Simple Storag
     \includegraphics[width=0.8\linewidth]{img/s33.png}
 \end{center}
 
+Una vez creado el bucket, desde el interfaz se pueden crear carpetas y subir ficheros. Dependiendo de si queremos que sean públicos o privados, deberemos de crearlos con la ACL (\textit{access control list}) adecuada. A continuación dos ficheros añadidos al bucket que son accesibles públicamente:
+\begin{itemize}
+    \item \href{https://rg-actividad1-08masw.s3.amazonaws.com/actividad1/docu1.pdf}{docu1.pdf}
+    \item \href{https://rg-actividad1-08masw.s3.amazonaws.com/actividad1/imagen1.png}{imagen1.png}
+\end{itemize}
+
+\section{Mediante CLI}
 Si queremos crear el bucket desde la línea de comandos se puede hacer con el siguiente comando:
 
 \begin{mycode}{Crear bucket S3}{console}{{\small }}
 ddd_v1_w_Hox_1818884@runweb69965:~$ aws s3 mb s3://rg-actividad1-08masw
-make_bucket: rg-actividad1-08masw
 \end{mycode}
 
 
-Una vez creado, se pueden añadir ficheros a través del interfaz web o desde el la consola de AWS, ejecutando lo siguiente para subir una imagen al bucket:
-
-\begin{mycode}{Subir fichero SVG al bucket S3}{console}{{\scriptsize }}
-ddd_v1_w_Hox_1818884@runweb69965:~$ aws s3 cp logo.svg s3://rg-actividad1-08masw/logo.svg
-upload: ./logo.svg to s3://rg-actividad1-08masw/logo.svg
+Una vez creado, si queremos que el bucket esté cifrado, deberemos asignarle el tipo de cifrado:
+\begin{mycode}{Añadir encriptación al bucket S3}{console}{{\footnotesize }}
+ddd_v1_w_Hox_1818884@runweb69965:~$ aws --region us-east-1 \
+  s3api put-bucket-encryption \
+    --bucket rg-actividad1-08masw2 \
+    --server-side-encryption-configuration \
+      '{"Rules":[{"ApplyServerSideEncryptionByDefault":{"SSEAlgorithm": "AES256"}}]}'
 \end{mycode}
 
-Los objetos subidos pueden ser públicos a través de distintas ACLs que se pueden crear. A continuación dos enlaces con ficheros de pruebas subidos:
 
-% TODO: poner enlaces
-\begin{itemize}
-    \item
-    \item
-\end{itemize}
 
+Se pueden añadir ficheros a través del interfaz web o desde el la consola de AWS. Si queremos que sea público, tendremos que indicarlo mediante otro comando:
+
+\begin{mycode}{Subir fichero PDF al bucket S3 y hacerlo público}{console}{}
+ddd_v1_w_Hox_1818884@runweb69965:~$ aws s3 cp docu1.pdf \
+  s3://rg-actividad1-08masw/actividad1/docu1.pdf
+
+ddd_v1_w_Hox_1818884@runweb69965:~$ aws s3api put-object-acl \
+--bucket rg-actividad1-08masw \
+--key actividad1/docu1.pdf \
+--acl public-read
+\end{mycode}
+
+En lugar de hacerlo mediante dos comandos, se podría utilizar directamente \commandbox{aws s3api put-object ...}, pero es posible que quizá haya ficheros que nos interese mantener privados.
 
 \chapter{Costes estimados}
 Debido a todas las opciones con las que cuenta AWS, puede resultar confuso el precio final que se termina pagando. Es por eso que Amazon cuenta con el \href{https://calculator.aws/}{Amazon Pricing Calculator} para poder estimar los costes.
 
-Teniendo en cuenta las siguientes características:
+Se ha tenido en cuenta las siguientes características para realizar una estimación de precios:
 
 \begin{itemize}
+    \vspace{-15 pt}
     \item Instancias bajo demanda sin reserva.
     \item Estimación tráfico de entrada servidor web de 15 GB/mes
     \item Estimación tráfico de salida servidor web de 30GB/mes.
@@ -415,17 +433,19 @@ En la siguiente tabla se van a comparar los costes estimados por mes para dos re
         & \$0,02/mes & \$0,02/mes \\
 \end{yukitblrcol}
 \begin{itemize}
-    \item[*] En España sólo se puede coger una instancia \textbf{t3}.micro, que tiene más CPU.
+    \item[*] En España sólo se pueden coger instancias \textbf{t3}.micro, que tiene más CPU.
     \item[**] La estimación para los backups al comienzo del proyecto podría ser menor, pero si se pretende llegar a los 20GB de espacio, para una retención de 10 días los 40GB se quedarán cortos.
     \item[***] Si el número de peticiones está por debajo de 100.000 el precio no varía. Tampoco se tiene en cuenta el cargar los datos iniciales.
 \end{itemize}
 
-Tal como se ha podido comprobar en la tabla, los precios son similares en ambas regiones. En el caso de la instancia EC2, por el mismo precio obtenemos una máquina virtual mejor, mientras que la instancia de base de datos es un poco más cara.
+Tal como se ha podido comprobar en la tabla, los precios son similares en ambas regiones. En el caso de la instancia EC2, por el mismo precio obtenemos una máquina virtual mejor, mientras que la instancia de base de datos es un poco más cara en el CPD de Amazon en España.
 
 De todas formas, también hay que tener en cuenta la latencia de acceso a las instancias. En el mejor de los casos el acceso a Virginia es dos veces más lento que a España, y en el peor hasta 6 veces. Para comprobarlo se pueden utilizar distintas herramientas que comprueban la latencia (\href{https://www.cloudping.info/}{enlace 1}, \href{https://www.awsspeedtest.com/latency}{enlace 2}).
 
 \chapter{Conclusiones}
 
-La gestión de
+Tal como se ha podido ver, la creación de una instancia de máquina virtual junto con una base de datos separada, para realizar el despliegue de una aplicación web, es una labor de unos pocos clicks a través del interfaz web o unos pocos comandos.
+
+Este documento sólo ha sido una introducción para unos pocos servicios, sin profundizar en todas las características, ya que AWS también nos permitirá realizar una infraestructura mucho más compleja, pero a la hora de crearla será igual de sencillo hacerlo.
 
 \end{document}
