@@ -1,0 +1,69 @@
+\newcommand{\ClassPath}{../VIU_TFM_LaTeX_template}
+\documentclass{\ClassPath/viu-tfm-template}
+\usepackage{multicol}
+
+\definecolor{maincolor}{HTML}{f25416}
+
+%--------------------------------------------------------------------------
+% Definiciones necesarias Modifica con tus datos
+%--------------------------------------------------------------------------
+\def\nombre{ Gómez Olivencia, Rubén}
+\def\dni{78910013-A}
+\def\titulo{Gestor de contraseñas y documentación \linebreak\linebreak sensible en sistemas multiusuarios\linebreak\linebreak hecho con Angular y Hashicorp Vault}
+\def\titulacion{Máster Universitario en Desarrollo de Aplicaciones y Servicios Web}
+\def\curso{2022-2023}
+
+%Los siguientes son opcionales: si no se ponen, la portada cambia un poco. Ideal para escribir artículos/trabajos cortos
+\def\dirige{Simarro Moncholí, Héctor}
+\def\codirige{de Fez Lava, Ismael}
+\def\convocatoria{Primera}
+\def\asignatura{}
+
+
+% importar fichero de Bibliografía
+%\addbibresource{Actividad_1.bib}
+
+\begin{document}
+\graphicspath{{../VIU_TFM_LaTeX_template/}}
+
+\coverpage
+
+
+%--------------------------------------------------------------------------
+% Abstract
+%--------------------------------------------------------------------------
+
+% Creo un “abstract” propio, porque la plantilla “book” no la tiene, y cambiar a “report” no aporta nada nuevo. Aparte, el comando “abstract” original hace salto de página.
+
+\vspace*{\fill}
+\begin{center}
+    \textbf{Resumen}
+\end{center}
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum pretium libero non odio tincidunt semper. Vivamus sollicitudin egestas mattis. Sed vitae risus vel ex tincidunt molestie nec vel leo. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Maecenas quis massa tincidunt...
+
+\keywords{one, two, three, four}
+
+\vspace*{\fill}
+\vspace*{\fill}
+\vspace*{\fill}
+
+\pagebreak
+
+%--------------------------------------------------------------------------
+% end of Abstract
+%--------------------------------------------------------------------------
+
+
+\tableofcontents
+
+
+\chapter{Introducción}
+
+
+
+
+\chapter{Conclusiones}
+
+
+\end{document}
