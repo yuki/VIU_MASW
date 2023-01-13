@@ -10,11 +10,13 @@
 \def\nombre{Gómez Olivencia, Rubén}
 \def\dni{78910013-A}
 \def\titulo{Introducción a AWS}
+\def\subtitulo{}
 \def\titulacion{Máster Universitario en Desarrollo de Aplicaciones y Servicios Web}
 \def\curso{2022-2023}
 
 %Los siguientes son opcionales: si no se ponen, la portada cambia un poco. Ideal para escribir artículos/trabajos cortos
 \def\dirige{}
+\def\codirige{}
 \def\convocatoria{}
 \def\asignatura{Computación en la nube}
 
@@ -35,7 +37,7 @@ A la hora de poner un proyecto en producción es aconsejable conocer las distint
 
 Debido a las dificultades que puede suponer el gestionar unos servidores propios, junto con el no poder realizar el escalado del proyecto de manera sencilla, ha supuesto que la demanda de utilizar sistemas \textit{cloud} crezca, ya que facilitan dicha labor.
 
-A lo largo de este documento se va a realizar una introducción a \textbf{AWS} (Amazon Web Services) junto con el despliegue de la aplicación \href{https://flarum.org/}{Flarum} en un servidor creado en este \textit{cloud}.
+A lo largo de este documento se va a realizar una introducción a \textbf{\href{https://aws.amazon.com/es/}{AWS}} (Amazon Web Services) junto con el despliegue de la aplicación \href{https://flarum.org/}{Flarum} en un servidor creado en este \textit{cloud}.
 
 
 \chapter{Base de datos RDS}
@@ -56,11 +58,11 @@ AWS permite realizar el despliegue de distintos gestores de bases de datos a tra
 A continuación parte de la configuración realizada durante la creación de la misma:
 
 \begin{center}
-    \includegraphics[width=0.8\linewidth]{img/db1.png}
-    \includegraphics[width=0.8\linewidth]{img/db2.png}
-    \includegraphics[width=0.8\linewidth]{img/db3.png}
-    \includegraphics[width=0.8\linewidth]{img/db4.png}
-    \includegraphics[width=0.8\linewidth]{img/db5.png}
+    \includegraphics[frame,width=0.8\linewidth]{img/db1.png}
+    \includegraphics[frame,width=0.8\linewidth]{img/db2.png}
+    \includegraphics[frame,width=0.8\linewidth]{img/db3.png}
+    \includegraphics[frame,width=0.8\linewidth]{img/db4.png}
+    \includegraphics[frame,width=0.8\linewidth]{img/db5.png}
 \end{center}
 
 
@@ -93,13 +95,11 @@ Si queremos crear la instancia de RDS mediante el interfaz de línea de comandos
 
 \begin{mycode}{Crear instancia RDS mediante CLI}{console}{}
 ddd_v1_w_Hox_1818884@runweb70100:~$ aws --region us-east-1 \
-    rds create-db-instance \
-        --db-name mysqlcli \
+    rds create-db-instance --db-name mysqlcli \
         --db-instance-identifier rds-cli \
         --allocated-storage 20 \
         --db-instance-class db.t3.micro \
-        --engine mysql \
-        --engine-version 5.7 \
+        --engine mysql --engine-version 5.7 \
         --master-username admin \
         --master-user-password p4isQW73QW9130aS \
         --storage-encrypted \
@@ -146,8 +146,7 @@ Si queremos realizar la creación de la máquina virtual a través del interfaz 
 
 \begin{mycode}{Crear instancia EC2 mediante CLI}{console}{}
 ddd_v1_w_Hox_1818884@runweb70100:~$ aws --region us-east-1 \
-  ec2 run-instances \
-    --instance-type t2.micro \
+  ec2 run-instances --instance-type t2.micro \
     --key-name vockey \
     --image-id ami-0b5eea76982371e91 \
     --block-device-mappings \
@@ -221,7 +220,7 @@ Se ha decidido utilizar la versión 8.0 de \href{https://www.php.net/}{PHP} y re
 \end{mycode}
 
 
-\section{Instalación de la aplicación}
+\section{Instalación de la aplicación Flarum}
 
 Para realizar la instalación de la aplicación Flarum se ha seguido la \href{https://docs.flarum.org/install#installing}{guía de instalación}, por lo que se usará \href{https://getcomposer.org/}{Composer} para la descarga del código.
 
@@ -292,7 +291,7 @@ De esta manera, podríamos aplicar este grupo de seguridad a todas las instancia
 Tras crear el grupo lo que tenemos que hacer es asignarlo a la instancia creada previamente:
 
 \begin{center}
-    \includegraphics[frame,width=0.7\linewidth]{img/grupos2.png}
+    \includegraphics[frame,width=0.8\linewidth]{img/grupos2.png}
 \end{center}
 
 También podremos realizar la asignación en el momento en el que se crea una instancia nueva, de esta manera nos aseguramos que ya desde el momento de la creación sólo se tiene acceso desde las IPs que nos interese.
@@ -312,27 +311,22 @@ ddd_v1_w_Hox_1818884@runweb70100:~$ aws --region us-east-1 \
 ddd_v1_w_Hox_1818884@runweb70100:~$ aws --region us-east-1 \
   ec2 authorize-security-group-ingress \
   --group-id sg-0d13061c1e89dec15 \
-  --protocol tcp --port 22 \
-  --cidr 83.138.41.161/32
+  --protocol tcp --port 22 --cidr 83.138.41.161/32
 
 ddd_v1_w_Hox_1818884@runweb70100:~$ aws --region us-east-1 \
   ec2 authorize-security-group-ingress \
     --group-id sg-0d13061c1e89dec15 \
-    --protocol tcp --port 22 \
-    --cidr 47.61.134.184/32
-
+    --protocol tcp --port 22 --cidr 47.61.134.184/32
 
 ddd_v1_w_Hox_1818884@runweb70100:~$ aws --region us-east-1 \
   ec2 authorize-security-group-ingress \
     --group-id sg-0d13061c1e89dec15 \
-    --protocol tcp --port 80 \
-    --cidr 0.0.0.0/0
+    --protocol tcp --port 80 --cidr 0.0.0.0/0
 
 ddd_v1_w_Hox_1818884@runweb70100:~$ aws --region us-east-1 \
   ec2 authorize-security-group-ingress \
     --group-id sg-0d13061c1e89dec15 \
-    --protocol tcp --port 443 \
-    --cidr 0.0.0.0/0
+    --protocol tcp --port 443 --cidr 0.0.0.0/0
 \end{mycode}
 
 Es importante darse cuenta que a la hora de crear mediante línea de comandos la instancia EC2 y la RDS se han añadido distintos IDs de \textit{security-groups}, que lógicamente deben existir previamente.
@@ -384,8 +378,7 @@ ddd_v1_w_Hox_1818884@runweb69965:~$ aws s3 mb s3://rg-actividad1-08masw
 Una vez creado, si queremos que el bucket esté cifrado, deberemos asignarle el tipo de cifrado:
 \begin{mycode}{Añadir encriptación al bucket S3}{console}{{\footnotesize }}
 ddd_v1_w_Hox_1818884@runweb69965:~$ aws --region us-east-1 \
-  s3api put-bucket-encryption \
-    --bucket rg-actividad1-08masw2 \
+  s3api put-bucket-encryption --bucket rg-actividad1-08masw2 \
     --server-side-encryption-configuration \
       '{"Rules":[{"ApplyServerSideEncryptionByDefault":{"SSEAlgorithm": "AES256"}}]}'
 \end{mycode}
@@ -400,13 +393,12 @@ ddd_v1_w_Hox_1818884@runweb69965:~$ aws s3 cp docu1.pdf \
 
 ddd_v1_w_Hox_1818884@runweb69965:~$ aws s3api put-object-acl \
 --bucket rg-actividad1-08masw \
---key actividad1/docu1.pdf \
---acl public-read
+--key actividad1/docu1.pdf --acl public-read
 \end{mycode}
 
 En lugar de hacerlo mediante dos comandos, se podría utilizar directamente \commandbox{aws s3api put-object ...}, pero es posible que quizá haya ficheros que nos interese mantener privados.
 
-\chapter{Costes estimados}
+\chapter{Estimación de costes}
 Debido a todas las opciones con las que cuenta AWS, puede resultar confuso el precio final que se termina pagando. Es por eso que Amazon cuenta con el \href{https://calculator.aws/}{Amazon Pricing Calculator} para poder estimar los costes.
 
 Se ha tenido en cuenta las siguientes características para realizar una estimación de precios:
@@ -421,22 +413,29 @@ Se ha tenido en cuenta las siguientes características para realizar una estimac
 
 En la siguiente tabla se van a comparar los costes estimados por mes para dos regiones (España y USA-Virginia) teniendo en cuenta todo lo visto hasta ahora:
 
+\pagebreak
 \begin{yukitblrcol}{X[3]X[1]X[1]}
         & España & N. Virginia \\
-    Instancia EC2 t2.micro Linux, 15GB EBS gp2, con tráfico estimado
-        & \$9,97/mes \textbf{*} & \$9,97/mes \\
+    Instancia EC2 t3.micro Linux, 15GB EBS gp2, con tráfico estimado
+        & \$12.34/mes  & \$11,49/mes \\
     IP elástica
         & \$0/mes & \$0/mes \\
-    Base de datos RDS MySQL db.t3.micro, single-AZ, sin proxy, almacenamiento 20GB, 40GB copias de seguridad \textbf{**}
-        & \$20,54/mes & \$18,51/mes \\
+    Base de datos RDS MySQL db.t3.micro, single-AZ, sin proxy, almacenamiento 20GB (con 40GB copias de seguridad \textbf{**})
+        & \$17,14 o \$20,94/mes & \$14,71 o \$18,51/mes \\
     Bucket S3, 1GB de almacenamiento, con tráfico estimado de salida \textbf{***}
-        & \$0,02/mes & \$0,02/mes \\
+        & \$0,92/mes & \$0,92/mes \\
 \end{yukitblrcol}
 \begin{itemize}
-    \item[*] En España sólo se pueden coger instancias \textbf{t3}.micro, que tiene más CPU.
-    \item[**] La estimación para los backups al comienzo del proyecto podría ser menor, pero si se pretende llegar a los 20GB de espacio, para una retención de 10 días los 40GB se quedarán cortos.
+    \item[*] Si la IP elástica está asociada a una instancia es gratuita. Hay que pagar por tener más de una o si está asociada a una instancia que \textbf{no está en ejecución}.
+    \item[**] Se ha añadido precio con sólo el espacio para la propia base de datos y también si tenemos en cuenta un espacio de 40GB adicional para copias de seguridad.
     \item[***] Si el número de peticiones está por debajo de 100.000 el precio no varía. Tampoco se tiene en cuenta el cargar los datos iniciales.
 \end{itemize}
+
+A continuación una imagen para la estimación de la región de España obtenida de la web \href{https://calculator.aws/}{calculator.aws}.
+\begin{center}
+    \includegraphics[frame,width=0.8\linewidth]{img/calculadora.png}
+\end{center}
+
 
 Tal como se ha podido comprobar en la tabla, los precios son similares en ambas regiones. En el caso de la instancia EC2, por el mismo precio obtenemos una máquina virtual mejor, mientras que la instancia de base de datos es un poco más cara en el CPD de Amazon en España.
 
