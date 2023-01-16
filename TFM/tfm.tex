@@ -72,11 +72,11 @@ Por otro lado, tenemos información sensible como son las contraseñas, que a pe
 
 En el ámbito personal existen distintas posibilidades que nos permiten gestionar las contraseñas, ya sea de manera integrada en los navegadores web, o a través de aplicaciones externas.
 
-Cuando esta gestión de contraseñas se pasa al ámbito empresarial, a pesar de que también existen distintas alternativas, puede resultar más complicado el utilizarlas. Pueden no contar con características necesarias para la empresa, quizá la integración con los sistemas de la empresa no sea posible, si es una opción de pago, sea demasiado cara...
+Cuando esta gestión de contraseñas se pasa al ámbito empresarial, a pesar de que también existen distintas alternativas, puede que no cuenten con características necesarias para la empresa; quizá la integración con los sistemas de la empresa no sea posible; en caso de ser una opción de pago ser demasiado cara... Puede resultar complejo decantarse por una solución existente.
 
-A las contraseñas, dentro de una empresa también hay que añadir la información sensible que maneja, ya sea propia o de terceras empresas (clientes o proveedores que se tengan). Esa información, ya no tiene por qué ceñirse a “usuario” y “contraseña”, si no que puede ser documentación, ficheros, imágenes, ...
+A las contraseñas también hay que añadir la información sensible que maneja la empresa, ya sea información propia o de terceras empresas (clientes o proveedores que se tengan). Esa información, ya no tiene por qué ceñirse a “usuario” y “contraseña”, si no que puede ser documentación, ficheros, imágenes, esquemas de red ...
 
-Encontrar una aplicación que se ciña a todas las necesidades actuales puede resultar complejo, y más complejo si estas necesidades varían a lo largo del tiempo,. La aplicación que utilicemos puede ser abandonada por los creadores; si es de pago, la empresa puede cerrar; la posibilidad de añadir características propias no existirá salvo que sea Software Libre, ... puede haber muchos inconvenientes.
+Encontrar una aplicación que se ciña a todas las necesidades puede resultar complejo, y más si estas necesidades varían a lo largo del tiempo. También pueden surgir distintos problemas: la aplicación que utilicemos puede ser abandonada por los creadores; si es de pago, el precio o la suscripción puede variar; la posibilidad de añadir características propias no será posible salvo que sea Software Libre, ...
 
 A lo largo de este \textbf{trabajo final del Máster Universitario en Desarrollo de Aplicaciones y Servicios Web} se analizará la creación de un sistema gestor de contraseñas y documentación sensible para entornos multiusuarios hecho con el \textit{frontend} de desarrollo \href{https://angular.io/}{Angular} y utilizando  \href{https://www.vaultproject.io/}{Hashicorp Vault} como sistema de backend.
 
@@ -95,7 +95,7 @@ A lo largo de este \textbf{trabajo final del Máster Universitario en Desarrollo
     \item Lógicamente, la \textbf{seguridad en el acceso y en el almacenamiento} debe ser la principal prioridad. Hay que evitar que cualquier tipo de acceso a los datos, ya sea a través del almacenamiento, o por la transmisión de los datos, no esté cifrado. De esta manera, la información interceptada, al estar cifrada, carecerá de sentido.
 \end{itemize}
 
-La gestión de contraseñas
+La gestión de contraseñas %TODO: continuar
 
 
 
@@ -106,14 +106,356 @@ La gestión de contraseñas
 
 \chapter{Metodología}
 
+% copiado de la actividad 2 de “Gestión de proyectos en entornos ágiles” con pequeñas modificaciones
+
+Hoy en día es conveniente hacer uso de las \textbf{metodologías ágiles} cuando realizamos la gestión de un proyecto, ya que cuentan con una serie de ventajas que nos van a permitir dar una respuesta más rápida y flexible ante posibles cambios durante la vida de desarrollo del producto.
+
+Las metodologías ágiles cuentan con una serie de ventajas entre las que podemos destacar:
+
+\begin{itemize}
+    \item Poder entregar resultados funcionales al cliente cada poco tiempo y así obtener \textit{feedback} de lo realizado.
+    \item Seremos capaces de dar una respuesta ágil y flexible ante posibles cambios que puedan surgir (cambios en los requisitos, ante bajas de personal asignado al proyecto, dificultades durante el desarrollo...).
+    \item Tratar de evitar burocracia innecesaria, para centrarnos de esta manera en el producto y sus funcionalidades.
+    \item Se trata de involucrar al cliente y colaborar con él para de esta manera conseguir un mayor valor al producto.
+\end{itemize}
+
+\section{Gestión del proyecto}
+
+Para comenzar con la gestión del proyecto debemos contar con los objetivos nombrados previamente y transformarlos en las conocidas como “\textbf{historias de usuario}”.
+
+En ellas plasmaremos, en un lenguaje que pueda entender el cliente, las funcionalidades que el producto debe tener, a las que asociaremos otros datos como son:
+
+\begin{itemize}
+    \item Un \textbf{identificador único} para poder diferenciarlas del resto.
+    \item Una \textbf{estimación de tiempos} de lo que creemos que podemos tardar en realizarlo.
+    \item La \textbf{prioridad} inicial para poder ordenarlas entre ellas.
+    \item El \textbf{tema principal} al que se relaciona la historia de usuario.
+    \item Se añadirán posibles \textbf{dependencias} de otras historias de usuario.
+    \item Una \textbf{descripción} de lo que se quiere conseguir.
+    \item Unos \textbf{criterios de validación} por parte del cliente.
+\end{itemize}
+
+\subsection{Resultado del análisis realizado}
+
+A continuación se van a plasmar las distintas “historias de usuario” obtenidas:
+
+\begin{requisitostbl}{X[1]X[2]X[2]X[3]X[2]}
+    ID & Estimación & Prioridad  & Tema &  Dependencias \\
+    1  & 25 horas & 1  & Interfaz web &   \\
+
+    Desarrollar “esqueleto” del interfaz web \\
+
+    \textbf{Descripción}:
+    Como usuario necesito un interfaz web para poder acceder a la aplicación y hacer uso de ella. Es la base del proyecto. \\
+
+    \textbf{Criterios de validación}:
+    El interfaz es \textit{\textbf{responsive}}, visualmente atractivo y funcional. \\
+\end{requisitostbl}
+
+\begin{requisitostbl}{X[1]X[2]X[2]X[3]X[2]}
+    ID & Estimación & Prioridad  & Tema &  Dependencias \\
+    2  & 10 horas & 1  & Gestión de usuarios & 1  \\
+
+    Crear “login” de usuario \\
+
+    \textbf{Descripción}:
+    Como usuario quiero poder acceder a la aplicación utilizando como sistema de autenticación un usuario y contraseña.  \\
+
+    \textbf{Criterios de validación}:
+    Los valores introducidos serán autenticados contra el \textit{backend} que el cliente decida (base de datos o LDAP/Active Directory). \\
+\end{requisitostbl}
+
+\begin{requisitostbl}{X[1]X[2]X[2]X[3]X[2]}
+    ID & Estimación & Prioridad  & Tema &  Dependencias \\
+    3  & 10 horas & 1  & Gestión de Secretos & 2  \\
+
+    Crear secretos \\
+
+    \textbf{Descripción}:
+    Como usuario quiero poder crear un secreto para poder guardar información sensible y/o contraseñas. \\
+
+    \textbf{Criterios de validación}:
+    \begin{itemize}
+        \item El botón para crear siempre será visible.
+        \item Se podrá elegir la ruta (por defecto será donde nos encontramos) y el nombre del secreto.
+    \end{itemize}
+    \\
+\end{requisitostbl}
+
+
+
+\begin{requisitostbl}{X[1]X[2]X[2]X[3]X[2]}
+    ID & Estimación & Prioridad  & Tema &  Dependencias \\
+    4  & 30 horas & 1  & Gestión de Secretos & 2, 3  \\
+
+    Listado de secretos \\
+
+    \textbf{Descripción}:
+    Como usuario quiero poder obtener un listado de los secretos existentes para poder navegar por ellos y seleccionar el que me interese. \\
+
+    \textbf{Criterios de validación}:
+    \begin{itemize}
+        \item El listado completo se visualiza mediante un árbol jerarquizado.
+        \item También se puede navegar como si fuera un explorador de archivos.
+        \item El interfaz mostrará un \textit{breadcrumb} para indicar la ruta en la que nos encontramos.
+        \item Se puede buscar por el nombre de los secretos.
+    \end{itemize}
+    \\
+\end{requisitostbl}
+
+
+
+\begin{requisitostbl}{X[1]X[2]X[2]X[3]X[2]}
+    ID & Estimación & Prioridad  & Tema &  Dependencias \\
+    5  & 15 horas & 2  & Gestión de Secretos & 2, 3, 4  \\
+
+    Visualizar un secreto \\
+
+    \textbf{Descripción}:
+    Como usuario quiero acceder a un secreto para visualizar su contenido.  \\
+
+    \textbf{Criterios de validación}:
+    \begin{itemize}
+        \item La visualización mostrará el secreto en formato HTML.
+        \item Si un usuario accede a un secreto “bloqueado” el sistema lo debe alertar y no se le permitirá editarlo.
+        \item El interfaz nos mostrará la última vez que se modificó el secreto.
+        \item Al visualizar el secreto aparecerán botones con distintas acciones que se podrán realizar sobre él (editar, imprimir, ver históricos, borrar).
+    \end{itemize}
+    \\
+\end{requisitostbl}
+
+
+\begin{requisitostbl}{X[1]X[2]X[2]X[3]X[2]}
+    ID & Estimación & Prioridad  & Tema &  Dependencias \\
+    6  & 35 horas & 2  & Gestión de Secretos & 2, 3  \\
+
+    Modificar un secreto \\
+
+    \textbf{Descripción}:
+    Como usuario quiero poder editar un secreto para realizar modificaciones.  \\
+
+    \textbf{Criterios de validación}:
+    \begin{itemize}
+        \item La modificación se realizará a través de un editor \textit{\textbf{WYSIWYG}}.
+        \item El editor permitirá realizar modificaciones en formato \href{https://es.wikipedia.org/wiki/Markdown}{Markdown}.
+        \item El editor permitirá guardar el secreto y al hacerlo volveremos a la visualización del mismo.
+        \item Al comenzar la modificación el secreto se pondrá en estado “bloqueado”.
+    \end{itemize}
+    \\
+\end{requisitostbl}
+
+
+
+\begin{requisitostbl}{X[1]X[2]X[2]X[3]X[2]}
+    ID & Estimación & Prioridad  & Tema &  Dependencias \\
+    7  & 10 horas & 3  & Gestión de Secretos & 2, 3, 5  \\
+
+    Borrado de secretos \\
+
+    \textbf{Descripción}:
+    Como usuario quiero poder borrar secretos para que desaparezcan.  \\
+
+    \textbf{Criterios de validación}:
+    \begin{itemize}
+        \item Antes de borrar debe existir un mensaje de confirmación.
+        \item Al borrar un secreto, el árbol de secretos se debe actualizar.
+    \end{itemize}
+     \\
+\end{requisitostbl}
+
+
+
+\begin{requisitostbl}{X[1]X[2]X[2]X[3]X[2]}
+    ID & Estimación & Prioridad  & Tema &  Dependencias \\
+    8  & 15 horas & 3  & Gestión de Secretos & 2  \\
+
+    Permitir gestionar ficheros como secretos \\
+
+    \textbf{Descripción}:
+    Como usuario quiero poder subir ficheros al sistema para guardarlos cifrados.  \\
+
+    \textbf{Criterios de validación}:
+    \begin{itemize}
+        \item Se permite subir cualquier tipo de fichero.
+        \item Se permite descargar el fichero original.
+        \item Se debe poder visualizar los ficheros más habituales en la propia web (imágenes y ficheros PDF) sin necesidad de descargarlos.
+    \end{itemize}
+     \\
+\end{requisitostbl}
+
+
+\begin{requisitostbl}{X[1]X[2]X[2]X[3]X[2]}
+    ID & Estimación & Prioridad  & Tema &  Dependencias \\
+    9  & 20 horas & 4  & Gestión de Secretos & 3, 6  \\
+
+    Versionado de secretos\\
+
+    \textbf{Descripción}:
+    Como usuario quiero poder ver las veces que el fichero ha sido modificado para poder ver los cambios realizados.  \\
+
+    \textbf{Criterios de validación}:
+    \begin{itemize}
+        \item Poder ver el número de versiones que tiene un secreto.
+        \item Poder ver una versión concreta del secreto.
+        \item Poder ver las diferencias entre versiones.
+        \item Poder restaurar una versión concreta del secreto.
+    \end{itemize} \\
+\end{requisitostbl}
+
+
+\begin{requisitostbl}{X[1]X[2]X[2]X[3]X[2]}
+    ID & Estimación & Prioridad  & Tema &  Dependencias \\
+    10  & 5 horas & 4  & Gestión de Secretos & 2, 5  \\
+
+    Imprimir secretos \\
+
+    \textbf{Descripción}:
+    Como usuario quiero poder imprimir un secreto. \\
+
+    \textbf{Criterios de validación}:
+    Existe un botón para imprimir un secreto. \\
+\end{requisitostbl}
+
+
+
+\begin{requisitostbl}{X[1]X[2]X[2]X[3]X[2]}
+    ID & Estimación & Prioridad  & Tema &  Dependencias \\
+    11  & 35 horas & 2  & Producción & 1  \\
+
+    Puesta en producción segura \\
+
+    \textbf{Descripción}:
+    Como usuario quiero poder acceder a la plataforma de manera segura para realizar todo lo comentado hasta ahora \\
+
+    \textbf{Criterios de validación}:
+    \begin{itemize}
+        \item El acceso web tiene que ser por HTTPS (certificado válido).
+        \item El servidor debe estar securizado ante accesos externos.
+        \item Los servicios deben auto-arrancarse en caso de caída.
+        \item Existe un registro de lo sucedido a cada secreto (auditoría).
+    \end{itemize} \\
+\end{requisitostbl}
+
+
+\subsection{Mapa de las historias de usuario}
+
+Dado que las historias de usuario pueden suponer la agrupación de distintas tareas técnicas que son más pequeñas, es conveniente crear un mapa que englobe todas las tareas a realizar.
+
+Para la organización de este mapa se pueden identificar los siguientes apartados:
+\begin{itemize}
+    \item Los \textbf{temas} son las características a alto nivel que va a tener la aplicación, y coinciden con el tema de las historias de usuario. En el mapa se ha diferenciado en color verde.
+    \item Los \textbf{epics}, en color azul, son características que normalmente no pueden realizarse en un \textit{sprint} y que a veces pueden ser divididas en distintas historias de usuarios que están relacionadas entre sí.
+    \item Las \textbf{tareas}, en este caso en amarillo, son las unidades concretas de trabajo. Se ha tratado que sean lo más cortas posibles y que a nivel técnico sean auto-contenidas y aisladas.
+\end{itemize}
+
+El mapa resultante inicial es el siguiente:
+
+\begin{center}
+    \includegraphics[width=\linewidth]{img/kanban.png}
+\end{center}
+
+\subsection{\textit{Sprints} generados}
+
+A la par que se ha ido creando el mapa anterior, se han diferenciado diferentes \textit{sprints} con las tareas que deberían completarse para cada uno de ellos.
+
+Bien es cierto que aunque haya sido realizada esa primera estimación, se podrían efectuar modificaciones en caso de que fuese necesario.
+
+Para el primer \textit{sprint} se han identificado las siguientes tareas que deben realizarse:
+
+\begin{center}
+%    \includegraphics[width=\linewidth]{img/sprint1.png}
+\end{center}
+
+Tal como se puede ver, las tareas están representadas con su prioridad dentro del \textit{sprint}, para así también tener claro qué tareas deben tratar de terminarse antes que otras.
+
+Al terminar este primer \textit{sprint}, tendremos la base del proyecto terminada, podremos mostrarle al cliente una primera versión con unas funcionalidades básicas.
+
+De esta manera, el cliente nos puede dar \textit{feedback} de lo realizado, con una base ya terminada.Ese \textit{feedback} podremos utilizarlo como retroalimentación para el siguiente \textit{sprint}, ya sea para realizar modificaciones de lo ya realizado (hacer cambios nuevos que el cliente pida) o para utilizarlo para las tareas ya planificadas.
+
+
+\subsection{Gestión de tareas en Trello}
+
+\href{https://trello.com/}{Trello} es una aplicación web, creada por la empresa \href{https://www.atlassian.com/}{Atlassian}, que nos permite tener un tablero \href{https://en.wikipedia.org/wiki/Kanban_(development)}{Kanban} donde podremos añadir las tareas de nuestro proyecto, e ir moviéndolas entre distintas etapas.
+
+Aunque cuenta con una versión de suscripción, la versión gratuita cuenta con las características suficientes como para poder ser utilizado para la gestión de proyectos sin problema alguno.
+
+Una vez definidas las tareas, tal como se ha visto antes, se han añadido a Trello, en el que se han creado las siguientes columnas, o fases de desarrollo:
+
+\begin{itemize}
+    \item \textbf{Tareas pendientes}: donde situaremos las tareas que se deben realizar para llevar a cabo el proyecto.
+    \item \textbf{Desarrollo}: Son las tareas que se han empezado a desarrollar.
+\end{itemize}
+
+\begin{minipage}{0.6\linewidth}
+    \begin{itemize}
+
+        \item \textbf{Testing}: Son las tareas que se dan por terminadas en el desarrollo y que pasan a una fase de testeo. En algunos casos puede ser directamente testeado por el cliente para dar su feedback (por ejemplo para el interfaz web), aunque lo habitual es que el testeo lo realice otra persona del proyecto (que no haya sido quien ha hecho el desarrollo).
+
+        En caso de que una tarea no pase esta fase, se anotará los inconvenientes y volverá a la columna de \textbf{desarrollo}.
+        \item \textbf{Producción}: Una vez el \textit{testing} ha terminado, se puede dar por terminada la tarea y debe ser incluida en producción.
+    \end{itemize}
+\end{minipage}
+\hfill
+\begin{minipage}{0.29\linewidth}
+%    \includegraphics[width=\linewidth]{img/tareas.png}
+    \vspace{-35pt}
+    \begin{center}
+        {\scriptsize \textit{Tareas pendientes en Trello}}
+    \end{center}
+\end{minipage}
+
+\vspace{10pt}
+Tal como se puede ver en la imagen, cada tarea se representa como una pequeña tarjeta, apareciendo como un listado de todas ellas en la columna correspondiente en las que están situadas (en este caso todavía en la tarea de pendientes).
+
+A cada una de las tareas se les ha asignado un color y varias etiquetas que se van a detallar a continuación. De esta manera, Trello nos permitirá realizar búsquedas o visualizar las tareas con la etiqueta que nos interese.
+
+
+\begin{minipage}{0.48\linewidth}
+%    \includegraphics[width=\linewidth]{img/tarea.png}
+    \vspace{-35pt}
+    \begin{center}
+        {\scriptsize \textit{Detalle de tarea}}
+    \end{center}
+\end{minipage}
+\hfill
+\begin{minipage}{0.47\linewidth}
+    A cada tarjeta se le ha dado un color, dependiendo del tema al que esté más orientada la tarea.
+
+    Otro aspecto son las etiquetas asignadas. En este caso cuenta con “\textbf{P1}” que marca la prioridad, siendo esta la más alta, y la segunda etiqueta referenciando a qué \textit{sprint} pertenece.
+\end{minipage}
+
+Por último, cada tarea puede tener pequeños ítems. Estos han sido detalladas para que el desarrollador tenga en cuenta qué es lo que debe hacer para dar por finalizada la tarea.
+
+Tal como se ha dicho previamente se pueden hacer filtros por las etiquetas, por lo que dependiendo del \textit{sprint} en el que nos encontremos, podremos filtrar por dicha etiqueta, quedando el inicio del primer \textit{sprint} de la siguiente manera:
+
+\begin{center}
+%    \includegraphics[frame,width=0.9\linewidth]{img/board1.png}
+\end{center}
+
+Este es el punto de partida y las tareas serán repartidas a sus correspondientes desarrolladores, que empezarán con ellas en cuanto se termine la asignación.
+
+
+\section{Herramientas tecnológicas utilizadas}
+
+%TODO: comentar GIT y ramas, etiquetas
 
 \chapter{Resultados}
 
 
-\chapter{Conclusiones}
 
 
 \chapter{Trabajo futuro}
+
+% TODO: posibles mejoras a añadir:
+
+% TODO: configuración del usuario, forzar actualizar el árbol, mejor visualización de ficheros, permitir exportar secretos a formatos editables (odt/docx)
+
+
+
+
+
+\chapter{Conclusiones}
+
 
 
 \end{document}
