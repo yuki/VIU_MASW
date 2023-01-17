@@ -120,11 +120,9 @@ Como propuesta para la creación de un gestor de contraseñas propio, se han ide
 
     \item Para tener un registro de lo sucedido, también es importante contar con un \textbf{sistema de auditoría}. A través de él se registrarán los accesos y operaciones que se realizan.
 
-    \item Lógicamente, la \textbf{seguridad en el acceso y en el almacenamiento} debe ser la principal prioridad. \textbf{Hay que evitar cualquier tipo de acceso a los datos}, ya sea a través del almacenamiento, o por la transmisión de los datos, \textbf{no sea mediante algún sistema  cifrado}.
+    \item Lógicamente, la \textbf{seguridad en la transmisión y en el almacenamiento} debe ser la principal prioridad.  \textcite{scarfone2009guide} nos recuerdan que las comunicaciones que contienen contraseñas deben ser cifradas, ya sea mediante uso del protocolo TLS (\textit{Transport Layer Security}) o creando un túnel en la comunicación a través de una VPN.
 
-    De esta manera, en caso de que la información sea interceptada, al estar cifrada, carecerá de sentido y no se podrá visualizar el contenido.
-
-
+    En caso de que algún atacante obtuviese acceso físico al sistema de almacenamiento, de nuevo, los datos estarían cifrados, evitando la fuga de información.
 
     \item La aplicación debe ser \textbf{sencilla de utilizar}, para que al usuario final no le cueste utilizarla. De esta manera \textbf{conseguiremos que el usuario final la integre en su metodología de trabajo} a la hora de crear/usar contraseñas y guardar información sensible.
 
@@ -481,7 +479,11 @@ Aparte, también se ha integrado con Trello (a través de los plugins conocidos 
 
 
 \subsection{Creación de entornos con Docker}
-Para poder crear distintos entornos aislados para cada una de las fases del desarrollo se ha hecho uso de contenedores \href{https://es.wikipedia.org/wiki/Docker_(software)}{Docker}.
+Como dice \textcite{mouat}, los contenedores son un concepto que lleva existiendo décadas en sistemas Unix (con el comando “chroot”), pero \href{https://es.wikipedia.org/wiki/Docker_(software)}{Docker} cogió la tecnología existente de contenedores Linux y la amplió de varias maneras, sobre todo gracias a su sistema de imágenes portable.
+
+Gracias a utilizar distintas imágenes Docker con distintos servicios, se ha podido realizar despliegues de manera sencilla para distintos entornos (desarrollo, test y producción), y también el poder realizar el desarrollo en distintos ordenadores, sin perder el tiempo en realizar instalaciones de librerías y ejecutables.
+
+% TODO: meter una imagen propia de ejemplo
 
 
 
@@ -504,5 +506,7 @@ Para poder crear distintos entornos aislados para cada una de las fases del desa
 \chapter{Conclusiones}
 
 
+
+\printbibliography[title={Referencias bibliográficas},heading=bibintoc]
 
 \end{document}
