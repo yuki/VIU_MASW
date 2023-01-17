@@ -41,11 +41,11 @@
     \textbf{Resumen}
 \end{center}
 
-La gestión de contraseñas y documentación que una empresa acumula puede llegar a resultar un problema si no se sabe gestionar bien. Esta documentación puede crecer si es una empresa de servicios informáticos, con varios clientes, distintos proyectos, contraseñas para distintos servicios...
+La gestión de contraseñas y documentación que una empresa acumula puede llegar a resultar un problema si no se sabe gestionar de manera correcta. Esta documentación puede crecer si es una empresa de servicios informáticos, con varios clientes, distintos proyectos, contraseñas para distintos servicios...
 
-Existen distintas herramientas que están especializadas en gestión de contraseñas, o gestión de documentación, pero quizá no de ambos, lo que requeriría tener dos aplicaciones distintas, y muchas veces es conveniente tener la documentación de lo realizado junto con la contraseña de acceso. Aún con todo, pueden no ajustarse a nuestras necesidades, y salvo que sea una aplicación de Software Libre, no podremos realizar modificaciones.
+Existen distintas herramientas que están especializadas en gestión de contraseñas o para gestión de documentación, lo que requeriría tener dos aplicaciones distintas. Muchas veces es conveniente tener la documentación de lo realizado junto con la contraseña de acceso, para así poder facilitar la gestión.
 
-Aparte, estas aplicaciones pueden ser de pago, no sabemos la seguridad real de los datos, normalmente la información no está en nuestros servidores y pueden existir fallos de seguridad que expondrán nuestros datos.
+Aparte, estas aplicaciones pueden ser de pago, no tendremos la certeza de cómo es la seguridad real de los datos, ya que normalmente la información no está en nuestros servidores y pueden existir fallos de seguridad que expongan nuestros datos. También hay que tener en cuenta que pueden no ajustarse a nuestras necesidades y salvo que sea una aplicación de Software Libre, no podremos realizar modificaciones
 
 Este TFM trata de aproximar la creación de un gestor de contraseñas y documentación sensible creado en Angular y haciendo uso de Hashicorp Vault como almacenamiento seguro.
 
@@ -78,39 +78,69 @@ A las contraseñas también hay que añadir la información sensible que maneja 
 
 Encontrar una aplicación que se ciña a todas las necesidades puede resultar complejo, y más si estas necesidades varían a lo largo del tiempo. También pueden surgir distintos problemas: la aplicación que utilicemos puede ser abandonada por los creadores; si es de pago, el precio o la suscripción puede variar; la posibilidad de añadir características propias no será posible salvo que sea Software Libre, ...
 
-A lo largo de este \textbf{trabajo final del Máster Universitario en Desarrollo de Aplicaciones y Servicios Web} se analizará la creación de un sistema gestor de contraseñas y documentación sensible para entornos multiusuarios hecho con el \textit{frontend} de desarrollo \href{https://angular.io/}{Angular} y utilizando  \href{https://www.vaultproject.io/}{Hashicorp Vault} como sistema de backend.
+A lo largo de este \textbf{trabajo final del Máster Universitario en Desarrollo de Aplicaciones y Servicios Web} se analizará la creación de un sistema gestor de contraseñas y documentación sensible para entornos multiusuarios, hecho con el \textit{frontend} de desarrollo \href{https://angular.io/}{Angular} y utilizando  \href{https://www.vaultproject.io/}{Hashicorp Vault} como sistema de backend.
 
 
 \chapter{Objetivos}
 %TODO: añadir introducción
+El objetivo principal de este proyecto final de máster es el de aunar los conocimientos adquiridos en el máster y utilizarlos para llevar a cabo una investigación sobre el uso y las funcionalidades de los gestores de contraseñas más conocidos.
 
-
-\begin{itemize}
-    \item El gestor de contraseñas debe contar con un \textbf{sistema de autenticación}. Sólo debe permitir el acceso a las personas que hayan pasado algún sistema de verificación que demuestre ser quién es.
-
-    \item También debe existir un \textbf{sistema de autorización, que controle el tipo de acceso y permisos} que tenga en en cuenta quién los realiza y a qué contraseñas se quiere acceder.
-
-    \item Para tener un registro de lo sucedido, también es importante contar con un \textbf{sistema de auditoría}. A través de él se registrarán los accesos y operaciones que se realizan.
-
-    \item Lógicamente, la \textbf{seguridad en el acceso y en el almacenamiento} debe ser la principal prioridad. Hay que evitar que cualquier tipo de acceso a los datos, ya sea a través del almacenamiento, o por la transmisión de los datos, no esté cifrado. De esta manera, la información interceptada, al estar cifrada, carecerá de sentido.
-\end{itemize}
-
-La gestión de contraseñas %TODO: continuar
-
-
+Tras este análisis se realizará la propuesta para la realización de un gestor de contraseñas, con los objetivos marcados para el mismo, y cómo se ha realizado su implementación.
 
 \chapter{Estado del arte}
+
+Para acotar el análisis, vamos a identificar qué se entiende por un gestor de contraseñas. ... %TODO:
+
 
 \section{Gestores de contraseñas conocidos}
 
 
-\chapter{Metodología}
+\subsection{Problemas acontecidos}
 
-% copiado de la actividad 2 de “Gestión de proyectos en entornos ágiles” con pequeñas modificaciones
+
+
+\chapter{Requisitos del proyecto}
+Como propuesta para la creación de un gestor de contraseñas propio, se han identificado los siguientes requisitos que deben de cumplirse para considerar que el trabajo final de máster ha cumpido con su objetivo principal:
+
+\begin{itemize}
+
+    \item Se quiere crear un sistema que \textbf{gestione contraseñas e información sensible}. Esta información sensible puede ser imágenes, documentos, o ficheros en general que la aplicación permitirá subir.
+
+    También se podrá generar documentación en la propia aplicación a través de un interfaz \textbf{WYSIWYG} (\textit{what you see is what you get}) que guarde la información en formato Markdown.
+
+    \item El sistema estará basado en web creado con el \textit{framework frontend} \href{https://angular.io/}{Angular} tratando que sea lo más modular posible.
+
+    \item El gestor de contraseñas debe contar con un \textbf{sistema de autenticación}. Sólo debe permitir el acceso a las personas que hayan pasado algún sistema de verificación que demuestre ser quién es.
+
+    Este sistema de autenticación no tiene por qué limitarse al clásico “usuario y contraseña”, si no que podrá adaptarse para utilizar otros sistemas conocidos de forma sencilla, como por ejemplo: certificados \textbf{TLS}, contraseñas de un sólo uso basadas en tiempo (TOTP), tokens basados en \href{https://en.wikipedia.org/wiki/JSON_Web_Token}{JWT}, sistemas \href{https://en.wikipedia.org/wiki/OAuth}{OAuth}/\href{https://en.wikipedia.org/wiki/OpenID#OpenID_Connect_(OIDC)}{OIDC}, ...
+
+    \item Debe existir un \textbf{sistema de autorización, que controle el tipo de acceso y permisos} que tenga en en cuenta quién los realiza y a qué contraseñas se quiere acceder.
+
+    Estos permisos pueden basarse en \textbf{roles}, para de esta manera poder agrupar usuarios, y en base a ellos facilitar la autorización
+
+    \item Para tener un registro de lo sucedido, también es importante contar con un \textbf{sistema de auditoría}. A través de él se registrarán los accesos y operaciones que se realizan.
+
+    \item Lógicamente, la \textbf{seguridad en el acceso y en el almacenamiento} debe ser la principal prioridad. \textbf{Hay que evitar cualquier tipo de acceso a los datos}, ya sea a través del almacenamiento, o por la transmisión de los datos, \textbf{no sea mediante algún sistema  cifrado}.
+
+    De esta manera, en caso de que la información sea interceptada, al estar cifrada, carecerá de sentido y no se podrá visualizar el contenido.
+
+
+
+    \item La aplicación debe ser \textbf{sencilla de utilizar}, para que al usuario final no le cueste utilizarla. De esta manera \textbf{conseguiremos que el usuario final la integre en su metodología de trabajo} a la hora de crear/usar contraseñas y guardar información sensible.
+
+    \item Es importante que la aplicación \textbf{se adapte a la pantalla} donde se esté visualizando. De esta manera el usuario podrá hacer uso de ella a través de dispositivos móviles.
+
+    \item Para el almacenamiento de la información y el sistema de autorización se hará uso del sistema \href{https://www.vaultproject.io/}{Vault} de la empresa \href{https://www.hashicorp.com/}{Hashicorp}.
+\end{itemize}
+
+Teniendo en cuenta las metodologías utilizadas, y explicadas en el siguiente apartado, cualquier añadido a estos requisitos se podría añadir en etapas posteriores del desarrollo.
+
+
+\chapter{Metodologías utilizadas}
 
 Hoy en día es conveniente hacer uso de las \textbf{metodologías ágiles} cuando realizamos la gestión de un proyecto, ya que cuentan con una serie de ventajas que nos van a permitir dar una respuesta más rápida y flexible ante posibles cambios durante la vida de desarrollo del producto.
 
-Las metodologías ágiles cuentan con una serie de ventajas entre las que podemos destacar:
+Ventajas que podemos destacar de las metodologías ágiles:
 
 \begin{itemize}
     \item Poder entregar resultados funcionales al cliente cada poco tiempo y así obtener \textit{feedback} de lo realizado.
@@ -344,11 +374,11 @@ Dado que las historias de usuario pueden suponer la agrupación de distintas tar
 Para la organización de este mapa se pueden identificar los siguientes apartados:
 \begin{itemize}
     \item Los \textbf{temas} son las características a alto nivel que va a tener la aplicación, y coinciden con el tema de las historias de usuario. En el mapa se ha diferenciado en color verde.
-    \item Los \textbf{epics}, en color azul, son características que normalmente no pueden realizarse en un \textit{sprint} y que a veces pueden ser divididas en distintas historias de usuarios que están relacionadas entre sí.
+    \item Los \textbf{epics}, en color azul, son características que normalmente no pueden realizarse en un \textit{sprint}, que a veces pueden ser divididas en distintas historias de usuarios, y que engloban en su mayoría varias tareas.
     \item Las \textbf{tareas}, en este caso en amarillo, son las unidades concretas de trabajo. Se ha tratado que sean lo más cortas posibles y que a nivel técnico sean auto-contenidas y aisladas.
 \end{itemize}
 
-El mapa resultante inicial es el siguiente:
+El mapa resultante inicial para la gestión del proyecto es el siguiente:
 
 \begin{center}
     \includegraphics[width=\linewidth]{img/kanban.png}
@@ -363,15 +393,20 @@ Bien es cierto que aunque haya sido realizada esa primera estimación, se podrí
 Para el primer \textit{sprint} se han identificado las siguientes tareas que deben realizarse:
 
 \begin{center}
-%    \includegraphics[width=\linewidth]{img/sprint1.png}
+    \includegraphics[width=\linewidth]{img/sprint1.png}
 \end{center}
 
 Tal como se puede ver, las tareas están representadas con su prioridad dentro del \textit{sprint}, para así también tener claro qué tareas deben tratar de terminarse antes que otras.
 
-Al terminar este primer \textit{sprint}, tendremos la base del proyecto terminada, podremos mostrarle al cliente una primera versión con unas funcionalidades básicas.
+Al terminar este primer \textit{sprint}, tendremos la base del proyecto terminada, y podríamos mostrarle al cliente una primera versión con unas funcionalidades básicas.
 
-De esta manera, el cliente nos puede dar \textit{feedback} de lo realizado, con una base ya terminada.Ese \textit{feedback} podremos utilizarlo como retroalimentación para el siguiente \textit{sprint}, ya sea para realizar modificaciones de lo ya realizado (hacer cambios nuevos que el cliente pida) o para utilizarlo para las tareas ya planificadas.
+De esta manera, podemos obtener \textit{feedback} de lo realizado, con una base ya terminada. Ese \textit{feedback} podremos utilizarlo como retroalimentación para el siguiente \textit{sprint}, ya sea para realizar modificaciones de lo ya realizado (hacer cambios nuevos que el cliente pida) o para utilizarlo para las tareas ya planificadas.
 
+
+
+\section{Herramientas tecnológicas utilizadas}
+
+Durante la implementación del proyecto hemos hecho uso de distintas herramientas tecnológicas, que a su vez también nos han ayudado con las metodologías ágiles explicadas previamente:
 
 \subsection{Gestión de tareas en Trello}
 
@@ -379,65 +414,77 @@ De esta manera, el cliente nos puede dar \textit{feedback} de lo realizado, con 
 
 Aunque cuenta con una versión de suscripción, la versión gratuita cuenta con las características suficientes como para poder ser utilizado para la gestión de proyectos sin problema alguno.
 
-Una vez definidas las tareas, tal como se ha visto antes, se han añadido a Trello, en el que se han creado las siguientes columnas, o fases de desarrollo:
+Una vez definidas las tareas, tal como se ha visto anteriormente, se han añadido a Trello, en el que se han creado las siguientes columnas, o fases de desarrollo:
 
 \begin{itemize}
     \item \textbf{Tareas pendientes}: donde situaremos las tareas que se deben realizar para llevar a cabo el proyecto.
-    \item \textbf{Desarrollo}: Son las tareas que se han empezado a desarrollar.
+
 \end{itemize}
 
 \begin{minipage}{0.6\linewidth}
     \begin{itemize}
-
+        \item \textbf{Desarrollo}: Son las tareas que se han empezado a desarrollar.
         \item \textbf{Testing}: Son las tareas que se dan por terminadas en el desarrollo y que pasan a una fase de testeo. En algunos casos puede ser directamente testeado por el cliente para dar su feedback (por ejemplo para el interfaz web), aunque lo habitual es que el testeo lo realice otra persona del proyecto (que no haya sido quien ha hecho el desarrollo).
 
         En caso de que una tarea no pase esta fase, se anotará los inconvenientes y volverá a la columna de \textbf{desarrollo}.
         \item \textbf{Producción}: Una vez el \textit{testing} ha terminado, se puede dar por terminada la tarea y debe ser incluida en producción.
     \end{itemize}
+
+Tal como se puede ver en la imagen, cada tarea se representa como una pequeña tarjeta, apareciendo como un listado de todas ellas en la columna correspondiente en las que están situadas (en este caso todavía en la tarea de pendientes).
 \end{minipage}
 \hfill
-\begin{minipage}{0.29\linewidth}
-%    \includegraphics[width=\linewidth]{img/tareas.png}
-    \vspace{-35pt}
+\begin{minipage}{0.32\linewidth}
+        \includegraphics[width=\linewidth]{img/tareas.png}
+    \vspace{-30pt}
     \begin{center}
         {\scriptsize \textit{Tareas pendientes en Trello}}
     \end{center}
 \end{minipage}
 
-\vspace{10pt}
-Tal como se puede ver en la imagen, cada tarea se representa como una pequeña tarjeta, apareciendo como un listado de todas ellas en la columna correspondiente en las que están situadas (en este caso todavía en la tarea de pendientes).
+%\vspace{10pt}
 
-A cada una de las tareas se les ha asignado un color y varias etiquetas que se van a detallar a continuación. De esta manera, Trello nos permitirá realizar búsquedas o visualizar las tareas con la etiqueta que nos interese.
+
+A cada una de las tareas se les ha asignado un color teniendo en cuenta el tema al que pertenecen, y varias etiquetas que representan el \textit{sprint} y la prioridad dentro del \textit{sprint}. De esta manera, Trello nos permitirá realizar búsquedas o visualizar las tareas con la etiqueta que nos interese.
 
 
 \begin{minipage}{0.48\linewidth}
-%    \includegraphics[width=\linewidth]{img/tarea.png}
-    \vspace{-35pt}
+    \includegraphics[width=\linewidth]{img/tarea.png}
+    \vspace{-30pt}
     \begin{center}
         {\scriptsize \textit{Detalle de tarea}}
     \end{center}
 \end{minipage}
 \hfill
-\begin{minipage}{0.47\linewidth}
-    A cada tarjeta se le ha dado un color, dependiendo del tema al que esté más orientada la tarea.
-
-    Otro aspecto son las etiquetas asignadas. En este caso cuenta con “\textbf{P1}” que marca la prioridad, siendo esta la más alta, y la segunda etiqueta referenciando a qué \textit{sprint} pertenece.
+\begin{minipage}{0.40\linewidth}
+    \includegraphics[width=\linewidth]{img/tarea1.png}
+    \vspace{-30pt}
+    \begin{center}
+        {\scriptsize \textit{Ítems de tarea}}
+    \end{center}
 \end{minipage}
 
-Por último, cada tarea puede tener pequeños ítems. Estos han sido detalladas para que el desarrollador tenga en cuenta qué es lo que debe hacer para dar por finalizada la tarea.
+Por último, cada tarea puede tener pequeños ítems. Estos han sido detallados para que a la hora de desarrollar se tenga en cuenta qué es lo que debe conseguir, y de esta manera dar por finalizada la tarea.
 
-Tal como se ha dicho previamente se pueden hacer filtros por las etiquetas, por lo que dependiendo del \textit{sprint} en el que nos encontremos, podremos filtrar por dicha etiqueta, quedando el inicio del primer \textit{sprint} de la siguiente manera:
+Tras terminar la tarea, se pasará a la columna \textbf{testing}, para de esta manera
+
+\subsection{Gestión de código fuente con Git}
+
+\href{https://es.wikipedia.org/wiki/Git}{Git} es el sistema de control de versiones creado por \href{https://es.wikipedia.org/wiki/Linus_Torvalds}{Linus Torvalds} para la gestión del código fuente de \href{https://es.wikipedia.org/wiki/N%C3%BAcleo_Linux}{Linux}. Hoy en día es el sistema más utilizado gracias a características tan importantes como la facilidad para crear ramas, su versatilidad para adaptarse al flujo de trabajo del desarrollador, integración con los entornos de desarrollo más importantes...
+
+A pesar de que Git permite ser descentralizado, se ha utilizado la plataforma \href{https://github.com/}{Github} como plataforma centralizadora y de esta manera también así disponer de una copia de seguridad del código fuente.
 
 \begin{center}
-%    \includegraphics[frame,width=0.9\linewidth]{img/board1.png}
+    \includegraphics[width=0.8\linewidth]{img/commits.png}
 \end{center}
 
-Este es el punto de partida y las tareas serán repartidas a sus correspondientes desarrolladores, que empezarán con ellas en cuanto se termine la asignación.
+Aparte, también se ha integrado con Trello (a través de los plugins conocidos como “Power-Ups”) para así poder asociar las tareas a los commits que las han cumplimentado. De esta manera conseguiremos una relación “tarea ↔ código” que podremos utilizar para analizar si ha habido algún error durante el desarrollo, o fases como la de \textit{testing}.
 
 
-\section{Herramientas tecnológicas utilizadas}
+\subsection{Creación de entornos con Docker}
+Para poder crear distintos entornos aislados para cada una de las fases del desarrollo se ha hecho uso de contenedores \href{https://es.wikipedia.org/wiki/Docker_(software)}{Docker}.
 
-%TODO: comentar GIT y ramas, etiquetas
+
+
 
 \chapter{Resultados}
 
