@@ -81,26 +81,82 @@ Encontrar una aplicación que se ciña a todas las necesidades puede resultar co
 A lo largo de este \textbf{trabajo final del Máster Universitario en Desarrollo de Aplicaciones y Servicios Web} se analizará la creación de un sistema gestor de contraseñas y documentación sensible para entornos multiusuarios, hecho con el \textit{frontend} de desarrollo \href{https://angular.io/}{Angular} y utilizando  \href{https://www.vaultproject.io/}{Hashicorp Vault} como sistema de backend.
 
 
-\chapter{Objetivos}
-%TODO: añadir introducción
-El objetivo principal de este proyecto final de máster es el de aunar los conocimientos adquiridos en el máster y utilizarlos para llevar a cabo una investigación sobre el uso y las funcionalidades de los gestores de contraseñas más conocidos.
-
-Tras este análisis se realizará la propuesta para la realización de un gestor de contraseñas, con los objetivos marcados para el mismo, y cómo se ha realizado su implementación.
 
 \chapter{Estado del arte}
 
-Para acotar el análisis, vamos a identificar qué se entiende por un gestor de contraseñas. ... %TODO:
+\textcite{tapas} nos indican que la categoría de software donde podemos meter a los administradores de contraseñas es amplia y que contiene muchas técnicas diferentes, pero que generalmente pueden ser complementarias. Es por ello que se van a identificar algunas de las características que suelen proveer este tipo de software:
+
+\begin{itemize}
+    \item Almacenar y devolver contraseñas.
+    \item Detectar la fuerza de las contraseñas.
+    \item Convertir otros tipos de autenticación a contraseñas.
+    \item Detección de formularios en webs para autorrellenado de datos.
+    \item Aplicaciones con almacenamiento en la nube y sincronización entre dispositivos.
+\end{itemize}
+
+Este tipo de aplicaciones suelen hacer uso de una contraseña maestra para proteger el “almacén de contraseñas”, pero esto puede desencadenar en dos inconvenientes:
+
+\begin{itemize}
+    \item En el estudio de \textcite{belenko2012secure} analizan más de una docena de gestores de contraseñas y concluyen que muchos de ellos no proveen un nivel de seguridad apropiado.
+
+    \item La contraseña elegida por el usuario puede no ser resistente a un ataque si el “almacén de contraseñas” es robado.
+\end{itemize}
+
+Es cierto que en los últimos años, este tipo de software que es utilizado en dispositivos móviles puede sustituir esa contraseña maestra por un reconocimiento biométrico (como puede ser reconocimiento de la huella dactilar o reconocimiento facial). En cambio, cuando se refiere a aplicaciones de escritorio, esto no sucede.
 
 
 \section{Gestores de contraseñas conocidos}
 
-
-\subsection{Problemas acontecidos}
-
+La siguiente tabla muestra una comparativa con distintos gestores de contraseñas conocidos y distintas característica que pueden ser útiles dentro de una empresa:
 
 
-\chapter{Requisitos del proyecto}
-Como propuesta para la creación de un gestor de contraseñas propio, se han identificado los siguientes requisitos que deben de cumplirse para considerar que el trabajo final de máster ha cumpido con su objetivo principal:
+\begin{yukitblrcol}{X[9]X[7]X[7]X[8]X[7]}
+    &    \titlehref{https://keepass.info/}{KeePass} &
+         \titlehref{https://keeweb.info/}{KeeWeb} &
+         \titlehref{https://1password.com/}{1Password} &
+         \titlehref{https://www.lastpass.com/}{LastPass}
+         \\
+    Multiusuario  & {\LARGE \xmark}  & {\LARGE \cmark} & {\LARGE \xmark} / {\LARGE \cmark}** & {\LARGE \xmark} / {\LARGE \cmark}** \\
+    Distintos sistemas de autenticación \textbf{*}  & {\LARGE \xmark}  &  {\LARGE \xmark} & {\LARGE \xmark} / {\LARGE \cmark}*** &  {\LARGE \xmark} / {\LARGE \cmark}*** \\
+    Permite guardar ficheros & {\LARGE \cmark} & {\LARGE \cmark} & {\LARGE \cmark} & {\LARGE \cmark}\\
+    Permite editar documentación & {\LARGE \xmark} & {\LARGE \xmark} & {\LARGE \xmark} & {\LARGE \xmark} \\
+    Versión web  & {\LARGE \xmark}  & {\LARGE \cmark} & {\LARGE \cmark} & {\LARGE \cmark} \\
+    Versión escritorio  &  {\LARGE \cmark}  & {\LARGE \cmark} & {\LARGE \cmark} & {\LARGE \cmark} \\
+    App móvil  & {\LARGE \xmark} / {\LARGE \cmark}**** & {\LARGE \xmark} & {\LARGE \cmark} & {\LARGE \cmark} \\
+    Informes de auditoría &  {\LARGE \xmark}***** & {\LARGE \xmark} & {\LARGE \xmark} / {\LARGE \cmark}** & {\LARGE \xmark} / {\LARGE \cmark}**  \\
+    On-premises  & {\LARGE \cmark}  & {\LARGE \cmark} & {\LARGE \xmark} & {\LARGE \xmark}\\
+    Coste  &  0€  & 0€ &  \$7,99\linebreak user/mes** & 5,70€\linebreak user/mes** \\
+    Software Libre  & {\LARGE \cmark}  & {\LARGE \cmark} & {\LARGE \xmark} & {\LARGE \xmark}\\
+
+\end{yukitblrcol}
+
+\begin{itemize}
+    \item[*] Permitir distintos sistemas de autorización como usuario+contraseña, autenticación contra Active Directory, sistema LDAP, TOTP...
+    \item[**] La versión para empresas (“business” en 1password).
+    \item[***] La versión para empresas y sólo sistemas “\textit{single sign on}”.
+    \item[****] Versión no oficial.
+    \item[*****] Se puede conseguir algo similar mediante un “\textit{trigger}”.
+\end{itemize}
+
+Tal como se ve en la tabla anterior, sólo las aplicaciones que son Software Libre tienen versión \textit{on-premises}, es decir, que podemos ejecutar y guardar los datos en nuestros servidores.
+
+
+\section{Problemas acontecidos}
+
+Dada la importancia de los datos que se puede guardar en un gestor de contraseñas y documentación, es importante que los datos se encuentren a buen recaudo, ya que cualquier fallo de seguridad puede suponer el robo de dicha información.
+
+%TODO: continuar
+
+
+\chapter{Objetivos}
+
+El objetivo principal de este proyecto final de máster es el de aunar los conocimientos adquiridos en el máster y utilizarlos para llevar a cabo una investigación sobre los gestores de contraseñas más conocidos en la actualidad.
+
+Tras esto, se va a pasar a explicar cómo se ha desarrollado un gestor de contraseñas propio, en el que también se podrá crear, editar y guardar documentación sensible.
+
+
+\section{Requisitos del proyecto}
+Como propuesta para la creación de un gestor de contraseñas propio, se han identificado los siguientes requisitos que deben de cumplirse para considerar que el trabajo final de máster ha cumplido con los objetivos citados previamente:
 
 \begin{itemize}
 
@@ -132,6 +188,8 @@ Como propuesta para la creación de un gestor de contraseñas propio, se han ide
 \end{itemize}
 
 Teniendo en cuenta las metodologías utilizadas, y explicadas en el siguiente apartado, cualquier añadido a estos requisitos se podría añadir en etapas posteriores del desarrollo.
+
+
 
 
 \chapter{Metodologías utilizadas}
