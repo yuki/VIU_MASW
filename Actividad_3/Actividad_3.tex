@@ -33,7 +33,7 @@
 
 \chapter{Introducción}
 
-A la hora de gestionar un proyecto es conveniente hacer uso de las tecnologías ágiles que están de moda, pero eso no supone sólo realizar un análisis previo.
+A la hora de gestionar un proyecto es conveniente hacer uso de las tecnologías ágiles que son tan utilizadas hoy en día, pero eso no supone sólo realizar un análisis previo.
 
 Durante la vida del proyecto hay que ir tomando decisiones teniendo en cuenta el estado del proyecto, de las tareas realizadas (y a realizar) y cuál es el estado del equipo que lo desarrolla. Con todo esto, y con otras posibles variables externas, habrá que ir adaptando la gestión del proyecto para buscar la manera más eficiente de continuar con el desarrollo.
 
@@ -297,6 +297,7 @@ Entre todo el equipo se decide que, salvo sorpresa, el proyecto termina el día 
 A continuación se va a detallar el resumen de lo acontecido durante la simulación:
 
 \textbf{¿La estimación temporal fue la correcta?}
+\vspace{-12pt}
 \begin{itemize}
     \item La estimación inicial de ciertas tareas no ha sido del todo correcta. Para tareas cortas como “Analytics” se ha estimado 4 días y para otras más largas como “Chat”, de 24 horas, el mismo número de días.
 
@@ -306,39 +307,27 @@ A continuación se va a detallar el resumen de lo acontecido durante la simulaci
 \end{itemize}
 
 \textbf{¿Qué hubierais cambiado del planteamiento inicial? ¿Qué factores hubierais tenido en cuenta?}
-
+\vspace{-12pt}
 \begin{itemize}
-    \item El cambio principal sería la modificación de la estimación inicial de días. Se podría haber establecido que la necesidad de días fuese el número de horas entre 4. Por lo tanto, quedaría algo similar a lo siguiente (se han redondeado algunos resultados):
-
-    \begin{columntblr}[long]{XXX}
-        Tareas de programación & Coste & Límite inicial
-        establecido (días) \\
-        Login & 20 & 5 \\
-        API Rest & 20 & 5 \\
-        Integrar MongoDB & 17 & 4 \\
-        Crear Foro & 19 & 5 \\
-        UI & 25 & 6 \\
-        Chat & 24 & 6 \\
-        Analytics & 7 & 2 \\
-    \end{columntblr}
+    \item El cambio principal sería la modificación de la estimación inicial de días. Se podría haber establecido que la necesidad de días fuese el número de horas entre 4.
 \end{itemize}
 
 \textbf{¿Cuántas veces durante el proceso se han cambiado las fechas límites?}
-
+\vspace{-12pt}
 \begin{itemize}
     \item Se han tenido que hacer tres cambios a lo largo del proyecto, aunque dos de los cambios han sido para la estimación de la misma tarea (“Chat”, que al final ha requerido de 6 días aunque habían sido estimados 4).
 \end{itemize}
 
 
 \textbf{¿Se han ajustado bien los nuevos plazos establecidos o han sobrado recursos tras los reajustes?}
-
+\vspace{-12pt}
 \begin{itemize}
     \item Aunque en los reajustes ha sobrado tiempo, acto seguido se ha puesto con la nueva tarea a realizar. De esta manera se ha aprovechado de manera correcta el tiempo.
 \end{itemize}
 
 
 \textbf{¿Cómo habéis consensuado las decisiones para reajustar los recursos?}
-
+\vspace{-12pt}
 \begin{itemize}
     \item Teniendo en cuenta el planteamiento anterior propuesto de estimar que van a ser “4 horas/día”. En el caso de “Chat”, faltaban 8 horas y había dos personas realizando la tarea, por eso en primera instancia se decidió que con un día más habría sido suficiente.
 
@@ -346,16 +335,296 @@ A continuación se va a detallar el resumen de lo acontecido durante la simulaci
 \end{itemize}
 
 \textbf{¿Qué nuevas decisiones propondríais para futuros proyectos?}
+\vspace{-12pt}
 \begin{itemize}
     \item Aparte de la proposición comentada previamente para la estimación de días, se cree que es necesario realizar un nuevo añadido a las estimaciones.
 
-    Esta nueva estimación sería la de el tiempo que se va a requerir para realizar la fase de testeo de las actividades. Se podría indicar que el tiempo de testeo puede ser el de el número de horas de desarrollo entre 6, aunque lógicamente cada caso puede tarea puede ser distinta.
+    Esta nueva estimación sería la del tiempo que se va a requerir para realizar la fase de testeo de las actividades. Se podría indicar que el tiempo de testeo puede ser el de el número de horas de desarrollo entre 6, aunque lógicamente cada caso puede tarea puede ser distinta.
+\end{itemize}
+
+
+\section{Simulación 2}
+
+Para realizar la segunda simulación uno de los desarrolladores se va a encargar de ser el “\textit{SCRUM Master}”, que tomará todas las decisiones de gestión del proyecto, en este caso va a ser Emily. El resto de desarrolladores se encargarán de realizar las tareas técnicas.
+
+Como primera decisión de Emily es la de modificar el límite inicial establecido del número de días. Para la nueva estimación, se ha tenido en cuenta que para el límite inicial de días va a ser el coste de horas que se va a necesitar entre 4 (días = coste/4). Se han redondeado algunos resultados, quedando la tabla de la siguiente manera:
+
+\begin{columntblr}[long]{X[2]XX[2]X}
+    Tareas de programación & Coste & Límite inicial
+    establecido (días) &  Test\\
+    Login & 20 & 5 & 3\\
+    API Rest & 20 & 5 & 4\\
+    Integrar MongoDB & 17 & 4 & 3\\
+    Crear Foro & 19 & 5 & 3\\
+    UI & 25 & 6 & 4\\
+    Chat & 24 & 6 & 4\\
+    Analytics & 7 & 2 & 2\\
+\end{columntblr}
+
+A la tabla también se ha añadido una columna del tiempo que se va a necesitar para realizar el testeo de la tarea. Esta estimación se ha obtenido como resultado del coste entre 6, y dependiendo del caso redondeando para arriba o para abajo.
+
+\subsection{Reunión 1}
+
+En la primera reunión Emily explica la nueva estimación de días y para el test y hace el primer reparto de tareas:
+
+\begin{columntblr}{XX[2]XXX}
+    Reunión 1 & Tarea actual & Avance diario & Estado final/día & Días usados\\
+    John & Login & 3 & 3/20 & 1/5\\
+    Susan & API Rest & 2 & 2/20 & 1/5\\
+    Robert & Integrar MongoDB & 4 & 4/17 & 1/4\\
+\end{columntblr}
+
+
+\begin{center}
+    \includegraphics[width=0.95\linewidth]{img/s2-1.png}
+\end{center}
+
+\subsection{Reunión 2}
+Teniendo en cuenta los avances del día anterior, se mantienen las asignaciones y las estimaciones realizadas previamente.
+
+\begin{columntblr}{XX[2]XXX}
+    Reunión 2 & Tarea actual & Avance diario & Estado final/día & Días usados\\
+    John & Login & 3 & 6/20 & 2/5\\
+    Susan & API Rest & 6 & 8/20 & 2/5\\
+    Robert & Integrar MongoDB & 5 & 9/17 & 2/4\\
+\end{columntblr}
+
+La situación del Trello al finalizar el segundo día es la siguiente:
+\begin{center}
+    \includegraphics[width=\linewidth]{img/s2-2.png}
+\end{center}
+
+\subsection{Reunión 3}
+No es previsible que se termine ninguna tarea, por lo que se mantiene la previsión.
+
+\begin{columntblr}{XX[2]XXX}
+    Reunión 3 & Tarea actual & Avance diario & Estado final/día & Días usados\\
+    John & Login & 6 & 12/20 & 3/5\\
+    Susan & API Rest & 5 & 13/20 & 3/5\\
+    Robert & Integrar MongoDB & 2 & 11/17 & 3/4\\
+\end{columntblr}
+
+\begin{center}
+    \includegraphics[width=\linewidth]{img/s2-3.png}
+\end{center}
+
+\subsection{Reunión 4}
+Teniendo en cuenta la estimación inicial, Robert debería terminar hoy la tarea, pero es poco probable. Así que se va a añadir un día más.
+
+\begin{columntblr}{XX[2]XXX}
+    Reunión 4 & Tarea actual & Avance diario & Estado final/día & Días usados\\
+    John & Login & 1 & 13/20 & 4/5\\
+    Susan & API Rest & 6 & 19/20 & 4/5\\
+    Robert & Integrar MongoDB & 4 & 15/17 & 4/4\\
+\end{columntblr}
+
+\begin{center}
+    \includegraphics[width=\linewidth]{img/s2-4.png}
+\end{center}
+
+\subsection{Reunión 5}
+Tal como se indicó ayer, Robert va a necesitar al menos el día de hoy. En caso de terminar su tarea, se pondrá con la siguiente del pool. Para “Login” también va a ser necesario al menos un día más. Respecto a Susan, cuando termine que coja “Crear Foro”.
+
+\begin{columntblr}{XX[2]XXX}
+    Reunión 5 & Tarea actual & Avance diario & Estado final/día & Días usados\\
+    John & Login & 4 & 17/20 & 5/5\\
+    Susan & API Rest & 1 & 20/20 & 5/5\\
+    Susan & Crear Foro & 3 & 3/19 & 1/5\\
+    Robert & Integrar MongoDB & 2 & 17/17 & 5/4\\
+    Robert & UI & 1 & 1/25 & 1/6\\
+\end{columntblr}
+
+\begin{center}
+    \includegraphics[width=\linewidth]{img/s2-5.png}
+\end{center}
+
+\subsection{Reunión 6}
+Si John termina su tarea, pasará a testear “API Rest”, que el tiempo estimado son 4 horas. El resto siguen con sus tareas.
+
+\begin{columntblr}{XX[2]XXX}
+    Reunión 6 & Tarea actual & Avance diario & Estado final/día & Días usados\\
+    John & Login & 3 & 20/20 & 6/5\\
+    John & Test-API Rest & 2 & 2/4 & \\
+    Susan & Crear Foro & 4 & 7/19 & 2/5\\
+    Robert & UI & 5 & 6/25 & 2/6\\
+\end{columntblr}
+
+Al finalizar el sexto día, el Trello queda de la siguiente manera:
+
+\begin{center}
+    \includegraphics[width=\linewidth]{img/s2-6.png}
+\end{center}
+
+\subsection{Reunión 7}
+Si John termina de testear “API Rest”, lo ideal es que pase a testear “Integrar MongoDB”. Si por un casual terminase con ese testeo también, cogerá la tarea “Chat”. El resto del equipo siguen con sus tareas.
+
+\begin{columntblr}{XX[2]XXX}
+    Reunión 7 & Tarea actual & Avance diario & Estado final/día & Días usados\\
+    John & Test-API Rest & 2 & 4/4 & \\
+    John & Test-Integrar MongoDB & 3 & 3/3 & \\
+    John & Chat & 1 & 1/24 & 1/6 \\
+    Susan & Crear Foro & 5 & 12/19 & 3/5\\
+    Robert & UI & 4 & 10/25 & 3/6\\
+\end{columntblr}
+
+John ha tenido un día productivo, dejando 2 tareas como terminadas tras el testeo.
+\begin{center}
+    \includegraphics[width=\linewidth]{img/s2-7.png}
+\end{center}
+
+\subsection{Reunión 8}
+Tal como están las tareas, no existe necesidad de realizar previsión. Se continúa con las tareas
+
+\begin{columntblr}{XX[2]XXX}
+    Reunión 8 & Tarea actual & Avance diario & Estado final/día & Días usados\\
+    John & Chat & 1 & 2/24 & 2/6 \\
+    Susan & Crear Foro & 5 & 17/19 & 4/5\\
+    Robert & UI & 3 & 13/25 & 4/6\\
+\end{columntblr}
+
+\begin{center}
+    \includegraphics[width=\linewidth]{img/s2-8.png}
+\end{center}
+
+\subsection{Reunión 9}
+Hoy Susan debería terminar con su tarea. No se cree que haya necesidad de añadir un día más. En caso de que termine sería conveniente que testee “Login”.
+
+\begin{columntblr}{XX[2]XXX}
+    Reunión 9 & Tarea actual & Avance diario & Estado final/día & Días usados\\
+    John & Chat & 5 & 7/24 & 3/6 \\
+    Susan & Crear Foro & 2 & 19/19 & 5/5\\
+    Susan & Test-Login & 2 & 2/3 &\\
+    Robert & UI & 6 & 19/25 & 5/6\\
+\end{columntblr}
+
+\begin{center}
+    \includegraphics[width=\linewidth]{img/s2-9.png}
+\end{center}
+
+\subsection{Reunión 10}
+Si Susan termina de testear “Login” cogerá la última tarea. Se va a estimar un día más para “UI”, porque es probable que hoy no se termine.
+
+\begin{columntblr}{XX[2]XXX}
+    Reunión 10 & Tarea actual & Avance diario & Estado final/día & Días usados\\
+    John & Chat & 3 & 10/24 & 4/6 \\
+    Susan & Test-Login & 1 & 2/3 &\\
+    Susan & Analytics & 5 & 5/7 & 1/2 \\
+    Robert & UI & 3 & 22/25 & 6/6\\
+\end{columntblr}
+
+\begin{center}
+    \includegraphics[width=\linewidth]{img/s2-10.png}
+\end{center}
+
+\subsection{Reunión 11}
+Emily cree que Robert terminará hoy “UI”, por lo que se mantiene únicamente un día extra de estimación. De ser así, que se ponga a testear “Crear Foro”. Si Susan termina “Analytics” pasará a ayudar a “John”, para tratar que no se estire el tiempo estimado.
+
+\begin{columntblr}{XX[2]XXX}
+    Reunión 11 & Tarea actual & Avance diario & Estado final/día & Días usados\\
+    Susan & Analytics & 2 & 7/7 & 2/2 \\
+    Susan & Chat & 3 & 16/24 & 5/6 \\
+    John & Chat & 3 & 16/24 & 5/6 \\
+    Robert & UI & 3 & 25/25 & 6/6\\
+    Robert & Test-Crear Foro & 3 & 3/3 & \\
+\end{columntblr}
+
+Al terminar el día, Trello queda:
+\begin{center}
+    \includegraphics[width=\linewidth]{img/s2-11.png}
+\end{center}
+
+
+\subsection{Reunión 12}
+Teniendo en cuenta que Robert terminó de testear “Crear Foro”, hoy que testee “Analytics”. En caso de terminar es mejor que no se ponga a ayudar en “Chat”, porque será el encargado de testearla. Emily prefiere ser positiva, aunque por si acaso estima un día más para “Chat”. En caso de que “Chat” se termine, que John y Susan comiencen a testear “UI”.
+
+\begin{columntblr}{XX[2]XXX}
+    Reunión 12 & Tarea actual & Avance diario & Estado final/día & Días usados\\
+    Susan & Chat & 1 & 22/24 & 6/6 \\
+    John & Chat & 5 & 22/24 & 6/6 \\
+    Robert & Test-Analytics & 1 & 2/2 & \\
+\end{columntblr}
+
+Al terminar el día, Trello queda:
+\begin{center}
+    \includegraphics[width=\linewidth]{img/s2-12.png}
+\end{center}
+
+\subsection{Reunión 13}
+Susan se encarga de terminar “Chat” y “John pasa a testear “UI” para así tratar de terminar hoy. En cuanto Susan termine, Robert testea “Chat”.
+
+\begin{columntblr}{XX[2]XXX}
+    Reunión 13 & Tarea actual & Avance diario & Estado final/día & Días usados\\
+    Susan & Chat & 2 & 22/24 & 7/6 \\
+    John & Test-UI & 4 & 4/4 & \\
+    Robert & Test-Chat & 3 & 3/4 & \\
+\end{columntblr}
+
+Todas las tareas terminadas a falta del test de “Chat”
+\begin{center}
+    \includegraphics[width=\linewidth]{img/s2-13.png}
+\end{center}
+
+\subsection{Reunión 13}
+La única tarea que queda es terminar el test de “Chat” que se va a terminar hoy. El resto de desarrolladores han pasado a otros proyectos.
+
+\begin{columntblr}{XX[2]XXX}
+    Robert & Test-Chat & 1 & 4/4 & \\
+\end{columntblr}
+
+\subsection{Resumen de la Simulación 2}
+A continuación se va a detallar el resumen de lo acontecido durante la simulación:
+
+\textbf{¿La estimación temporal fue la correcta?}
+\vspace{-12pt}
+\begin{itemize}
+    \item La estimación inicial de ciertas tareas no ha sido del todo correcta. A pesar de las nuevas estimaciones, ha habido que hacer cambios.
+\end{itemize}
+
+\textbf{¿Qué hubierais cambiado del planteamiento inicial? ¿Qué factores hubierais tenido en cuenta?}
+\vspace{-12pt}
+\begin{itemize}
+    \item Se ha creído que habiendo modificado la estimación inicial de días permitiría no excederlos. Quizá habría sido mejor haber hecho las tareas por parejas en la medida de lo posible a pesar de las nuevas estimaciones.
+\end{itemize}
+
+\textbf{¿Cuántas veces durante el proceso se han cambiado las fechas límites?}
+\vspace{-12pt}
+\begin{itemize}
+    \item Se han tenido que hacer tres cambios a lo largo del proyecto. Para “Login”, “Integrar MongoDB” e “UI”.
+\end{itemize}
+
+
+\textbf{¿Se han ajustado bien los nuevos plazos establecidos o han sobrado recursos tras los reajustes?}
+\vspace{-12pt}
+\begin{itemize}
+    \item El último día ha habido parte del equipo (Susan y John) que ya no tenían tareas para realizar.
+\end{itemize}
+
+
+\textbf{¿Qué opináis del rendimiento obtenido en las tareas?}
+\vspace{-12pt}
+\begin{itemize}
+    \item En principio, a pesar de que ha habido que ha habido que realizar nuevas estimaciones, bien es cierto que las tareas se han comenzado a mitad de día (tras terminar otras tareas el mismo día). Por lo tanto, el equipo ha trabajado en la medida de lo posible.
+\end{itemize}
+
+\textbf{¿Qué opináis sobre la organización de las mismas?}
+\vspace{-12pt}
+\begin{itemize}
+    \item Habiendo hechas las modificaciones tras la primera simulación, \textit{a priori} la estimación parecía más correcta. Lo que habría que haber sabido es si existe algún tipo de inter-dependencia entre las mismas, para así poder simular las prioridades de las mismas.
+\end{itemize}
+
+
+\textbf{¿Qué nuevas decisiones propondríais para futuros proyectos?}
+\vspace{-12pt}
+\begin{itemize}
+    \item Habría que ajustar de mejor manera los días utilizados. Por otro lado, la estimación inicial de “testeo de tareas” habría que ajustarlo más a la realidad y ver si con la estimación de “horas para hacer la tarea entre 6” sería suficiente.
 \end{itemize}
 
 
 
 \chapter{Conclusiones}
 
-Tal como se ha podido ver a lo largo del documento,
+Tal como se ha podido ver a lo largo del documento, las simulaciones realizadas en la gestión de un proyecto nos puede ayudar a entender las situaciones por las que el proyecto pasa y de esta manera estar prevenidos antes distintos incidentes.
+
+Por otro lado, se ha podido observar cómo la figura del “Scrum Master” hoy en día hace que el proyecto pueda adaptarse de manera rápida ante las situaciones acontecidas, y de esta manera entender el papel importante que desempeña.
 
 \end{document}
