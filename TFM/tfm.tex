@@ -64,7 +64,6 @@ Este TFM trata de aproximar la creación de un gestor de contraseñas y document
 
 \tableofcontents
 
-
 \chapter{Introducción}
 En la era digital en la que nos encontramos guardar datos e información es relativamente sencillo, gracias a que cada vez conseguimos tener discos duros con mayor capacidad. En caso de que un único disco duro se nos quede pequeño, existen sistemas como RAID que nos permite combinar varios discos añadiendo tolerancia a fallos en caso de rotura de alguno de ellos.
 
@@ -78,7 +77,7 @@ A las contraseñas también hay que añadir la información sensible que maneja 
 
 Encontrar una aplicación que se ciña a todas las necesidades puede resultar complejo, y más si estas necesidades varían a lo largo del tiempo. También pueden surgir distintos problemas: la aplicación que utilicemos puede ser abandonada por los creadores; si es de pago, el precio o la suscripción puede variar; la posibilidad de añadir características propias no será posible salvo que sea Software Libre, ...
 
-A lo largo de este \textbf{trabajo final del Máster Universitario en Desarrollo de Aplicaciones y Servicios Web} se analizará la creación de un sistema gestor de contraseñas y documentación sensible para entornos multiusuarios, hecho con el \textit{frontend} de desarrollo \href{https://angular.io/}{Angular} y utilizando  \href{https://www.vaultproject.io/}{Hashicorp Vault} como sistema de backend.
+A lo largo de este \textbf{trabajo final del Máster Universitario en Desarrollo de Aplicaciones y Servicios Web} se analizará la creación de un sistema gestor de contraseñas y documentación sensible para entornos multiusuario, hecho con el \textit{frontend} de desarrollo \href{https://angular.io/}{Angular} y utilizando  \href{https://www.vaultproject.io/}{Hashicorp Vault} como sistema de backend.
 
 
 
@@ -352,7 +351,7 @@ A continuación se van a plasmar las distintas “historias de usuario” obteni
     \\
 \end{requisitostbl}
 
-
+\vspace{20pt}
 
 \begin{requisitostbl}{X[1]X[2]X[2]X[3]X[2]}
     ID & Estimación & Prioridad  & Tema &  Dependencias \\
@@ -371,7 +370,7 @@ A continuación se van a plasmar las distintas “historias de usuario” obteni
      \\
 \end{requisitostbl}
 
-
+\vspace{20pt}
 
 \begin{requisitostbl}{X[1]X[2]X[2]X[3]X[2]}
     ID & Estimación & Prioridad  & Tema &  Dependencias \\
@@ -425,7 +424,6 @@ A continuación se van a plasmar las distintas “historias de usuario” obteni
 \end{requisitostbl}
 
 
-
 \begin{requisitostbl}{X[1]X[2]X[2]X[3]X[2]}
     ID & Estimación & Prioridad  & Tema &  Dependencias \\
     11  & 35 horas & 2  & Producción & 1  \\
@@ -460,6 +458,7 @@ El mapa resultante inicial para la gestión del proyecto es el siguiente:
 
 \begin{center}
     \includegraphics[width=\linewidth]{img/kanban.png}
+    \captionof{figure}{Mapa de las tareas a realizar}
 \end{center}
 
 \subsection{\textit{Sprints} generados}
@@ -472,6 +471,7 @@ Para el primer \textit{sprint} se han identificado las siguientes tareas que deb
 
 \begin{center}
     \includegraphics[width=\linewidth]{img/sprint1.png}
+    \captionof{figure}{Tareas a realizar en el \textit{Sprint} 1}
 \end{center}
 
 Tal como se puede ver, las tareas están representadas con su prioridad dentro del \textit{sprint}, para así también tener claro qué tareas deben tratar de terminarse antes que otras.
@@ -480,13 +480,9 @@ Al terminar este primer \textit{sprint}, tendremos la base del proyecto terminad
 
 De esta manera, podemos obtener \textit{feedback} de lo realizado, con una base ya terminada. Ese \textit{feedback} podremos utilizarlo como retroalimentación para el siguiente \textit{sprint}, ya sea para realizar modificaciones de lo ya realizado (hacer cambios nuevos que el cliente pida) o para utilizarlo para las tareas ya planificadas.
 
+Para llevar una mejor gestión de las tareas expuestas en este apartado, lo ideal es utilizar un software especializado creado con dicho objetivo, como el que vamos a analizar a continuación.
 
-
-\section{Herramientas tecnológicas utilizadas}
-
-Durante la creación del proyecto hemos hecho uso de distintas herramientas tecnológicas, que a su vez también nos han ayudado con las metodologías ágiles explicadas previamente:
-
-\subsection{Gestión de tareas en Trello}
+\section{Gestión de tareas con Trello}
 
 \href{https://trello.com/}{Trello} es una aplicación web, creada por la empresa \href{https://www.atlassian.com/}{Atlassian}, que nos permite tener un tablero \href{https://en.wikipedia.org/wiki/Kanban_(development)}{Kanban} donde podremos añadir las tareas de nuestro proyecto, e ir moviéndolas entre distintas etapas.
 
@@ -499,7 +495,7 @@ Una vez definidas las tareas, tal como se ha visto anteriormente, se han añadid
 
 \end{itemize}
 
-\begin{minipage}{0.6\linewidth}
+\begin{minipage}{0.60\linewidth}
     \begin{itemize}
         \item \textbf{Desarrollo}: Son las tareas que se han empezado a desarrollar.
         \item \textbf{Testing}: Son las tareas que se dan por terminadas en el desarrollo y que pasan a una fase de testeo. En algunos casos puede ser directamente testeado por el cliente para dar su feedback (por ejemplo para el interfaz web), aunque lo habitual es que el testeo lo realice otra persona del proyecto (que no haya sido quien ha hecho el desarrollo).
@@ -508,15 +504,12 @@ Una vez definidas las tareas, tal como se ha visto anteriormente, se han añadid
         \item \textbf{Producción}: Una vez el \textit{testing} ha terminado, se puede dar por terminada la tarea y podrá ser incluida en producción.
     \end{itemize}
 
-Tal como se puede ver en la imagen, cada tarea se representa como una pequeña tarjeta, apareciendo como un listado de todas ellas en la columna correspondiente en las que están situadas (en este caso todavía en la lista de tareas pendientes).
+    Tal como se puede ver en la imagen, cada tarea se representa como una pequeña tarjeta, apareciendo como un listado de todas ellas en la columna correspondiente en las que están situadas (en este caso todavía en la lista de tareas pendientes).
 \end{minipage}
 \hfill
 \begin{minipage}{0.32\linewidth}
-        \includegraphics[width=\linewidth]{img/tareas.png}
-    \vspace{-30pt}
-    \begin{center}
-        {\scriptsize \textit{Tareas pendientes en Trello}}
-    \end{center}
+    \includegraphics[width=\linewidth]{img/tareas.png}
+    \captionof{figure}{Tareas pendientes en Trello}
 \end{minipage}
 
 %\vspace{10pt}
@@ -527,25 +520,52 @@ A cada una de las tareas se les ha asignado un color teniendo en cuenta el tema 
 
 \begin{minipage}{0.48\linewidth}
     \includegraphics[width=\linewidth]{img/tarea.png}
-    \vspace{-30pt}
-    \begin{center}
-        {\scriptsize \textit{Detalle de tarea}}
-    \end{center}
+    \captionof{figure}{Detalle de la tarea}
 \end{minipage}
 \hfill
 \begin{minipage}{0.40\linewidth}
     \includegraphics[width=\linewidth]{img/tarea1.png}
-    \vspace{-30pt}
-    \begin{center}
-        {\scriptsize \textit{Ítems de tarea}}
-    \end{center}
+    \captionof{figure}{Ítems de la tarea}
 \end{minipage}
 
 Por último, cada tarea puede tener un listado de pequeños ítems. Estos han sido detallados para que a la hora de desarrollar se tenga en cuenta qué es lo que se debe conseguir, y de esta manera dar por finalizada la tarea.
 
 Tras terminar la tarea, se pasará a la columna \textbf{testing}, para de esta manera, tal como se ha dicho previamente, comenzar con la fase de testeo.
 
-\subsection{Gestión de código fuente con Git}
+
+\chapter{Herramientas tecnológicas utilizadas}
+
+Durante la creación del proyecto hemos hecho uso de distintas herramientas tecnológicas, que a su vez también nos han ayudado con las metodologías ágiles explicadas previamente.
+
+
+\section{Framework Angular}
+
+\href{https://angular.io/}{Angular} es un \textit{framework} que nos facilita la creación de aplicaciones web, utiliza el lenguaje de programación \href{https://www.typescriptlang.org/}{Typescript} y es Software Libre.
+
+Angular nos va a permitir programar haciendo uso de la arquitectura conocida como “Modelo–vista–controlador”, que nos va a permitir separar la representación visual de la aplicación, el modelo de datos que podamos tener y la lógica de negocio.
+
+Gracias a ello, la aplicación desarrollada va a ser lo más modular posible, para que de esta manera el mantenimiento y el añadirle nuevas características en el futuro se pueda realizar de manera sencilla.
+
+\section{Hashicorp Vault}
+
+\href{https://www.vaultproject.io/}{Vault} es el proyecto de código abierto para asegurar, almacenar y controlar el acceso a secretos y datos sensibles creado por la empresa \href{https://www.hashicorp.com/}{Hashicorp} (conocidos también por la creación de \href{https://www.terraform.io/}{Terraform}).
+
+Se va a utilizar Vault como sistema centralizado para varios aspectos de la aplicación web que se va a desarrollar:
+
+\begin{itemize}
+    \item \textbf{Gestión de autenticación}: Vault nos va a permitir tener un sistema de gestión de autenticación centralizado, que nos puede permitir pasar de un sistema de “usuario y contraseña”, a un sistema autenticado contra el Active Directory de la empresa, o hacer uso de sistemas sistemas \href{https://en.wikipedia.org/wiki/OAuth}{OAuth}/\href{https://en.wikipedia.org/wiki/OpenID#OpenID_Connect_(OIDC)}{OIDC}.
+
+    \item \textbf{Gestión de autorización}: A la hora de permitir el acceso y permisos a los secretos Vault cuenta con un sistema interno que nos ayudará a realizar dicha gestión.
+
+    \item \textbf{Gestor de almacenamiento}: Se puede hacer uso de distintos sistemas de \textit{backend} de almacenamiento: desde ficheros cifrados a distintas bases de datos (MySQL, PostgreSQL, Cassandra,...).
+
+    Dependiendo del almacenamiento elegido, el crear un sistema en Alta Disponibilidad será más sencillo que en otros. De todas maneras, la posibilidad de migrar de un sistema de almacenamiento a otro siempre es posible
+
+\end{itemize}
+
+
+
+\section{Git como gestor de código fuente}
 
 \href{https://es.wikipedia.org/wiki/Git}{Git} es el sistema de control de versiones creado por \href{https://es.wikipedia.org/wiki/Linus_Torvalds}{Linus Torvalds} para la gestión del código fuente de \href{https://es.wikipedia.org/wiki/N%C3%BAcleo_Linux}{Linux}. Hoy en día es el sistema más utilizado gracias a características tan importantes como la facilidad para crear ramas, su versatilidad para adaptarse al flujo de trabajo del desarrollador, integración con los entornos de desarrollo más importantes...
 
@@ -553,12 +573,13 @@ A pesar de que Git permite ser descentralizado, se ha utilizado la plataforma \h
 
 \begin{center}
     \includegraphics[width=0.8\linewidth]{img/commits.png}
+    \captionof{figure}{Histórico de varios commits realizados}
 \end{center}
 
 Aparte, también se ha integrado con Trello (a través de los plugins conocidos como “Power-Ups”) para así poder asociar las tareas a los commits que las han cumplimentado. De esta manera conseguiremos una relación “tarea ↔ código” que podremos utilizar para analizar si ha habido algún error durante el desarrollo, o fases como la de \textit{testing}.
 
 
-\subsection{Creación de entornos con Docker}
+\section{Creación de entornos con Docker}
 Como dice \textcite{mouat}, los contenedores son un concepto que lleva existiendo décadas en sistemas Unix (con el comando “chroot”), pero \href{https://es.wikipedia.org/wiki/Docker_(software)}{Docker} cogió la tecnología existente de contenedores Linux y la amplió de varias maneras, sobre todo gracias a su sistema de imágenes portable.
 
 Gracias a utilizar distintas imágenes Docker con distintos servicios, se ha podido realizar despliegues de manera sencilla para distintos entornos (desarrollo, test y producción).
@@ -626,7 +647,7 @@ También ha sido especialmente útil al poder realizar el desarrollo en distinto
         \item Crear “timers” para que si el usuario no utiliza la aplicación en X minutos, se realice un deslogueo de la aplicación y así salvaguardar los datos.
         \item Posibles mejoras en la visualización de secretos (que se puedan ver documentos word/libreoffice a través de librerías externas)
         \item Añadir un TOC (índice, table of contents), teniendo en cuenta la estructura del MarkDown.
-        \item Poder enviar po mail un documento del secreto (aunque igual me da tiempo a hacerlo antes de la entrega)
+        \item Poder enviar por mail un documento del secreto (aunque igual me da tiempo a hacerlo antes de la entrega)
         \item ...
     \end{itemize}
 }
@@ -640,5 +661,13 @@ También ha sido especialmente útil al poder realizar el desarrollo en distinto
 
 \pagebreak
 \printbibliography[title={Referencias bibliográficas},heading=bibintoc]
+\pagebreak
+
+{
+    \addcontentsline{toc}{chapter}{\listfigurename}
+    % un poco de ñapa para quitar el color a los enlaces
+    \hypersetup{linkcolor = black}
+    \listoffigures
+}
 
 \end{document}
