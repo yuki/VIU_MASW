@@ -37,9 +37,9 @@ A la hora de poner un proyecto en producción era habitual realizar el despliegu
 
 A día de hoy el despliegue manual ha sufrido muchas mejoras gracias a los sistemas de contenedores, como ejemplo \href{https://www.docker.com/}{Docker} o sistemas PaaS (plataformas como servicio) como \href{https://en.wikipedia.org/wiki/AWS_Elastic_Beanstalk}{AWS Elastic Beanstalk}.
 
-Por otro lado, tenemos la posibilidad de realizar despliegues automatizados gracias a los nuevos sistemas de integración continua y despliegue continuo (CI/CD), muy utilizado en la metodología DevOps. De esta manera, una vez creado el \textit{pipeline} de ejecución, el despliegue siempre se realizará de igual manera.
+Por otro lado, tenemos la posibilidad de realizar despliegues automatizados gracias a los nuevos sistemas de integración continua y despliegue continuo (CI/CD), muy utilizado en la metodología DevOps. De esta manera, una vez creado el \textit{pipeline} de ejecución, el despliegue siempre se realizará de la misma manera.
 
-Si al punto anterior le añadimos la creación de toda la infraestructura mediante código (IaC, \textit{Infraestructure as code}), pasar de un proveedor de servicios en nube a otro será mucho más sencillo.
+Si al punto anterior le añadimos la creación de toda la infraestructura mediante código (IaC, \textit{Infraestructure as code}), pasar de un proveedor de servicios en la nube a otro se convierte en una tarea mucho más sencilla.
 
 En este documento usaremos la aplicación \href{https://flarum.org/}{Flarum} como ejemplo para realizar los distintos despliegues explicados previamente.
 
@@ -72,19 +72,19 @@ Con esto ya tendríamos creada la base de datos.
 
 \chapter{Despliegue con AWS Elastic Beanstalk}
 
-\href{https://aws.amazon.com/es/elasticbeanstalk/}{Amazon Elastic Beanstalk} nos permite crear y desplegar aplicaciones web de manera sencilla sin tener que depender de la tediosa configuración que hay detrás de ello.
+\href{https://aws.amazon.com/es/elasticbeanstalk/}{Amazon Elastic Beanstalk} nos permite crear y desplegar aplicaciones web de manera sencilla sin tener que realizar la tediosa configuración que hay detrás de ello, ya que lo hace de manera automática.
 
-Para realizar el despliegue de Flarum se han utilizado la siguiente configuración personalizada, a través del editor avanzado al crear el entorno de Beanstalk:
+Para realizar el despliegue de Flarum se ha utilizado la siguiente configuración personalizada, a través del editor avanzado al crear el entorno de Beanstalk:
 \vspace{-15pt}
 \begin{itemize}
     \item \textbf{Nombre de la aplicación} = flarum
-    \item \textbf{Nombre del entorno} = pro-XXYY-08masw
+    \item \textbf{Nombre del entorno} = pro-rg-08masw
     \item Sin balanceador de carga.
     \item \textbf{Entorno}: PHP 8.0
     \item \textbf{Servidor Web} = apache
     \item \textbf{Raíz del documento}: /public
     \item \textbf{Mostrar errores}: On
-    \item \textbf{Código fuente} de la aplicación obtenido de \href{https://amn-viu-resources-public.s3.eu-west-1.amazonaws.com/08masw/actividad2/flarum_php8.0.zip}{aquí}.
+    \item \textbf{Código fuente} de la aplicación obtenido del siguiente \href{https://amn-viu-resources-public.s3.eu-west-1.amazonaws.com/08masw/actividad2/flarum_php8.0.zip}{enlace}.
 \end{itemize}
 
 Tras crear el entorno, nos aparecerá a modo resumen en el interfaz lo siguiente:
@@ -105,7 +105,7 @@ En este formulario nos aparecen las opciones que debemos rellenar para que se ac
     \includegraphics[frame,width=\linewidth]{img/flarum-1.png}
 \end{center}
 
-En la imagen anterior se puede cómo se ha podido crear una nueva entrada en el foro recién desplegado.
+En la imagen superior se puede cómo se ha podido crear una nueva entrada en el foro recién desplegado.
 
 
 \chapter{Despliegue automatizado desde GitLab}
@@ -121,9 +121,9 @@ Lo primero que tenemos que hacer es crear un nuevo repositorio con el código ob
 Tras subir el código hay que realizar las siguientes modificaciones:
 
 \begin{itemize}
-    \item Añadir el fichero \configfile{.gitlab-ci.yml}. Es el encargado de lanzar el \textit{pipeline}, que son las instrucciones para realizar el despliegue automatizado que ejecuta GitLab al recibir un commit del código.
+    \item Añadir el fichero \configfile{.gitlab-ci.yml} :  Es el encargado de lanzar el \textit{pipeline}, que son las instrucciones para realizar el despliegue automatizado que ejecuta GitLab al recibir un commit del código en la rama \textbf{main}.
 \end{itemize}
-\begin{mycode}{Parte del .gitlab-ci.yml}{yaml}{{\scriptsize }}
+\begin{mycode}{Automatización con  .gitlab-ci.yml}{yaml}{{\scriptsize }}
 image: "php:8.0"
 stages:
   - build
@@ -154,7 +154,45 @@ before_script:
   artifacts:
     paths:
     - myapp.zip
-    expire_in: 1 week\end{mycode}
+    expire_in: 1 week
+.deploy:
+  script:
+    - echo "Deploy in server"
+    - pwd
+    - ls -la
+    # AWScli de ElasticBeanstalk
+    - pip install awsebcli==3.18
+    - export PATH=~/.local/bin:$PATH
+    # Credentials AWS (Profile)
+    - set -x
+    - set -e
+    - mkdir ~/.aws
+    - touch ~/.aws/config
+    - chmod 600 ~/.aws/config
+    - echo "[profile eb-cli]" > ~/.aws/config
+    - echo "aws_access_key_id=$AWS_ACCESS_KEY_ID" >> ~/.aws/config
+    - echo "aws_secret_access_key=$AWS_SECRET_ACCESS_KEY" >> ~/.aws/config
+    - echo "aws_session_token=$AWS_SESSION_TOKEN_KEY" >> ~/.aws/config
+    # Deploy
+    - cp $CONFIG_FILE_BEAN_STALK_AWS .elasticbeanstalk/config.yml
+    - eb --version
+    - eb status --verbose $ENV_BEAN_STALK_AWS
+    - eb use $ENV_BEAN_STALK_AWS
+    - eb deploy
+1_build_pro:
+  extends: .build
+  stage: build
+  only:
+    - main
+
+2_deploy_pro:
+  extends: .deploy
+  stage: deploy
+  variables:
+    ENV_BEAN_STALK_AWS: "pro-rg-08masw"
+    CONFIG_FILE_BEAN_STALK_AWS: ".elasticbeanstalk/config.pro.yml"
+  only:
+  - main\end{mycode}
 
 \begin{itemize}
     \item Modificar el fichero \configfile{.elasticbeanstalk/config.pro.yml} para que el \textit{pipeline} anterior lo utilice para realizar el despliegue. El despliegue se realizará sobre el mismo Beanstalk creado previamente.
@@ -174,7 +212,7 @@ global:
 deploy:
   artifact: ./myapp.zip\end{mycode}
 
-    \item Añadir \textbf{variables} de entorno dentro de GitLab. El valor de estas variables será sustituido dentro del pipeline. De esta manera no introducimos credenciales en el código fuente del repositorio.
+    \item Añadir \textbf{variables} de entorno dentro del repositorio GitLab (en \textit{Settings → CI/CD → Variables}). El valor de estas variables será sustituido dentro del pipeline. De esta manera no introducimos credenciales en el código fuente del repositorio.
     \begin{center}
         \includegraphics[frame,width=\linewidth]{img/gitlab-vars.png}
     \end{center}
@@ -186,30 +224,143 @@ Una vez realizadas las modificaciones, el \textit{pipeline} se ejecutará, y tra
     \includegraphics[frame,width=\linewidth]{img/gitlab-pipeline.png}
 \end{center}
 
+Beanstalk necesita del código fuente de la aplicación para realizar el despliegue. Este se ha subido a través del \textbf{\textit{artifact}} que se ha creado en el \textit{pipeline} (“myapp.zip”), que en AWS se añade dentro de un bucket S3 creado específicamente para Beanstalk.
+
+A continuación se puede ver cómo se han subido varios ficheros tras realizar distintos despliegues:
 \begin{center}
     \includegraphics[frame,width=\linewidth]{img/s3.png}
 \end{center}
 
+Dado que es un sistema automatizado, deberíamos también controlar el número de ficheros que se tienen en el bucket S3 para no incurrir en gastos innecesarios.
 
+Tras realizar el despliegue, al ir a la URL proporcionada por Beanstalk,  nos aparecerá el asistente de configuración de Flarum, en el que debemos volver a añadir la configuración necesaria. Si utilizamos la misma base de datos del despliegue anterior dará un error, por lo que es importante acordarnos de borrar las tablas existentes.
 
 \begin{center}
     \includegraphics[frame,width=0.63\linewidth]{img/flarum-2.png}
 \end{center}
 
+Después de la creación de las tablas y el despliegue inicial, ya podremos utilizar la aplicación:
 \begin{center}
     \includegraphics[frame,width=\linewidth]{img/flarum-3.png}
 \end{center}
 
+\chapter{IaC con Terraform}
+\href{https://www.terraform.io/}{Terraform} es una aplicación que nos permite  la creación de toda la infraestructura dentro de una nube pública mediante código (IaC, \textit{Infraestructure as code}). De esta manera, podremos realizar despliegues automatizados para distintos entornos (desarrollo, test, producción...).
 
-\begin{mycode}{Crear instancia RDS mediante CLI}{console}{}
-ddd_v1_w_Hox_1818884@runweb70100:~$
+Para poder utilizar Terraform, una vez \href{https://developer.hashicorp.com/terraform/downloads}{descargado el binario}, tenemos que crear unas variables de entorno (con datos obtenidos de nuestra cuenta AWS) para que la conexión se realice de manera correcta y autenticada.
+
+\begin{mycode}{Seteamos las variables de entorno}{console}{}
+ruben@vega:~$ export AWS_ACCESS_KEY_ID=ASIAUSUHSKXGC...
+ruben@vega:~$ export AWS_SECRET_ACCESS_KEY=iaC2DxU6Gg...
 \end{mycode}
 
+El siguiente paso es decidir qué queremos desplegar. Para esta prueba se va a desplegar una instancia RDS de MySQL similar a la del primer capítulo. Las característcas son:
 
+\begin{itemize}
+    \item RDS MySQL versión 5.7.X
+    \item \textbf{Identificador RDS}: actividad2-terra
+    \textbf{Nombre bd} = DB\_terra
+    \textbf{User} = admTerra
+    \textbf{Password} = Viu2022Terra
+    \item \textbf{Tipo de instancia}: T3.micro
+    \item \textbf{Tamaño}: 15GB
+    \item \textbf{Periodo de retención backups}: 15 días
+    \item \textbf{Hora de realización backups}: 03:00 UTC.
+    \item \textbf{Ventana de mantenimiento}: 05:00 UTC
+    \item \textbf{Cifrado activo}
+\end{itemize}
 
+Para realizar el despliegue tenemos que crear un fichero \configfile{main.tf} que contendrá las directivas que Terraform utilizará para conectarse a AWS y realizar el despliegue con las características previas.
+
+\begin{mycode}{Fichero main.tf}{terraform}{}
+terraform {
+    required_providers {
+        aws = {
+            source  = "hashicorp/aws"
+            version = "~> 4.16"
+        }
+    }
+    required_version = ">= 1.2.0"
+}
+provider "aws" {
+    region = "us-east-1"
+}
+resource "aws_db_instance" "actividad2-terra" {
+    identifier              = "actividad2-terra"
+    allocated_storage       = 15
+    db_name                 = "DB_terra"
+    engine                  = "mysql"
+    engine_version          = "5.7"
+    instance_class          = "db.t3.micro"
+    username                = "admTerra"
+    password                = "Viu2022Terra"
+    parameter_group_name    = "default.mysql5.7"
+    skip_final_snapshot     = true
+    backup_retention_period = 15
+    backup_window           = "03:00-03:30"
+    maintenance_window      = "Sat:05:00-Sat:05:30"
+    storage_encrypted       = true
+}
+\end{mycode}
+
+Para asegurarnos que el fichero está bien creado, podemos ejecutar \commandbox{terraform validate}, después inicializar el entorno y aplicar los cambios que se van a realizar ya en AWS.
+
+\begin{mycode}{Validar la configuración, inicializar y aplicar cambios}{console}{}
+ruben@vega:~$ terraform validate
+Success! The configuration is valid.
+
+ruben@vega:~$ terraform init
+Initializing the backend...
+Initializing provider plugins...
+- Finding hashicorp/aws versions matching "~> 4.16"...
+- Installing hashicorp/aws v4.52.0...
+- Installed hashicorp/aws v4.52.0 (signed by HashiCorp)
+...
+Terraform has been successfully initialized!
+
+ruben@vega:~$ terraform apply
+Terraform used the selected providers to generate the following
+execution plan. Resource actions are indicated with the following
+symbols:
++ create
+Terraform will perform the following actions:
+# aws_db_instance.actividad2-terra will be created
++ resource "aws_db_instance" "actividad2-terra" {
+    + address                               = (known after apply)
+    + allocated_storage                     = 15
+...
+}
+Plan: 1 to add, 0 to change, 0 to destroy.
+
+Do you want to perform these actions?
+Terraform will perform the actions described above.
+Only 'yes' will be accepted to approve.
+  Enter a value: yes
+
+aws_db_instance.actividad2-terra: Creating...
+aws_db_instance.actividad2-terra: Still creating... [10s elapsed]
+...
+aws_db_instance.actividad2-terra: Creation complete
+  after 9m15s [id=actividad2-terra]
+Apply complete! Resources: 1 added, 0 changed, 0 destroyed.
+\end{mycode}
+
+Tras esperar unos minutos, el proceso termina, y desde el interfaz web ya podemos ver que nos aparece la instancia, y al ir a mirar su configuración podemos ver los detalles configurados en el fichero \configfile{main.tf}:
+
+\vspace{-10pt}
+\begin{center}
+    \includegraphics[frame,width=\linewidth]{img/terraform2.png}
+\end{center}
+\vspace{-20pt}
+
+Si nos interesase destruir la instancia de base de datos recién levantada, podríamos hacerlo con \commandbox{terraform destroy}.
 
 \chapter{Conclusiones}
 
-Tal como se ha podido ver, l
+La automatización del despliegue de aplicaciones, a través de sistemas CI/CD como el que ofrece GitlLab, nos va a permitir que una vez creado el proceso podamos replicarlo tantas veces como sea necesario. De esta manera, podremos utilizarlo para realizar pases a producción, evitando tener que repetir cada vez el proceso y así evitar posibles olvidos o fallos durante el proceso.
+
+Si esto mismo lo utilizamos para realizar despliegues a nivel de infraestructura con Terraform, podremos realizar despliegues enteros para distintos entornos asegurando que no existen diferencias entre ellos.
+
+Tal como se puede ver, cuando vayamos a utilizar una infraestructura \textit{Cloud}, es obligatorio hacer uso de las herramientas que nos van a permitir realizar un trabajo repetitivo de manera más eficiente y segura.
 
 \end{document}
