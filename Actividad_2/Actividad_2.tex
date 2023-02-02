@@ -347,13 +347,18 @@ Apply complete! Resources: 1 added, 0 changed, 0 destroyed.
 
 Tras esperar unos minutos, el proceso termina, y desde el interfaz web ya podemos ver que nos aparece la instancia, y al ir a mirar su configuración podemos ver los detalles configurados en el fichero \configfile{main.tf}:
 
-\vspace{-10pt}
+
 \begin{center}
     \includegraphics[frame,width=\linewidth]{img/terraform2.png}
 \end{center}
-\vspace{-20pt}
 
-Si nos interesase destruir la instancia de base de datos recién levantada, podríamos hacerlo con \commandbox{terraform destroy}.
+
+En la siguiente imagen se puede comprobar cómo la instancia está funcionando:
+\begin{center}
+    \includegraphics[frame,width=\linewidth]{img/terraform1.png}
+\end{center}
+
+Si nos interesase destruir la instancia de base de datos recién levantada, podríamos hacerlo con \commandbox{terraform destroy}, y comenzaría con el proceso de parada y eliminación.
 
 \chapter{Conclusiones}
 
