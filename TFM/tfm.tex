@@ -79,9 +79,61 @@ Encontrar una aplicación que se ciña a todas las necesidades puede resultar co
 
 A lo largo de este \textbf{trabajo final del Máster Universitario en Desarrollo de Aplicaciones y Servicios Web} se analizará la creación de un sistema gestor de contraseñas y documentación sensible para entornos multiusuario, hecho con el \textit{frontend} de desarrollo \href{https://angular.io/}{Angular} y utilizando  \href{https://www.vaultproject.io/}{Hashicorp Vault} como sistema de backend.
 
+\section{Motivación del proyecto}
+
+La motivación principal del proyecto es la de crear una aplicación que gestione contraseñas y documentación tratando de buscar un enfoque generalista para que pueda ser utilizada en empresas tecnológicas.
+
+Algunas de las aplicaciones de gestión de contraseñas más conocidas están enfocadas sólo al almacenamiento de contraseñas, y aunque permitan subir ficheros para ser cifrados, al querer realizar modificaciones, hay que descargar el fichero, realizar las modificaciones y posteriormente volver a subirlo.
+
+Estas aplicaciones, de las cuales más adelante se analizarán algunas, la versión multi-usuario suele ser de pago, y las que lo tienen, no son ni Software Libre ni permiten la posibilidad de tener el servicio \textit{on premise}.
 
 
-\chapter{Estado del arte}
+
+\chapter{Objetivos}
+
+El objetivo principal es crear una aplicación que gestione contraseñas y documentación sensible basada en un entorno web, que pueda ser utilizada en un entorno multiusuario como una empresa.
+
+Este gestor de contraseñas deberá cumplir con unos requisitos mínimos para que pueda ser desplegado y utilizado en una empresa para mejorar la seguridad de la misma.
+
+
+\section{Requisitos del proyecto}
+Como propuesta para la creación de un gestor de contraseñas propio, se han identificado los siguientes requisitos que deben de cumplirse para considerar que el trabajo final de máster ha cumplido con los objetivos citados previamente:
+
+\begin{itemize}
+
+    \item Se quiere crear un sistema que \textbf{gestione contraseñas e información sensible}. Esta información sensible puede ser imágenes, documentos, o ficheros en general que la aplicación permitirá subir.
+
+    También se podrá generar documentación en la propia aplicación a través de un interfaz \textbf{WYSIWYG} (\textit{what you see is what you get}) que guarde la información en formato Markdown.
+
+    \item El sistema estará basado en una aplicación web creada con el \textit{framework frontend} \href{https://angular.io/}{Angular} tratando que sea lo más modular posible.
+
+    La modularidad nos va a permitir poder añadir características nuevas a la aplicación en el futuro. De esta manera, podremos adaptar la aplicación a posibles exigencias futuras que necesite la empresa.
+
+    \item El gestor de contraseñas debe contar con un \textbf{sistema de autenticación}. Sólo debe permitir el acceso a las personas que hayan pasado algún sistema de verificación que demuestre ser quién es.
+
+    Este sistema de autenticación no tiene por qué limitarse al clásico “usuario y contraseña”, ya que podrá adaptarse para en el futuro utilizar de forma sencilla otros sistemas conocidos, como por ejemplo: certificados \textbf{TLS}, contraseñas de un sólo uso basadas en tiempo (TOTP), tokens basados en \href{https://en.wikipedia.org/wiki/JSON_Web_Token}{JWT}, sistemas \href{https://en.wikipedia.org/wiki/OAuth}{OAuth}/\href{https://en.wikipedia.org/wiki/OpenID#OpenID_Connect_(OIDC)}{OIDC}, ...
+
+    \item Debe existir un \textbf{sistema de autorización, que controle el tipo de acceso y permisos} que tenga en en cuenta quién los realiza y a qué contraseñas se quiere acceder.
+
+    Estos permisos pueden basarse en \textbf{roles}, para de esta manera poder agrupar usuarios, y en base a ellos facilitar la autorización
+
+    \item Para tener un registro de lo sucedido, también es importante contar con un \textbf{sistema de auditoría}. A través de él se registrarán los accesos y operaciones que se realizan.
+
+    \item Lógicamente, la \textbf{seguridad en la transmisión y en el almacenamiento} debe ser la principal prioridad.  \textcite{scarfone2009guide} nos recuerdan que las comunicaciones que contienen contraseñas deben ser cifradas, ya sea mediante uso del protocolo TLS (\textit{Transport Layer Security}) o creando un túnel en la comunicación a través de una \textbf{VPN}.
+
+    En caso de que algún atacante obtuviese acceso físico al sistema de almacenamiento, de nuevo, los datos estarían cifrados, evitando la fuga de información.
+
+    \item La aplicación debe ser \textbf{sencilla de utilizar}, para que al usuario final no le cueste utilizarla. De esta manera \textbf{conseguiremos que el usuario final la integre en su metodología de trabajo} a la hora de crear/usar contraseñas y guardar información sensible.
+
+    \item Es importante que la aplicación \textbf{se adapte a la pantalla} donde se esté visualizando. De esta manera el usuario podrá hacer uso de ella a través de dispositivos móviles.
+
+    \item Para el almacenamiento de la información y el sistema de autorización se hará uso del sistema \href{https://www.vaultproject.io/}{Vault} de la empresa \href{https://www.hashicorp.com/}{Hashicorp}.
+\end{itemize}
+
+Teniendo en cuenta las metodologías utilizadas, y explicadas en apartados posteriores, cualquier añadido a estos requisitos se podría añadir en etapas posteriores del desarrollo.
+
+
+\chapter{Marco tecnológico}
 
 \textcite{tapas} nos indican que la categoría de software donde podemos meter a los gestores de contraseñas es amplia y pueden contener muchas técnicas diferentes, pero que generalmente pueden ser complementarias. Es por ello que se van a identificar algunas de las características que suelen proveer este tipo de software:
 
@@ -166,52 +218,6 @@ Algunos ejemplos en los últimos años:
 \end{itemize}
 
 Como se puede ver, y este listado sólo es una pequeña muestra, los gestores de contraseña son un objetivo claro de ataques.  \textcite{hacked3} analiza parte de estos ataques y da pequeñas recomendaciones sobre cómo mejorar la protección (como modificar la contraseña por una más fuerte).
-
-\chapter{Objetivos}
-
-El objetivo principal de este proyecto final de máster es el de utilizar los conocimientos adquiridos y utilizarlos para llevar a cabo la propuesta de creación de un gestor de contraseñas propio.
-
-Este gestor de contraseñas deberá cumplir con unos requisitos mínimos para que pueda ser desplegado y utilizado en una empresa para mejorar la seguridad de la misma.
-
-
-\section{Requisitos del proyecto}
-Como propuesta para la creación de un gestor de contraseñas propio, se han identificado los siguientes requisitos que deben de cumplirse para considerar que el trabajo final de máster ha cumplido con los objetivos citados previamente:
-
-\begin{itemize}
-
-    \item Se quiere crear un sistema que \textbf{gestione contraseñas e información sensible}. Esta información sensible puede ser imágenes, documentos, o ficheros en general que la aplicación permitirá subir.
-
-    También se podrá generar documentación en la propia aplicación a través de un interfaz \textbf{WYSIWYG} (\textit{what you see is what you get}) que guarde la información en formato Markdown.
-
-    \item El sistema estará basado en una aplicación web creada con el \textit{framework frontend} \href{https://angular.io/}{Angular} tratando que sea lo más modular posible.
-
-    La modularidad nos va a permitir poder añadir características nuevas a la aplicación en el futuro. De esta manera, podremos adaptar la aplicación a posibles exigencias futuras que necesite la empresa.
-
-    \item El gestor de contraseñas debe contar con un \textbf{sistema de autenticación}. Sólo debe permitir el acceso a las personas que hayan pasado algún sistema de verificación que demuestre ser quién es.
-
-    Este sistema de autenticación no tiene por qué limitarse al clásico “usuario y contraseña”, ya que podrá adaptarse para en el futuro utilizar de forma sencilla otros sistemas conocidos, como por ejemplo: certificados \textbf{TLS}, contraseñas de un sólo uso basadas en tiempo (TOTP), tokens basados en \href{https://en.wikipedia.org/wiki/JSON_Web_Token}{JWT}, sistemas \href{https://en.wikipedia.org/wiki/OAuth}{OAuth}/\href{https://en.wikipedia.org/wiki/OpenID#OpenID_Connect_(OIDC)}{OIDC}, ...
-
-    \item Debe existir un \textbf{sistema de autorización, que controle el tipo de acceso y permisos} que tenga en en cuenta quién los realiza y a qué contraseñas se quiere acceder.
-
-    Estos permisos pueden basarse en \textbf{roles}, para de esta manera poder agrupar usuarios, y en base a ellos facilitar la autorización
-
-    \item Para tener un registro de lo sucedido, también es importante contar con un \textbf{sistema de auditoría}. A través de él se registrarán los accesos y operaciones que se realizan.
-
-    \item Lógicamente, la \textbf{seguridad en la transmisión y en el almacenamiento} debe ser la principal prioridad.  \textcite{scarfone2009guide} nos recuerdan que las comunicaciones que contienen contraseñas deben ser cifradas, ya sea mediante uso del protocolo TLS (\textit{Transport Layer Security}) o creando un túnel en la comunicación a través de una \textbf{VPN}.
-
-    En caso de que algún atacante obtuviese acceso físico al sistema de almacenamiento, de nuevo, los datos estarían cifrados, evitando la fuga de información.
-
-    \item La aplicación debe ser \textbf{sencilla de utilizar}, para que al usuario final no le cueste utilizarla. De esta manera \textbf{conseguiremos que el usuario final la integre en su metodología de trabajo} a la hora de crear/usar contraseñas y guardar información sensible.
-
-    \item Es importante que la aplicación \textbf{se adapte a la pantalla} donde se esté visualizando. De esta manera el usuario podrá hacer uso de ella a través de dispositivos móviles.
-
-    \item Para el almacenamiento de la información y el sistema de autorización se hará uso del sistema \href{https://www.vaultproject.io/}{Vault} de la empresa \href{https://www.hashicorp.com/}{Hashicorp}.
-\end{itemize}
-
-Teniendo en cuenta las metodologías utilizadas, y explicadas en el siguiente apartado, cualquier añadido a estos requisitos se podría añadir en etapas posteriores del desarrollo.
-
-
-
 
 \chapter{Metodologías utilizadas}
 
@@ -589,25 +595,114 @@ También ha sido especialmente útil al poder realizar el desarrollo en distinto
 % TODO: meter una imagen propia de ejemplo
 
 
+\chapter{Resultados obtenidos}
+
+A continuación se va a exponer los pasos realizados para el diseño y la creación de la aplicación teniendo en cuenta los requisitos del proyecto y las historias de usuario detalladas previamente. Se van a diferenciar distintos apartados generales:
+
+\begin{itemize}
+    \item Diseño del \textbf{interfaz}
+    \item \textbf{Angular}: Aspectos destacables de la programación
+    \item \textbf{Características y uso} de la aplicación
+\end{itemize}
 
 
-\chapter{Resultados}
-
-{\color{red} Realizar introducción al capítulo}
 
 \section{Diseño del interfaz}
-%TODO: cambiar
-{\color{red} Comentar cosas como:
 
-    \begin{itemize}
-        \item Creación de esbozo inicial en papel
-        \item Interfaz estático
-        \item Paso del diseño a código real
-        \item Interfaz responsive (añadir capturas en distintas situaciones)
-    \end{itemize}
-}
+El interfaz web de la aplicación es el punto de entrada del usuario, por lo que es importante dedicarle el esfuerzo que se merece ya que puede determinar el éxito o el fracaso en el uso de la aplicación.
 
-\section{Angular y servicios}
+A la hora de hacer el diseño, se han tenido en cuenta:
+\begin{itemize}
+    \item \textbf{Facilidad de uso}: Es importante que la aplicación tenga una buena usabilidad, para que el usuario final no requiera de ningún esfuerzo a la hora de utilizarla.
+    \item \textbf{Diseño funcional}: Continuando con el punto anterior, se ha tratado de realizar un diseño funcional, para que cada parte del interfaz se sepa para qué va a ser utilizado. Para facilitarlo, se ha trabajado tratando de conseguir un diseño \textbf{minimalista}.
+    \item Se ha realizado un \textbf{diseño adaptable a la pantalla} (también conocido como diseño \textit{responsive}). para facilitar el uso de la aplicación en dispositivos móviles.
+\end{itemize}
+
+
+\subsection{Primer boceto}
+Para la creación del interfaz se decidió crear un primer prototipo a boli en un cuaderno, tratando de plasmar las ideas generales, y la colocación inicial de los elementos con los que los usuarios van a interactuar.
+
+Este primer boceto sirve para asentar las historias de usuario y las distintas acciones que los usuarios van a poder realizar en la aplicación final. Es una manera rápida para empezar a tomar consciencia del proyecto y cómo queremos encauzar el interfaz.
+
+\vspace{-20pt}
+\begin{center}
+    \includegraphics[angle=90,width=0.9\linewidth]{img/boceto.pdf}
+    \vspace{-20pt}
+    \captionof{figure}{Boceto del interfaz}
+\end{center}
+
+En el boceto existen zonas diferenciadas hechas en color azul, donde también aparece en color rojo el nombre para cada zona. Ya en este primer boceto se estaban identificando lo que posteriormente serán distintos componentes independientes.
+
+En rojo, en la parte central también aparece cómo sería el login, que daría paso al interfaz general. Por último, se pueden diferenciar, también en la parte central, nombrados como “Opt1” y “Opt2”, las vistas que dependerán de qué estemos haciendo: si navegamos por los secretos o si estamos visualizando/editano un secreto.
+
+Tal como se puede ver, ya en este primer boceto se tenía una idea bastante clara de cómo debía ser a grandes rasgos el interfaz final.
+
+\subsection{Creación del Interfaz con un \textit{framework}}
+Una vez se tuvieron claro los aspectos generales del prototipo, se realizó un primer prototipo haciendo uso de un \textit{framework CSS}.
+
+El \textit{framework} elegido ha sido \href{https://getbootstrap.com/}{Bootstrap}, ya que va a permitir crear un diseño funcional, de manera sencilla, que dispone de distintas características que  van a resultar útiles durante el uso de la aplicación (como por ejemplo los “\textit{modal}” o el “\textit{breadcrumb}”).
+
+\begin{center}
+    \includegraphics[frame,width=\linewidth]{img/boceto2.png}
+    \vspace{-20pt}
+    \captionof{figure}{Boceto del interfaz con Bootstrap y datos estáticos}
+\end{center}
+
+Bootstrap ha permitido crear un código sencillo, pero visualmente atractivo, que posteriormente será reutilizado para el interfaz final.
+
+
+\subsection{Del prototipo al código real}
+
+Tal como se ha comentado previamente, Bootstrap permitió crear crear el prototipo del interfaz de manera rápida y sencilla. Aunque el aspecto visual a grandes rasgos no ha variado en exceso, a medida que se iba avanzando en el proyecto se han ido realizando pequeñas modificaciones.
+
+El interfaz final se puede descomponer en distintos apartados que cumplen con distintas funcionalidades. La pantalla de \textit{\textbf{login}} nos permite introducir el usuario y la contraseña del mismo para acceder a la aplicación.
+
+
+\begin{center}
+    \includegraphics[width=0.4\linewidth]{img/login.png}
+    \hfil
+    \includegraphics[width=0.4\linewidth]{img/login2.png}
+%    \vspace{-10pt}
+    \captionof{figure}{Interfaz para el \textit{login}}
+\end{center}
+
+En esta ventana de \textit{login} se ha añadido una pestaña extra con el símbolo del engranaje que permite modificar la URL de conexión al que nos queremos conectar
+
+Tras realizar la autenticación la aplicación nos llevará al directorio principal donde podremos navegar a través del interfaz para acceder a los secretos que nos interese.
+
+\begin{center}
+    \includegraphics[frame,width=\linewidth]{img/interfaz1.png}
+    %    \vspace{-10pt}
+    \captionof{figure}{Interfaz principal de la aplicación}
+\end{center}
+
+Al acceder al secreto que nos interesa, el interfaz nos muestra el documento descifrado junto con unos botones con los que realizar ciertas acciones sobre los secretos.
+
+\begin{center}
+    \includegraphics[frame,width=\linewidth]{img/interfaz2.png}
+    %    \vspace{-10pt}
+    \captionof{figure}{Interfaz al visualizar un secreto}
+\end{center}
+
+
+
+\subsection{Interfaz \textit{responsive}}
+
+Para facilitar el uso de la aplicación en distintos tipos de pantallas, se ha hecho que el interfaz se adapte al tamaño donde se está visualizando la aplicación. Esto va a permitir que el usuario pueda acceder a través de su teléfono móvil, lo que puede ser útil en entornos de empresa donde se tengan que realizar salidas a clientes.
+
+\begin{center}
+    \includegraphics[width=0.3\linewidth]{img/responsive1.png}
+    \hfill
+    \includegraphics[width=0.3\linewidth]{img/responsive2.png}
+    \hfill
+    \includegraphics[width=0.3\linewidth]{img/responsive3.png}
+
+    \captionof{figure}{Interfaz en modo \textit{responsive}}
+\end{center}
+
+Tal como se puede ver, para mejorar la navegación, el interfaz que muestra en modo árbol la jerarquía de secretos se oculta, de esta manera navegamos a través de los secretos como un explorador de archivos.
+
+\section{Angular: Aspectos destacables de la programación}
 {\color{red} Comentar cosas como:
 
     \begin{itemize}
