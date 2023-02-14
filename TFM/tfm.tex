@@ -702,10 +702,316 @@ Para facilitar el uso de la aplicación en distintos tipos de pantallas, se ha h
 
 Tal como se puede ver, para mejorar la navegación, el interfaz que muestra en modo árbol la jerarquía de secretos se oculta, de esta manera navegamos a través de los secretos como un explorador de archivos.
 
+
+\section{Características y uso de la aplicación}
+
+Teniendo en cuenta los requisitos planteados al inicio del proyecto, y teniendo en cuenta que la aplicación debe ser fácil de utilizar, se ha hecho que las distintas características que dispone la aplicación y el uso de la misma recuerde a aplicaciones que los usuarios ya hayan utilizado.
+
+A continuación se van a detallar distintas características de la aplicación y cómo se crearon pensando en el usuario final.
+
+
+\subsection{Creación de un secreto nuevo}
+
+La creación de secretos es la característica principal de la aplicación, ya que con ello se va a conseguir guardar la información sensible que nos interese.
+
+
+{
+\begin{minipage}{0.1\linewidth}
+    \includegraphics[width=\linewidth]{img/new.png}
+\end{minipage}
+\hspace{0.5cm}
+\begin{minipage}{0.9\linewidth}
+    En la cabecera de la aplicación existe un icono que nos va a permitir crear un nuevo secreto en el sistema.
+
+    Al hacer \textit{click} sobre el icono, nos aparecerá un \textit{modal} (una pequeña ventana emergente en el interfaz) para preguntarnos por la ruta donde queremos crear el secreto.
+\end{minipage}
+}
+
+Al aparecer el \textit{modal} nos aparecerá por defecto la ruta en la que nos encontrábamos en ese instante.
+
+\begin{center}
+    \includegraphics[width=0.7\linewidth]{img/new_secret.png}
+    \captionof{figure}{\textit{Modal} para crear un secreto}
+\end{center}
+
+Si en la ruta que ponemos termina en “/” el botón para crear el secreto permanecerá deshabilitado, ya que una “barra” al final del nombre identifica (al igual que sucede en sistemas UNIX) un directorio.
+
+Al hacer \textit{click} en el botón de creación del secreto la aplicación nos creará un secreto nuevo en la aplicación y nos llevará a la ruta donde lo hemos creado.
+
+\subsection{Acciones sobre secretos}
+
+Una vez creado el secreto, o una vez que navegamos a un secreto creado previamente, podremos realizar distintas acciones sobre el mismo. Estas acciones dependerán de los permisos que se tengan sobre el secreto, pero a continuación se van a detallar todos ellos.
+
+Las acciones que podremos realizar se identifican a través de  distintos iconos que nos aparecen en el interfaz y que se van a detallar a continuación.
+
+
+\subsubsection*{Editar secreto}
+{
+\begin{minipage}{0.1\linewidth}
+    \includegraphics[width=\linewidth]{img/edit.png}
+\end{minipage}
+\hspace{0.5cm}
+\begin{minipage}{0.9\linewidth}
+    Una de las acciones principales es la de \textbf{editar el secreto}, ya sea para añadir, modificar o borrar información en el mismo. Como se verá más adelante, esta edición se hará a través de un editor completo \textit{WYSIWYG}.
+\end{minipage}
+}
+
+\subsubsection*{Imprimir secreto}
+{
+\begin{minipage}{0.1\linewidth}
+    \includegraphics[width=\linewidth]{img/print.png}
+\end{minipage}
+\hspace{0.5cm}
+\begin{minipage}{0.9\linewidth}
+    En algunas ocasiones puede ser interesante \textbf{imprimir la documentación guardada}. Este icono abrirá el asistente para imprimir del navegador y nos mostrará una previsualización.
+\end{minipage}
+}
+
+A la hora de imprimir, hay ciertas partes del interfaz que desaparecen para mejorar la impresión. La vista en árbol y los botones de acción del secreto no se imprimirán, y la cabecera también sufre una pequeña modificación.
+
+
+\subsubsection*{Visualizar histórico del secreto}
+{
+\begin{minipage}{0.1\linewidth}
+    \includegraphics[width=\linewidth]{img/calendar.png}
+\end{minipage}
+\hspace{0.5cm}
+\begin{minipage}{0.9\linewidth}
+    Como más adelante se explicará, cuando un secreto es modificado \textbf{se guarda un histórico} del mismo. A través de este botón podremos ver las distintas versiones del mismo e ir a una versión anterior.
+\end{minipage}
+}
+
+\begin{center}
+    \includegraphics[width=0.6\linewidth]{img/history.png}
+    \captionof{figure}{Histórico de un secreto.}
+\end{center}
+
+
+\subsubsection*{Desbloquear secreto}
+{
+\begin{minipage}{0.1\linewidth}
+    \includegraphics[width=\linewidth]{img/unlock.png}
+\end{minipage}
+\hspace{0.5cm}
+\begin{minipage}{0.9\linewidth}
+    Cuando un usuario entra a modificar un secreto, este entra en modo “bloqueado”. Si, por alguna razón, abandona la aplicación antes de guardar los cambios el secreto se mantiene en dicho estado. A través de este botón \textbf{un usuario administrador podrá desbloquear un secreto}.
+\end{minipage}
+}
+
+\begin{center}
+    \includegraphics[width=0.8\linewidth]{img/unlock_warning.png}
+    \captionof{figure}{Aviso del estado bloqueado de un secreto}
+\end{center}
+
+
+\subsubsection*{Borrar secreto}
+{
+\begin{minipage}{0.1\linewidth}
+    \includegraphics[width=\linewidth]{img/delete.png}
+\end{minipage}
+\hspace{0.5cm}
+\begin{minipage}{0.9\linewidth}
+    Un administrador, o usuario que tenga permisos para ello, podrá borrar un secreto con todas las consecuencias que ello conlleva: perder los datos, el histórico, no poder recuperarlo...
+\end{minipage}
+
+Una vez el usuario haga \textit{click} en el botón de la confirmación, el secreto se borrará y la aplicación redirigirá al usuario al directorio superior.
+}
+
+Debido a que es una acción que no se va a poder deshacer, se requerirá que el usuario realice una confirmación antes de que el secreto sea borrado.
+
+\begin{center}
+    \includegraphics[width=0.6\linewidth]{img/delete_warning.png}
+    \captionof{figure}{Confirmación al borrar un secreto}
+\end{center}
+
+
+\subsection{Editar un secreto}
+
+Dado que esta acción es la más importante de la aplicación, se va a profundizar a continuación en las características del sistema de edición de secretos.
+
+Tal como se ha visto en el apartado anterior, para editar un secreto existe un botón dedicado a tal acción. Al hacer \textit{click} sobre él, los botones de acción se ocultan y aparece el editor con los datos del secreto:
+
+\begin{center}
+    \includegraphics[width=\linewidth]{img/editor.png}
+    \captionof{figure}{Editor \textit{WYSIWYG}}
+\end{center}
+
+El editor elegido es \href{https://github.com/nhn/tui.editor}{Tui.editor} ya que es un proyecto con \href{https://es.wikipedia.org/wiki/Licencia_MIT}{licencia MIT}, creado en el lenguaje \href{https://es.wikipedia.org/wiki/TypeScript}{Typescript} y que cumple con los requisitos para el proyecto.
+
+Entre las características que tiene el editor, se pueden destacar:
+
+\begin{itemize}
+    \item Interfaz \textbf{WYSIWYG} (\textit{what you see is what you get}) que permite guardar el documento generado en formato \href{https://es.wikipedia.org/wiki/Markdown}{Markdown}.
+    \item Permite añadir imágenes arrastrándolas sobre el interfaz.
+    \item Se puede expandir las funcionalidades a través de \textit{\textbf{plugins}}. Para este proyecto se están utilizando dos:
+    \begin{itemize}
+        \item Posibilidad de añadir \href{https://github.com/nhn/tui.editor/tree/master/plugins/color-syntax}{color al texto}, expandiendo las posibilidades de Markdown, ya que por defecto este sistema no lo permite.
+        \item Mejoras en el \href{https://github.com/nhn/tui.editor/tree/master/plugins/color-syntax}{resaltado de sintaxis} a la hora de añadir bloques de código fuente o de configuración.
+
+        Esto resulta es muy útil cuando se necesita guardar en la documentación configuración de algún tipo o fragmentos de código fuente. El plugin hace uso de \href{https://prismjs.com/}{PrismJS} que soporta 297 lenguajes.
+        \begin{center}
+            \includegraphics[frame,width=0.7\linewidth]{img/editor_example.png}
+            \captionof{figure}{Ejemplo de resaltado de sintaxis}
+        \end{center}
+    \end{itemize}
+
+    \item Posibilidad de añadir iconos propios a la barra de herramientas del editor. Esta característica ha sido clave ya que era necesario poder crear al menos un botón para guardar y cerrar el secreto.
+
+    El icono añadido tiene el siguiente aspecto \includegraphics[width=0.8cm]{img/save_exit.png}. Al hacer \textit{click} sobre él, el secreto será guardado, el editor se cerrará y la aplicación nos redirigirá para que visualicemos el nuevo aspecto del secreto recién editado.
+\end{itemize}
+
+\subsection{Navegación por los secretos}
+
+A la hora de navegar por las contraseñas y documentación se ha hecho uso de un sistema jerárquico que simula las carpetas de un explorador de archivos de cualquier sistema operativo actual.
+
+Los usuarios están acostumbrados a lidiar con cualquier tipo de ficheros y a ordenarlos en sus sistemas de almacenamiento, haciendo uso de una jerarquía decidida previamente.
+
+Dado que la aplicación se ha creado teniendo en cuenta las exigencias de una empresa para lidiar con contraseñas y documentación, se creía conveniente simular este sistema.
+
+Para ello, se han creado 3 sistemas diferenciados en el interfaz, que funcionan en sincronía. Esto quiere decir, que al utilizar cualquier de ellos, hará que se actualice el resto.
+
+\subsubsection*{Vista de árbol}
+Es una visualización jerárquica de la información, que se ha situado en el lado izquierdo del interfaz. Este apartado visual siempre será visible en una pantalla de grandes dimensiones, como las de un ordenador de sobremesa.
+
+Si por el contrario, la aplicación se está visualizando a través de un teléfono móvil, el árbol permanecerá oculto, aunque se podrá desplegar a través del botón de la parte superior derecha.
+
+{
+\begin{minipage}{0.3\linewidth}
+    \includegraphics[width=\linewidth]{img/tree1.png}
+\end{minipage}
+\hfill
+\begin{minipage}{0.3\linewidth}
+    \includegraphics[width=\linewidth]{img/tree2.png}
+\end{minipage}
+\hfill
+\begin{minipage}{0.3\linewidth}
+    \includegraphics[width=\linewidth]{img/tree3.png}
+\end{minipage}
+\captionof{figure}{Detalles de la “vista de árbol”}
+}
+
+En la vista de árbol se pueden diferenciar:
+
+\begin{itemize}
+    \item \textbf{Ramas}: Son un nodo que a su vez contiene otros nodos. En un explorador de ficheros serían los directorios.
+    \item \textbf{”Hojas”}: Lo que en un explorador de archivos serían los ficheros.
+\end{itemize}
+
+Tal como se ha podido ver previamente, al seleccionar cualquiera de los nodos, se resaltará la opción elegida con un color azul.
+
+\subsubsection*{Explorador de ficheros}
+
+Es el método más habitual a día de hoy para navegar por un sistema de ficheros en los sistemas operativos modernos.
+
+\begin{center}
+    \includegraphics[width=0.9\linewidth]{img/browser.png}
+    \captionof{figure}{Detalle del explorador de ficheros}
+\end{center}
+
+Para identificar el tipo de ficheros que se están visualizando se han identificado mediante distintos iconos. Los iconos utilizados son:
+
+{
+\begin{minipage}{0.1\linewidth}
+    \includegraphics[width=\linewidth]{img/folder.png}
+\end{minipage}
+\hspace{0.5cm}
+\begin{minipage}{0.9\linewidth}
+    Es un directorio, y al igual que sucede en un sistema de ficheros, puede contener a su vez otros ficheros y/o directorios.
+
+    Al hacer \textit{click} sobre él, se visualizará su contenido. Esto afectará a la vista de árbol, que se actualizará para mostrar el directorio desplegado.
+\end{minipage}
+}
+
+
+{
+    \begin{minipage}{0.1\linewidth}
+        \includegraphics[width=\linewidth]{img/secret.png}
+    \end{minipage}
+    \hspace{0.5cm}
+    \begin{minipage}{0.9\linewidth}
+        Es un secreto creado y editado a través de la aplicación. Este icono nos identifica que al hacer \textit{click} visualizaremos su contenido, y posteriormente podremos realizar otras acciones como editarlo, imprimirlo, borrarlo...
+    \end{minipage}
+}
+
+
+{
+    \begin{minipage}{0.1\linewidth}
+        \includegraphics[width=\linewidth]{img/file.png}
+    \end{minipage}
+    \hspace{0.5cm}
+    \begin{minipage}{0.9\linewidth}
+        Existen distintas representaciones de iconos para identificar a ficheros que se han subido a la aplicación para ser cifrados y almacenados en ella.
+
+        Dependiendo del tipo de fichero (identificado mediante la extensión) mostrará el tipo de fichero que es junto al icono. Existen iconos para las extensiones más habituales.
+    \end{minipage}
+}
+
+Tal como se ha venido explicando hasta ahora, al simular algo que el usuario ya conoce se va a conseguir que el usuario utilice la aplicación para navegar y guardar la información, consiguiendo que la seguridad de la empresa mejore.
+
+
+\subsubsection*{Navegación “miga de pan”}
+
+La “miga de pan” (en inglés \textit{breadcrumb}) es una técnica de navegación que se utiliza en distintos tipos de interfaces gráficas de usuario para mostrar el camino recorrido.
+
+Dependiendo de si estamos navegando en un directorio o si estamos en un fichero, al final aparecerá un símbolo “/” o no.
+
+\begin{center}
+    \includegraphics[width=0.6\linewidth]{img/breadcrumb1.png}
+    \includegraphics[width=0.6\linewidth]{img/breadcrumb2.png}
+    \captionof{figure}{Detalle de la “miga de pan”}
+\end{center}
+
+Para poder volver sobre nuestros pasos, o para ir hacia arriba en la jerarquía, cada apartado de la “miga de pan” es un enlace, por lo que al hacer \textit{click} sobre cualquiera de ellos nos llevará a su correspondiente directorio.
+
+
+\subsection{Subir un fichero al sistema}
+
+Dado que la creación y edición de secretos puede resultar limitante, la aplicación permite la posibilidad de subir un fichero para que sea guardado y securizado.
+
+
+{
+    \begin{minipage}{0.1\linewidth}
+        \includegraphics[width=\linewidth]{img/upload.png}
+    \end{minipage}
+    \hspace{0.5cm}
+    \begin{minipage}{0.9\linewidth}
+        En la cabecera de la aplicación existe un icono que nos va a permitir subir a la aplicación un fichero de cualquier tipo.
+
+        Al hacer \textit{click} sobre el icono, nos aparecerá un \textit{modal} para preguntarnos por la ruta donde queremos guardar el fichero y para que elijamos el fichero de nuestro sistema.
+    \end{minipage}
+}
+
+\begin{center}
+    \includegraphics[width=0.7\linewidth]{img/upload_modal.png}
+    \captionof{figure}{\textit{Modal} para subir un fichero}
+\end{center}
+
+Al igual que sucedía con la ventana para crear un secreto, este \textit{modal} también cuenta con un sistema de validación que no activará el botón hasta que no se elija del sistema un fichero o una ruta correcta.
+
+Una vez la aplicación ha guardado el fichero de forma segura se nos redirigirá a la ruta donde se ha guardado. Para poder visualizar el fichero sin tener que descargarlo, el sistema detecta (a través del “\href{https://en.wikipedia.org/wiki/Media_type}{MIME Type}”) si un fichero que se puede mostrar, y de esta manera lo visualizará.
+
+Los ficheros que automáticamente se muestran son:
+
+\begin{itemize}
+    \item Ficheros \textbf{PDF}: El fichero se abrirá a través del lector de documentos del navegador, lo que posibilita su visualización o descarga.
+    \item Ficheros de tipo \textbf{imagen}: Si el “MIME Type” es de tipo \textbf{data:image}, la aplicación creará un elemento en el HTML para poder visualizarlo.
+\end{itemize}
+
+\begin{center}
+    \includegraphics[frame,width=0.7\linewidth]{img/upload_download.png}
+    \captionof{figure}{Visualización de un fichero subido a la aplicación}
+\end{center}
+
+Aparte, y tal como se puede ver en la imagen superior, aparecerá un enlace para poder descargar el fichero subido, lo que permitirá recuperar el archivo sin cifrar.
+
 \section{Angular: Aspectos destacables de la programación}
+
+
+
 {\color{red} Comentar cosas como:
 
     \begin{itemize}
+        \item Creación del árbol de secretos usando “promises”
         \item Versatilidad de Angular a la hora de modularizar partes de la web
         \item Sencillez a la hora de comunicar dichos módulos a través de un servicio común. (ejemplo de alguna parte).
     \end{itemize}
@@ -716,17 +1022,6 @@ Tal como se puede ver, para mejorar la navegación, el interfaz que muestra en m
 
 
 
-\section{Características y uso de la aplicación}
-{\color{red} Añadir distintas características de la aplicación:
-
-    \begin{itemize}
-        \item Creación del árbol de secretos usando “promises”
-        \item Creación del interfaz de “ficheros” para facilitar la vida al usuario
-        \item Editor WYSIWYG y el añadirle un botón de guardado custom.
-        \item Bloqueo de secretos y cómo lo ve otro usuario
-        \item ...
-    \end{itemize}
-}
 
 \chapter{Trabajo futuro}
 
