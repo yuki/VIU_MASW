@@ -69,9 +69,9 @@ En la era digital en la que nos encontramos guardar datos e información es rela
 
 Por otro lado, tenemos información sensible como son las contraseñas, que a pesar de ocupar poco espacio, debemos tener especial cuidado con ellas, ya que no deben ser accedidas ni utilizadas por personas que no estén autorizadas para ello.
 
-En el ámbito personal existen distintas posibilidades que nos permiten gestionar contraseñas, ya sea de manera integrada en los navegadores web, o a través de aplicaciones externas.
+En el ámbito personal existen distintas aplicaciones que nos permiten gestionar contraseñas, ya sea de manera integrada en los navegadores web, o a través de aplicaciones externas.
 
-Cuando esta gestión de contraseñas se pasa al ámbito empresarial, a pesar de que también existen distintas alternativas, puede que no cuenten con características necesarias para la empresa; quizá la integración con los sistemas de la empresa no sea posible; en caso de ser una opción de pago ser demasiado cara por el volumen de empleados que tenemos... Puede resultar complejo decantarse por una solución existente.
+Cuando esta gestión de contraseñas se pasa al ámbito empresarial, a pesar de que también existen distintas alternativas, puede que no cuenten con características necesarias para la empresa; quizá la integración con los sistemas de la empresa no sea posible; en caso de ser una opción de pago, ser demasiado cara por el volumen de empleados que tenemos... Puede resultar complejo decantarse por una solución existente.
 
 A las contraseñas también hay que añadir la información sensible que maneja la empresa, ya sea información propia o de terceras empresas (clientes o proveedores que se tengan). Esa información, ya no tiene por qué ceñirse a “usuario” y “contraseña”, si no que puede ser documentación, ficheros, imágenes, esquemas de red ...
 
@@ -91,13 +91,13 @@ Estas aplicaciones, de las cuales más adelante se analizarán algunas, la versi
 
 \chapter{Objetivos}
 
-El objetivo principal es crear una aplicación que gestione contraseñas y documentación sensible basada en un entorno web, que pueda ser utilizada en un entorno multiusuario como una empresa.
+El objetivo principal es crear una aplicación que gestione contraseñas y en la que poder escribir y guardar documentación sensible, basada en un entorno web, que pueda ser utilizada en un entorno multiusuario como una empresa.
 
-Este gestor de contraseñas deberá cumplir con unos requisitos mínimos para que pueda ser desplegado y utilizado en una empresa para mejorar la seguridad de la misma.
+Este gestor de contraseñas deberá cumplir con unos requisitos mínimos para que pueda ser desplegado y utilizado en una empresa para mejorar la seguridad de los datos que se guardan.
 
 
 \section{Requisitos del proyecto}
-Como propuesta para la creación de un gestor de contraseñas propio, se han identificado los siguientes requisitos que deben de cumplirse para considerar que el trabajo final de máster ha cumplido con los objetivos citados previamente:
+Como propuesta para la creación de un gestor de contraseñas propio, se han identificado los siguientes requisitos que deben de cumplirse para considerar que el trabajo final de máster ha cumplido con las funcionalidades iniciales citadas previamente:
 
 \begin{itemize}
 
@@ -111,9 +111,9 @@ Como propuesta para la creación de un gestor de contraseñas propio, se han ide
 
     \item El gestor de contraseñas debe contar con un \textbf{sistema de autenticación}. Sólo debe permitir el acceso a las personas que hayan pasado algún sistema de verificación que demuestre ser quién es.
 
-    Este sistema de autenticación no tiene por qué limitarse al clásico “usuario y contraseña”, ya que podrá adaptarse para en el futuro utilizar de forma sencilla otros sistemas conocidos, como por ejemplo: certificados \textbf{TLS}, contraseñas de un sólo uso basadas en tiempo (TOTP), tokens basados en \href{https://en.wikipedia.org/wiki/JSON_Web_Token}{JWT}, sistemas \href{https://en.wikipedia.org/wiki/OAuth}{OAuth}/\href{https://en.wikipedia.org/wiki/OpenID#OpenID_Connect_(OIDC)}{OIDC}, ...
+    Este sistema de autenticación no tiene por qué limitarse al clásico “usuario y contraseña”, ya que podrá adaptarse para en el futuro utilizar, de forma sencilla, otros sistemas conocidos, como por ejemplo: certificados \textbf{TLS}, contraseñas de un sólo uso basadas en tiempo (TOTP), tokens basados en \href{https://en.wikipedia.org/wiki/JSON_Web_Token}{JWT}, sistemas \href{https://en.wikipedia.org/wiki/OAuth}{OAuth}/\href{https://en.wikipedia.org/wiki/OpenID#OpenID_Connect_(OIDC)}{OIDC}, ...
 
-    \item Debe existir un \textbf{sistema de autorización, que controle el tipo de acceso y permisos} que tenga en en cuenta quién los realiza y a qué contraseñas se quiere acceder.
+    \item Debe existir un \textbf{sistema de autorización, que controle el tipo de acceso y permisos} que tenga en cuenta quién los realiza y a qué contraseñas se quiere acceder.
 
     Estos permisos pueden basarse en \textbf{roles}, para de esta manera poder agrupar usuarios, y en base a ellos facilitar la autorización
 
@@ -207,7 +207,7 @@ Algunos ejemplos en los últimos años:
 
     \item La aplicación \href{https://www.lastpass.com/}{LastPass}, analizada previamente, ha sufrido varios ataques.
 
-    En \textcite{lastpass}, la empresa declara que están trabajando “para comprender el alcance del incidente e identificar a qué información específica se ha accedido”. Por otro lado, \textcite{lastpass2} se pregunta, que aunque la empresa haya indicado que los datos cifrados obtenidos no se pueden descifrar, no cree en la palabra de la empresa.
+    En \textcite{lastpass}, la empresa declara que están trabajando “para comprender el alcance del incidente e identificar a qué información específica se ha accedido”. Por otro lado, \textcite{lastpass2} analiz, que aunque la empresa haya indicado que los datos cifrados obtenidos no se pueden descifrar, no cree en la palabra de la empresa.
 
     Para poder ver un breve resumen de los últimos ataques, \textcite{lastpass3} nos muestra los últimos cuatro ataques en tres años, con enlaces a cada noticia.
 
@@ -218,6 +218,72 @@ Algunos ejemplos en los últimos años:
 \end{itemize}
 
 Como se puede ver, y este listado sólo es una pequeña muestra, los gestores de contraseña son un objetivo claro de ataques.  \textcite{hacked3} analiza parte de estos ataques y da pequeñas recomendaciones sobre cómo mejorar la protección (como modificar la contraseña por una más fuerte).
+
+
+\section{Herramientas tecnológicas utilizadas}
+
+Para la creación del proyecto se ha hecho uso de distintas herramientas tecnológicas, que a su vez también han ayudado con las metodologías ágiles que se expondrán más adelante.
+
+
+\subsection{Framework Angular}
+
+\href{https://angular.io/}{Angular} es un \textit{framework} que nos facilita la creación de aplicaciones web, utiliza el lenguaje de programación \href{https://www.typescriptlang.org/}{Typescript} y es Software Libre.
+
+Angular permite programar haciendo uso de la arquitectura conocida como “\textbf{Modelo–vista–controlador}”, que  va a permitir separar la representación visual de la aplicación, el modelo de datos que se va a tener y la lógica de negocio.
+
+Gracias a ello, la aplicación desarrollada va a ser lo más modular posible, para que de esta manera el mantenimiento y el añadirle nuevas características en el futuro se pueda realizar de manera sencilla.
+
+Por otro lado, y gracias a que Angular es un \textit{framework} de lado de cliente (el resultado se ejecuta en el navegador del usuario), va a permitir que la carga se reduzca en el lado del servidor.
+
+\subsection{Hashicorp Vault}
+
+\href{https://www.vaultproject.io/}{Vault} es el proyecto de código abierto para asegurar, almacenar y controlar el acceso a secretos y datos sensibles creado por la empresa \href{https://www.hashicorp.com/}{Hashicorp} (conocidos también por la creación de \href{https://www.terraform.io/}{Terraform}).
+
+Se va a utilizar Vault como sistema centralizado para varios aspectos de la aplicación web que se va a desarrollar:
+
+\begin{itemize}
+    \item \textbf{Gestión de autenticación}: Vault nos va a permitir tener un sistema de gestión de autenticación centralizado, que nos puede permitir pasar de un sistema de “usuario y contraseña”, a un sistema autenticado contra el Active Directory de la empresa, o hacer uso de sistemas sistemas \href{https://en.wikipedia.org/wiki/OAuth}{OAuth}/\href{https://en.wikipedia.org/wiki/OpenID#OpenID_Connect_(OIDC)}{OIDC}.
+
+    \item \textbf{Gestión de autorización}: A la hora de permitir el acceso y permisos a los secretos Vault cuenta con un sistema interno que nos ayudará a realizar dicha gestión.
+
+    \item \textbf{Gestor de almacenamiento}: Se puede hacer uso de distintos sistemas de \textit{backend} de almacenamiento: desde ficheros cifrados a distintas bases de datos (MySQL, PostgreSQL, Cassandra,...).
+
+    Dependiendo del almacenamiento elegido, el crear un sistema en Alta Disponibilidad será más sencillo que en otros. De todas maneras, la posibilidad de migrar de un sistema de almacenamiento a otro siempre es posible
+
+    \item \textbf{Alta Disponibilidad (HA)}: Teniendo en cuenta que un gestor de contraseñas y documentación sensible es una pieza fundamental en una empresa, es vital que exista la posibilidad de crear un sistema en Alta Disponibilidad.
+
+    Vault permite crear, dependiendo de las necesidades, distintos tipos de sistemas en Alta Disponibilidad multi-nodo, multi-región, con distintos tipos de sistemas de  ...
+
+\end{itemize}
+
+Aunque Vault no está pensado inicialmente para guardar documentación, uno de sus sistemas de almacenamiento es “clave-valor”.  Este ha sido el sistema elegido para guardar las contraseñas, la documentación que se va a poder generar en la propia aplicación y los ficheros que se van a poder subir.
+
+
+\subsection{Git y despliegues automáticos}
+
+\href{https://es.wikipedia.org/wiki/Git}{Git} es el sistema de control de versiones creado por \href{https://es.wikipedia.org/wiki/Linus_Torvalds}{Linus Torvalds} para la gestión del código fuente de \href{https://es.wikipedia.org/wiki/N%C3%BAcleo_Linux}{Linux}. Hoy en día es el sistema más utilizado gracias a características tan importantes como la facilidad para crear ramas, su versatilidad para adaptarse al flujo de trabajo del desarrollador, integración con los entornos de desarrollo más importantes...
+
+Gracias a los sistemas CI/CD (del inglés “\textit{Continuous Integration/Continuous Delivery}) integrados en las plataformas de repositorios más conocidas (\href{https://github.com/}{GitHub} o \href{https://about.gitlab.com/}{GitLab}) o a través de herramientas propias (como \href{https://www.jenkins.io/}{Jenkins}), el realizar despliegues automatizados de las nuevas versiones permitirá que la aplicación pueda ser rápidamente utilizada por los usuarios finales.
+
+%A pesar de que Git permite ser descentralizado, se ha utilizado la plataforma \href{https://github.com/}{Github} como plataforma centralizadora y de esta manera también así disponer de una copia de seguridad del código fuente.
+%
+%\begin{center}
+%    \includegraphics[width=0.8\linewidth]{img/commits.png}
+%    \captionof{figure}{Histórico de varios commits realizados}
+%\end{center}
+%
+%Aparte, también se ha integrado con Trello (a través de los plugins conocidos como “Power-Ups”) para así poder asociar las tareas a los commits que las han cumplimentado. De esta manera conseguiremos una relación “tarea ↔ código” que podremos utilizar para analizar si ha habido algún error durante el desarrollo, o fases como la de \textit{testing}.
+
+
+%\subsection{Creación de entornos con Docker}
+%Como dice \textcite{mouat}, los contenedores son un concepto que lleva existiendo décadas en sistemas Unix (con el comando “chroot”), pero \href{https://es.wikipedia.org/wiki/Docker_(software)}{Docker} cogió la tecnología existente de contenedores Linux y la amplió de varias maneras, sobre todo gracias a su sistema de imágenes portable.
+%
+%Gracias a utilizar distintas imágenes Docker con distintos servicios, se ha podido realizar despliegues de manera sencilla para distintos entornos (desarrollo, test y producción).
+%
+%También ha sido especialmente útil al poder realizar el desarrollo en distintos ordenadores, sin perder el tiempo en realizar instalaciones de librerías y ejecutables, creando el entorno de desarrollo en segundos.
+
+
+
 
 \chapter{Metodologías utilizadas}
 
@@ -234,7 +300,7 @@ Ventajas que podemos destacar de las metodologías ágiles:
 
 \section{Gestión del proyecto}
 
-Para comenzar con la gestión del proyecto debemos contar con los objetivos listados en el capítulo anterior y transformarlos en las conocidas como “\textbf{historias de usuario}”.
+Para comenzar con la gestión del proyecto debemos contar con los requisitos listados previamente y transformarlos en las conocidas como “\textbf{historias de usuario}”.
 
 En ellas plasmaremos, en un lenguaje sencillo de entender, las funcionalidades que el producto debe tener, a las que asociaremos otros datos como son:
 
@@ -316,7 +382,6 @@ A continuación se van a plasmar las distintas “historias de usuario” obteni
     \\
 \end{requisitostbl}
 
-\vspace{40pt}
 
 \begin{requisitostbl}{X[1]X[2]X[2]X[3]X[2]}
     ID & Estimación & Prioridad  & Tema &  Dependencias \\
@@ -539,61 +604,6 @@ Por último, cada tarea puede tener un listado de pequeños ítems. Estos han si
 Tras terminar la tarea, se pasará a la columna \textbf{testing}, para de esta manera, tal como se ha dicho previamente, comenzar con la fase de testeo.
 
 
-\chapter{Herramientas tecnológicas utilizadas}
-
-Durante la creación del proyecto hemos hecho uso de distintas herramientas tecnológicas, que a su vez también nos han ayudado con las metodologías ágiles explicadas previamente.
-
-
-\section{Framework Angular}
-
-\href{https://angular.io/}{Angular} es un \textit{framework} que nos facilita la creación de aplicaciones web, utiliza el lenguaje de programación \href{https://www.typescriptlang.org/}{Typescript} y es Software Libre.
-
-Angular nos va a permitir programar haciendo uso de la arquitectura conocida como “Modelo–vista–controlador”, que nos va a permitir separar la representación visual de la aplicación, el modelo de datos que podamos tener y la lógica de negocio.
-
-Gracias a ello, la aplicación desarrollada va a ser lo más modular posible, para que de esta manera el mantenimiento y el añadirle nuevas características en el futuro se pueda realizar de manera sencilla.
-
-\section{Hashicorp Vault}
-
-\href{https://www.vaultproject.io/}{Vault} es el proyecto de código abierto para asegurar, almacenar y controlar el acceso a secretos y datos sensibles creado por la empresa \href{https://www.hashicorp.com/}{Hashicorp} (conocidos también por la creación de \href{https://www.terraform.io/}{Terraform}).
-
-Se va a utilizar Vault como sistema centralizado para varios aspectos de la aplicación web que se va a desarrollar:
-
-\begin{itemize}
-    \item \textbf{Gestión de autenticación}: Vault nos va a permitir tener un sistema de gestión de autenticación centralizado, que nos puede permitir pasar de un sistema de “usuario y contraseña”, a un sistema autenticado contra el Active Directory de la empresa, o hacer uso de sistemas sistemas \href{https://en.wikipedia.org/wiki/OAuth}{OAuth}/\href{https://en.wikipedia.org/wiki/OpenID#OpenID_Connect_(OIDC)}{OIDC}.
-
-    \item \textbf{Gestión de autorización}: A la hora de permitir el acceso y permisos a los secretos Vault cuenta con un sistema interno que nos ayudará a realizar dicha gestión.
-
-    \item \textbf{Gestor de almacenamiento}: Se puede hacer uso de distintos sistemas de \textit{backend} de almacenamiento: desde ficheros cifrados a distintas bases de datos (MySQL, PostgreSQL, Cassandra,...).
-
-    Dependiendo del almacenamiento elegido, el crear un sistema en Alta Disponibilidad será más sencillo que en otros. De todas maneras, la posibilidad de migrar de un sistema de almacenamiento a otro siempre es posible
-
-\end{itemize}
-
-
-
-\section{Git como gestor de código fuente}
-
-\href{https://es.wikipedia.org/wiki/Git}{Git} es el sistema de control de versiones creado por \href{https://es.wikipedia.org/wiki/Linus_Torvalds}{Linus Torvalds} para la gestión del código fuente de \href{https://es.wikipedia.org/wiki/N%C3%BAcleo_Linux}{Linux}. Hoy en día es el sistema más utilizado gracias a características tan importantes como la facilidad para crear ramas, su versatilidad para adaptarse al flujo de trabajo del desarrollador, integración con los entornos de desarrollo más importantes...
-
-A pesar de que Git permite ser descentralizado, se ha utilizado la plataforma \href{https://github.com/}{Github} como plataforma centralizadora y de esta manera también así disponer de una copia de seguridad del código fuente.
-
-\begin{center}
-    \includegraphics[width=0.8\linewidth]{img/commits.png}
-    \captionof{figure}{Histórico de varios commits realizados}
-\end{center}
-
-Aparte, también se ha integrado con Trello (a través de los plugins conocidos como “Power-Ups”) para así poder asociar las tareas a los commits que las han cumplimentado. De esta manera conseguiremos una relación “tarea ↔ código” que podremos utilizar para analizar si ha habido algún error durante el desarrollo, o fases como la de \textit{testing}.
-
-
-\section{Creación de entornos con Docker}
-Como dice \textcite{mouat}, los contenedores son un concepto que lleva existiendo décadas en sistemas Unix (con el comando “chroot”), pero \href{https://es.wikipedia.org/wiki/Docker_(software)}{Docker} cogió la tecnología existente de contenedores Linux y la amplió de varias maneras, sobre todo gracias a su sistema de imágenes portable.
-
-Gracias a utilizar distintas imágenes Docker con distintos servicios, se ha podido realizar despliegues de manera sencilla para distintos entornos (desarrollo, test y producción).
-
-También ha sido especialmente útil al poder realizar el desarrollo en distintos ordenadores, sin perder el tiempo en realizar instalaciones de librerías y ejecutables, creando el entorno de desarrollo en segundos.
-
-% TODO: meter una imagen propia de ejemplo
-
 
 \chapter{Resultados obtenidos}
 
@@ -637,10 +647,10 @@ En rojo, en la parte central también aparece cómo sería el login, que daría 
 
 Tal como se puede ver, ya en este primer boceto se tenía una idea bastante clara de cómo debía ser a grandes rasgos el interfaz final.
 
-\subsection{Creación del Interfaz con un \textit{framework}}
-Una vez se tuvieron claro los aspectos generales del prototipo, se realizó un primer prototipo haciendo uso de un \textit{framework CSS}.
+\subsection{Creación inicial del interfaz con un \textit{framework} CSS}
+Una vez se tuvieron claro los aspectos generales del boceto, se realizó un primer prototipo haciendo uso de un \textit{framework CSS}.
 
-El \textit{framework} elegido ha sido \href{https://getbootstrap.com/}{Bootstrap}, ya que va a permitir crear un diseño funcional, de manera sencilla, que dispone de distintas características que  van a resultar útiles durante el uso de la aplicación (como por ejemplo los “\textit{modal}” o el “\textit{breadcrumb}”).
+El \textit{framework} elegido ha sido \href{https://getbootstrap.com/}{Bootstrap}, ya que va a permitir crear un diseño funcional, de manera sencilla, y dispone de distintas características que  van a resultar útiles durante el uso de la aplicación (como por ejemplo los “\textit{modal}” o el “\textit{breadcrumb}”).
 
 \begin{center}
     \includegraphics[frame,width=\linewidth]{img/boceto2.png}
@@ -786,6 +796,12 @@ A la hora de imprimir, hay ciertas partes del interfaz que desaparecen para mejo
     \captionof{figure}{Histórico de un secreto.}
 \end{center}
 
+De esta manera, podremos ver cualquier cambio que haya sufrido el secreto a lo largo del tiempo. Al hacer \textit{click} en alguno de los enlaces para visualizar alguna versión anterior, nos aparecerá un mensaje encima del secreto para indicarlo:
+
+\begin{center}
+    \includegraphics[width=0.6\linewidth]{img/history2.png}
+    \captionof{figure}{Mensaje indicando la versión del secreto.}
+\end{center}
 
 \subsubsection*{Desbloquear secreto}
 {
@@ -813,8 +829,6 @@ A la hora de imprimir, hay ciertas partes del interfaz que desaparecen para mejo
 \begin{minipage}{0.9\linewidth}
     Un administrador, o usuario que tenga permisos para ello, podrá borrar un secreto con todas las consecuencias que ello conlleva: perder los datos, el histórico, no poder recuperarlo...
 \end{minipage}
-
-Una vez el usuario haga \textit{click} en el botón de la confirmación, el secreto se borrará y la aplicación redirigirá al usuario al directorio superior.
 }
 
 Debido a que es una acción que no se va a poder deshacer, se requerirá que el usuario realice una confirmación antes de que el secreto sea borrado.
@@ -824,6 +838,7 @@ Debido a que es una acción que no se va a poder deshacer, se requerirá que el 
     \captionof{figure}{Confirmación al borrar un secreto}
 \end{center}
 
+Una vez el usuario haga \textit{click} en el botón de la confirmación, el secreto se borrará y la aplicación redirigirá al usuario al directorio superior de donde se encontraba el secreto borrado.
 
 \subsection{Editar un secreto}
 
@@ -1004,8 +1019,83 @@ Los ficheros que automáticamente se muestran son:
 
 Aparte, y tal como se puede ver en la imagen superior, aparecerá un enlace para poder descargar el fichero subido, lo que permitirá recuperar el archivo sin cifrar.
 
+
+
 \section{Angular: Aspectos destacables de la programación}
 
+Tras explicar cómo funciona la aplicación desde el punto de vista del usuario, se va a profundizar en algunos aspectos técnicos dentro de la programación.
+
+Tal como se ha dicho, la aplicación está programada utilizando el \textit{framework} \href{https://angular.io/}{Angular} y por tanto se ha hecho uso del lenguaje \href{https://www.typescriptlang.org/}{Typescript}.
+
+A continuación se van a detallar algunos aspectos importantes y algunas características utilizadas durante la programación de la aplicación.
+
+
+\subsection{Vistas en componentes separados}
+
+Durante la creación del interfaz gráfico se ha dividido en distintos componentes para de esta manera diferenciar el código de la vista para cada uno de ellos.
+
+\begin{center}
+    \includegraphics[frame,width=\linewidth]{img/interfaz2-colored.png}
+    \captionof{figure}{Interfaz principal con los componentes coloreados}
+\end{center}
+
+En la imagen se han coloreado los distintos componentes que existen a la hora de visualizar un secreto:
+
+\begin{itemize}
+    \item \textbf{Cabecera}: La cabecera de la aplicación una vez el usuario se ha logueado.
+    \item \textbf{Cajón de búsqueda}: Este componente se reutiliza en dos partes del interfaz: en la cabecera y encima de la vista de árbol de secretos.
+    \item \textbf{Vista de árbol}: Este componente se oculta cuando el interfaz está siendo visualizado en una pantalla pequeña.
+    \item \textbf{Breadcrumb} o “miga de pan”: Este es el componente que nos visualiza la ruta en la que nos encontramos.
+    \item \textbf{Vista del secreto}: Esta es la vista principal cuando se está visualizando el secreto. En caso de que se esté editando el secreto, la vista mostrará el editor.
+    \item \textbf{Pie de página}: El pie de página de la aplicación.
+\end{itemize}
+
+Aparte de los componentes explicados previamente, existen otro dos:
+
+\begin{itemize}
+    \item \textbf{Login}: Es el encargado de mostrar el \textit{modal} del \textit{login} cuando no se está logueado en la aplicación.
+    \item \textbf{Explorador de ficheros}: Es el componente que visualiza los secretos como si fuese un explorador de ficheros.
+\end{itemize}
+
+\begin{center}
+    \includegraphics[width=0.9\linewidth]{img/browser.png}
+    \captionof{figure}{Detalle del explorador de ficheros}
+\end{center}
+
+
+Varios de estos componentes están integrados en la vista principal a la hora de iniciar la aplicación, en el fichero \configfile{app.component.html}.
+
+\begin{mycode}{Fichero app.component.html}{html}{}
+<app-header></app-header>
+<div class="container pt-3 mb-5">
+    <div class="row">
+        <div id="tree_navbar" class="col-md-3 col-lg-2 d-md-block sidebar
+         collapse d-print-none">
+            <app-tree></app-tree>
+        </div>
+        <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+            <app-breadcrumb></app-breadcrumb>
+            <app-browser></app-browser>
+            <router-outlet></router-outlet>
+        </main>
+    </div>
+</div>
+<app-footer></app-footer>
+\end{mycode}
+
+
+Dado que los componentes idealmente sólo deben centrarse en la experiencia de usuario, se detallará cómo se ha realizado el paso de información entre ellos.
+
+
+
+\subsection{\textit{Services} e inyección de dependencias}
+
+Se ha creado un servicio en Angular, cuya dependencia se ha inyectado en la aplicación para realizar el paso de información entre distintos componentes de la vista, y para la obtención de datos de los secretos a través del \textit{backend} Vault utilizando su \href{https://developer.hashicorp.com/vault/api-docs}{API}.
+
+De esta manera
+
+
+\subsection{Programación asíncrona: \textit{promises} y \textit{observables}}
 
 
 {\color{red} Comentar cosas como:
