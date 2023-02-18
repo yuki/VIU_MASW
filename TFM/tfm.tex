@@ -892,11 +892,11 @@ Si por el contrario, la aplicación se está visualizando a través de un teléf
 
 {
 \begin{minipage}{0.3\linewidth}
-    \includegraphics[width=\linewidth]{img/tree1.png}
+    \includegraphics[width=0.9\linewidth]{img/tree1.png}
 \end{minipage}
 \hfill
 \begin{minipage}{0.3\linewidth}
-    \includegraphics[width=\linewidth]{img/tree2.png}
+    \includegraphics[width=0.9\linewidth]{img/tree2.png}
 \end{minipage}
 \hfill
 \begin{minipage}{0.3\linewidth}
@@ -1020,6 +1020,71 @@ Los ficheros que automáticamente se muestran son:
 Aparte, y tal como se puede ver en la imagen superior, aparecerá un enlace para poder descargar el fichero subido, lo que permitirá recuperar el archivo sin cifrar.
 
 
+\section{Vault como \textit{backend} de información}
+
+Ya se ha comentado previamente cómo Vault es un proyecto para asegurar, almacenar y controlar el acceso a secretos. La idea de la aplicación realizada ha sido explotar esas funcionalidades y llevarlas un paso más lejos para adaptarlas a un entorno de documentación.
+
+La comunicación con Vault se realiza a través de su s\href{https://developer.hashicorp.com/vault/api-docs}{API}, por lo que el servicio debe de estar funcionando y en parte configurado para que la aplicación funcione sobre él.
+
+Tal como se lleva repitiendo a lo largo del documento, la aplicación creada trata de buscar ser una herramienta que pueda servir en una empresa como sistema centralizado para la securización de contraseñas y documentación. Es por eso que debe de realizarse una configuración previa para que la aplicación funcione.
+
+\subsection{Configuración inicial de Vault}
+
+Dado que Vault va a ser el sistema que se va a encargar del almacenamiento de los secretos es vital que su instalación y configuración inicial sea correcta.
+
+Los pasos que deben realizarse están explicados en su \href{https://developer.hashicorp.com/vault/tutorials/getting-started/getting-started-deploy}{documentación oficial}, pero a continuación se van a simplificar rápidamente:
+
+\begin{itemize}
+    \item Crear un \textbf{servicio de inicio automático} para que en caso de que el servidor se reinicie, el servicio arranque de manera automática. En sistemas GNU/Linux se puede hacer a través de Systemd.
+    \item \textbf{Configurar Vault}: Teniendo distintos puntos a tener en cuenta que se van a detallar en los apartados siguientes.
+    \item \textbf{Inicializar Vault}: Al inicializar Vault se generarán el \textit{\textbf{token inicial de root}} que es el que permite la administración completa del servicio. Es fundamental guardarlo a buen recaudo.
+
+    También se generan las \textbf{claves de \textit{unseal}} para abrir el acceso a los secretos. Cuando Vault arranca no es posible acceder a los secretos hasta que no se ha realizado el proceso de \textit{unseal}.
+\end{itemize}
+
+A continuación se van a detallar las decisiones que una empresa puede tomar a la hora de configurar Vault para que mejor se adapte a sus necesidades.
+
+\subsection{Sistema \textit{backend} de autenticación}
+
+En una empresa lo habitual es hacer uso de un sistema centralizado de autenticación, para que todos los usuarios se generen en la misma plataforma.
+
+Hoy en día, los métodos más habituales suelen ser:
+\begin{itemize}
+    \item \textbf{Directorio Activo de Windows Server}: en empresas donde se haga uso de Windows como sistemas de escritorio, es habitual que el sistema de autenciación esté centralizado y junto con él se hagan usos de sistemas de seguridad como GPOs, carpetas compartidas, ...
+    \item \textbf{LDAP}: Un sistema más estandarizado es el de LDAP, que también se puede integrar con otro tipo de aplicaciones.
+
+    \item \textbf{Almacenamiento local}: En caso de que no se quiera integrar Vault con sistemas internos de la empresa, Vault cuenta con su propia gestión de autenticación para usuarios.
+\end{itemize}
+
+Cada empresa tendrá que decidir cuál es el mejor método que se adapta a ella, y adaptar la aplicación a ella resulta sencilla.
+
+
+\subsection{\textit{Key/Value} como motor de secretos}
+Para la interacción con los secretos se ha decidido hacer uso del sistema “\href{https://developer.hashicorp.com/vault/api-docs/secret/kv/kv-v2}{KVv2}” que tiene integrado Vault. Este sistema nos ofrece:
+
+\begin{itemize}
+    \item Interactuar con los secretos de manera sencilla a través de la API.
+    \item Modificar los \textit{metadata} para poder guardar un histórico de lo sucedido.
+    \item Tener un sistema de versiones por cada secreto.
+\end{itemize}
+
+Esta es la característica más importante utilizada por parte de la aplicación a la hora de interactuar con Vault.
+
+
+\subsection{\textit{Backend} de almacenamiento}
+
+Este es otro punto que la empresa debe tener en cuenta a la hora de configurar Vault, ya que de ello dependerá cómo se almacenen los secretos en el servidor final (aunque siempre se realiza de manera cifrada).
+
+Existen distintos \href{https://developer.hashicorp.com/vault/docs/configuration/storage}{\textit{backends} de almacenamiento} y dependiendo de las necesidades se deberá optar por uno u otro.
+
+\begin{itemize}
+    \item \textbf{\textit{Filesystem}}: Es el método más sencillo de implementar, ya que Vault almacena los secretos en formato de ficheros en el servidor.
+    \item \textbf{Bases de datos}: Dependiendo del sistema de base de datos utilizado podríamos hacer uso de su sistema en alta disponibilidad para tener un sistema escalable (como se puede realizar con MySQL).
+    \item \textbf{S3}: Quizá interese almacenar los secretos en un \textit{bucket} S3 de Amazon, y de esta manera no depender de almacenamiento local.
+\end{itemize}
+
+Estos son sólo unos ejemplos de los distintos sistemas de almacenamiento que se pueden utilizar, que habría que configurar en Vault, pero que para la aplicación creada es transparente cuál se elija.
+
 
 \section{Angular: Aspectos destacables de la programación}
 
@@ -1090,27 +1155,102 @@ Dado que los componentes idealmente sólo deben centrarse en la experiencia de u
 
 \subsection{\textit{Services} e inyección de dependencias}
 
-Se ha creado un servicio en Angular, cuya dependencia se ha inyectado en la aplicación para realizar el paso de información entre distintos componentes de la vista, y para la obtención de datos de los secretos a través del \textit{backend} Vault utilizando su \href{https://developer.hashicorp.com/vault/api-docs}{API}.
+Para la obtención de datos de los secretos a través del \textit{backend} Vault utilizando su \href{https://developer.hashicorp.com/vault/api-docs}{API}, y para la sincronización y envío de información entre los distintos componentes de la vista se ha creado un servicio en Angular, cuya dependencia se ha inyectado al inicio de la aplicación.
 
-De esta manera
-
-
-\subsection{Programación asíncrona: \textit{promises} y \textit{observables}}
+El servicio ha facilitado que distintos componentes que van a visualizar parte de la misma información (como la vista de árbol y el explorador de ficheros), o que dependen unos de otros, van a estar en sincronía a través del servicio.
 
 
-{\color{red} Comentar cosas como:
+\subsection{Programación asíncrona con \textit{promises}}
 
-    \begin{itemize}
-        \item Creación del árbol de secretos usando “promises”
-        \item Versatilidad de Angular a la hora de modularizar partes de la web
-        \item Sencillez a la hora de comunicar dichos módulos a través de un servicio común. (ejemplo de alguna parte).
-    \end{itemize}
+Dado que gran parte de la aplicación se basa en comunicarse con la API de Vault, ha sido necesario hacer uso en todo momento de la programación asíncrona al realizar las peticiones.
 
-{{\large \textbf{NOTA: ¿Esto debería ir quizá como punto 4.2.4?}}}
+El ejemplo más claro es la generación del árbol de secretos. Para ello se ha hecho un algoritmo recursivo de petición a la API de los secretos, que cuando comprobaba que existía una jerarquía de directorios, debía entrar al directorio y recorrerlo recursivamente.
+
+Al finalizar, las \textit{promises} hay que resolverlas para generar la estructura jerárquica que luego se convierte en la vista de árbol.
+
+\begin{mycode}{Resolviendo \textit{promises} de la función recursiva}{typescript}{}
+// Cogemos las promesas y las resolvemos
+Promise.all(promises).then(data => {
+    data.forEach((value:any) => {
+        if (value != null){
+            var x = nodes.map(function(e:any){
+                return e.href
+            }).indexOf(value[0].path)
+            // cada nodo pertenece a un padre
+            nodes[x].nodes = value
+        }
+    });
+    resolve(nodes)
+});
+\end{mycode}
+
+Angular, y ciertas peticiones que podemos realizar a través de la red, hace uso de \textit{observables}, que funcionan de manera similar a las \textit{promises}.
+
+\subsection{Envío de mensajes con \textit{observables}}
+
+Para la comunicación entre componentes, y también para consolidar la información a través de la API de Vault con la vista, se ha hecho uso de distintas variables de tipo \textbf{\textit{Observable}}.
+
+Este tipo de variables hacen uso del patrón conocido como “\textit{publish-subscribe}”, en el que desde un \textit{subject} se mantiene una lista de \textit{observers} que dependen de él.
+
+De esta manera, cuando se envía un mensaje, los observadores reciben esa información de manera asíncrona para posteriormente utilizarla en la vista en la que está escuchando.
+
+En el siguiente ejemplo se va a detallar parte de la información que se puede encontrar en el \textit{Service} creado llamado \textbf{VaultServices}, en el que se inicializa una variable “secret\_history” que contendrá información de las distintas versiones de un secreto.
+
+A través de la función “get\_secret\_history()” se realizarán peticiones a la API de Vault (usando otra función propia), para posteriormente generar un \textit{array} de la información que posteriormente se enviará a los subscriptores que están a la espera.
+
+\begin{mycode}{Creamos \textit{Observable} y mandamos información}{typescript}{{\small }}
+export class VaultService {
+    //...
+    public secret_history = new Subject<object>()
+    public secret_history$ = this.secret_history.asObservable()
+    //...
+    public get_secret_history(){
+        this.get_path(this.actual_url,"metadata").subscribe((resp:any) => {
+            let versions:any = []
+            let versions_keys = Object.keys(resp.data.versions)
+            for (let index = 0; index <= versions_keys.length-1; index++) {
+                versions.push([versions_keys[index],
+                  resp.data.versions[versions_keys[index]]])
+            }
+            //enviamos información
+            this.secret_history.next(versions.reverse())
+        })
+    }
 }
+\end{mycode}
 
+Continuando con el ejemplo, desde la vista en la que se visualiza a un secreto, se puede ver cómo se ha creado una suscripción a la variable detallada previamente, que al recibir información actualizará la variable local “versions”.
 
+\begin{mycode}{Ejemplo de subscripción a un \textit{Observable}}{typescript}{}
+export class SecretComponent implements OnInit {
+    versions: any = null
 
+    constructor(
+        protected vault: VaultService,
+    ) {
+        //...
+        this.vault.secret_history.subscribe(secret_history => {
+            this.versions = secret_history
+        })
+    }
+}
+\end{mycode}
+
+Esta variable, para terminar, es utilizada en la vista para generar una lista con las distintas versiones con las que cuenta el secreto:
+
+% pongo “hybris” porque el formato html+ng2 me la lía
+\begin{mycode}{Uso de la variable final en la vista}{hybris}{}
+<ul *ngFor="let version of versions; index as i">
+  <li><a routerLink="/v/{{version[0]}}{{this.vault.actual_url}}"
+    (click)="modal.dismiss('Cross click')">
+      <strong>v{{version[0]}}</strong>:
+        {{version[1].created_time|date: "yyyy-MM-dd, HH:mm:ss z"}}
+    </a>
+  </li>
+</ul>
+\end{mycode}
+
+Este tipo de secuencia “llamada a la API de Vault → envío de información al suscriptor/suscriptores → recibir información → actualizar vista” se repite de manera continuada a lo largo de toda la aplicación.
 
 
 \chapter{Trabajo futuro}
@@ -1133,7 +1273,8 @@ De esta manera
 }
 
 
-
+\vfill
+\pagebreak
 \chapter{Conclusiones}
 {\color{red} Las conclusiones finales}
 
@@ -1141,13 +1282,13 @@ De esta manera
 
 \pagebreak
 \printbibliography[title={Referencias bibliográficas},heading=bibintoc]
-\pagebreak
+%\pagebreak
 
-{
-    \addcontentsline{toc}{chapter}{\listfigurename}
-    % un poco de ñapa para quitar el color a los enlaces
-    \hypersetup{linkcolor = black}
-    \listoffigures
-}
+%{
+%    \addcontentsline{toc}{chapter}{\listfigurename}
+%    % un poco de ñapa para quitar el color a los enlaces
+%    \hypersetup{linkcolor = black}
+%    \listoffigures
+%}
 
 \end{document}
