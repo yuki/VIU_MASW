@@ -1239,7 +1239,7 @@ export class SecretComponent implements OnInit {
 Esta variable, para terminar, es utilizada en la vista para generar una lista con las distintas versiones con las que cuenta el secreto:
 
 % pongo “hybris” porque el formato html+ng2 me la lía
-\begin{mycode}{Uso de la variable final en la vista}{hybris}{}
+\begin{mycode}{Uso de la variable  en la vista}{hybris}{}
 <ul *ngFor="let version of versions; index as i">
   <li><a routerLink="/v/{{version[0]}}{{this.vault.actual_url}}"
     (click)="modal.dismiss('Cross click')">
@@ -1255,22 +1255,59 @@ Este tipo de secuencia “llamada a la API de Vault → envío de información a
 
 \chapter{Trabajo futuro}
 
-% TODO: posibles mejoras a añadir:
+Dada la naturaleza de la aplicación realizada, y las distintas posibilidades que puede aportar dentro de una empresa, se podría decir que el trabajo futuro a desarrollar es tan diverso como las necesidades de las empresas que lo puedan utilizar.
 
-% TODO: configuración del usuario, forzar actualizar el árbol, mejor visualización de ficheros, permitir exportar secretos a formatos editables (odt/docx)
+Actualmente la aplicación se considera que es funcional dentro de las tareas que puede realizar, y que por tanto se podría hacer uso de ella para un entorno en producción dentro de cualquier tipo de empresa.
 
-{\color{red} Añadir posibles características futuras:
+Es cierto que las funcionalidades que tiene actualmente se pueden considerar básicas, pero eso facilita que la aplicación ya pueda ser utilizada. Teniendo en cuenta las metodologías ágiles de desarrollo actuales, es cuestión de escuchar la opinión de los usuarios para ir aportando valor y de estar manera ir ampliando las funcionalidades.
+
+Con todo ello, dado que existen muchas funcionalidades que se han quedado sin realizar, y que podrían interesar a nivel general, a continuación de detallan un número de funcionalidades que podrían ir añadiéndose a la aplicación en futuros \textit{sprints}:
+
+\begin{itemize}
+    \item \textbf{Panel de control para administradores}: Como muchas aplicaciones, va a existir el rol de administrador, y que por tanto será el encargado de administrar no sólo la gestión del servicio, si no también la creación de usuarios como de dar permisos.
+
+    Es por eso que sería interesante crear una ruta dentro de la aplicación a la que sólo los administradores puedan acceder y donde se podrían efectuar las siguientes tareas:
 
     \begin{itemize}
-        \item Visualizar los logs de auditoria para cada secreto por parte de los administradores
-        \item Administrar los permisos de accesos a través de un apartado nuevo de administración.
-        \item Crear “timers” para que si el usuario no utiliza la aplicación en X minutos, se realice un deslogueo de la aplicación y así salvaguardar los datos.
-        \item Posibles mejoras en la visualización de secretos (que se puedan ver documentos word/libreoffice a través de librerías externas)
-        \item Añadir un TOC (índice, table of contents), teniendo en cuenta la estructura del MarkDown.
-        \item Poder enviar por mail un documento del secreto (aunque igual me da tiempo a hacerlo antes de la entrega)
-        \item ...
+        \item \textbf{Gestión de usuarios}: Si no se hace uso de un sistema centralizado de usuarios (como \textit{Active Directory} o LDAP), es conveniente tener un lugar donde crear usuarios, borrarlos, cambiarles la contraseña...
+        \item \textbf{Gestión de permisos}: Para crear las políticas de permisos de los usuarios.
+        \item \textbf{Gestionar secretos bloqueados}: Tener un lugar donde desbloquear posibles secretos que se hayan quedado bloqueados.
+        \item \textbf{Auditoría completa}: Vault cuenta con un sistema completo de auditoria, que es capaz de guardar logs por cada acción de usuario. Dada l, podría ser recomendable
     \end{itemize}
-}
+
+    \item \textbf{Mover secretos}: Actualmente no se permite mover un secreto de una ruta a otra. Esta funcionalidad es útil para poder reorganizar la estructura jerárquica de los secretos.
+
+    \item \textbf{Crear configuración para el usuario}: Crear un área de configuración para el usuario. En este apartado, algunas opciones que podría configurar son:
+
+    \begin{itemize}
+        \item Cambiar el aspecto visual de la aplicación. Ya sea a través de distintos temas o simplemente entre un tema claro y otro oscuro.
+        \item Permitir forzar la actualización de la vista de árbol.
+        \item Decidir si quiere tener la vista de árbol siempre visible.
+    \end{itemize}
+
+    \item \textbf{Auditoría propia para los secretos}: Crear un sistema propio más sencillo que el que tiene de serie Vault para conocer las modificaciones históricas de quién ha modificado el secreto.
+
+    \item \textbf{Ver diferencias entre versiones}: Actualmente se pueden ver las distintas versiones de un secreto, pero pueder ser interesante seleccionar dos versiones y ver cuáles son las diferencias entre las dos versiones. Sería tener una herramienta similar a \commandbox{git diff}.
+
+    \item \textbf{Creación de “timers”}: La idea sería que si un usuario no utiliza la aplicación en X minutos, se realice un deslogueo de la aplicación. De esta manera, se salvaguardan los datos ante posibles accesos a un equipo que no está siendo utilizando en un momento dado.
+
+    \item \textbf{Mejoras en la visualización de secretos}: Mejorar y ampliar la visualización de los distintos tipos de ficheros que se pueden subir a la aplicación.
+
+    Puede ser interesante permitir la visualización de documentos tipo word,libreoffice, excel,... haciendo uso de librerías externas.
+
+    \item \textbf{Crear un Índice en los secretos creados}: Dado que la aplicación permite crear documentos gracias al sistema Markdown, se entiende que estos documentos pueden contar con una jerarquía interna basada en encabezados.
+
+    Sería interesante que antes de visualizar el secreto, \textit{parsearlo} para generar una “tabla de contenidos” (TOC o \textit{table of contents} en inglés), y de esta manera generar índices para poder llegar a la parte que interese del documento.
+
+    \item \textbf{Generar e-mail para enviar un secreto}: Junto con la opción de imprimir el secreto, puede ser interesante la opción de crear un botón para generar automáticamente un e-mail para enviar el secreto.
+
+    Como alternativa, y para no tener que enviar la información, se podría generar un token que dure un periodo de tiempo determinado, y que al generar el e-mail se mande dicho token. El usuario receptor deberá loguearse con dicho token para poder visualizar la información.
+\end{itemize}
+
+Tal como se puede observar, el número de nuevas funcionalidades con las que mejorar la aplicación puede resultar muy amplia, y tal como se ha dicho previamente, todo ello sin tener en cuenta la opinión de los usuarios finales.
+
+Con todo ello, y teniendo en cuenta las posibilidades que este tipo de aplicación puede llevar a una empresa, resulta interesante pensar las posibles funcionalidades que podría llegar a tener en un futuro.
+
 
 
 \vfill
