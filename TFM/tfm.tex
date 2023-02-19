@@ -314,9 +314,12 @@ En ellas plasmaremos, en un lenguaje sencillo de entender, las funcionalidades q
     \item Unos \textbf{criterios de validación} por parte del cliente.
 \end{itemize}
 
+Teniendo en cuenta los datos que queremos plasmar en las “historias de usuario”, y tras haber realizado el análisis de los requisitos del proyecto, veremos cuál ha sido el resultado obtenido en el siguiente apartado.
+
+
 \subsection{Resultado del análisis realizado}
 
-A continuación se van a plasmar las distintas “historias de usuario” obtenidas:
+A continuación se van a plasmar las distintas “historias de usuario” obtenidas, en las que se ha ido plasmando la información necesaria que posteriormente se utilizarán para la creación de las tareas a desarrollar:
 
 \begin{requisitostbl}{X[1]X[2]X[2]X[3]X[2]}
     ID & Estimación & Prioridad  & Tema &  Dependencias \\
@@ -395,7 +398,7 @@ A continuación se van a plasmar las distintas “historias de usuario” obteni
     \textbf{Criterios de validación}:
     \begin{itemize}
         \item La visualización mostrará el secreto en formato HTML.
-        \item Si un usuario accede a un secreto “bloqueado” el sistema lo debe alertar y no se le permitirá editarlo.
+        \item Al acceder a un secreto “bloqueado” el sistema lo debe alertar y no se permitirá editarlo.
         \item El interfaz nos mostrará la última vez que se modificó el secreto.
         \item Al visualizar el secreto aparecerán botones con distintas acciones que se podrán realizar sobre él (editar, imprimir, ver históricos, borrar).
     \end{itemize}
@@ -403,7 +406,7 @@ A continuación se van a plasmar las distintas “historias de usuario” obteni
 \end{requisitostbl}
 
 
-\begin{requisitostbl}{X[1]X[2]X[2]X[3]X[2]}
+\begin{requisitostbl}[long]{X[1]X[2]X[2]X[3]X[2]}
     ID & Estimación & Prioridad  & Tema &  Dependencias \\
     6  & 35 horas & 2  & Gestión de Secretos & 2, 3  \\
 
@@ -416,13 +419,13 @@ A continuación se van a plasmar las distintas “historias de usuario” obteni
     \begin{itemize}
         \item La modificación se realizará a través de un editor \textit{\textbf{WYSIWYG}}.
         \item El editor permitirá realizar modificaciones en formato \href{https://es.wikipedia.org/wiki/Markdown}{Markdown}.
-        \item El editor permitirá guardar el secreto y al hacerlo volveremos a la visualización del mismo.
-        \item Al comenzar la modificación, el secreto se pondrá en estado “bloqueado”.
+%        \item El editor permitirá guardar el secreto y al hacerlo volveremos a la visualización del mismo.
+        \item Al editar el secreto se pondrá en estado “bloqueado”.
     \end{itemize}
     \\
 \end{requisitostbl}
 
-\vspace{20pt}
+%\vspace{20pt}
 
 \begin{requisitostbl}{X[1]X[2]X[2]X[3]X[2]}
     ID & Estimación & Prioridad  & Tema &  Dependencias \\
@@ -461,6 +464,7 @@ A continuación se van a plasmar las distintas “historias de usuario” obteni
      \\
 \end{requisitostbl}
 
+\vspace{20pt}
 
 \begin{requisitostbl}{X[1]X[2]X[2]X[3]X[2]}
     ID & Estimación & Prioridad  & Tema &  Dependencias \\
@@ -494,6 +498,7 @@ A continuación se van a plasmar las distintas “historias de usuario” obteni
     Existe un botón para imprimir un secreto. \\
 \end{requisitostbl}
 
+\vspace{10pt}
 
 \begin{requisitostbl}{X[1]X[2]X[2]X[3]X[2]}
     ID & Estimación & Prioridad  & Tema &  Dependencias \\
@@ -512,7 +517,7 @@ A continuación se van a plasmar las distintas “historias de usuario” obteni
         \item Existe un registro de lo sucedido a cada secreto (auditoría).
     \end{itemize} \\
 \end{requisitostbl}
-
+\vspace{10pt}
 
 \subsection{Mapa de las historias de usuario}
 
@@ -557,17 +562,24 @@ Para llevar una mejor gestión de las tareas expuestas en este apartado, lo idea
 
 \href{https://trello.com/}{Trello} es una aplicación web, creada por la empresa \href{https://www.atlassian.com/}{Atlassian}, que nos permite tener un tablero \href{https://en.wikipedia.org/wiki/Kanban_(development)}{Kanban} donde podremos añadir las tareas de nuestro proyecto, e ir moviéndolas entre distintas etapas.
 
-Aunque cuenta con una versión de suscripción, la versión gratuita cuenta con las características suficientes como para poder ser utilizado para la gestión de proyectos sin ningún problema.
+Aunque cuenta con una versión de suscripción, la versión gratuita dispone de las características suficientes como para poder ser utilizado para la gestión de proyectos sin ningún problema.
 
-Una vez definidas las tareas, tal como se ha visto anteriormente, se han añadido a Trello, en el que se han creado las siguientes columnas, o fases de desarrollo:
+Una vez definidas las tareas, tal como se ha visto anteriormente, se han añadido a Trello, en el que se han creado diferentes columnas, o fases de desarrollo.
 
-\begin{itemize}
-    \item \textbf{Tareas pendientes}: donde situaremos las tareas que se deben realizar para llevar a cabo el proyecto.
+Aparte, y para que a nivel visual sea más sencillo de terminar de qué tipo es cada tarea, a cada una de ellas se les ha asignado un color teniendo en cuenta el tema al que pertenecen, y varias etiquetas que representan el \textit{sprint} y la prioridad dentro del \textit{sprint}. De esta manera, Trello nos permitirá realizar búsquedas o visualizar las tareas con la etiqueta que nos interese.
 
-\end{itemize}
+
+\begin{center}
+    \includegraphics[width=0.5\linewidth]{img/tarea.png}
+    \captionof{figure}{Detalle de la tarea}
+\end{center}
+
+Las tareas serán divididas en las diferentes fases de desarrollo a medida que se van realizando. Se ha determinado contar con las siguientes fases:
+
 
 \begin{minipage}{0.60\linewidth}
     \begin{itemize}
+        \item \textbf{Tareas pendientes}: donde situaremos las tareas que se deben realizar para llevar a cabo el proyecto.
         \item \textbf{Desarrollo}: Son las tareas que se han empezado a desarrollar.
         \item \textbf{Testing}: Son las tareas que se dan por terminadas en el desarrollo y que pasan a una fase de testeo. En algunos casos puede ser directamente testeado por el cliente para dar su feedback (por ejemplo para el interfaz web), aunque lo habitual es que el testeo lo realice otra persona del proyecto (que no haya sido quien ha hecho el desarrollo).
 
@@ -586,20 +598,15 @@ Una vez definidas las tareas, tal como se ha visto anteriormente, se han añadid
 %\vspace{10pt}
 
 
-A cada una de las tareas se les ha asignado un color teniendo en cuenta el tema al que pertenecen, y varias etiquetas que representan el \textit{sprint} y la prioridad dentro del \textit{sprint}. De esta manera, Trello nos permitirá realizar búsquedas o visualizar las tareas con la etiqueta que nos interese.
 
+%\hfill
 
-\begin{minipage}{0.48\linewidth}
-    \includegraphics[width=\linewidth]{img/tarea.png}
-    \captionof{figure}{Detalle de la tarea}
-\end{minipage}
-\hfill
-\begin{minipage}{0.40\linewidth}
-    \includegraphics[width=\linewidth]{img/tarea1.png}
-    \captionof{figure}{Ítems de la tarea}
-\end{minipage}
 
 Por último, cada tarea puede tener un listado de pequeños ítems. Estos han sido detallados para que a la hora de desarrollar se tenga en cuenta qué es lo que se debe conseguir, y de esta manera dar por finalizada la tarea.
+\begin{center}
+    \includegraphics[width=0.4\linewidth]{img/tarea1.png}
+    \captionof{figure}{Ítems de la tarea}
+\end{center}
 
 Tras terminar la tarea, se pasará a la columna \textbf{testing}, para de esta manera, tal como se ha dicho previamente, comenzar con la fase de testeo.
 
@@ -608,7 +615,7 @@ Tras terminar la tarea, se pasará a la columna \textbf{testing}, para de esta m
 \chapter{Resultados obtenidos}
 
 A continuación se va a exponer los pasos realizados para el diseño y la creación de la aplicación teniendo en cuenta los requisitos del proyecto y las historias de usuario detalladas previamente. Se van a diferenciar distintos apartados generales:
-
+\vspace{-10pt}
 \begin{itemize}
     \item Diseño del \textbf{interfaz}
     \item \textbf{Angular}: Aspectos destacables de la programación
@@ -616,12 +623,12 @@ A continuación se va a exponer los pasos realizados para el diseño y la creaci
 \end{itemize}
 
 
-
 \section{Diseño del interfaz}
 
 El interfaz web de la aplicación es el punto de entrada del usuario, por lo que es importante dedicarle el esfuerzo que se merece ya que puede determinar el éxito o el fracaso en el uso de la aplicación.
 
 A la hora de hacer el diseño, se han tenido en cuenta:
+\vspace{-10pt}
 \begin{itemize}
     \item \textbf{Facilidad de uso}: Es importante que la aplicación tenga una buena usabilidad, para que el usuario final no requiera de ningún esfuerzo a la hora de utilizarla.
     \item \textbf{Diseño funcional}: Continuando con el punto anterior, se ha tratado de realizar un diseño funcional, para que cada parte del interfaz se sepa para qué va a ser utilizado. Para facilitarlo, se ha trabajado tratando de conseguir un diseño \textbf{minimalista}.
@@ -636,7 +643,7 @@ Este primer boceto sirve para asentar las historias de usuario y las distintas a
 
 \vspace{-20pt}
 \begin{center}
-    \includegraphics[angle=90,width=0.9\linewidth]{img/boceto.pdf}
+    \includegraphics[angle=90,width=\linewidth]{img/boceto.pdf}
     \vspace{-20pt}
     \captionof{figure}{Boceto del interfaz}
 \end{center}
@@ -902,17 +909,17 @@ Si por el contrario, la aplicación se está visualizando a través de un teléf
 \begin{minipage}{0.3\linewidth}
     \includegraphics[width=\linewidth]{img/tree3.png}
 \end{minipage}
-\captionof{figure}{Detalles de la “vista de árbol”}
+\captionof{figure}{Detalles de la “vista de árbol” normal y modo \textit{responsive}}
 }
 
 En la vista de árbol se pueden diferenciar:
-
+\vspace{-10pt}
 \begin{itemize}
-    \item \textbf{Ramas}: Son un nodo que a su vez contiene otros nodos. En un explorador de ficheros serían los directorios.
+    \item \textbf{Ramas}: Son los nodos que a su vez contiene otros nodos. En un explorador de ficheros serían los directorios.
     \item \textbf{”Hojas”}: Lo que en un explorador de archivos serían los ficheros.
 \end{itemize}
 
-Tal como se ha podido ver previamente, al seleccionar cualquiera de los nodos, se resaltará la opción elegida con un color azul.
+Tal como se puede ver en las imágenes, al seleccionar cualquiera de los nodos, se resaltará la opción elegida con un color azul.
 
 \subsubsection*{Explorador de ficheros}
 
@@ -972,8 +979,10 @@ Dependiendo de si estamos navegando en un directorio o si estamos en un fichero,
 
 \begin{center}
     \includegraphics[width=0.6\linewidth]{img/breadcrumb1.png}
+\end{center}
+\begin{center}
     \includegraphics[width=0.6\linewidth]{img/breadcrumb2.png}
-    \captionof{figure}{Detalle de la “miga de pan”}
+    \captionof{figure}{Detalle de la navegación con “miga de pan”}
 \end{center}
 
 Para poder volver sobre nuestros pasos, o para ir hacia arriba en la jerarquía, cada apartado de la “miga de pan” es un enlace, por lo que al hacer \textit{click} sobre cualquiera de ellos nos llevará a su correspondiente directorio.
