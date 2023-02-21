@@ -773,6 +773,22 @@ Las acciones que podremos realizar se identifican a través de  distintos iconos
 \end{minipage}
 }
 
+\subsubsection*{Mover secreto}
+{
+\begin{minipage}{0.1\linewidth}
+    \includegraphics[width=\linewidth]{img/move.png}
+\end{minipage}
+\hspace{0.5cm}
+\begin{minipage}{0.9\linewidth}
+    Una vez creado un secreto, para realizar una reestructuración de los secretos, puede interesar moverlo. Al hacer \textit{click} en este botón se abrirá un \textit{modal} en el que nos aparecerá la ruta actual y podremos moverlo a una nueva ruta.
+\end{minipage}
+}
+\vspace{-8pt}
+\begin{center}
+    \includegraphics[width=0.56\linewidth]{img/move-modal.png}
+    \captionof{figure}{Elegir nueva ruta para un secreto.}
+\end{center}
+
 \subsubsection*{Imprimir secreto}
 {
 \begin{minipage}{0.1\linewidth}
@@ -780,11 +796,9 @@ Las acciones que podremos realizar se identifican a través de  distintos iconos
 \end{minipage}
 \hspace{0.5cm}
 \begin{minipage}{0.9\linewidth}
-    En algunas ocasiones puede ser interesante \textbf{imprimir la documentación guardada}. Este icono abrirá el asistente para imprimir del navegador y nos mostrará una previsualización.
+    En algunas ocasiones puede ser interesante \textbf{imprimir la documentación guardada}. Este icono abrirá el asistente para imprimir del navegador y nos mostrará una previsualización, en la que desaparecen partes del interfaz (la vista en árbol y los botones de acción) para mejorar el formato.
 \end{minipage}
 }
-
-A la hora de imprimir, hay ciertas partes del interfaz que desaparecen para mejorar la impresión. La vista en árbol y los botones de acción del secreto no se imprimirán, y la cabecera también sufre una pequeña modificación.
 
 
 \subsubsection*{Visualizar histórico del secreto}
@@ -797,14 +811,14 @@ A la hora de imprimir, hay ciertas partes del interfaz que desaparecen para mejo
     Como más adelante se explicará, cuando un secreto es modificado \textbf{se guarda un histórico} del mismo. A través de este botón podremos ver las distintas versiones del mismo e ir a una versión anterior.
 \end{minipage}
 }
-
+\vspace{-8pt}
 \begin{center}
-    \includegraphics[width=0.6\linewidth]{img/history.png}
+    \includegraphics[width=0.56\linewidth]{img/history.png}
     \captionof{figure}{Histórico de un secreto.}
 \end{center}
 
 De esta manera, podremos ver cualquier cambio que haya sufrido el secreto a lo largo del tiempo. Al hacer \textit{click} en alguno de los enlaces para visualizar alguna versión anterior, nos aparecerá un mensaje encima del secreto para indicarlo:
-
+\vspace{-8pt}
 \begin{center}
     \includegraphics[width=0.6\linewidth]{img/history2.png}
     \captionof{figure}{Mensaje indicando la versión del secreto.}
@@ -839,7 +853,7 @@ De esta manera, podremos ver cualquier cambio que haya sufrido el secreto a lo l
 }
 
 Debido a que es una acción que no se va a poder deshacer, se requerirá que el usuario realice una confirmación antes de que el secreto sea borrado.
-
+\vspace{-8pt}
 \begin{center}
     \includegraphics[width=0.6\linewidth]{img/delete_warning.png}
     \captionof{figure}{Confirmación al borrar un secreto}
@@ -1282,8 +1296,6 @@ Con todo ello, dado que existen muchas funcionalidades que se han quedado sin re
         \item \textbf{Gestionar secretos bloqueados}: Tener un lugar donde desbloquear posibles secretos que se hayan quedado bloqueados.
         \item \textbf{Auditoría completa}: Vault cuenta con un sistema completo de auditoria, que es capaz de guardar logs por cada acción de usuario. Dada la importancia de este tipo de información, podría ser recomendable guardarlo en un sistema de base de datos no-relacional y poder acceder a dicha información en cualquier momento.
     \end{itemize}
-
-    \item \textbf{Mover secretos}: Actualmente no se permite mover un secreto de una ruta a otra. Esta funcionalidad es útil para poder reorganizar la estructura jerárquica de los secretos.
 
     \item \textbf{Crear configuración para el usuario}: Crear un área de configuración para el usuario. En este apartado, algunas opciones que podría configurar son:
 
