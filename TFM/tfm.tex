@@ -120,7 +120,7 @@ Como propuesta para la creación de un gestor de contraseñas propio, se han ide
 
     \item El gestor de contraseñas debe contar con un \textbf{sistema de autenticación}. Sólo debe permitir el acceso a las personas que hayan pasado algún sistema de verificación que demuestre ser quién es.
 
-    Este sistema de autenticación no tiene por qué limitarse al clásico “usuario y contraseña”, ya que podrá adaptarse para en el futuro utilizar, de forma sencilla, otros sistemas conocidos, como por ejemplo: certificados de seguridad de la capa de transporte (en inglés: \textit{Transport Layer Security} o \textbf{TLS}), contraseñas de un sólo uso basadas en tiempo (TOTP), tokens basados en \href{https://en.wikipedia.org/wiki/JSON_Web_Token}{JWT} (o JSON Web Token, basados en \textit{JavaScript Object Notation}), sistemas \href{https://en.wikipedia.org/wiki/OAuth}{OAuth}/\href{https://en.wikipedia.org/wiki/OpenID#OpenID_Connect_(OIDC)}{OIDC}, ...
+    Este sistema de autenticación no tiene por qué limitarse al clásico “usuario y contraseña”, ya que podrá adaptarse para en el futuro utilizar, de forma sencilla, otros sistemas conocidos, como por ejemplo: certificados de seguridad de la capa de transporte (en inglés: \textit{Transport Layer Security} o \textbf{TLS}), contraseñas de un sólo uso basadas en tiempo (TOTP), tokens basados en JWT (o JSON Web Token, basados en \textit{JavaScript Object Notation}), ...
 
     \item Debe existir un \textbf{sistema de autorización, que controle el tipo de acceso y permisos} que tenga en cuenta quién los realiza y a qué contraseñas se quiere acceder.
 
@@ -136,8 +136,9 @@ Como propuesta para la creación de un gestor de contraseñas propio, se han ide
 
     \item Es importante que la aplicación sea \textit{responsive}, es decir, \textbf{se adapte a la pantalla} donde se esté visualizando. De esta manera el usuario podrá hacer uso de ella a través de dispositivos móviles.
 
-    \item Para el almacenamiento de la información y el sistema de autorización se hará uso del sistema \href{https://www.vaultproject.io/}{Vault} de la empresa \href{https://www.hashicorp.com/}{Hashicorp}.
+    \item Para el almacenamiento de la información y el sistema de autorización se hará uso del sistema Vault de la empresa Hashicorp.
 \end{itemize}
+
 
 Teniendo en cuenta las metodologías utilizadas, y explicadas en apartados posteriores, cualquier añadido a estos requisitos se podría añadir en etapas posteriores del desarrollo.
 
@@ -154,13 +155,16 @@ Teniendo en cuenta las metodologías utilizadas, y explicadas en apartados poste
     \item Aplicaciones con almacenamiento en la nube y sincronización entre dispositivos.
 \end{itemize}
 
+
 Estos gestores de contraseña suelen hacer uso de una contraseña maestra para proteger el “almacén de contraseñas”, pero esto puede desencadenar en dos inconvenientes:
+
 
 \begin{itemize}
     \item En el estudio de \textcite{belenko2012secure} se comprueba cómo entre más de una docena de gestores de contraseñas muchos de ellos no proveen un nivel de seguridad apropiado.
 
     \item La contraseña elegida por el usuario puede no ser resistente a un ataque si el “almacén de contraseñas” es robado.
 \end{itemize}
+
 
 Es cierto que en los últimos años, cuando este tipo de software es utilizado en dispositivos móviles la contraseña maestra se puede sustituir por un reconocimiento biométrico (como puede ser reconocimiento de la huella dactilar o reconocimiento facial).
 
@@ -183,8 +187,8 @@ La siguiente tabla muestra una comparativa con distintos gestores de contraseña
     Permite guardar ficheros & {\LARGE \cmark} & {\LARGE \cmark} & {\LARGE \cmark} & {\LARGE \cmark}\\
     Permite editar documentación & {\LARGE \xmark} & {\LARGE \xmark} & {\LARGE \xmark} & {\LARGE \xmark} \\
     Versión web  & {\LARGE \xmark}  & {\LARGE \cmark} & {\LARGE \cmark} & {\LARGE \cmark} \\
-    Versión escritorio  &  {\LARGE \cmark}  & {\LARGE \cmark} & {\LARGE \cmark} & {\LARGE \cmark} \\
     App móvil  & {\LARGE \xmark} / {\LARGE \cmark}**** & {\LARGE \xmark} & {\LARGE \cmark} & {\LARGE \cmark} \\
+    Versión escritorio  &  {\LARGE \cmark}  & {\LARGE \cmark} & {\LARGE \cmark} & {\LARGE \cmark} \\
     Informes de auditoría &  {\LARGE \xmark}***** & {\LARGE \xmark} & {\LARGE \xmark} / {\LARGE \cmark}** & {\LARGE \xmark} / {\LARGE \cmark}**  \\
     On-premises  & {\LARGE \cmark}  & {\LARGE \cmark} & {\LARGE \xmark} & {\LARGE \xmark}\\
     Coste  &  0€  & 0€ &  \$7,99\linebreak user/mes** & 5,70€\linebreak user/mes** \\
@@ -192,7 +196,7 @@ La siguiente tabla muestra una comparativa con distintos gestores de contraseña
 
 \end{yukitblrcol}
 {
-\captionof{table}{Comparativa de gestores de contraseñas}
+\captionof{table}{Comparativa de gestores de contraseñas.}
 \label{table:comparativa}
 }
 
@@ -216,11 +220,11 @@ Es por eso que los gestores de contraseñas más conocidos han sufrido distintos
 Algunos ejemplos en los últimos años:
 
 \begin{itemize}
-    \item \textcite{norton} informa que las cuentas de los usuarios que utilizan el programa \href{https://us.norton.com/feature/password-manager}{Norton Password Manager} han sido potencialmente comprometidas, obteniendo el usuario y contraseña, y habiendo obtenido nombre, apellidos, número de teléfono y la cuenta de correo de los usuarios.
+    \item \textcite{norton} informa que las cuentas de los usuarios que utilizan el programa \textbf{Norton Password Manager} han sido potencialmente comprometidas, obteniendo el usuario y contraseña, y habiendo obtenido nombre, apellidos, número de teléfono y la cuenta de correo de los usuarios.
 
     La empresa ha declarado a \textcite{norton2} que aunque los servidores no han sido comprometidos, es posible que se hayan usado los usuarios y contraseñas para acceder a las cuentas de usuario. Se estiman que el ataque se ha realizado sobre al menos 8.000 cuentas.
 
-    \item La aplicación \href{https://www.lastpass.com/}{LastPass}, analizada previamente, ha sufrido varios ataques.
+    \item La aplicación \textbf{LastPass}, analizada previamente, ha sufrido varios ataques.
 
     En \textcite{lastpass}, la empresa declara que están trabajando “para comprender el alcance del incidente e identificar a qué información específica se ha accedido”. Por otro lado, \textcite{lastpass2} analiza que aunque la empresa haya indicado que los datos cifrados obtenidos no se pueden descifrar, no cree en la palabra de la empresa.
 
@@ -253,33 +257,35 @@ Gracias a ello, la aplicación desarrollada va a ser lo más modular posible, pa
 
 \subsection{Hashicorp Vault}
 
-Vault es el proyecto de código abierto para asegurar, almacenar y controlar el acceso a secretos y datos sensibles creado por la empresa \href{https://www.hashicorp.com/}{Hashicorp} (empresa conocida también por la creación de \href{https://www.terraform.io/}{Terraform}).
+Vault es el proyecto de código abierto para asegurar, almacenar y controlar el acceso a secretos y datos sensibles creado por la empresa Hashicorp (empresa conocida también por la creación de Terraform).
 
 Se va a utilizar Vault como sistema centralizado para varios aspectos de la aplicación web que se va a desarrollar:
+%\vspace{-15pt}
 
 \begin{itemize}
-    \item \textbf{Gestión de autenticación}: Vault nos va a permitir tener un sistema de gestión de autenticación centralizado, que nos puede permitir pasar de un sistema de “usuario y contraseña”, a un sistema autenticado contra el Active Directory de la empresa, o hacer uso de sistemas  \href{https://en.wikipedia.org/wiki/OAuth}{OAuth}/\href{https://en.wikipedia.org/wiki/OpenID#OpenID_Connect_(OIDC)}{OIDC}.
+    \item \textbf{Gestión de autenticación}: Vault nos va a permitir tener un sistema de gestión de autenticación centralizado, que nos puede permitir pasar de un sistema de “usuario y contraseña”, a un sistema autenticado contra el Active Directory de la empresa.
+    %, o hacer uso de sistemas  \href{https://en.wikipedia.org/wiki/OAuth}{OAuth}/\href{https://en.wikipedia.org/wiki/OpenID#OpenID_Connect_(OIDC)}{OIDC}.
 
     \item \textbf{Gestión de autorización}: A la hora de permitir el acceso y permisos a los secretos Vault cuenta con un sistema interno que nos ayudará a realizar dicha gestión.
 
     \item \textbf{Gestor de almacenamiento}: Se puede hacer uso de distintos sistemas de \textit{backend} de almacenamiento: desde ficheros cifrados a distintas bases de datos (MySQL, PostgreSQL, Cassandra,...).
 
-    Dependiendo del almacenamiento elegido, el crear un sistema en Alta Disponibilidad será más sencillo que en otros. De todas maneras, la posibilidad de migrar de un sistema de almacenamiento a otro siempre es posible
+%    Dependiendo del almacenamiento elegido, el crear un sistema en Alta Disponibilidad será más sencillo que en otros. De todas maneras, la posibilidad de migrar de un sistema de almacenamiento a otro siempre es posible.
 
     \item \textbf{Alta Disponibilidad (HA)}: Teniendo en cuenta que un gestor de contraseñas y documentación sensible es una pieza fundamental en una empresa, es vital que exista la posibilidad de crear un sistema en Alta Disponibilidad.
 
     Vault permite crear, dependiendo de las necesidades, distintos tipos de sistemas en Alta Disponibilidad multi-nodo, multi-región, con distintos tipos de sistemas de almacenamiento ... Es importante analizar las necesidades para elegir la mejor opción.
 
 \end{itemize}
-
+%\vspace{-15pt}
 Aunque Vault no está pensado inicialmente para guardar documentación, uno de sus sistemas de almacenamiento es “clave-valor”.  Este ha sido el sistema elegido para guardar las contraseñas, la documentación que se va a poder generar en la propia aplicación y los ficheros que se van a poder subir.
 
 
 \subsection{Git y despliegues automáticos}
 
-\href{https://es.wikipedia.org/wiki/Git}{Git} es el sistema de control de versiones creado por \href{https://es.wikipedia.org/wiki/Linus_Torvalds}{Linus Torvalds} para la gestión del código fuente de \href{https://es.wikipedia.org/wiki/N%C3%BAcleo_Linux}{Linux}. Hoy en día es el sistema más utilizado gracias a características tan importantes como la facilidad para crear ramas, su versatilidad para adaptarse al flujo de trabajo del desarrollador, integración con los entornos de desarrollo más importantes...
+Git es el sistema de control de versiones creado por \textcite{git} para la gestión del código fuente del \textit{kernel} Linux. Hoy en día es el sistema más utilizado gracias a características tan importantes como la facilidad para crear ramas, su versatilidad para adaptarse al flujo de trabajo del desarrollador, integración con los entornos de desarrollo más importantes...
 
-Gracias a los sistemas CI/CD (del inglés “\textit{Continuous Integration/Continuous Delivery}) integrados en las plataformas de repositorios más conocidas (\href{https://github.com/}{GitHub} o \href{https://about.gitlab.com/}{GitLab}) o a través de herramientas propias (como \href{https://www.jenkins.io/}{Jenkins}), el realizar despliegues automatizados de las nuevas versiones permitirá que la aplicación pueda ser rápidamente utilizada por los usuarios finales.
+Gracias a los sistemas CI/CD (del inglés “\textit{Continuous Integration/Continuous Delivery}) integrados en las plataformas de repositorios más conocidas (GitHub o GitLab) o a través de herramientas propias (como Jenkins), el realizar despliegues automatizados de las nuevas versiones permitirá que la aplicación pueda ser rápidamente utilizada por los usuarios finales.
 
 %A pesar de que Git permite ser descentralizado, se ha utilizado la plataforma \href{https://github.com/}{Github} como plataforma centralizadora y de esta manera también así disponer de una copia de seguridad del código fuente.
 %
@@ -297,7 +303,7 @@ Gracias a los sistemas CI/CD (del inglés “\textit{Continuous Integration/Cont
 %Gracias a utilizar distintas imágenes Docker con distintos servicios, se ha podido realizar despliegues de manera sencilla para distintos entornos (desarrollo, test y producción).
 %
 %También ha sido especialmente útil al poder realizar el desarrollo en distintos ordenadores, sin perder el tiempo en realizar instalaciones de librerías y ejecutables, creando el entorno de desarrollo en segundos.
-
+% TODO: Héctor me pone: “Este punto permite agregar anexo con comandos de git usados para: pull/push/commits...incluso hablar de pipelines para despliegue automático.”
 
 
 \hypertarget{metodologia}{}
@@ -306,7 +312,7 @@ Gracias a los sistemas CI/CD (del inglés “\textit{Continuous Integration/Cont
 Hoy en día es conveniente hacer uso de las \textbf{metodologías ágiles} cuando realizamos la gestión de un proyecto, ya que cuentan con una serie de ventajas que nos van a permitir dar una respuesta más rápida y flexible ante posibles cambios durante la vida de desarrollo del producto.
 
 Ventajas que podemos destacar de las metodologías ágiles:
-
+%\vspace{-10pt}
 \begin{itemize}
     \item Poder entregar resultados funcionales al cliente cada poco tiempo y así obtener \textit{feedback} de lo realizado.
     \item Seremos capaces de dar una respuesta ágil y flexible ante posibles cambios que puedan surgir (cambios en los requisitos, ante bajas de personal asignado al proyecto, dificultades durante el desarrollo...).
@@ -319,6 +325,7 @@ Ventajas que podemos destacar de las metodologías ágiles:
 Para comenzar con la gestión del proyecto debemos contar con los requisitos listados previamente y transformarlos en las conocidas como “\textbf{historias de usuario}”.
 
 En ellas plasmaremos, en un lenguaje sencillo de entender, las funcionalidades que el producto debe tener, a las que asociaremos otros datos como son:
+%\vspace{-10pt}
 
 \begin{itemize}
     \item Un \textbf{identificador único} para poder diferenciarlas del resto.
@@ -329,7 +336,7 @@ En ellas plasmaremos, en un lenguaje sencillo de entender, las funcionalidades q
     \item Una \textbf{descripción} de lo que se quiere conseguir.
     \item Unos \textbf{criterios de validación} por parte del cliente.
 \end{itemize}
-
+%\vspace{-10pt}
 Teniendo en cuenta los datos que queremos plasmar en las “historias de usuario”, y tras haber realizado el análisis de los requisitos del proyecto, veremos cuál ha sido el resultado obtenido en el siguiente apartado.
 
 
@@ -337,7 +344,7 @@ Teniendo en cuenta los datos que queremos plasmar en las “historias de usuario
 
 A continuación se van a identificar las distintas “historias de usuario” obtenidas, en las que se ha ido plasmando la información necesaria que posteriormente se utilizarán para la creación de las tareas a desarrollar:
 
-{
+
 \begin{requisitostbl}{X[1]X[2]X[2]X[3]X[2]}
     ID & Estimación & Prioridad  & Tema &  Dependencias \\
     1  & 25 horas & 1  & Interfaz web &   \\
@@ -348,9 +355,10 @@ A continuación se van a identificar las distintas “historias de usuario” ob
     Como usuario necesito un interfaz web para poder acceder a la aplicación y hacer uso de ella. Es la base del proyecto. \\
 
     \textbf{Criterios de validación}:
-    El interfaz es \textit{\textbf{responsive}}, visualmente atractivo y funcional. \\
+    Interfaz \textit{\textbf{responsive}}, visualmente atractiva y funcional. \\
 \end{requisitostbl}
-\captionof{table}{qwe}
+{
+\captionof{table}{Desarrollar “esqueleto” del interfaz web.}
 }
 
 \begin{requisitostbl}{X[1]X[2]X[2]X[3]X[2]}
@@ -365,6 +373,9 @@ A continuación se van a identificar las distintas “historias de usuario” ob
     \textbf{Criterios de validación}:
     Los valores introducidos serán autenticados contra el \textit{backend} que se decida (base de datos o LDAP/Active Directory inicialmente). \\
 \end{requisitostbl}
+{
+    \captionof{table}{Crear “login” de usuario.}
+}
 
 \begin{requisitostbl}{X[1]X[2]X[2]X[3]X[2]}
     ID & Estimación & Prioridad  & Tema &  Dependencias \\
@@ -382,7 +393,9 @@ A continuación se van a identificar las distintas “historias de usuario” ob
     \end{itemize}
     \\
 \end{requisitostbl}
-
+{
+    \captionof{table}{Crear secretos.}
+}
 
 
 \begin{requisitostbl}{X[1]X[2]X[2]X[3]X[2]}
@@ -403,7 +416,9 @@ A continuación se van a identificar las distintas “historias de usuario” ob
     \end{itemize}
     \\
 \end{requisitostbl}
-
+{
+    \captionof{table}{Listado de secretos.}
+}
 
 \begin{requisitostbl}{X[1]X[2]X[2]X[3]X[2]}
     ID & Estimación & Prioridad  & Tema &  Dependencias \\
@@ -423,7 +438,9 @@ A continuación se van a identificar las distintas “historias de usuario” ob
     \end{itemize}
     \\
 \end{requisitostbl}
-
+{
+    \captionof{table}{Visualizar un secreto.}
+}
 
 \begin{requisitostbl}[long]{X[1]X[2]X[2]X[3]X[2]}
     ID & Estimación & Prioridad  & Tema &  Dependencias \\
@@ -437,13 +454,15 @@ A continuación se van a identificar las distintas “historias de usuario” ob
     \textbf{Criterios de validación}:
     \begin{itemize}
         \item La modificación se realizará a través de un editor \textit{\textbf{WYSIWYG}}.
-        \item El editor permitirá realizar modificaciones en formato \href{https://es.wikipedia.org/wiki/Markdown}{Markdown}.
+        \item El editor permitirá realizar modificaciones en formato \textbf{Markdown}.
 %        \item El editor permitirá guardar el secreto y al hacerlo volveremos a la visualización del mismo.
         \item Al editar el secreto se pondrá en estado “bloqueado”.
     \end{itemize}
     \\
 \end{requisitostbl}
-
+{
+    \captionof{table}{Modificar un secreto.}
+}
 %\vspace{20pt}
 
 \begin{requisitostbl}{X[1]X[2]X[2]X[3]X[2]}
@@ -462,8 +481,10 @@ A continuación se van a identificar las distintas “historias de usuario” ob
     \end{itemize}
      \\
 \end{requisitostbl}
-
-\vspace{20pt}
+{
+    \captionof{table}{Borrado de secretos.}
+}
+%\vspace{20pt}
 
 \begin{requisitostbl}{X[1]X[2]X[2]X[3]X[2]}
     ID & Estimación & Prioridad  & Tema &  Dependencias \\
@@ -482,8 +503,10 @@ A continuación se van a identificar las distintas “historias de usuario” ob
     \end{itemize}
      \\
 \end{requisitostbl}
-
-\vspace{20pt}
+{
+    \captionof{table}{Permitir gestionar ficheros como secretos.}
+}
+%\vspace{20pt}
 
 \begin{requisitostbl}{X[1]X[2]X[2]X[3]X[2]}
     ID & Estimación & Prioridad  & Tema &  Dependencias \\
@@ -502,7 +525,9 @@ A continuación se van a identificar las distintas “historias de usuario” ob
         \item Poder restaurar una versión concreta del secreto.
     \end{itemize} \\
 \end{requisitostbl}
-
+{
+    \captionof{table}{Versionado de secretos.}
+}
 
 \begin{requisitostbl}{X[1]X[2]X[2]X[3]X[2]}
     ID & Estimación & Prioridad  & Tema &  Dependencias \\
@@ -516,8 +541,10 @@ A continuación se van a identificar las distintas “historias de usuario” ob
     \textbf{Criterios de validación}:
     Existe un botón para imprimir un secreto. \\
 \end{requisitostbl}
-
-\vspace{10pt}
+{
+    \captionof{table}{Imprimir secretos.}
+}
+%\vspace{10pt}
 
 \begin{requisitostbl}{X[1]X[2]X[2]X[3]X[2]}
     ID & Estimación & Prioridad  & Tema &  Dependencias \\
@@ -536,7 +563,10 @@ A continuación se van a identificar las distintas “historias de usuario” ob
         \item Existe un registro de lo sucedido a cada secreto (auditoría).
     \end{itemize} \\
 \end{requisitostbl}
-\vspace{10pt}
+{
+    \captionof{table}{Puesta en producción segura.}
+}
+%\vspace{10pt}
 
 \subsection{Mapa de las historias de usuario}
 
@@ -544,7 +574,7 @@ Dado que las historias de usuario pueden suponer la agrupación de distintas tar
 
 Para la organización de este mapa se pueden identificar los siguientes apartados:
 \begin{itemize}
-    \item Los \textbf{temas} son las características a alto nivel que va a tener la aplicación, y coinciden con el tema de las historias de usuario. En el mapa se ha diferenciado en color verde.
+    \item Los \textbf{temas} son las características a alto nivel que va a tener la aplicación, y coinciden con el tema de las historias de usuario. En la figura \ref{figure:mapa_tarea} se ha diferenciado en color verde.
     \item Los \textbf{epics}, en color azul, son características que normalmente no pueden realizarse en un \textit{sprint}, que a veces pueden ser divididas en distintas historias de usuarios, y que engloban en su mayoría varias tareas.
     \item Las \textbf{tareas}, en este caso en amarillo, son las unidades concretas de trabajo. Se ha tratado que sean lo más cortas posibles y que a nivel técnico sean auto-contenidas y aisladas.
 \end{itemize}
@@ -553,7 +583,8 @@ El mapa resultante inicial para la gestión del proyecto es el siguiente:
 
 \begin{center}
     \includegraphics[width=\linewidth]{img/kanban.png}
-    \captionof{figure}{Mapa de las tareas a realizar}
+    \captionof{figure}{Mapa de las tareas a realizar.}
+    \label{figure:mapa_tarea}
 \end{center}
 
 \subsection{\textit{Sprints} generados}
@@ -566,7 +597,7 @@ Para el primer \textit{sprint} se han identificado las siguientes tareas que deb
 
 \begin{center}
     \includegraphics[width=\linewidth]{img/sprint1.png}
-    \captionof{figure}{Tareas a realizar en el \textit{Sprint} 1}
+    \captionof{figure}{Tareas a realizar en el \textit{Sprint} 1.}
 \end{center}
 
 Tal como se puede ver, las tareas están representadas con su prioridad dentro del \textit{sprint}, para así también tener claro qué tareas deben tratar de terminarse antes que otras.
@@ -579,7 +610,7 @@ Para llevar una mejor gestión de las tareas expuestas en este apartado, lo idea
 
 \section{Gestión de tareas con Trello}
 
-\href{https://trello.com/}{Trello} es una aplicación web, creada por la empresa \href{https://www.atlassian.com/}{Atlassian}, que nos permite tener un tablero \href{https://en.wikipedia.org/wiki/Kanban_(development)}{Kanban} donde podremos añadir las tareas de nuestro proyecto, e ir moviéndolas entre distintas etapas.
+Trello es una aplicación web, creada por la empresa \textcite{atlassian}, que nos permite tener un tablero virtual (denominado \textbf{Kanban}) donde se podrá añadir las tareas de nuestro proyecto, e ir moviéndolas entre distintas etapas.
 
 Aunque cuenta con una versión de suscripción, la versión gratuita dispone de las características suficientes como para poder ser utilizado para la gestión de proyectos sin ningún problema.
 
@@ -590,7 +621,7 @@ Aparte, y para que a nivel visual sea más sencillo de determinar de qué tipo e
 
 \begin{center}
     \includegraphics[width=0.5\linewidth]{img/tarea.png}
-    \captionof{figure}{Detalle de la tarea}
+    \captionof{figure}{Detalle de la tarea.}
 \end{center}
 
 Las tareas serán movidas entre las diferentes fases de desarrollo a medida que se van realizando. Se ha determinado contar con las siguientes fases:
@@ -606,12 +637,13 @@ Las tareas serán movidas entre las diferentes fases de desarrollo a medida que 
         \item \textbf{Producción}: Una vez el \textit{testing} ha terminado, se puede dar por terminada la tarea y podrá ser incluida en producción.
     \end{itemize}
 
-    Tal como se puede ver en la imagen, cada tarea se representa como una pequeña tarjeta, apareciendo como un listado de todas ellas en la columna correspondiente en las que están situadas (en este caso todavía en la lista de tareas pendientes).
+    Tal como se puede ver en la Figura \ref{figure:tareas_pendientes}, cada tarea se representa como una pequeña tarjeta, apareciendo como un listado de todas ellas en la columna correspondiente en las que están situadas (en este caso todavía en la lista de tareas pendientes).
 \end{minipage}
 \hfill
 \begin{minipage}{0.32\linewidth}
     \includegraphics[width=\linewidth]{img/tareas.png}
-    \captionof{figure}{Tareas pendientes en Trello}
+    \captionof{figure}{Tareas pendientes en Trello.}
+    \label{figure:tareas_pendientes}
 \end{minipage}
 
 %\vspace{10pt}
@@ -621,10 +653,11 @@ Las tareas serán movidas entre las diferentes fases de desarrollo a medida que 
 %\hfill
 
 
-Por último, cada tarea puede tener un listado de pequeños ítems. Estos han sido detallados para que a la hora de desarrollar se tenga en cuenta qué es lo que se debe conseguir, y de esta manera dar por finalizada la tarea.
+Por último, cada tarea puede tener un listado de pequeños ítems. Estos han sido detallados para que a la hora de desarrollar se tenga en cuenta qué es lo que se debe conseguir, y de esta manera dar por finalizada la tarea, tal como se puede ver en la figura \ref{figure:items}.
 \begin{center}
     \includegraphics[width=0.4\linewidth]{img/tarea1.png}
-    \captionof{figure}{Ítems de la tarea}
+    \captionof{figure}{Ítems de la tarea.}
+    \label{figure:items}
 \end{center}
 
 Tras terminar la tarea, se pasará a la columna \textbf{testing}, para de esta manera, tal como se ha dicho previamente, comenzar con la fase de testeo.
@@ -634,7 +667,7 @@ Tras terminar la tarea, se pasará a la columna \textbf{testing}, para de esta m
 \chapter{Resultados obtenidos}
 
 A continuación se va a exponer los pasos realizados para el diseño y la creación de la aplicación teniendo en cuenta los requisitos del proyecto y las historias de usuario detalladas previamente. Se van a diferenciar distintos apartados generales:
-\vspace{-10pt}
+%\vspace{-10pt}
 \begin{itemize}
     \item Diseño del \textbf{interfaz}
     \item \textbf{Angular}: Aspectos destacables de la programación
@@ -644,44 +677,45 @@ A continuación se va a exponer los pasos realizados para el diseño y la creaci
 
 \section{Diseño del interfaz}
 
-El interfaz web de la aplicación es el punto de entrada del usuario, por lo que es importante dedicarle el esfuerzo que se merece ya que puede determinar el éxito o el fracaso en el uso de la aplicación.
+La interfaz web de la aplicación es el punto de entrada del usuario, por lo que resulta un aspecto clave, ya que puede determinar el éxito o el fracaso en el uso de la aplicación.
 
 A la hora de hacer el diseño, se han tenido en cuenta:
-\vspace{-10pt}
+%\vspace{-10pt}
 \begin{itemize}
     \item \textbf{Facilidad de uso}: Es importante que la aplicación tenga una buena usabilidad, para que el usuario final no requiera de ningún esfuerzo a la hora de utilizarla.
-    \item \textbf{Diseño funcional}: Continuando con el punto anterior, se ha tratado de realizar un diseño funcional, para que cada parte de la interfaz se sepa para qué va a ser utilizada. Para facilitarlo, se ha trabajado tratando de conseguir un diseño \textbf{minimalista}.
+    \item \textbf{Diseño funcional}: Continuando con el punto anterior, se ha tratado de realizar un diseño funcional, para que cada parte de la interfaz se sepa para qué va a ser utilizada. Para facilitar dicha tarea, se ha trabajado tratando de conseguir un diseño \textbf{minimalista}.
     \item Se ha realizado un \textbf{diseño adaptable a la pantalla} (también conocido como diseño \textit{responsive}) para facilitar el uso de la aplicación en dispositivos móviles.
 \end{itemize}
 
 
 \subsection{Primer boceto}
-Para la creación del interfaz se decidió crear un primer prototipo a boli en un cuaderno, tratando de plasmar las ideas generales, y la colocación inicial de los elementos con los que los usuarios van a interactuar.
+Para la creación de la interfaz se decidió crear un primer prototipo a boli en un cuaderno, tratando de plasmar las ideas generales, y la colocación inicial de los elementos con los que los usuarios van a interactuar.
 
-Este primer boceto sirve para asentar las historias de usuario y las distintas acciones que los usuarios van a poder realizar en la aplicación final. Es una manera rápida para empezar a tomar consciencia del proyecto y cómo queremos encauzar el interfaz.
+Este primer boceto sirve para asentar las historias de usuario y las distintas acciones que los usuarios van a poder realizar en la aplicación final. Es una manera rápida para empezar a tomar consciencia del proyecto y cómo queremos encauzar la interfaz.
 
-\vspace{-20pt}
+%\vspace{-20pt}
 \begin{center}
     \includegraphics[angle=90,width=\linewidth]{img/boceto.pdf}
     \vspace{-20pt}
-    \captionof{figure}{Boceto del interfaz}
+    \captionof{figure}{Boceto del interfaz.}
 \end{center}
 
-En el boceto existen zonas diferenciadas hechas en color azul, donde también aparece en color rojo el nombre para cada zona. Ya en este primer boceto se estaban identificando lo que posteriormente serán distintos componentes independientes.
+En el boceto existen zonas diferenciadas marcadas en color azul, donde también aparece en color rojo el nombre para cada zona. Ya en este primer boceto se estaban identificando lo que posteriormente serían distintos componentes independientes.
 
 En rojo, en la parte central también aparece cómo sería el login, que daría paso al interfaz general. Por último, se pueden diferenciar, también en la parte central, nombrados como “Opt1” y “Opt2”, las vistas que dependerán de qué estemos haciendo: si navegamos por los secretos o si estamos visualizando/editano un secreto.
 
 Tal como se puede ver, ya en este primer boceto se tenía una idea bastante clara de cómo debía ser a grandes rasgos el interfaz final.
 
 \subsection{Creación inicial del interfaz con un \textit{framework} CSS}
-Una vez se tuvieron claro los aspectos generales del boceto, se realizó un primer prototipo haciendo uso de un \textit{framework CSS}.
+Una vez se tuvieron claros los aspectos generales del boceto, se realizó un primer prototipo haciendo uso de un \textit{framework CSS}.
 
-El \textit{framework} elegido ha sido \href{https://getbootstrap.com/}{Bootstrap}, ya que va a permitir crear un diseño funcional, de manera sencilla, y dispone de distintas características que  van a resultar útiles durante el uso de la aplicación (como por ejemplo los “\textit{modal}” y el “\textit{breadcrumb}”).
+El \textit{framework} elegido ha sido Bootstrap, creado por \textcite{bootstrap}, ya que va a permitir crear un diseño funcional, de manera sencilla, y dispone de distintas características que  van a resultar útiles durante el uso de la aplicación (como por ejemplo los “\textit{modal}” y el “\textit{breadcrumb}”).
+% TODO: explicar modal y breadcrumb
 
 \begin{center}
     \includegraphics[frame,width=\linewidth]{img/boceto2.png}
     \vspace{-20pt}
-    \captionof{figure}{Boceto del interfaz con Bootstrap y datos estáticos}
+    \captionof{figure}{Boceto del interfaz con Bootstrap y datos estáticos.}
 \end{center}
 
 Bootstrap ha permitido crear un código sencillo, pero visualmente atractivo, y que posteriormente será reutilizado para el interfaz final.
@@ -689,7 +723,7 @@ Bootstrap ha permitido crear un código sencillo, pero visualmente atractivo, y 
 
 \subsection{Del prototipo al código real}
 
-Tal como se ha comentado previamente, Bootstrap permitió crear crear el prototipo del interfaz de manera rápida y sencilla. Aunque el aspecto visual a grandes rasgos no ha variado en exceso, a medida que se iba avanzando en el proyecto se han ido realizando pequeñas modificaciones.
+Tal como se ha comentado previamente, Bootstrap permitió crear el prototipo del interfaz de manera rápida y sencilla. Aunque el aspecto visual a grandes rasgos no ha variado en exceso, a medida que se iba avanzando en el proyecto se han ido realizando pequeñas modificaciones.
 
 El interfaz final se puede descomponer en distintos apartados que cumplen con distintas funcionalidades. La pantalla de \textit{\textbf{login}} nos permite introducir el usuario y la contraseña del mismo para acceder a la aplicación.
 
@@ -699,7 +733,7 @@ El interfaz final se puede descomponer en distintos apartados que cumplen con di
     \hfil
     \includegraphics[width=0.4\linewidth]{img/login2.png}
 %    \vspace{-10pt}
-    \captionof{figure}{Interfaz para el \textit{login}}
+    \captionof{figure}{Interfaz para el \textit{login}.}
 \end{center}
 
 En esta ventana de \textit{login} se ha añadido una pestaña extra con el símbolo del engranaje que permite modificar la URL de conexión al que nos queremos conectar
@@ -709,15 +743,17 @@ Tras realizar la autenticación la aplicación nos llevará al directorio princi
 \begin{center}
     \includegraphics[frame,width=\linewidth]{img/interfaz1.png}
     %    \vspace{-10pt}
-    \captionof{figure}{Interfaz principal de la aplicación}
+    \captionof{figure}{Interfaz principal de la aplicación.}
 \end{center}
 
 Al acceder al secreto que nos interesa, el interfaz nos muestra el documento descifrado junto con unos botones con los que realizar ciertas acciones sobre los secretos.
 
+%TODO: Hablaría de la posibilidad de la jerarquía de carpetas. Y tipo de ficheros admisibles. Limitaciones de carga por tamaño...
+
 \begin{center}
     \includegraphics[frame,width=\linewidth]{img/interfaz2.png}
     %    \vspace{-10pt}
-    \captionof{figure}{Interfaz al visualizar un secreto}
+    \captionof{figure}{Interfaz al visualizar un secreto.}
 \end{center}
 
 
@@ -733,7 +769,7 @@ Para facilitar el uso de la aplicación en distintos tipos de pantallas, se ha h
     \hfill
     \includegraphics[width=0.3\linewidth]{img/responsive3.png}
 
-    \captionof{figure}{Interfaz en modo \textit{responsive}}
+    \captionof{figure}{Interfaz en modo \textit{responsive}.}
 \end{center}
 
 Tal como se puede ver, para mejorar la navegación, el interfaz que muestra en modo árbol la jerarquía de secretos se oculta, de esta manera navegamos a través de los secretos como un explorador de archivos.
@@ -741,7 +777,7 @@ Tal como se puede ver, para mejorar la navegación, el interfaz que muestra en m
 
 \section{Características y uso de la aplicación}
 
-Teniendo en cuenta los requisitos planteados al inicio del proyecto, y teniendo en cuenta que la aplicación debe ser fácil de utilizar, se ha hecho que las distintas características que dispone la aplicación y el uso de la misma recuerde a aplicaciones que los usuarios ya hayan utilizado.
+Teniendo en cuenta los requisitos planteados al inicio del proyecto, siendo uno de ellos que la aplicación debe ser fácil de utilizar, se ha conseguido que las distintas características que dispone la aplicación y el uso de la misma recuerde a aplicaciones que los usuarios ya hayan utilizado.
 
 A continuación se van a detallar distintas características de la aplicación y cómo se crearon pensando en el usuario final.
 
@@ -755,8 +791,8 @@ La creación de secretos es la característica principal de la aplicación, ya q
 \begin{minipage}{0.1\linewidth}
     \includegraphics[width=\linewidth]{img/new.png}
 \end{minipage}
-\hspace{0.5cm}
-\begin{minipage}{0.9\linewidth}
+\hfill
+\begin{minipage}{0.85\linewidth}
     En la cabecera de la aplicación existe un icono que nos va a permitir crear un nuevo secreto en el sistema.
 
     Al hacer \textit{click} sobre el icono, nos aparecerá un \textit{modal} (una pequeña ventana emergente en el interfaz) para preguntarnos por la ruta donde queremos crear el secreto.
@@ -767,7 +803,7 @@ Al aparecer el \textit{modal} nos aparecerá por defecto la ruta en la que nos e
 
 \begin{center}
     \includegraphics[width=0.7\linewidth]{img/new_secret.png}
-    \captionof{figure}{\textit{Modal} para crear un secreto}
+    \captionof{figure}{\textit{Modal} para crear un secreto.}
 \end{center}
 
 Si en la ruta que ponemos termina en “/” el botón para crear el secreto permanecerá deshabilitado, ya que una “barra” al final del nombre identifica un directorio, al igual que sucede en sistemas UNIX.
@@ -786,9 +822,9 @@ Las acciones que podremos realizar se identifican a través de  distintos iconos
 \begin{minipage}{0.1\linewidth}
     \includegraphics[width=\linewidth]{img/edit.png}
 \end{minipage}
-\hspace{0.5cm}
-\begin{minipage}{0.9\linewidth}
-    Una de las acciones principales es la de \textbf{editar el secreto}, ya sea para añadir, modificar o borrar información en el mismo. Como se verá más adelante, esta edición se hará a través de un editor completo \textit{WYSIWYG}.
+\hfill
+\begin{minipage}{0.85\linewidth}
+    Una de las acciones principales es la de \textbf{editar el secreto}, ya sea para añadir, modificar o borrar información en el mismo. Esta edición se hará a través de un editor completo \textit{WYSIWYG}, tal como se explica en el apartado “\hyperlink{editar_secreto}{editar un secreto}”.
 \end{minipage}
 }
 
@@ -850,13 +886,13 @@ De esta manera, podremos ver cualquier cambio que haya sufrido el secreto a lo l
 \end{minipage}
 \hspace{0.5cm}
 \begin{minipage}{0.9\linewidth}
-    Cuando un usuario entra a modificar un secreto, este entra en modo “bloqueado”. Si, por alguna razón, abandona la aplicación antes de guardar los cambios el secreto se mantiene en dicho estado. A través de este botón \textbf{un usuario administrador podrá desbloquear un secreto}.
+    Cuando un usuario entra a modificar un secreto, se pondrá en modo “bloqueado”. Si, por alguna razón, abandona la aplicación antes de guardar los cambios el secreto se mantiene en dicho estado. A través de este botón \textbf{un usuario administrador podrá desbloquear un secreto}.
 \end{minipage}
 }
 
 \begin{center}
     \includegraphics[width=0.8\linewidth]{img/unlock_warning.png}
-    \captionof{figure}{Aviso del estado bloqueado de un secreto}
+    \captionof{figure}{Aviso del estado bloqueado de un secreto.}
 \end{center}
 
 
@@ -875,11 +911,12 @@ Debido a que es una acción que no se va a poder deshacer, se requerirá que el 
 \vspace{-8pt}
 \begin{center}
     \includegraphics[width=0.6\linewidth]{img/delete_warning.png}
-    \captionof{figure}{Confirmación al borrar un secreto}
+    \captionof{figure}{Confirmación al borrar un secreto.}
 \end{center}
 
 Una vez el usuario haga \textit{click} en el botón de confirmación, el secreto se borrará y la aplicación redirigirá al usuario al directorio superior de donde se encontraba el secreto borrado.
 
+\hypertarget{editar_secreto}{}
 \subsection{Editar un secreto}
 
 Dado que esta acción es la más importante de la aplicación, se va a profundizar a continuación en las características del sistema de edición de secretos.
@@ -888,25 +925,25 @@ Tal como se ha visto en el apartado anterior, para editar un secreto existe un b
 
 \begin{center}
     \includegraphics[width=\linewidth]{img/editor.png}
-    \captionof{figure}{Editor \textit{WYSIWYG}}
+    \captionof{figure}{Editor \textit{WYSIWYG}.}
 \end{center}
 
-El editor elegido es \href{https://github.com/nhn/tui.editor}{Tui.editor} ya que es un proyecto con \href{https://es.wikipedia.org/wiki/Licencia_MIT}{licencia MIT}, creado en el lenguaje \href{https://es.wikipedia.org/wiki/TypeScript}{Typescript} y que cumple con los requisitos para el proyecto.
+El editor elegido es \textbf{Tui.editor}, creado por \textcite{nhn}, ya que es un proyecto con licencia \textbf{MIT} (en inglés \textit{Massachusetts Institute of Technology}), creado en el lenguaje Typescript y que cumple con los requisitos para el proyecto.
 
 Entre las características que tiene el editor, se pueden destacar:
 
 \begin{itemize}
-    \item Interfaz \textbf{WYSIWYG} (\textit{what you see is what you get}) completo que permite editar y guardar el documento generado en formato \href{https://es.wikipedia.org/wiki/Markdown}{Markdown}.
+    \item Interfaz \textbf{WYSIWYG} completo que permite editar y guardar el documento generado en formato Markdown.
     \item Permite añadir imágenes arrastrándolas sobre el interfaz.
     \item Se puede expandir las funcionalidades a través de \textit{\textbf{plugins}}. Para este proyecto se están utilizando dos:
     \begin{itemize}
-        \item Posibilidad de añadir \href{https://github.com/nhn/tui.editor/tree/master/plugins/color-syntax}{color al texto}, expandiendo las posibilidades de Markdown, ya que por defecto este sistema no lo permite.
-        \item Mejoras en el \href{https://github.com/nhn/tui.editor/tree/master/plugins/color-syntax}{resaltado de sintaxis} a la hora de añadir bloques de código fuente o de configuración.
+        \item Posibilidad de \textbf{añadir color al texto}, expandiendo las posibilidades de Markdown, ya que por defecto este sistema no lo permite.
+        \item Mejoras en el \textbf{resaltado de sintaxis} a la hora de añadir bloques de código fuente o de configuración.
 
         Esto resulta es muy útil cuando se necesita guardar en la documentación configuración de algún tipo o fragmentos de código fuente. El plugin hace uso de \href{https://prismjs.com/}{PrismJS} que soporta 297 lenguajes.
         \begin{center}
             \includegraphics[frame,width=0.7\linewidth]{img/editor_example.png}
-            \captionof{figure}{Ejemplo de resaltado de sintaxis}
+            \captionof{figure}{Ejemplo de resaltado de sintaxis.}
         \end{center}
     \end{itemize}
 
@@ -942,17 +979,18 @@ Si por el contrario, la aplicación se está visualizando a través de un teléf
 \begin{minipage}{0.3\linewidth}
     \includegraphics[width=\linewidth]{img/tree3.png}
 \end{minipage}
-\captionof{figure}{Detalles de la “vista de árbol” en modo normal y \textit{responsive}}
+\captionof{figure}{Detalles de la “vista de árbol” en modo normal y \textit{responsive}.}
+\label{figure:arbol}
 }
 
 En la vista de árbol se pueden diferenciar:
-\vspace{-10pt}
+%\vspace{-10pt}
 \begin{itemize}
     \item \textbf{Ramas}: Son los nodos que a su vez contiene otros nodos. En un explorador de ficheros serían los directorios.
     \item \textbf{”Hojas”}: Lo que en un explorador de archivos serían los ficheros.
 \end{itemize}
 
-Tal como se puede ver en las imágenes, al seleccionar cualquiera de los nodos, se resaltará la opción elegida con un color azul y se mostrará su contenido en caso de ser una rama.
+Tal como se puede ver en la figura \ref{figure:arbol}, al seleccionar cualquiera de los nodos, se resaltará la opción elegida con un color azul y se mostrará su contenido en caso de ser una rama.
 
 \subsubsection*{Explorador de ficheros}
 
@@ -960,7 +998,7 @@ Es el método más habitual a día de hoy para navegar por un sistema de fichero
 
 \begin{center}
     \includegraphics[width=0.9\linewidth]{img/browser.png}
-    \captionof{figure}{Detalle del explorador de ficheros}
+    \captionof{figure}{Detalle del explorador de ficheros.}
 \end{center}
 
 Para identificar el tipo de ficheros que se están visualizando se han identificado mediante distintos iconos. Los iconos utilizados son:
@@ -969,8 +1007,8 @@ Para identificar el tipo de ficheros que se están visualizando se han identific
 \begin{minipage}{0.1\linewidth}
     \includegraphics[width=\linewidth]{img/folder.png}
 \end{minipage}
-\hspace{0.5cm}
-\begin{minipage}{0.9\linewidth}
+\hfill
+\begin{minipage}{0.85\linewidth}
     Es un directorio, y al igual que sucede en un sistema de ficheros, puede contener a su vez otros ficheros y/o directorios.
 
     Al hacer \textit{click} sobre él, se visualizará su contenido. Esto afectará a la vista de árbol, que se actualizará para mostrar el directorio desplegado.
@@ -982,8 +1020,8 @@ Para identificar el tipo de ficheros que se están visualizando se han identific
     \begin{minipage}{0.1\linewidth}
         \includegraphics[width=\linewidth]{img/secret.png}
     \end{minipage}
-    \hspace{0.5cm}
-    \begin{minipage}{0.9\linewidth}
+    \hfill
+    \begin{minipage}{0.85\linewidth}
         Es un secreto creado y editado a través de la aplicación. Este icono nos identifica que al hacer \textit{click} visualizaremos su contenido, y posteriormente podremos realizar otras acciones como editarlo, imprimirlo, borrarlo...
     \end{minipage}
 }
@@ -993,11 +1031,11 @@ Para identificar el tipo de ficheros que se están visualizando se han identific
     \begin{minipage}{0.1\linewidth}
         \includegraphics[width=\linewidth]{img/file.png}
     \end{minipage}
-    \hspace{0.5cm}
-    \begin{minipage}{0.9\linewidth}
+    \hfill
+    \begin{minipage}{0.85\linewidth}
         Existen distintas representaciones de iconos para identificar a ficheros que se han subido a la aplicación para ser cifrados y almacenados en ella.
 
-        Dependiendo del tipo de fichero (identificado mediante la extensión) mostrará el tipo de fichero que es junto al icono. Existen iconos para las extensiones más habituales.
+        Dependiendo del tipo de fichero (identificado mediante la extensión) mostrará el tipo de fichero que es junto al icono. Existen iconos para las extensiones más habituales (png, doc, pdf, jpg, docx, zip, ...).
     \end{minipage}
 }
 
@@ -1015,7 +1053,7 @@ Dependiendo de si estamos navegando en un directorio o si estamos en un fichero,
 \end{center}
 \begin{center}
     \includegraphics[width=0.6\linewidth]{img/breadcrumb2.png}
-    \captionof{figure}{Detalle de la navegación con “miga de pan”}
+    \captionof{figure}{Detalle de la navegación con “miga de pan”.}
 \end{center}
 
 Para poder volver sobre nuestros pasos, o para ir hacia arriba en la jerarquía, cada apartado de la “miga de pan” es un enlace, por lo que al hacer \textit{click} sobre cualquiera de ellos nos llevará a su correspondiente directorio.
@@ -1038,12 +1076,12 @@ Dado que la creación y edición de secretos puede resultar limitante, la aplica
 
 \begin{center}
     \includegraphics[width=0.7\linewidth]{img/upload_modal.png}
-    \captionof{figure}{\textit{Modal} para subir un fichero}
+    \captionof{figure}{\textit{Modal} para subir un fichero.}
 \end{center}
 
 Al igual que sucedía con la ventana para crear un secreto, este \textit{modal} también cuenta con un sistema de validación que no activará el botón hasta que no se elija del sistema un fichero o una ruta correcta.
 
-Una vez la aplicación ha guardado el fichero de forma segura se nos redirigirá a la ruta donde se ha guardado. Para poder visualizar el fichero sin tener que descargarlo, el sistema detecta (a través del “\href{https://en.wikipedia.org/wiki/Media_type}{MIME Type}”) si es un fichero que se puede mostrar, y de esta manera lo visualizará.
+Una vez la aplicación ha guardado el fichero de forma segura se nos redirigirá a la ruta donde se ha guardado. Para poder visualizar el fichero sin tener que descargarlo, el sistema detecta (a través del “\textbf{MIME Type}”, del inglés \textit{Multipurpose Internet Mail Extensions}) si es un fichero que se puede mostrar, y de esta manera lo visualizará.
 
 Los ficheros que automáticamente se muestran son:
 
@@ -1054,29 +1092,31 @@ Los ficheros que automáticamente se muestran son:
 
 \begin{center}
     \includegraphics[frame,width=0.7\linewidth]{img/upload_download.png}
-    \captionof{figure}{Visualización de un fichero subido a la aplicación}
+    \captionof{figure}{Visualización de un fichero subido a la aplicación.}
 \end{center}
 
 Aparte, y tal como se puede ver en la imagen superior, aparecerá un enlace para poder descargar el fichero subido, lo que permitirá recuperar el archivo sin cifrar.
+
+% TODO: comprobar si no se sube bien.
 
 
 \section{Vault como \textit{backend} de información}
 
 Ya se ha comentado previamente cómo Vault es un proyecto para asegurar, almacenar y controlar el acceso a secretos. La idea de la aplicación realizada ha sido explotar esas funcionalidades y llevarlas un paso más lejos para adaptarlas a un entorno de documentación.
 
-La comunicación con Vault se realiza a través de su \href{https://developer.hashicorp.com/vault/api-docs}{API}, por lo que el servicio debe de estar funcionando y en parte configurado para que la aplicación funcione sobre él.
+La comunicación con Vault se realiza a través de su API (en inglés \textit{application programming interface}), por lo que el servicio debe de estar funcionando y en parte configurado para que la aplicación funcione sobre él.
 
-Tal como se lleva repitiendo a lo largo del documento, la aplicación creada trata de buscar ser una herramienta que pueda servir en una empresa como sistema centralizado para la securización de contraseñas y documentación. Es por eso que debe de realizarse una configuración previa para que la aplicación funcione.
+Tal como se lleva destacando a lo largo del documento, la aplicación creada trata de buscar ser una herramienta que pueda servir en una empresa como sistema centralizado para la securización de contraseñas y documentación. Es por eso que debe de realizarse una configuración previa para que la aplicación funcione.
 
 \subsection{Configuración inicial de Vault}
 
 Dado que Vault va a ser el sistema que se va a encargar del almacenamiento de los secretos es vital que su instalación y configuración inicial sea correcta.
 
-Los pasos que deben realizarse están explicados en su \href{https://developer.hashicorp.com/vault/tutorials/getting-started/getting-started-deploy}{documentación oficial}, pero a continuación se van a simplificar rápidamente:
+Los pasos que deben realizarse están explicados en su documentación oficial, pero a continuación se van a simplificar rápidamente:
 
 \begin{itemize}
     \item Crear un \textbf{servicio de inicio automático} para que en caso de que el servidor se reinicie, el servicio arranque de manera automática. En sistemas GNU/Linux se puede hacer a través de Systemd.
-    \item \textbf{Configurar Vault}: Teniendo distintos puntos a tener en cuenta que se van a detallar en los apartados siguientes.
+    \item \textbf{Configurar Vault}: Teniendo distintos puntos a tener en cuenta que se van a detallar en los apartados “\hyperlink{sistema_backend}{sistema \textit{backend} de autenticación}” y “\hyperlink{backend_almacenamiento}{\textit{backend} de almacenamiento}”.
     \item \textbf{Inicializar Vault}: Al inicializar Vault se generarán el \textit{\textbf{token inicial de root}} que es el que permite la administración completa del servicio. Es fundamental guardarlo a buen recaudo.
 
     También se generan las \textbf{claves de \textit{unseal}} para abrir el acceso a los secretos. Cuando Vault arranca no es posible acceder a los secretos hasta que no se ha realizado el proceso de \textit{unseal}.
@@ -1084,39 +1124,40 @@ Los pasos que deben realizarse están explicados en su \href{https://developer.h
 
 A continuación se van a detallar las decisiones que una empresa puede tomar a la hora de configurar Vault para que se adapte mejor a sus necesidades.
 
+\hypertarget{sistema_backend}{}
 \subsection{Sistema \textit{backend} de autenticación}
 
-En una empresa lo habitual es hacer uso de un sistema centralizado de autenticación, para que todos los usuarios se generen en la misma plataforma.
+En una empresa es habitual hacer uso de un sistema centralizado de autenticación, para que todos los usuarios se generen en la misma plataforma.
 
 Hoy en día, los métodos más habituales suelen ser:
 \begin{itemize}
-    \item \textbf{Directorio Activo de Windows Server}: en empresas donde se haga uso de Windows como sistemas de escritorio, es habitual que el sistema de autenciación esté centralizado y junto con él se hagan usos de sistemas de seguridad como GPOs, carpetas compartidas, ...
-    \item \textbf{LDAP}: Un sistema más estandarizado es el de LDAP, que también se puede integrar con otro tipo de aplicaciones.
+    \item \textbf{Directorio Activo de Windows Server}: en empresas donde se haga uso de Windows como sistemas de escritorio, es habitual que el sistema de autenticación esté centralizado y junto con él se hagan usos de sistemas de seguridad como GPOs (\textit{Group Policy Object)}), carpetas compartidas, ...
+    \item \textbf{LDAP}: Del inglés \textit{Lightweight Directory Access Protocol}, es un sistema más estandarizado es el anterior, que también hace uso de un sistema centralizado de autenticación. LDAP ha sido utilizado en servicios como Red Hat Directory Server y Apache Directory Server.
 
     \item \textbf{Gestión de usuarios local}: En caso de que no se quiera integrar Vault con sistemas internos de la empresa, Vault cuenta con su propia gestión de autenticación para usuarios.
 \end{itemize}
 
-Cada empresa tendrá que decidir cuál es el mejor método que se adapta a ella, y adaptar la aplicación a ella, tarea que resulta sencilla.
+Cada empresa tendrá que decidir cuál es el mejor método que se adapta a ella, y adaptar la aplicación a ella para que haga uso del \textit{backend} seleccionado.
 
 
 \subsection{\textit{Key/Value} como motor de secretos}
-Para la interacción con los secretos se ha decidido hacer uso del sistema “\href{https://developer.hashicorp.com/vault/api-docs/secret/kv/kv-v2}{KVv2}” que tiene integrado Vault. Este sistema nos ofrece:
+Para la interacción con los secretos se ha decidido hacer uso del sistema KVv2 que tiene integrado Vault. Este sistema nos ofrece:
 
 \begin{itemize}
     \item Sistema de interacción \textbf{clave-valor}, habitual en bases de datos no relacionales.
     \item Interactuar con los secretos de manera sencilla a través de la API.
-    \item Modificar los \textit{metadata} para poder guardar un histórico de lo sucedido.
+    \item Modificar los metadatos para poder guardar un histórico de lo sucedido.
     \item Tener un sistema de versiones por cada secreto.
 \end{itemize}
 
-Esta es la característica más importante utilizada por parte de la aplicación a la hora de interactuar con Vault.
+Este motor de secretos KV2 es la característica más importante utilizada por parte de la aplicación a la hora de interactuar con Vault.
 
-
+\hypertarget{backend_almacenamiento}{}
 \subsection{\textit{Backend} de almacenamiento}
 
 Este es otro punto que la empresa debe tener en cuenta a la hora de configurar Vault, ya que de ello dependerá cómo se almacenen los secretos en el servidor final (aunque siempre se realiza de manera cifrada).
 
-Existen distintos \href{https://developer.hashicorp.com/vault/docs/configuration/storage}{\textit{backends} de almacenamiento} y dependiendo de las necesidades se deberá optar por uno u otro.
+Existen distintos \textit{backends} de almacenamiento y dependiendo de las necesidades se deberá optar por uno u otro:
 
 \begin{itemize}
     \item \textbf{\textit{Filesystem}}: Es el método más sencillo de implementar, ya que Vault almacena los secretos en formato de ficheros en el servidor.
@@ -1124,14 +1165,14 @@ Existen distintos \href{https://developer.hashicorp.com/vault/docs/configuration
     \item \textbf{S3}: Quizá interese almacenar los secretos en un \textit{bucket} S3 de Amazon, y de esta manera no depender de almacenamiento local.
 \end{itemize}
 
-Estos son sólo unos ejemplos de los distintos sistemas de almacenamiento que se pueden utilizar. Habría que tomar la decisión de cuál elegir y realizar la configuración en Vault. La opción elegida será transparente para la aplicación que se ha creado.
+Estos son sólo unos ejemplos de los distintos sistemas de almacenamiento que se pueden utilizar. La empresa debe tomar la decisión de cuál elegir y realizar la configuración en Vault. La opción elegida será transparente para la aplicación que se ha creado.
 
 
 \section{Angular: Aspectos destacables de la programación}
 
 Tras explicar cómo funciona la aplicación desde el punto de vista del usuario, se va a profundizar en algunos aspectos técnicos realizados durante la programación.
 
-Tal como se ha dicho, la aplicación está programada utilizando el \textit{framework} \href{https://angular.io/}{Angular} y por tanto se ha hecho uso del lenguaje \href{https://www.typescriptlang.org/}{Typescript}.
+Tal como se ha dicho, la aplicación está programada utilizando el \textit{framework} Angular y por tanto se ha hecho uso del lenguaje TypeScript.
 
 A continuación se van a detallar algunos aspectos importantes y algunas características utilizadas durante la programación de la aplicación.
 
@@ -1142,7 +1183,7 @@ Durante la creación del interfaz gráfico se ha dividido en distintos component
 
 \begin{center}
     \includegraphics[frame,width=\linewidth]{img/interfaz2-colored.png}
-    \captionof{figure}{Interfaz principal con los componentes coloreados}
+    \captionof{figure}{Interfaz principal con los componentes coloreados.}
 \end{center}
 
 En la imagen se han coloreado los distintos componentes que existen a la hora de visualizar un secreto:
@@ -1156,7 +1197,7 @@ En la imagen se han coloreado los distintos componentes que existen a la hora de
     \item \textbf{Pie de página}: El pie de página de la aplicación.
 \end{itemize}
 
-Aparte de los componentes explicados previamente, existen otro dos:
+Aparte de los componentes explicados previamente, existen otros dos:
 
 \begin{itemize}
     \item \textbf{Login}: Es el encargado de mostrar el \textit{modal} del \textit{login} cuando no se está logueado en la aplicación.
@@ -1165,11 +1206,11 @@ Aparte de los componentes explicados previamente, existen otro dos:
 
 \begin{center}
     \includegraphics[width=0.9\linewidth]{img/browser.png}
-    \captionof{figure}{Detalle del explorador de ficheros}
+    \captionof{figure}{Detalle del explorador de ficheros.}
 \end{center}
 
 
-Varios de estos componentes están integrados en la vista principal a la hora de iniciar la aplicación, en el fichero \configfile{app.component.html}.
+Varios de estos componentes están integrados en la vista principal a la hora de iniciar la aplicación, en el fichero \configfile{app.component.html}. Desde este fichero se invocan a los componentes junto con parte de código para hacer que la aplicación sea \textit{\textbf{responsive}}.
 
 \begin{mycode}{Fichero app.component.html}{html}{}
 <app-header></app-header>
@@ -1190,22 +1231,22 @@ Varios de estos componentes están integrados en la vista principal a la hora de
 \end{mycode}
 
 
-Dado que los componentes idealmente sólo deben centrarse en la experiencia de usuario, se detallará cómo se ha realizado el paso de información entre ellos.
+Dado que los componentes idealmente deben centrarse en la experiencia de usuario, se detallará cómo se ha realizado el paso de información entre ellos.
 
 
 
 \subsection{\textit{Services} e inyección de dependencias}
 
-Para la obtención de datos de los secretos a través del \textit{backend} Vault utilizando su \href{https://developer.hashicorp.com/vault/api-docs}{API}, y para la sincronización y envío de información entre los distintos componentes de la vista se ha creado un servicio en Angular, cuya dependencia se ha inyectado al inicio de la aplicación.
+Para la obtención de datos de los secretos a través del \textit{backend} Vault utilizando su API, y para la sincronización y envío de información entre los distintos componentes de la vista se ha creado un servicio en Angular, cuya dependencia se ha inyectado al inicio de la aplicación.
 
-El servicio ha facilitado que distintos componentes que van a visualizar parte de la misma información (como la vista de árbol y el explorador de ficheros), o que dependen unos de otros, van a estar en sincronía a través del servicio.
+El servicio ha facilitado que distintos componentes que van a visualizar parte de la misma información (como la vista de árbol y el explorador de ficheros), o que dependen unos de otros, puedan estar en sincronía a través del servicio.
 
 
 \subsection{Programación asíncrona con \textit{promises}}
 
 Dado que gran parte de la aplicación se basa en comunicarse con la API de Vault, ha sido necesario hacer uso en todo momento de la programación asíncrona al realizar las peticiones.
 
-El ejemplo más claro es la generación del árbol de secretos. Para ello se ha hecho un algoritmo recursivo de petición a la API de los secretos, que cuando comprobaba que existía una jerarquía de directorios, debía entrar al directorio y recorrerlo recursivamente.
+El ejemplo más claro es la generación del árbol de secretos. Para ello se ha implementado un algoritmo recursivo de petición a la API de los secretos, que cuando comprobaba que existía una jerarquía de directorios, debía entrar al directorio y recorrerlo recursivamente.
 
 Al finalizar, las \textit{promises} hay que resolverlas para generar la estructura jerárquica que luego se convierte en la vista de árbol.
 
@@ -1226,6 +1267,8 @@ Promise.all(promises).then(data => {
 \end{mycode}
 
 Angular, y ciertas peticiones que podemos realizar a través de la red, hace uso de \textit{observables}, que funcionan de manera similar a las \textit{promises}.
+
+% TODO: Aquí podríamos hablar del ciclo de vida de la inyección de la dependencias, Transient, Scoped, Singleton...
 
 \subsection{Envío de mensajes con \textit{observables}}
 
@@ -1265,7 +1308,6 @@ Continuando con el ejemplo, desde la vista en la que se visualiza a un secreto, 
 \begin{mycode}{Ejemplo de subscripción a un \textit{Observable}}{typescript}{}
 export class SecretComponent implements OnInit {
     versions: any = null
-
     constructor(
         protected vault: VaultService,
     ) {
@@ -1294,6 +1336,27 @@ Esta variable, para terminar, es utilizada en la vista para generar una lista co
 Este tipo de secuencia “llamada a la API de Vault → envío de información al suscriptor/suscriptores → recibir información → actualizar vista” se repite de manera continuada a lo largo de toda la aplicación.
 
 
+\vfill
+\pagebreak
+\chapter{Conclusiones}
+
+La seguridad a la hora de almacenar datos importantes, y salvaguardar las contraseñas de accesos a servicios debe ser una prioridad a nivel personal, pero mucho más cuando hablamos a nivel empresarial. En este último caso puede llegar a haber consecuencias legales en caso de perder esa información (ya sea por borrado o por filtraciones por ataques de agentes externos).
+
+A pesar de que ya existen herramientas dedicadas a guardar contraseñas, se ha demostrado que este tipo de aplicaciones comerciales no están exentas de fallos de seguridad, y que debido a la importancia de las mismas, suelen ser objetivos de ataque para la obtención de información sensible.
+
+Aún existiendo aplicaciones de Software Libre para el mismo fin, en las que la comunidad se vuelca para que tales fallos de seguridad no existan, normalmente sólo están dedicadas a guardar contraseñas, sin posibilidad de crear documentación en la propia aplicación. Existe la posibilidad de modificar estas aplicaciones, gracias a las licencias libres que las componen, pero puede suponer un esfuerzo que puede no estar al alcance de muchos.
+
+
+A lo largo de este Trabajo Final de Máster se ha demostrado cómo crear una herramienta \textit{ad hoc} para guardar contraseñas, subir ficheros y donde se puede crear y editar documentación es un proyecto asequible que puede ser llevado por cualquier empresa tecnológica que cuente con un desarrollador que tenga conocimientos de programación.
+
+El hecho de crear una aplicación propia, y securizarla para limitar el acceso a la misma, trae consigo una serie de ventajas que un producto comercial es difícil que consiga. Podremos adaptar la aplicación a medida que la empresa vaya necesitando nuevas características, y por tanto no nos limitaremos a lo que un producto de terceros nos permita hacer.
+
+Por último, y dado que para la creación de la aplicación nos hemos basado en herramientas con licencia de Software Libre, al dotar a nuestra aplicación del mismo tipo de licencia, estaremos permitiendo a la comunidad que incluyan mejoras de cualquier tipo. Esto no sólo es beneficioso para la propia comunidad, sino también para las empresas, que podrán añadir esas nuevas características a su propio desarrollo, mejorando así su propia aplicación interna.
+
+
+\vfill
+\pagebreak
+
 \chapter{Trabajo futuro}
 
 Dada la naturaleza de la aplicación realizada, y las distintas posibilidades que puede aportar dentro de una empresa, se podría decir que el trabajo futuro a desarrollar es tan diverso como las necesidades de las empresas que lo puedan utilizar.
@@ -1305,7 +1368,7 @@ Es cierto que las funcionalidades que tiene actualmente se pueden considerar bá
 Con todo ello, dado que existen muchas funcionalidades que se han quedado sin realizar, y que podrían interesar a nivel general, a continuación de detallan un número de funcionalidades que podrían ir añadiéndose a la aplicación en futuros \textit{sprints}:
 
 \begin{itemize}
-    \item \textbf{Panel de control para administradores}: Como muchas aplicaciones, va a existir el rol de administrador, y que por tanto será el encargado de administrar no sólo la gestión del servicio, si no también la creación de usuarios como de dar permisos.
+    \item \textbf{Panel de control para administradores}: Como muchas aplicaciones, va a existir el rol de administrador, y que por tanto será el encargado de administrar no sólo la gestión del servicio, si no también la creación de usuarios como de asignar permisos.
 
     Es por eso que sería interesante crear una ruta dentro de la aplicación a la que sólo los administradores puedan acceder y donde se podrían efectuar las siguientes tareas:
 
@@ -1316,23 +1379,23 @@ Con todo ello, dado que existen muchas funcionalidades que se han quedado sin re
         \item \textbf{Auditoría completa}: Vault cuenta con un sistema completo de auditoria, que es capaz de guardar logs por cada acción de usuario. Dada la importancia de este tipo de información, podría ser recomendable guardarlo en un sistema de base de datos no-relacional y poder acceder a dicha información en cualquier momento.
     \end{itemize}
 
-    \item \textbf{Crear configuración para el usuario}: Crear un área de configuración para el usuario. En este apartado, algunas opciones que podría configurar son:
+    \item \textbf{Crear configuración para el usuario}: Crear un área de configuración para el usuario. En este apartado, algunas opciones que se podrían configurar son:
 
     \begin{itemize}
         \item Cambiar el aspecto visual de la aplicación. Ya sea a través de distintos temas o simplemente entre un tema claro y otro oscuro.
         \item Permitir forzar la actualización de la vista de árbol.
-        \item Decidir si quiere tener la vista de árbol siempre visible.
+        \item Decidir si se quiere tener la vista de árbol siempre visible.
     \end{itemize}
 
     \item \textbf{Auditoría propia para los secretos}: Crear un sistema propio más sencillo que el que tiene de serie Vault para conocer las modificaciones históricas de quién ha modificado el secreto.
 
     \item \textbf{Ver diferencias entre versiones}: Actualmente se pueden ver las distintas versiones de un secreto, pero pueder ser interesante seleccionar dos versiones y ver cuáles son las diferencias entre las dos versiones. Sería tener una herramienta similar a \commandbox{git diff}.
 
-    \item \textbf{Creación de “timers”}: La idea sería que si un usuario no utiliza la aplicación en X minutos, se realice un deslogueo de la aplicación. De esta manera, se salvaguardan los datos ante posibles accesos a un equipo que no está siendo utilizando en un momento dado.
+    \item \textbf{Creación de “timers”}: La idea es que si un usuario no utiliza la aplicación en un tiempo configurable (por ejemplo, 5 minutos), se realice un deslogueo de la aplicación. De esta manera, se salvaguardan los datos ante posibles accesos a un equipo que no está siendo utilizando en un momento dado.
 
     \item \textbf{Mejoras en la visualización de secretos}: Mejorar y ampliar la visualización de los distintos tipos de ficheros que se pueden subir a la aplicación.
 
-    Puede ser interesante permitir la visualización de documentos tipo word, libreoffice, excel,... haciendo uso de librerías externas.
+    Puede ser interesante permitir la visualización de documentos tipo Word, LibreOffice, Excel,... haciendo uso de librerías externas.
 
     \item \textbf{Crear un índice en los secretos creados}: Dado que la aplicación permite crear documentos gracias al sistema Markdown, se entiende que estos documentos pueden contar con una jerarquía interna basada en encabezados.
 
@@ -1348,30 +1411,10 @@ Tal como se puede observar, el número de nuevas funcionalidades con las que mej
 Con todo ello, y teniendo en cuenta las posibilidades que este tipo de aplicación puede llevar a una empresa, resulta interesante pensar las posibles funcionalidades que podría llegar a tener en un futuro.
 
 
-
 \vfill
 \pagebreak
-\chapter{Conclusiones}
-
-La seguridad a la hora de almacenar datos importantes, y salvaguardar las contraseñas de accesos a servicios debe ser una prioridad a nivel personal, pero mucho más cuando hablamos a nivel empresarial. En este último caso puede llegar a haber consecuencias legales en caso de perder esa información (ya sea por borrado o por filtraciones por ataques de agentes externos).
-
-A pesar de que ya existen herramientas dedicadas a guardar contraseñas, se ha demostrado que este tipo de aplicaciones comerciales no están exentas de fallos de seguridad, y que debido a la importancia de las mismas, suelen ser objetivos de ataque para la obtención de información sensible.
-
-Aún existiendo aplicaciones de Software Libre para el mismo fin, en las que la comunidad se vuelca para que tales fallos de seguridad no existan, normalmente sólo están dedicadas a guardar contraseñas, sin posibilidad de crear documentación en la propia aplicación. Existe la posibilidad de modificar estas aplicaciones, gracias a las licencias libres que las componen, pero puede suponer un esfuerzo que puede no estar al alcance de muchos.
 
 
-A lo largo de este trabajo final de máster se ha demostrado cómo crear una herramienta \textit{ad hoc} para guardar contraseñas, subir ficheros y donde se puede crear y editar documentación no es una tarea demasiado compleja y que puede ser llevado por cualquier empresa tecnológica que cuente con un desarrollador que tenga conocimientos de programación.
-
-Las ventajas de crear una aplicación propia, y securizarla para limitar el acceso a la misma, trae consigo una serie de ventajas que un producto comercial es difícil que consiga. Podremos adaptar la aplicación a medida que la empresa vaya necesitando nuevas características, y por tanto no nos limitaremos a lo que un producto de terceros nos permita hacer.
-
-Por último, y dado que para la creación de la aplicación nos hemos basado en herramientas con licencia de Software Libre, al dotar a nuestra aplicación del mismo tipo de licencia, estaremos permitiendo a la comunidad que incluyan mejoras de cualquier tipo. Esto no sólo es beneficioso para la propia comunidad, si no también para las empresas, que podrán añadir esas nuevas características a su propio desarrollo, mejorando así su propia aplicación interna.
-
-
-
-
-\vfill
-
-\pagebreak
 \printbibliography[title={Referencias bibliográficas},heading=bibintoc]
 %\pagebreak
 %
