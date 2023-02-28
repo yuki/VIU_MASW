@@ -49,7 +49,7 @@ Otro inconveniente de estas aplicaciones es que suelen ser de pago. Además, el 
 
 También hay que tener en cuenta que pueden no ajustarse a las necesidades de la empresa y salvo que sea una aplicación de Software Libre, no será posible realizar modificaciones.
 
-Considerando este escenario, el presente Trabajo Fin de Máster propone la creación de un gestor de contraseñas y documentación sensible, utilizando Angular y haciendo uso de Hashicorp Vault como herramientas de almacenamiento seguro.
+Considerando este escenario, el presente Trabajo Fin de Máster propone la creación de un gestor de contraseñas y documentación sensible, utilizando Angular y haciendo uso de Hashicorp Vault como herramienta de almacenamiento seguro.
 
 
 \keywords{gestión de contraseñas, seguridad, autenticación, autorización, documentación sensible, cifrado de datos, hashicorp vault}
@@ -74,7 +74,7 @@ Por otro lado, existe información sensible como son las contraseñas, con las q
 
 En el ámbito personal existen distintas aplicaciones que nos permiten gestionar contraseñas, ya sea de manera integrada en los navegadores web, o a través de aplicaciones externas.
 
-Cuando esta gestión de contraseñas se pasa al ámbito empresarial, a pesar de que también existen distintas alternativas, puede que no cuenten con características necesarias para la empresa: quizá la integración con los sistemas de la empresa no sea posible; en caso de ser una opción de pago, ser demasiado cara por el volumen de empleados que tenemos... Esto causa que resulte complejo decantarse por una solución existente.
+Cuando esta gestión de contraseñas se pasa al ámbito empresarial, a pesar de que también existen distintas alternativas, puede que no cuenten con características necesarias para la empresa: falta de integración con los sistemas de la empresa; en caso de ser una opción de pago, ser demasiado cara por el volumen de empleados que tenemos... Esto causa que resulte complejo decantarse por una solución existente.
 
 
 Aparte de las contraseñas, también hay que considerar la información sensible que maneja la empresa, ya sea información propia o de terceras empresas (clientes o proveedores). Esa información, ya no tiene por qué ceñirse a “usuario” y “contraseña”, sino que puede ser documentación, ficheros, imágenes, esquemas de red...
@@ -89,7 +89,7 @@ La motivación principal del proyecto es la de crear una aplicación que gestion
 
 Algunas de las aplicaciones de gestión de contraseñas más conocidas están enfocadas sólo al almacenamiento de contraseñas, y aunque permitan subir ficheros para ser cifrados, al querer realizar modificaciones, hay que descargar el fichero, realizar las modificaciones y posteriormente volver a subirlo.
 
-En dichas aplicaciones, algunas de las cuales serán analizadas en el presente trabajo, la versión multi-usuario suele ser de pago, y no permiten la posibilidad de tener el servicio \textit{on premise} (ser alojadas en servidores propios).
+En dichas aplicaciones, algunas de las cuales serán analizadas en el presente trabajo, la versión multi-usuario suele ser de pago, y no permiten la posibilidad de tener el servicio \textit{on premise} (alojar el servicio junto con los datos cifrados en servidores propios).
 
 
 
@@ -103,7 +103,7 @@ El objetivo principal del presente Trabajo Fin de Máster es la creación de una
 
 Este gestor de contraseñas deberá cumplir con unos requisitos mínimos para que pueda ser desplegado y utilizado en una empresa para mejorar la seguridad de los datos que se guardan.
 
-
+\hypertarget{requisitos}{}
 \section{Requisitos del proyecto}
 Como propuesta para la creación de un gestor de contraseñas propio, se han identificado los siguientes requisitos que deben cumplirse para llevar a cabo con éxito el desarrollo propuesto:
 
@@ -112,15 +112,25 @@ Como propuesta para la creación de un gestor de contraseñas propio, se han ide
 
     \item Se quiere crear un sistema que \textbf{gestione contraseñas e información sensible}. Esta información sensible puede corresponder con imágenes, documentos, o ficheros en general que la aplicación permitirá subir.
 
-    También se podrá generar documentación en la propia aplicación a través de un interfaz \textbf{WYSIWYG} (del inglés \textit{what you see is what you get}) que guarde la información en formato Markdown creado por \textcite{markdown}.
+    También se podrá generar documentación en la propia aplicación a través de un interfaz \textbf{WYSIWYG} (del inglés \textit{what you see is what you get}) que guarde la información en formato Markdown.
 
-    \item El sistema estará basado en una aplicación web creada con el \textit{framework} de desarrollo Angular, tratando que sea lo más modular posible.
+    Markdown es un lenguaje de marcado ligero creado por \textcite{markdown}, que a través de texto plano se puede obtener un documento en formato HTML (siglas en inglés de \textit{HyperText Markup Language}) válido.
 
-    La modularidad va a permitir poder añadir características nuevas a la aplicación en el futuro. De esta manera, podremos adaptar la aplicación a posibles exigencias futuras que necesite la empresa.
+    \item El sistema estará basado en una aplicación web creada con el \textit{framework} de desarrollo Angular y utilizando el lenguaje de programación TypeScript, creado por \textcite{typescript}.
+
+    Para el desarrollo de la aplicación se va a tratar que el resultado obtenido sea lo más modular posible.
+
+    La modularidad va a permitir poder añadir características nuevas a la aplicación en el futuro. De esta manera, la aplicación se podrá adaptar a posibles exigencias futuras que necesite el usuario o la empresa que haga uso de ella.
 
     \item El gestor de contraseñas debe contar con un \textbf{sistema de autenticación}. Sólo debe permitir el acceso a las personas que hayan pasado algún sistema de verificación que demuestre ser quién es.
 
-    Este sistema de autenticación no tiene por qué limitarse al clásico “usuario y contraseña”, ya que podrá adaptarse para en el futuro utilizar, de forma sencilla, otros sistemas conocidos, como por ejemplo: certificados de seguridad de la capa de transporte (en inglés: \textit{Transport Layer Security} o \textbf{TLS}), contraseñas de un sólo uso basadas en tiempo (TOTP), tokens basados en JWT (o JSON Web Token, basados en \textit{JavaScript Object Notation}), ...
+    Este sistema de autenticación no tiene por qué limitarse al clásico “usuario y contraseña”, ya que podrá adaptarse para en el futuro utilizar, de forma sencilla, otros sistemas conocidos, como por ejemplo:
+    \begin{itemize}
+        \item Certificados de seguridad de la capa de transporte (en inglés: \textit{Transport Layer Security} o \textbf{TLS}).
+        \item Usuario y contraseña de un sólo uso basadas en tiempo (\textbf{TOTP}).
+        \item Tokens basados en \textbf{JWT} (o JSON Web Token , basados en \textit{JavaScript Object Notation}).
+        \item Autenticación descentralizada a través del estándar abierto \textbf{OpenID}, creado por \textcite{openid}.
+    \end{itemize}
 
     \item Debe existir un \textbf{sistema de autorización, que controle el tipo de acceso y permisos} que tenga en cuenta quién los realiza y a qué contraseñas se quiere acceder.
 
@@ -128,19 +138,19 @@ Como propuesta para la creación de un gestor de contraseñas propio, se han ide
 
     \item Para tener un registro de lo sucedido, también es importante contar con un \textbf{sistema de auditoría}. A través de él se registrarán los accesos y operaciones que se realicen.
 
-    \item La \textbf{seguridad en la transmisión y en el almacenamiento} debe ser la principal prioridad.  \textcite{scarfone2009guide} inciden en que las comunicaciones que contienen contraseñas deben ser cifradas, ya sea mediante uso del protocolo TLS (\textit{Transport Layer Security}) o creando un túnel en la comunicación a través de una red privada virtual (o \textbf{VPN}).
+    \item La \textbf{seguridad en la transmisión y en el almacenamiento} debe ser la principal prioridad.  \textcite{scarfone2009guide} inciden en que las comunicaciones que contienen contraseñas deben ser cifradas, ya sea mediante uso del protocolo TLS o creando un túnel en la comunicación a través de una red privada virtual (o \textbf{VPN}).
 
-    En caso de que algún atacante obtuviese acceso físico al sistema de almacenamiento, de nuevo, los datos estarían cifrados, evitando la fuga de información.
+    En caso de que algún atacante obtuviese acceso físico al sistema de almacenamiento, de nuevo, los datos estarán cifrados, evitando la fuga de información.
 
-    \item La aplicación debe ser \textbf{sencilla de utilizar}, para que al usuario final no le cueste utilizarla. De esta manera \textbf{conseguiremos que el usuario final la integre en su metodología de trabajo} a la hora de crear/usar contraseñas y guardar información sensible.
+    \item La aplicación debe ser \textbf{sencilla de utilizar}, para que al usuario final no le cueste utilizarla. De esta manera \textbf{se conseguirá que el usuario final la integre en su metodología de trabajo} a la hora de crear/usar contraseñas y guardar información sensible.
 
-    \item Es importante que la aplicación sea \textit{responsive}, es decir, \textbf{se adapte a la pantalla} donde se esté visualizando. De esta manera el usuario podrá hacer uso de ella a través de dispositivos móviles.
+    \item Es importante que la aplicación sea \textit{\textbf{responsive}}, es decir, \textbf{se adapte a la pantalla} donde se esté visualizando. De esta manera el usuario podrá hacer uso de ella a través de dispositivos móviles.
 
     \item Para el almacenamiento de la información y el sistema de autorización se hará uso del sistema Vault de la empresa Hashicorp.
 \end{itemize}
 
 
-Teniendo en cuenta las metodologías utilizadas, y explicadas en apartados posteriores, cualquier añadido a estos requisitos se podría añadir en etapas posteriores del desarrollo.
+Con todo ello, y teniendo en cuenta lo explicado en la sección \hyperlink{metodologias}{Metodologías}, cualquier ampliación a estos requisitos se podrán añadir en etapas posteriores del desarrollo.
 
 
 \chapter{Marco tecnológico}
@@ -160,7 +170,7 @@ Estos gestores de contraseña suelen hacer uso de una contraseña maestra para p
 
 
 \begin{itemize}
-    \item En el estudio de \textcite{belenko2012secure} se comprueba cómo entre más de una docena de gestores de contraseñas muchos de ellos no proveen un nivel de seguridad apropiado.
+    \item En el estudio de \textcite{belenko2012secure} más de una docena de gestores de contraseñas no proveen un nivel de seguridad apropiado.
 
     \item La contraseña elegida por el usuario puede no ser resistente a un ataque si el “almacén de contraseñas” es robado.
 \end{itemize}
@@ -169,11 +179,11 @@ Estos gestores de contraseña suelen hacer uso de una contraseña maestra para p
 Es cierto que en los últimos años, cuando este tipo de software es utilizado en dispositivos móviles la contraseña maestra se puede sustituir por un reconocimiento biométrico (como puede ser reconocimiento de la huella dactilar o reconocimiento facial).
 
 
-A continuación se analizarán cuatro gestores de contraseñas, los problemas de seguridad que han tenido y qué herramientas tecnológicas se han utilizado para el desarrollo del gestor de contraseñas y documentación que se propone en este Trabajo Fin de Máster.
+A continuación se analizarán cuatro gestores de contraseñas muy utilizados en la actualidad, los problemas de seguridad que han tenido y qué herramientas tecnológicas se han utilizado para el desarrollo del gestor de contraseñas y documentación que se propone en este Trabajo Fin de Máster.
 
 \section{Gestores de contraseñas conocidos}
 
-La siguiente tabla muestra una comparativa con distintos gestores de contraseñas conocidos y distintas características que pueden ser útiles dentro de una empresa:
+La siguiente tabla muestra una comparativa con distintos gestores de contraseñas conocidos, cuyo uso está extendido,  y distintas características que pueden ser útiles dentro de una empresa:
 
 
 \begin{yukitblrcol}{X[9]X[7]X[7]X[8]X[7]}
@@ -208,7 +218,7 @@ La siguiente tabla muestra una comparativa con distintos gestores de contraseña
     \item[*****] Se puede conseguir algo similar mediante un “\textit{trigger}”.
 \end{itemize}
 
-%Tal como se ve en la tabla \ref{table:comparativa}, sólo las aplicaciones que son Software Libre tienen versión \textit{on-premise}.
+Tal como se ve en la tabla \ref{table:comparativa}, sólo las aplicaciones que son Software Libre tienen versión \textit{on premise}.
 
 
 \section{Problemas acontecidos}
@@ -236,7 +246,7 @@ Algunos ejemplos en los últimos años:
 
 \end{itemize}
 
-Como se puede ver, y este listado sólo es una pequeña muestra, los gestores de contraseñas son un objetivo claro de ataques.  \textcite{hacked3} analiza parte de estos ataques y da pequeñas recomendaciones sobre cómo mejorar la protección (como modificar la contraseña por una más fuerte).
+Como se puede ver, y este listado sólo es una pequeña muestra, los gestores de contraseñas son un objetivo claro de ataques.  \textcite{hacked3} analiza parte de estos ataques y da pequeñas recomendaciones sobre cómo mejorar la protección (siendo la primera de la lista modificar la contraseña por una más fuerte).
 
 
 \section{Herramientas tecnológicas utilizadas}
@@ -248,9 +258,9 @@ Para la creación del proyecto se ha hecho uso de distintas herramientas tecnol�
 
 Angular es un \textit{framework} que facilita la creación de aplicaciones web, utiliza el lenguaje de programación TypeScript creado por \textcite{typescript} y es Software Libre.
 
-Angular permite programar haciendo uso de la arquitectura conocida como “\textbf{Modelo – vista – controlador}”, que  permite separar la representación visual de la aplicación, el modelo de datos que se va a tener y la lógica de negocio.
+Angular permite programar haciendo uso de la arquitectura conocida como “\textbf{Modelo – Vista – Controlador}”, que  permite separar la representación visual de la aplicación, el modelo de datos que se va a tener y la lógica de negocio.
 
-Gracias a ello, la aplicación desarrollada va a ser lo más modular posible, para que de esta manera el mantenimiento y añadir nuevas características en el futuro se pueda realizar de manera sencilla.
+Gracias a ello, la aplicación desarrollada va a ser lo más modular posible, para que de esta manera el mantenimiento, y añadir nuevas características en el futuro, se pueda realizar de manera sencilla.
 
 %Por otro lado, y gracias a que Angular es un \textit{framework} de lado de cliente (el resultado se ejecuta en el navegador del usuario), va a permitir que la carga se reduzca en el lado del servidor.
 % TODO: mirar lo que me dice Hector sobre esto
@@ -268,13 +278,13 @@ Se va a utilizar Vault como sistema centralizado para varios aspectos de la apli
 
     \item \textbf{Gestión de autorización}: A la hora de permitir el acceso y permisos a los secretos Vault cuenta con un sistema interno que nos ayudará a realizar dicha gestión.
 
-    \item \textbf{Gestor de almacenamiento}: Se puede hacer uso de distintos sistemas de \textit{backend} de almacenamiento: desde ficheros cifrados a distintas bases de datos (MySQL, PostgreSQL, Cassandra,...).
+    \item \textbf{Gestor de almacenamiento}: Se puede hacer uso de distintos sistemas de \textit{backend} de almacenamiento: desde ficheros cifrados a distintas bases de datos (MySQL, PostgreSQL, Cassandra, ...).
 
 %    Dependiendo del almacenamiento elegido, el crear un sistema en Alta Disponibilidad será más sencillo que en otros. De todas maneras, la posibilidad de migrar de un sistema de almacenamiento a otro siempre es posible.
 
-    \item \textbf{Alta Disponibilidad (HA)}: Teniendo en cuenta que un gestor de contraseñas y documentación sensible es una pieza fundamental en una empresa, es vital que exista la posibilidad de crear un sistema en Alta Disponibilidad.
+    \item \textbf{Alta Disponibilidad}: Teniendo en cuenta que un gestor de contraseñas y documentación sensible es una pieza fundamental en una empresa, es vital que exista la posibilidad de crear un sistema en Alta Disponibilidad.
 
-    Vault permite crear, dependiendo de las necesidades, distintos tipos de sistemas en Alta Disponibilidad multi-nodo, multi-región, con distintos tipos de sistemas de almacenamiento ... Es importante analizar las necesidades para elegir la mejor opción.
+    Vault permite crear, dependiendo de las necesidades, distintos tipos de sistemas en Alta Disponibilidad multi-nodo, multi-región y con distintos tipos de sistemas de almacenamiento. Es importante analizar las necesidades para elegir la mejor opción.
 
 \end{itemize}
 %\vspace{-15pt}
@@ -285,7 +295,7 @@ Aunque Vault no está pensado inicialmente para guardar documentación, uno de s
 
 Git es el sistema de control de versiones creado por \textcite{git} para la gestión del código fuente del \textit{kernel} Linux. Hoy en día es el sistema más utilizado gracias a características tan importantes como la facilidad para crear ramas, su versatilidad para adaptarse al flujo de trabajo del desarrollador, integración con los entornos de desarrollo más importantes...
 
-Gracias a los sistemas CI/CD (del inglés “\textit{Continuous Integration/Continuous Delivery}) integrados en las plataformas de repositorios más conocidas (GitHub o GitLab) o a través de herramientas propias (como Jenkins), el realizar despliegues automatizados de las nuevas versiones permitirá que la aplicación pueda ser rápidamente utilizada por los usuarios finales.
+Gracias a los sistemas CI/CD (del inglés “\textit{Continuous Integration/Continuous Delivery}) integrados en las plataformas de repositorios más conocidas (GitHub o GitLab) o a través de herramientas propias (como Jenkins), realizar despliegues automatizados de las nuevas versiones permitirá que la aplicación pueda ser rápidamente utilizada por los usuarios finales.
 
 %A pesar de que Git permite ser descentralizado, se ha utilizado la plataforma \href{https://github.com/}{Github} como plataforma centralizadora y de esta manera también así disponer de una copia de seguridad del código fuente.
 %
@@ -309,16 +319,18 @@ Gracias a los sistemas CI/CD (del inglés “\textit{Continuous Integration/Cont
 \hypertarget{metodologia}{}
 \chapter{Metodología}
 
-Hoy en día es conveniente hacer uso de las \textbf{metodologías ágiles} cuando realizamos la gestión de un proyecto, ya que cuentan con una serie de ventajas que nos van a permitir dar una respuesta más rápida y flexible ante posibles cambios durante la vida de desarrollo del producto.
+Hoy en día es conveniente hacer uso de las \textbf{metodologías ágiles} cuando se realiza la gestión de un proyecto, ya que cuentan con una serie de ventajas que van a permitir dar una respuesta más rápida y flexible ante posibles cambios durante la vida de desarrollo del producto.
 
-Ventajas que podemos destacar de las metodologías ágiles:
-%\vspace{-10pt}
+Ventajas que se pueden destacar de las metodologías ágiles:
+\vspace{-10pt}
 \begin{itemize}
     \item Poder entregar resultados funcionales al cliente cada poco tiempo y así obtener \textit{feedback} de lo realizado.
-    \item Seremos capaces de dar una respuesta ágil y flexible ante posibles cambios que puedan surgir (cambios en los requisitos, ante bajas de personal asignado al proyecto, dificultades durante el desarrollo...).
+    \item Ser capaces de dar una respuesta ágil y flexible ante posibles cambios que puedan surgir (cambios en los requisitos, ante bajas de personal asignado al proyecto, dificultades durante el desarrollo...).
     \item Tratar de evitar burocracia innecesaria, para centrarnos de esta manera en el producto y sus funcionalidades.
     \item Tratar de involucrar al cliente (y/o a los usuarios finales) y colaborar con él, para de esta manera conseguir un mayor valor al producto.
 \end{itemize}
+
+A continuación se detallará cómo se ha realizado la gestión del proyecto que está siendo detallado en el presente Trabajo Fin de Máster.
 
 \section{Gestión del proyecto}
 
@@ -460,6 +472,7 @@ A continuación se van a identificar las distintas “historias de usuario” ob
     \end{itemize}
     \\
 \end{requisitostbl}
+\vspace{-10pt}
 {
     \captionof{table}{Modificar un secreto.}
 }
@@ -481,6 +494,7 @@ A continuación se van a identificar las distintas “historias de usuario” ob
     \end{itemize}
      \\
 \end{requisitostbl}
+%\vspace{-10pt}
 {
     \captionof{table}{Borrado de secretos.}
 }
@@ -568,9 +582,21 @@ A continuación se van a identificar las distintas “historias de usuario” ob
 }
 %\vspace{10pt}
 
+%Todas estas “historias de usuario” conforman las necesidades iniciales para cumplir con lo expuesto en la sección \hyperlink{requisitos}{Requisitos del proyecto}.
+
+%Para cumplir con nuevos requisitos que pueda interesar añadir en el futuro,
+
 \subsection{Mapa de las historias de usuario}
 
 Dado que las historias de usuario pueden suponer la agrupación de distintas tareas técnicas que son más pequeñas, es conveniente crear un mapa que englobe todas las tareas a realizar.
+
+El mapa resultante inicial para la gestión del proyecto es el siguiente:
+\vspace{-10pt}
+\begin{center}
+    \includegraphics[width=\linewidth]{img/kanban.png}
+    \captionof{figure}{Mapa de las tareas a realizar.}
+    \label{figure:mapa_tarea}
+\end{center}
 
 Para la organización de este mapa se pueden identificar los siguientes apartados:
 \begin{itemize}
@@ -579,13 +605,7 @@ Para la organización de este mapa se pueden identificar los siguientes apartado
     \item Las \textbf{tareas}, en este caso en amarillo, son las unidades concretas de trabajo. Se ha tratado que sean lo más cortas posibles y que a nivel técnico sean auto-contenidas y aisladas.
 \end{itemize}
 
-El mapa resultante inicial para la gestión del proyecto es el siguiente:
 
-\begin{center}
-    \includegraphics[width=\linewidth]{img/kanban.png}
-    \captionof{figure}{Mapa de las tareas a realizar.}
-    \label{figure:mapa_tarea}
-\end{center}
 
 \subsection{\textit{Sprints} generados}
 
@@ -614,17 +634,9 @@ Trello es una aplicación web, creada por la empresa \textcite{atlassian}, que n
 
 Aunque cuenta con una versión de suscripción, la versión gratuita dispone de las características suficientes como para poder ser utilizado para la gestión de proyectos sin ningún problema.
 
-Una vez definidas las tareas, tal como se ha visto anteriormente, se han añadido a Trello, en el que se han creado diferentes columnas, o fases de desarrollo.
+Una vez definidas las tareas, tal como se ha visto anteriormente, se han añadido a Trello, en el que se han creado diferentes columnas, o fases de desarrollo. Las tareas serán movidas entre las diferentes fases de desarrollo a medida que se van realizando.
 
-Aparte, y para que a nivel visual sea más sencillo de determinar de qué tipo es cada tarea, a cada una de ellas se les ha asignado un color teniendo en cuenta el tema al que pertenecen, y varias etiquetas que representan el \textit{sprint} y la prioridad dentro del \textit{sprint}. De esta manera, Trello nos permitirá realizar búsquedas o visualizar las tareas con la etiqueta que nos interese.
-
-
-\begin{center}
-    \includegraphics[width=0.5\linewidth]{img/tarea.png}
-    \captionof{figure}{Detalle de la tarea.}
-\end{center}
-
-Las tareas serán movidas entre las diferentes fases de desarrollo a medida que se van realizando. Se ha determinado contar con las siguientes fases:
+ Se ha determinado contar con las siguientes fases:
 
 
 \begin{minipage}{0.60\linewidth}
@@ -648,7 +660,13 @@ Las tareas serán movidas entre las diferentes fases de desarrollo a medida que 
 
 %\vspace{10pt}
 
+Aparte, y para que a nivel visual sea más sencillo de determinar de qué tipo es cada tarea, a cada una de ellas se les ha asignado un color teniendo en cuenta el tema al que pertenecen, y varias etiquetas que representan el \textit{sprint} y la prioridad dentro del \textit{sprint}. De esta manera, Trello nos permitirá realizar búsquedas o visualizar las tareas con la etiqueta que nos interese.
 
+
+\begin{center}
+    \includegraphics[width=0.5\linewidth]{img/tarea.png}
+    \captionof{figure}{Detalle de la tarea.}
+\end{center}
 
 %\hfill
 
@@ -666,14 +684,18 @@ Tras terminar la tarea, se pasará a la columna \textbf{testing}, para de esta m
 
 \chapter{Resultados obtenidos}
 
-A continuación se va a exponer los pasos realizados para el diseño y la creación de la aplicación teniendo en cuenta los requisitos del proyecto y las historias de usuario detalladas previamente. Se van a diferenciar distintos apartados generales:
+A continuación se va a exponer los pasos realizados para el diseño y la creación de la aplicación teniendo en cuenta los requisitos del proyecto y las historias de usuario detalladas previamente.
+
+Se van a diferenciar distintas secciones generales:
 %\vspace{-10pt}
 \begin{itemize}
-    \item Diseño del \textbf{interfaz}
-    \item \textbf{Angular}: Aspectos destacables de la programación
-    \item \textbf{Características y uso} de la aplicación
+    \item Diseño del \textbf{interfaz}.
+    \item \textbf{Características y uso} de la aplicación.
+    \item Vault como \textit{backend} de secretos.
+    \item \textbf{Angular}: Aspectos destacables de la programación.
 \end{itemize}
 
+Cada una de estas secciones serán tratadas en profundidad a continuación, dando lugar a subsecciones para diferenciar la información tratada en las mismas.
 
 \section{Diseño del interfaz}
 
@@ -693,18 +715,21 @@ Para la creación de la interfaz se decidió crear un primer prototipo a boli en
 
 Este primer boceto sirve para asentar las historias de usuario y las distintas acciones que los usuarios van a poder realizar en la aplicación final. Es una manera rápida para empezar a tomar consciencia del proyecto y cómo queremos encauzar la interfaz.
 
+Tal como se puede ver en la figura \ref{figure:boceto} existen zonas diferenciadas marcadas en color azul, donde también aparece en color rojo el nombre para cada zona. Ya en este primer boceto se estaban identificando lo que posteriormente serían distintos componentes independientes.
+
+En rojo, en la parte central de la figura \ref{figure:boceto} también aparece cómo sería el login, que daría paso al interfaz general. Por último, se pueden diferenciar, también en la parte central, nombrados como “Opt1” y “Opt2”, las vistas que dependerán de qué estemos haciendo: si navegamos por los secretos o si estamos visualizando/editano un secreto.
+
 %\vspace{-20pt}
 \begin{center}
-    \includegraphics[angle=90,width=\linewidth]{img/boceto.pdf}
     \vspace{-20pt}
+    \includegraphics[angle=90, clip, trim=1.88cm 0cm 1cm 0cm, width=0.9\linewidth]{img/boceto.pdf}
+    \vspace{-5pt}
     \captionof{figure}{Boceto del interfaz.}
+    \label{figure:boceto}
 \end{center}
 
-En el boceto existen zonas diferenciadas marcadas en color azul, donde también aparece en color rojo el nombre para cada zona. Ya en este primer boceto se estaban identificando lo que posteriormente serían distintos componentes independientes.
-
-En rojo, en la parte central también aparece cómo sería el login, que daría paso al interfaz general. Por último, se pueden diferenciar, también en la parte central, nombrados como “Opt1” y “Opt2”, las vistas que dependerán de qué estemos haciendo: si navegamos por los secretos o si estamos visualizando/editano un secreto.
-
-Tal como se puede ver, ya en este primer boceto se tenía una idea bastante clara de cómo debía ser a grandes rasgos el interfaz final.
+\vspace{-15pt}
+Ya en este primer boceto se tenía una idea de cómo debía ser el interfaz final.
 
 \subsection{Creación inicial del interfaz con un \textit{framework} CSS}
 Una vez se tuvieron claros los aspectos generales del boceto, se realizó un primer prototipo haciendo uso de un \textit{framework CSS}.
@@ -718,6 +743,7 @@ El \textit{framework} elegido ha sido Bootstrap, creado por \textcite{bootstrap}
     \captionof{figure}{Boceto del interfaz con Bootstrap y datos estáticos.}
 \end{center}
 
+\vspace{-10pt}
 Bootstrap ha permitido crear un código sencillo, pero visualmente atractivo, y que posteriormente será reutilizado para el interfaz final.
 
 
@@ -725,18 +751,24 @@ Bootstrap ha permitido crear un código sencillo, pero visualmente atractivo, y 
 
 Tal como se ha comentado previamente, Bootstrap permitió crear el prototipo del interfaz de manera rápida y sencilla. Aunque el aspecto visual a grandes rasgos no ha variado en exceso, a medida que se iba avanzando en el proyecto se han ido realizando pequeñas modificaciones.
 
-El interfaz final se puede descomponer en distintos apartados que cumplen con distintas funcionalidades. La pantalla de \textit{\textbf{login}} nos permite introducir el usuario y la contraseña del mismo para acceder a la aplicación.
+El interfaz final se puede descomponer en distintos apartados que cumplen con distintas funcionalidades.
 
-
+La pantalla de \textit{\textbf{login}} nos permite introducir el usuario y la contraseña del mismo para acceder a la aplicación.
+\vspace{-5pt}
 \begin{center}
-    \includegraphics[width=0.4\linewidth]{img/login.png}
-    \hfil
-    \includegraphics[width=0.4\linewidth]{img/login2.png}
-%    \vspace{-10pt}
+    \includegraphics[width=0.38\linewidth]{img/login.png}
     \captionof{figure}{Interfaz para el \textit{login}.}
 \end{center}
 
-En esta ventana de \textit{login} se ha añadido una pestaña extra con el símbolo del engranaje que permite modificar la URL de conexión al que nos queremos conectar
+En esta ventana de \textit{login} se ha añadido una pestaña extra con el símbolo del engranaje que permite modificar la URL del servidor al que nos queremos conectar, tal como se ve en la figura \ref{figure:url}.
+
+\vspace{-5pt}
+\begin{center}
+    \includegraphics[width=0.38\linewidth]{img/login2.png}
+    \vspace{-15pt}
+    \captionof{figure}{Configurar URL del servidor.}
+    \label{figure:url}
+\end{center}
 
 Tras realizar la autenticación la aplicación nos llevará al directorio principal donde podremos navegar a través del interfaz para acceder a los secretos que nos interese.
 
@@ -756,7 +788,7 @@ Al acceder al secreto que nos interesa, el interfaz nos muestra el documento des
     \captionof{figure}{Interfaz al visualizar un secreto.}
 \end{center}
 
-
+Hasta ahora se ha comprobado cómo es el aspecto visual en pantallas grandes, donde todos los aspectos de la interfaz caben en ella.
 
 \subsection{Interfaz \textit{responsive}}
 
@@ -1100,7 +1132,7 @@ Aparte, y tal como se puede ver en la imagen superior, aparecerá un enlace para
 % TODO: comprobar si no se sube bien.
 
 
-\section{Vault como \textit{backend} de información}
+\section{Vault como \textit{backend} de secretos}
 
 Ya se ha comentado previamente cómo Vault es un proyecto para asegurar, almacenar y controlar el acceso a secretos. La idea de la aplicación realizada ha sido explotar esas funcionalidades y llevarlas un paso más lejos para adaptarlas a un entorno de documentación.
 
