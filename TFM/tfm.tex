@@ -825,28 +825,30 @@ La creación de secretos es la característica principal de la aplicación, ya q
 \end{minipage}
 \hfill
 \begin{minipage}{0.85\linewidth}
-    En la cabecera de la aplicación existe un icono que nos va a permitir crear un nuevo secreto en el sistema.
+    En la cabecera de la aplicación existe un icono con el que se va a permitir crear un nuevo secreto en el sistema.
 
-    Al hacer \textit{click} sobre el icono, nos aparecerá un \textit{modal} (una pequeña ventana emergente en el interfaz) para preguntarnos por la ruta donde queremos crear el secreto.
+    Al hacer \textit{click} sobre el icono, aparecerá un \textit{modal} (una pequeña ventana emergente en el interfaz) donde preguntará por la ruta donde se quiere crear el secreto.
 \end{minipage}
 }
 
-Al aparecer el \textit{modal} nos aparecerá por defecto la ruta en la que nos encontrábamos en ese instante.
+Al aparecer el \textit{modal} por defecto mostrará la ruta en la que el usuario se encuentra en ese instante.
 
 \begin{center}
     \includegraphics[width=0.7\linewidth]{img/new_secret.png}
     \captionof{figure}{\textit{Modal} para crear un secreto.}
 \end{center}
 
-Si en la ruta que ponemos termina en “/” el botón para crear el secreto permanecerá deshabilitado, ya que una “barra” al final del nombre identifica un directorio, al igual que sucede en sistemas UNIX.
+Si en la ruta que indica el usuario termina en “/” el botón para crear el secreto permanecerá deshabilitado, ya que una “barra” al final del nombre identifica un directorio, al igual que sucede en sistemas UNIX.
 
-Al hacer \textit{click} en el botón de creación del secreto la aplicación nos creará un secreto nuevo en la aplicación y nos llevará a la ruta donde lo hemos creado.
+Al hacer \textit{click} en el botón de creación del secreto la aplicación creará un secreto nuevo en la aplicación y redirigirá al usuario a la ruta donde se ha creado.
 
 \subsection{Acciones sobre secretos}
 
-Una vez creado el secreto, o una vez que navegamos a un secreto creado previamente, podremos realizar distintas acciones sobre el mismo. Estas acciones dependerán de los permisos que se tengan sobre el secreto, pero a continuación se van a detallar todos ellos.
+Una vez creado el secreto, o una vez que se navegue a un secreto creado previamente, se podrán realizar distintas acciones sobre el mismo. Estas acciones dependerán de los permisos que se tengan sobre el secreto, pero a continuación se van a detallar todos ellos.
 
-Las acciones que podremos realizar se identifican a través de  distintos iconos que nos aparecen en el interfaz y que se van a detallar a continuación.
+%TODO: hablar de los permisos
+
+Las acciones que el usuario podrá realizar se identifican a través de  distintos iconos que aparecen en el interfaz y que se van a detallar a continuación.
 
 
 \subsubsection*{Editar secreto}
@@ -867,7 +869,7 @@ Las acciones que podremos realizar se identifican a través de  distintos iconos
 \end{minipage}
 \hspace{0.5cm}
 \begin{minipage}{0.9\linewidth}
-    Una vez creado un secreto, para realizar una reestructuración de los secretos, puede interesar moverlo. Al hacer \textit{click} en este botón se abrirá un \textit{modal} en el que nos aparecerá la ruta actual y podremos moverlo a una nueva ruta.
+    Una vez creado un secreto, para realizar una reestructuración de los secretos, puede interesar moverlo. Al hacer \textit{click} en este botón se abrirá un \textit{modal} en el que aparecerá la ruta actual y donde habrá que indicar la nueva ruta.
 \end{minipage}
 }
 \vspace{-8pt}
@@ -883,7 +885,7 @@ Las acciones que podremos realizar se identifican a través de  distintos iconos
 \end{minipage}
 \hspace{0.5cm}
 \begin{minipage}{0.9\linewidth}
-    En algunas ocasiones puede ser interesante \textbf{imprimir la documentación guardada}. Este icono abrirá el asistente para imprimir del navegador y nos mostrará una previsualización, en la que desaparecen partes del interfaz (la vista en árbol y los botones de acción) para mejorar el formato.
+    En algunas ocasiones puede ser interesante \textbf{imprimir la documentación guardada}. Este icono abrirá el asistente para imprimir del navegador y mostrará una previsualización, en la que desaparecen partes del interfaz (la vista en árbol y los botones de acción) para mejorar el formato.
 \end{minipage}
 }
 
@@ -895,7 +897,7 @@ Las acciones que podremos realizar se identifican a través de  distintos iconos
 \end{minipage}
 \hspace{0.5cm}
 \begin{minipage}{0.9\linewidth}
-    Como más adelante se explicará, cuando un secreto es modificado \textbf{se guarda un histórico} del mismo. A través de este botón podremos ver las distintas versiones del mismo e ir a una versión anterior.
+    Como más adelante se explicará, cuando un secreto es modificado \textbf{se guarda un histórico} del mismo. A través de este botón se pueden ver las distintas versiones del mismo e ir a una versión anterior.
 \end{minipage}
 }
 \vspace{-8pt}
@@ -904,7 +906,7 @@ Las acciones que podremos realizar se identifican a través de  distintos iconos
     \captionof{figure}{Histórico de un secreto.}
 \end{center}
 
-De esta manera, podremos ver cualquier cambio que haya sufrido el secreto a lo largo del tiempo. Al hacer \textit{click} en alguno de los enlaces para visualizar alguna versión anterior, nos aparecerá un mensaje encima del secreto para indicarlo:
+De esta manera, se podrá ver cualquier cambio que haya sufrido el secreto a lo largo del tiempo. Al hacer \textit{click} en alguno de los enlaces para visualizar alguna versión anterior, aparecerá un mensaje encima del secreto para indicarlo:
 \vspace{-8pt}
 \begin{center}
     \includegraphics[width=0.6\linewidth]{img/history2.png}
@@ -918,7 +920,7 @@ De esta manera, podremos ver cualquier cambio que haya sufrido el secreto a lo l
 \end{minipage}
 \hspace{0.5cm}
 \begin{minipage}{0.9\linewidth}
-    Cuando un usuario entra a modificar un secreto, se pondrá en modo “bloqueado”. Si, por alguna razón, abandona la aplicación antes de guardar los cambios el secreto se mantiene en dicho estado. A través de este botón \textbf{un usuario administrador podrá desbloquear un secreto}.
+    Cuando un usuario entra a modificar un secreto, éste se pondrá en modo “bloqueado”. Si, por alguna razón, abandona la aplicación antes de guardar los cambios el secreto se mantiene en dicho estado. A través de este botón \textbf{un usuario administrador podrá desbloquear el secreto}.
 \end{minipage}
 }
 
@@ -979,7 +981,7 @@ Entre las características que tiene el editor, se pueden destacar:
         \end{center}
     \end{itemize}
 
-    \item Posibilidad de añadir iconos propios a la barra de herramientas del editor. Esta característica ha sido clave ya que era necesario poder crear al menos un botón para guardar y cerrar el secreto.
+    \item Posibilidad de añadir iconos propios a la barra de herramientas del editor. Esta característica ha sido clave ya que era necesario poder crear al menos un botón para guardar el secreto y cerrar el editor.
 
     El icono añadido tiene el siguiente aspecto \includegraphics[width=0.8cm]{img/save_exit.png}. Al hacer \textit{click} sobre él, el secreto será guardado, el editor se cerrará y la aplicación nos redirigirá para que visualicemos el nuevo aspecto del secreto recién editado.
 \end{itemize}
@@ -1011,6 +1013,7 @@ Si por el contrario, la aplicación se está visualizando a través de un teléf
 \begin{minipage}{0.3\linewidth}
     \includegraphics[width=\linewidth]{img/tree3.png}
 \end{minipage}
+\vspace{-5pt}
 \captionof{figure}{Detalles de la “vista de árbol” en modo normal y \textit{responsive}.}
 \label{figure:arbol}
 }
@@ -1071,7 +1074,7 @@ Para identificar el tipo de ficheros que se están visualizando se han identific
     \end{minipage}
 }
 
-Tal como se ha venido explicando hasta ahora, al simular algo que el usuario ya conoce se va a conseguir que el usuario utilice la aplicación para navegar y guardar la información, consiguiendo que la seguridad de la empresa mejore.
+Tal como se ha venido explicando hasta ahora, simulando una característica que el usuario ya conoce se va a conseguir que el usuario utilice la aplicación para navegar y guardar la información, consiguiendo que la seguridad de la empresa mejore.
 
 
 \subsubsection*{Navegación “miga de pan”}
@@ -1102,7 +1105,7 @@ Dado que la creación y edición de secretos puede resultar limitante, la aplica
     \end{minipage}
     \hspace{0.5cm}
     \begin{minipage}{0.9\linewidth}
-        En la cabecera de la aplicación existe un icono que nos va a permitir subir a la aplicación un fichero de cualquier tipo. Al hacer \textit{click} sobre el icono, nos aparecerá un \textit{modal} para preguntarnos por la ruta donde queremos guardar el fichero y para que elijamos el fichero de nuestro sistema.
+        En la cabecera de la aplicación existe un icono que va a permitir subir a la aplicación un fichero de cualquier tipo. Al hacer \textit{click} sobre el icono, aparecerá un \textit{modal} que preguntará por la ruta donde se quiere guardar el fichero y para elegir el fichero del sistema anfitrión.
     \end{minipage}
 }
 
@@ -1134,7 +1137,7 @@ Aparte, y tal como se puede ver en la imagen superior, aparecerá un enlace para
 
 \section{Vault como \textit{backend} de secretos}
 
-Ya se ha comentado previamente cómo Vault es un proyecto para asegurar, almacenar y controlar el acceso a secretos. La idea de la aplicación realizada ha sido explotar esas funcionalidades y llevarlas un paso más lejos para adaptarlas a un entorno de documentación.
+Ya se ha comentado previamente cómo Vault es un proyecto para asegurar, almacenar y controlar el acceso a secretos. La aplicación desarrollada en este Trabajo Fin de Máster explota esas funcionalidades y las lleva un paso más lejos para adaptarlas a un entorno de documentación.
 
 La comunicación con Vault se realiza a través de su API (en inglés \textit{application programming interface}), por lo que el servicio debe de estar funcionando y en parte configurado para que la aplicación funcione sobre él.
 
@@ -1163,8 +1166,8 @@ En una empresa es habitual hacer uso de un sistema centralizado de autenticació
 
 Hoy en día, los métodos más habituales suelen ser:
 \begin{itemize}
-    \item \textbf{Directorio Activo de Windows Server}: en empresas donde se haga uso de Windows como sistemas de escritorio, es habitual que el sistema de autenticación esté centralizado y junto con él se hagan usos de sistemas de seguridad como GPOs (\textit{Group Policy Object)}), carpetas compartidas, ...
-    \item \textbf{LDAP}: Del inglés \textit{Lightweight Directory Access Protocol}, es un sistema más estandarizado es el anterior, que también hace uso de un sistema centralizado de autenticación. LDAP ha sido utilizado en servicios como Red Hat Directory Server y Apache Directory Server.
+    \item \textbf{Directorio Activo de Windows Server}: en empresas donde se hace uso de Windows como sistemas de escritorio, es habitual que el sistema de autenticación esté centralizado y junto con él se hagan usos de sistemas de seguridad como GPOs (\textit{Group Policy Object)}), carpetas compartidas, ...
+    \item \textbf{LDAP}: Del inglés \textit{Lightweight Directory Access Protocol}, es un sistema más estandarizado que el anterior, y también hace uso de un sistema centralizado de autenticación. LDAP ha sido utilizado en servicios como Red Hat Directory Server y Apache Directory Server.
 
     \item \textbf{Gestión de usuarios local}: En caso de que no se quiera integrar Vault con sistemas internos de la empresa, Vault cuenta con su propia gestión de autenticación para usuarios.
 \end{itemize}
@@ -1187,7 +1190,7 @@ Este motor de secretos KV2 es la característica más importante utilizada por p
 \hypertarget{backend_almacenamiento}{}
 \subsection{\textit{Backend} de almacenamiento}
 
-Este es otro punto que la empresa debe tener en cuenta a la hora de configurar Vault, ya que de ello dependerá cómo se almacenen los secretos en el servidor final (aunque siempre se realiza de manera cifrada).
+Este es otro punto que la empresa debe tener en cuenta a la hora de configurar Vault, ya que de ello dependerá cómo se almacenan los secretos en el servidor final (aunque siempre se realiza de manera cifrada).
 
 Existen distintos \textit{backends} de almacenamiento y dependiendo de las necesidades se deberá optar por uno u otro:
 
@@ -1197,21 +1200,21 @@ Existen distintos \textit{backends} de almacenamiento y dependiendo de las neces
     \item \textbf{S3}: Quizá interese almacenar los secretos en un \textit{bucket} S3 de Amazon, y de esta manera no depender de almacenamiento local.
 \end{itemize}
 
-Estos son sólo unos ejemplos de los distintos sistemas de almacenamiento que se pueden utilizar. La empresa debe tomar la decisión de cuál elegir y realizar la configuración en Vault. La opción elegida será transparente para la aplicación que se ha creado.
+Estos son sólo unos ejemplos de los distintos sistemas de almacenamiento que se pueden utilizar. La empresa debe tomar la decisión de cuál elegir y realizar la configuración en Vault, aunque en caso de dudas se recomienda hacer uso de la opción Filesystem. La opción elegida será transparente para la aplicación que se ha creado.
 
 
 \section{Angular: Aspectos destacables de la programación}
 
-Tras explicar cómo funciona la aplicación desde el punto de vista del usuario, se va a profundizar en algunos aspectos técnicos realizados durante la programación.
+Tras explicar cómo funciona la aplicación desde el punto de vista del usuario, se va a profundizar en algunos aspectos técnicos realizados durante el desarrollo de la misma.
 
 Tal como se ha dicho, la aplicación está programada utilizando el \textit{framework} Angular y por tanto se ha hecho uso del lenguaje TypeScript.
 
-A continuación se van a detallar algunos aspectos importantes y algunas características utilizadas durante la programación de la aplicación.
+A continuación se van a detallar aspectos importantes y características utilizadas durante el desarrollo de la aplicación.
 
 
 \subsection{Vistas en componentes separados}
 
-Durante la creación del interfaz gráfico se ha dividido en distintos componentes para de esta manera diferenciar el código de la vista para cada uno de ellos.
+Durante la creación del interfaz gráfico se ha dividido en distintos componentes para, de esta manera, diferenciar el código de la vista en cada uno de ellos.
 
 \begin{center}
     \includegraphics[frame,width=\linewidth]{img/interfaz2-colored.png}
@@ -1269,7 +1272,7 @@ Dado que los componentes idealmente deben centrarse en la experiencia de usuario
 
 \subsection{\textit{Services} e inyección de dependencias}
 
-Para la obtención de datos de los secretos a través del \textit{backend} Vault utilizando su API, y para la sincronización y envío de información entre los distintos componentes de la vista se ha creado un servicio en Angular, cuya dependencia se ha inyectado al inicio de la aplicación.
+Para la obtención de datos de los secretos a través del \textit{backend} Vault utilizando su API, y para la sincronización y envío de información entre los distintos componentes de la vista, se ha creado un servicio en Angular cuya dependencia se ha inyectado al inicio de la aplicación.
 
 El servicio ha facilitado que distintos componentes que van a visualizar parte de la misma información (como la vista de árbol y el explorador de ficheros), o que dependen unos de otros, puedan estar en sincronía a través del servicio.
 
@@ -1278,9 +1281,9 @@ El servicio ha facilitado que distintos componentes que van a visualizar parte d
 
 Dado que gran parte de la aplicación se basa en comunicarse con la API de Vault, ha sido necesario hacer uso en todo momento de la programación asíncrona al realizar las peticiones.
 
-El ejemplo más claro es la generación del árbol de secretos. Para ello se ha implementado un algoritmo recursivo de petición a la API de los secretos, que cuando comprobaba que existía una jerarquía de directorios, debía entrar al directorio y recorrerlo recursivamente.
+El ejemplo más claro es la generación del árbol de secretos. Para ello se ha implementado un algoritmo recursivo de peticiones a la API de los secretos. Al realizar una petición y comprobar que existía una jerarquía de directorios, debe entrar al directorio y recorrerlo recursivamente.
 
-Al finalizar, las \textit{promises} hay que resolverlas para generar la estructura jerárquica que luego se convierte en la vista de árbol.
+Al finalizar, las \textit{promises}, que son la representación de que una petición asíncrona se ha completado o ha fallado, hay que resolverlas para generar la estructura jerárquica que luego se convierte en la vista de árbol.
 
 \begin{mycode}{Resolviendo \textit{promises} de la función recursiva}{typescript}{}
 // Cogemos las promesas y las resolvemos
@@ -1335,7 +1338,7 @@ export class VaultService {
 }
 \end{mycode}
 
-Continuando con el ejemplo, desde la vista en la que se visualiza a un secreto, se puede ver cómo se ha creado una suscripción a la variable detallada previamente, que al recibir información actualizará la variable local “versions”.
+Continuando con el ejemplo, desde la vista en la que se visualiza el secreto, se puede ver cómo se ha creado una suscripción a la variable detallada previamente, que al recibir información actualizará la variable local “versions”.
 
 \begin{mycode}{Ejemplo de subscripción a un \textit{Observable}}{typescript}{}
 export class SecretComponent implements OnInit {
@@ -1379,9 +1382,11 @@ A pesar de que ya existen herramientas dedicadas a guardar contraseñas, se ha d
 Aún existiendo aplicaciones de Software Libre para el mismo fin, en las que la comunidad se vuelca para que tales fallos de seguridad no existan, normalmente sólo están dedicadas a guardar contraseñas, sin posibilidad de crear documentación en la propia aplicación. Existe la posibilidad de modificar estas aplicaciones, gracias a las licencias libres que las componen, pero puede suponer un esfuerzo que puede no estar al alcance de muchos.
 
 
-A lo largo de este Trabajo Final de Máster se ha demostrado cómo crear una herramienta \textit{ad hoc} para guardar contraseñas, subir ficheros y donde se puede crear y editar documentación es un proyecto asequible que puede ser llevado por cualquier empresa tecnológica que cuente con un desarrollador que tenga conocimientos de programación.
+A lo largo de este Trabajo Fin de Máster se ha demostrado cómo crear una herramienta \textit{ad hoc} para guardar contraseñas, subir ficheros y donde se puede crear y editar documentación es un proyecto asequible que puede ser llevado por cualquier empresa tecnológica que cuente con un desarrollador que tenga conocimientos de programación.
 
 El hecho de crear una aplicación propia, y securizarla para limitar el acceso a la misma, trae consigo una serie de ventajas que un producto comercial es difícil que consiga. Podremos adaptar la aplicación a medida que la empresa vaya necesitando nuevas características, y por tanto no nos limitaremos a lo que un producto de terceros nos permita hacer.
+
+Si para ello, al igual que se ha expuesto en este documento, se hace uso de un \textit{framework} consolidado como es Angular, y se le acompaña de un sistema dedicado al almacenamiento seguro de información como es Vault, la combinación resultante es muy potente para una empresa.
 
 Por último, y dado que para la creación de la aplicación nos hemos basado en herramientas con licencia de Software Libre, al dotar a nuestra aplicación del mismo tipo de licencia, estaremos permitiendo a la comunidad que incluyan mejoras de cualquier tipo. Esto no sólo es beneficioso para la propia comunidad, sino también para las empresas, que podrán añadir esas nuevas características a su propio desarrollo, mejorando así su propia aplicación interna.
 
@@ -1400,7 +1405,7 @@ Es cierto que las funcionalidades que tiene actualmente se pueden considerar bá
 Con todo ello, dado que existen muchas funcionalidades que se han quedado sin realizar, y que podrían interesar a nivel general, a continuación de detallan un número de funcionalidades que podrían ir añadiéndose a la aplicación en futuros \textit{sprints}:
 
 \begin{itemize}
-    \item \textbf{Panel de control para administradores}: Como muchas aplicaciones, va a existir el rol de administrador, y que por tanto será el encargado de administrar no sólo la gestión del servicio, si no también la creación de usuarios como de asignar permisos.
+    \item \textbf{Panel de control para administradores}: Como muchas aplicaciones, va a existir el rol de administrador, y que por tanto será el encargado de administrar no sólo la gestión del servicio, si no también la creación de usuarios y asignar permisos.
 
     Es por eso que sería interesante crear una ruta dentro de la aplicación a la que sólo los administradores puedan acceder y donde se podrían efectuar las siguientes tareas:
 
